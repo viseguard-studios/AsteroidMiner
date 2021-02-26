@@ -1,4 +1,4 @@
-package com.viseguardstudios.asteroid_miner;
+package com.viseguardstudios.virtual_engine;
 
 public class Main {
 
