@@ -53,6 +53,12 @@ public abstract class Vessel extends Entity {
      */
     public void Drill() {
         // TODO implement here
+
+        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0:");
+        if(currentAsteroid.getCrustSize() > 0 && !currentAsteroid.isExploded()){
+            Logger.log("currentAsteroid.crustSize -= 1");
+            currentAsteroid.setCrustSize(currentAsteroid.getCrustSize() - 1);
+        }
     }
 
     /**

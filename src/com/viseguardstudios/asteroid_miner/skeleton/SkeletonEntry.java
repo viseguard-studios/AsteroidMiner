@@ -2,6 +2,7 @@ package com.viseguardstudios.asteroid_miner.skeleton;
 
 import com.viseguardstudios.asteroid_miner.model.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
+import com.viseguardstudios.asteroid_miner.skeleton.tests.SSDrillTest;
 import com.viseguardstudios.asteroid_miner.skeleton.tests.SSMoveTest;
 
 import java.util.Scanner;
@@ -39,6 +40,8 @@ public class SkeletonEntry {
 
     public static void RegisterTests(){
         testRegistry.Register("SSMove", new SSMoveTest());
+        testRegistry.Register("SSDrill", new SSDrillTest());
     }
+
 
 }

@@ -219,4 +219,56 @@ public class Asteroid extends Entity {
     }
 
 
+    public int getCrustSize() {
+        return crustSize;
+    }
+
+    public void setCrustSize(int crustSize) {
+        try {
+            if(crustSize >= 0) this.crustSize = crustSize;
+            else throw new Exception("crustSize must not smaller than 0!");
+        }
+        catch (Exception exp){ }
+
+    }
+
+    public int getMaxHidingSpace() {
+        return maxHidingSpace;
+    }
+
+    public void setMaxHidingSpace(int maxHidingSpace) {
+        this.maxHidingSpace = maxHidingSpace;
+    }
+
+    public boolean isExploded() {
+        return exploded;
+    }
+
+    public void setExploded(boolean exploded) {
+        this.exploded = exploded;
+    }
+
+    public Vessel getHidingVessel() {
+        return hidingVessel;
+    }
+
+    public void setHidingVessel(Vessel hidingVessel) {
+        this.hidingVessel = hidingVessel;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
 }
