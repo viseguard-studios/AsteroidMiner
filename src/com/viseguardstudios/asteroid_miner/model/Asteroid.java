@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.model;
 import com.viseguardstudios.asteroid_miner.model.building.Building;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.resource.Resource;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
 
@@ -65,7 +66,7 @@ public class Asteroid extends Entity {
     /**
      * A szomszédos aszteroidák tárolója.
      */
-    private Set<Asteroid> neighbours;
+    private List<Asteroid> neighbours = new LinkedList<>();
 
 
     /**
@@ -81,7 +82,7 @@ public class Asteroid extends Entity {
     /**
      * Az aszteroidára épített (véglegesen elhelyezett) építmények tárolója.
      */
-    private Set<Building> buildings;
+    private List<Building> buildings = new LinkedList<>();
 
     /**
      * Az osztály konstruktora.
@@ -104,9 +105,24 @@ public class Asteroid extends Entity {
      * Tárolja, hogy melyik aszteroidák elérhetőek jelenleg az adott aszteroidából.
      * @return
      */
-    public Set<Asteroid> ReachableAsteroids() {
+    public List<Asteroid> ReachableAsteroids() {
         // TODO implement here
-        return null;
+        List<Asteroid> n = new LinkedList<>(neighbours);
+
+        Logger.log("foreach b in buildings");
+
+        for (Building b : buildings) {
+
+            Logger.functionCalled("b.GetRoutes()");
+            var r = b.GetRoutes();
+            Logger.returned();
+
+            if(r != null){
+                n.addAll(r);
+            }
+        }
+
+        return n;
     }
 
     /**
@@ -197,7 +213,8 @@ public class Asteroid extends Entity {
      * Új szomszéd hozzáadása.
      * @param a
      */
-    public void AddNeigbour(Asteroid a) {
+    public void AddNeighbour(Asteroid a) {
+        neighbours.add(a);
         // TODO implement here
     }
 

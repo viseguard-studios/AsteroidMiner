@@ -13,7 +13,7 @@ public class Logger {
     /**
      * A behuzasmerete
      */
-    private static int depth = -1;
+    private static int depth = 0;
     
     public static void setEnabled(boolean e){
         enabled = e;
@@ -32,8 +32,10 @@ public class Logger {
     public static void setDepth(int dep) {
         depth = dep;
     }
+
     public static void returned(){
         depth--;
+        log("return;");
     }
 
     /** A fuggveny a parameterben kapott uzenetet a standard outputra tovabbitja
