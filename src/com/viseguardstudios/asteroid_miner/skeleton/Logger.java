@@ -6,18 +6,18 @@ package com.viseguardstudios.asteroid_miner.skeleton;
 public class Logger {
 
     /**
+     * Be van-e kapcsolva
+     */
+    public static boolean enabled = false;
+
+    /**
      * A behuzasmerete
      */
     private static int depth = -1;
     
-    public static turnOn(){
-        enabled = true;
+    public static void setEnabled(boolean e){
+        enabled = e;
     }
-
-    /**
-     * Be van-e kapcsolva
-     */
-    public static boolean enabled = false;
 
     /** A fuggveny megmutatja a behuzas merteket
      * @return a behuzas merteke
@@ -36,7 +36,6 @@ public class Logger {
         depth--;
     }
 
-
     /** A fuggveny a parameterben kapott uzenetet a standard outputra tovabbitja
      * @param message az uzenet
      */
@@ -46,6 +45,14 @@ public class Logger {
                 System.out.print("\t");
             System.out.println(message);
             depth++;
+        }
+    }
+
+    public static void log(String message) {
+        if(enabled) {
+            for (int i = 0; i < depth; i++)
+                System.out.print("\t");
+            System.out.println(message);
         }
     }
 }

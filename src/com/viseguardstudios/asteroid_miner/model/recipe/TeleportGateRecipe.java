@@ -30,6 +30,6 @@ public class TeleportGateRecipe extends Recipe {
      * @param inv 
      * @param a
      */
-    protected abstract void MakeResult(Inventory inv, Asteroid a);
+    protected void MakeResult(Inventory inv, Asteroid a){};
 
 }

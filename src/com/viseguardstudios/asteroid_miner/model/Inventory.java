@@ -33,9 +33,9 @@ public class Inventory {
      * @param item 
      * @return
      */
-    public bool InsertItem(Item item) {
+    public boolean InsertItem(Item item) {
         // TODO implement here
-        return null;
+        return false;
     }
 
     /**
@@ -51,9 +51,9 @@ public class Inventory {
      * @param item 
      * @return
      */
-    public bool TryInsertItem(Item item) {
+    public boolean TryInsertItem(Item item) {
         // TODO implement here
-        return null;
+        return false;
     }
 
     /**

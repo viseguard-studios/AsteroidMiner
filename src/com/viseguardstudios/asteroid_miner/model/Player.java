@@ -16,7 +16,7 @@ public class Player {
     /**
      * A játékos neve.
      */
-    private string name;
+    private String name;
 
 
 

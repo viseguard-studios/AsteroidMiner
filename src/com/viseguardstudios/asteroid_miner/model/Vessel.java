@@ -1,5 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model;
 
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+
 /**
  * Egy-egy járműért (pl. telepes vagy robot) felelős osztály.
  */
@@ -8,7 +10,9 @@ public abstract class Vessel extends Entity {
     /**
      * Default constructor
      */
-    public Vessel() {
+    public Vessel(Asteroid a) {
+        a.Arrive(this);
+        currentAsteroid = a;
     }
 
     /**
@@ -58,16 +62,24 @@ public abstract class Vessel extends Entity {
     public void Move(Asteroid to) {
         // TODO implement here
 
-        LOG.CallFunc("a.ReachableAsteroids()");
+        Logger.functionCalled("a.ReachableAsteroids()");
         var n = currentAsteroid.ReachableAsteroids();
-        LOG.Returned();
+        Logger.returned();
 
-        LOG.Log("Check if n has to: ");
+        Logger.log("Check if n has to: ");
         if(n.contains(to)){
-            LOG.Log("It has! 🎆");
+            Logger.log("It has! 🎆");
+
+            Logger.functionCalled("currentAsteroid.Depart(this);");
+            this.currentAsteroid.Depart(this);
+            Logger.returned();
+
+            Logger.functionCalled("to.Arrive(this);");
+            to.Arrive(this);
+            Logger.returned();
         }
         else {
-            LOG.Log("It doesn't :(");
+            Logger.log("It doesn't :(");
         }
     }
 
@@ -104,21 +116,11 @@ public abstract class Vessel extends Entity {
     }
 
     /**
-     * @param closeToSun
-     */
-    public void RoundEnd(bool closeToSun) {
-        // TODO implement here
-    }
-
-    /**
      * Akkor hívódik meg, ha az adott körben már minden játékos lépett. A robotok ezt használják például a mozgásra.
      * @param closeToSun
      */
-    public abstract void RoundEnd(bool closeToSun);
-
-    /**
-     * Napviharról értesíti az egységet.
-     */
-    public abstract void SolarFlare();
+    public void RoundEnd(boolean closeToSun) {
+        // TODO implement here
+    }
 
 }

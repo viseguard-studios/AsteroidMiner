@@ -18,7 +18,7 @@ public class GameManager {
     /**
      * The player who is taking the turn currently
      */
-    private void currentPlayer;
+    private Player currentPlayer;
 
     /**
      * Az aktuálisan irányítható jármű (akit a soron lévő játékos jelenleg irányít).
@@ -43,22 +43,17 @@ public class GameManager {
     /**
      * Jelzi, hogy a játék befejeződött-e már.
      */
-    private bool gameEnded;
+    private boolean gameEnded;
 
     /**
      * 
      */
-    private bool CreateStormOn;
+    private boolean CreateStormOn;
 
     /**
      * A játék telepeseinek tárolója.
      */
     private SpaceShip settlers;
-
-    /**
-     * A jelenleg aktív játékos, aki éppen tudja mozgatni a telepesit.
-     */
-    private Player currentPlayer;
 
     /**
      * Az adott játékhoz tartozó játéktér.
@@ -128,15 +123,15 @@ public class GameManager {
      * Visszaadja, hogy jelenleg napviharban van-e az aszteroidamező.
      * @return
      */
-    public bool IsSolarStormActive() {
+    public boolean IsSolarStormActive() {
         // TODO implement here
-        return null;
+        return false;
     }
 
     /**
-     * @param int
+     * @param d
      */
-    public void ChangeAFDistance(void int) {
+    public void ChangeAFDistance(int d) {
         // TODO implement here
     }
 

@@ -28,9 +28,9 @@ public abstract class Recipe {
      * @param a 
      * @return
      */
-    public bool CanCraft(Inventory inv, Asteroid a) {
+    public boolean CanCraft(Inventory inv, Asteroid a) {
         // TODO implement here
-        return null;
+        return false;
     }
 
     /**

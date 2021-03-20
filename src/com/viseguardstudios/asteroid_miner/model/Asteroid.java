@@ -17,6 +17,11 @@ public class Asteroid extends Entity {
     public Asteroid() {
     }
 
+    @Override
+    public void RoundEnd(boolean closeToSun) {
+
+    }
+
     /**
      * Az aszteroida magjának mérete, ennyi egységnyi nyersanyag bányászható ki belőle a játék elején, és bányászat után ennyi egységnyi item helyezhető vissza bele.
      */
@@ -157,9 +162,9 @@ public class Asteroid extends Entity {
      * @param v 
      * @return
      */
-    public bool Hide(Vessel v) {
+    public boolean Hide(Vessel v) {
         // TODO implement here
-        return null;
+        return false;
     }
 
     /**
@@ -185,7 +190,7 @@ public class Asteroid extends Entity {
      */
     public boolean PlaceItem(Item i) {
         // TODO implement here
-        return null;
+        return false;
     }
 
     /**
@@ -208,26 +213,10 @@ public class Asteroid extends Entity {
     /**
      * Napvihar esetén hívódik meg minden entitáson, az aszteroidákon nem történik művelet ilyenkor.
      */
+    @Override
     public void SolarFlare() {
         // TODO implement here
     }
 
-    /**
-     * @param closeToSun
-     */
-    public void RoundEnd(boolean closeToSun) {
-        // TODO implement here
-    }
-
-    /**
-     * Akkor hívódik meg, ha az adott körben már minden játékos lépett. A robotok ezt használják például a mozgásra.
-     * @param closeToSun
-     */
-    public abstract void RoundEnd(boolean closeToSun);
-
-    /**
-     * Napviharról értesíti az egységet.
-     */
-    public abstract void SolarFlare();
 
 }

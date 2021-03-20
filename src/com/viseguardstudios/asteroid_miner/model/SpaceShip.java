@@ -12,7 +12,9 @@ public class SpaceShip extends Vessel {
     /**
      * Default constructor
      */
-    public SpaceShip() {
+    public SpaceShip(Asteroid a) {
+        super(a);
+
     }
 
     /**
@@ -66,9 +68,9 @@ public class SpaceShip extends Vessel {
      * @param i 
      * @return
      */
-    public bool PlaceItem(Item i) {
+    public boolean PlaceItem(Item i) {
         // TODO implement here
-        return null;
+        return false;
     }
 
     /**
@@ -80,14 +82,20 @@ public class SpaceShip extends Vessel {
     }
 
     /**
-     * Absztrakt metódus, leszármazottól függően más értéket ad vissza. Meghatározza, hogy ha az adott jármű el szeretne bújni egy aszteroidában, mennyi helyre van hozzá szüksége.
-     * @return
-     */
-    public abstract int GetHidingSpaceRequirement();
-
-    /**
      * A jelenlegi aszeroida ezen keresztül szól a telep/robot-nak, hogy felrobbant.
      */
-    public abstract void AsteroidExploded();
+    public void AsteroidExploded(){
+
+    }
+
+    @Override
+    public void RoundEnd(boolean closeToSun) {
+
+    }
+
+    @Override
+    public void SolarFlare() {
+
+    }
 
 }
