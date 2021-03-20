@@ -1,4 +1,4 @@
-package com.viseguardstudios.asteroid_miner.model.resource
+package com.viseguardstudios.asteroid_miner.model.resource;
 
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
@@ -32,16 +32,15 @@ public abstract class Resource {
     /**
      * Napközelben a nyersanyag típusának megfelelő műveletet hajt végre. Különleges képességekkel nem rendelkező nyersanyagok esetén nem hajt végre műveletet.
      */
-    public abstract void NearSun();
+    public void NearSun(){
+
+    };
 
     /**
      * Meghatározza, hogy az átadott com.viseguardstudios.asteroid_miner.model.item.Item használható-e a jelenlegi helyett.
      * @param r 
      * @return
      */
-    public bool Satisfies(Resource r) {
-        // TODO implement here
-        return null;
-    }
+    public abstract boolean Satisfies(Resource r);
 
 }

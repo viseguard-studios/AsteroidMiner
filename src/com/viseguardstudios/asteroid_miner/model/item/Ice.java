@@ -18,16 +18,9 @@ public class Ice extends Item {
      * @param i 
      * @return
      */
-    public bool Satisfies(Item i) {
+    public boolean Satisfies(Item i) {
         // TODO implement here
-        return null;
+        return false;
     }
-
-    /**
-     * Meghatározza, hogy az átadott com.viseguardstudios.asteroid_miner.model.item.Item használható-e a jelenlegi helyett.
-     * @param i 
-     * @return
-     */
-    public abstract bool Satisfies(Item i);
 
 }

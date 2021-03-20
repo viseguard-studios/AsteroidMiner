@@ -20,7 +20,7 @@ public abstract class Entity {
      * Akkor hívódik meg, ha az adott körben már minden játékos lépett. A robotok ezt használják például a mozgásra.
      * @param closeToSun
      */
-    public abstract void RoundEnd(bool closeToSun);
+    public abstract void RoundEnd(boolean closeToSun);
 
     /**
      * A játéktér getter-e.

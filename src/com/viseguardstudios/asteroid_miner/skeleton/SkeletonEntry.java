@@ -2,15 +2,18 @@ package com.viseguardstudios.asteroid_miner.skeleton;
 
 import com.viseguardstudios.asteroid_miner.model.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
+import com.viseguardstudios.asteroid_miner.skeleton.tests.SSMoveTest;
 
 import java.util.Scanner;
 
 public class SkeletonEntry {
 
+    static Registry<Test> testRegistry = new Registry<>("");
+
 
     public static void main(String[] args) {
 
-
+        RegisterTests();
 
         while (true){
 
@@ -19,26 +22,23 @@ public class SkeletonEntry {
 
             var tokens = line.split(" ");
 
-            switch (tokens[0]){
-                case "move":
-                    System.out.print("Use TeleportGate? (Y/N):");
-                    var answer = sc.nextLine();
-                    if(answer.equals("Y")){
-                        Asteroid a1 = new Asteroid();
-                        Asteroid a2 = new Asteroid();
-                        TeleportGate tg1 = new TeleportGate();
-                        TeleportGate tg2 = new TeleportGate();
+            var test = testRegistry.Get(tokens[0]);
 
+            if(test == null)
+                continue;
 
-                    }
-                    break;
-                case "drill":
+            Logger.setEnabled(false);
+            test.Setup(sc);
 
-                    break;
-            }
+            Logger.setEnabled(true);
+            test.Run();
 
         }
 
+    }
+
+    public static void RegisterTests(){
+        testRegistry.Register("SSMove", new SSMoveTest());
     }
 
 }

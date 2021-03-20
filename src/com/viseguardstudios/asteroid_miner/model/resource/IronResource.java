@@ -16,14 +16,14 @@ public class IronResource extends Resource {
      * @param r 
      * @return
      */
-    public bool Satisfies(Resource r) {
+    public boolean Satisfies(Resource r) {
         // TODO implement here
-        return null;
+        return false;
     }
 
     /**
      * Napközelben a nyersanyag típusának megfelelő műveletet hajt végre. Különleges képességekkel nem rendelkező nyersanyagok esetén nem hajt végre műveletet.
      */
-    public abstract void NearSun();
+    public void NearSun() {};
 
 }

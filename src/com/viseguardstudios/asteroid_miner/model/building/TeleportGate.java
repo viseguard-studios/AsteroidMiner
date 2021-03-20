@@ -15,11 +15,15 @@ public class TeleportGate extends Building {
     public TeleportGate() {
     }
 
-
     /**
      * Az aszteroida párja.
      */
     private TeleportGate pair;
+
+    public void SetPair(TeleportGate tg){
+        //TODO: Check if it was set already
+        pair = tg;
+    }
 
     /**
      * Visszaadja az ebből a kapuból elérhető extra aszteroidákat.

@@ -24,11 +24,4 @@ public class Coal extends Item {
         return false;
     }
 
-    /**
-     * Meghatározza, hogy az átadott com.viseguardstudios.asteroid_miner.model.item.Item használható-e a jelenlegi helyett.
-     * @param i 
-     * @return
-     */
-    public abstract boolean Satisfies(Item i);
-
 }

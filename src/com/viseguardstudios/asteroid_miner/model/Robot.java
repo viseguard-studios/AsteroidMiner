@@ -8,7 +8,8 @@ public class Robot extends Vessel {
     /**
      * Default constructor
      */
-    public Robot() {
+    public Robot(Asteroid a) {
+        super(a);
     }
 
     /**
@@ -32,14 +33,10 @@ public class Robot extends Vessel {
     }
 
     /**
-     * Absztrakt metódus, leszármazottól függően más értéket ad vissza. Meghatározza, hogy ha az adott jármű el szeretne bújni egy aszteroidában, mennyi helyre van hozzá szüksége.
-     * @return
-     */
-    public abstract int GetHidingSpaceRequirement();
-
-    /**
      * A jelenlegi aszeroida ezen keresztül szól a telep/robot-nak, hogy felrobbant.
      */
-    public abstract void AsteroidExploded();
+    public void AsteroidExploded(){
+
+    }
 
 }
