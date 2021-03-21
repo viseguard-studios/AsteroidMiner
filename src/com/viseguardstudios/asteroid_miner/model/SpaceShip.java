@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.model;
 import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**
  * A telepesekért felelős osztály.
@@ -45,7 +46,7 @@ public class SpaceShip extends Vessel {
      */
     public int GetHidingSpaceRequirement() {
         // TODO implement here
-        return 0;
+        return 1;
     }
 
     /**
@@ -70,7 +71,22 @@ public class SpaceShip extends Vessel {
      */
     public boolean PlaceItem(Item i) {
         // TODO implement here
-        return false;
+
+        Logger.functionCalled("currentAsteroid.PlaceItem(i)");
+        var success = currentAsteroid.PlaceItem(i);
+        Logger.returned();
+        Logger.log("Does the inserting succeed?");
+        if(success){
+            Logger.log("Yes");
+            Logger.functionCalled("RemoveItem(i)");
+            inventory.RemoveItem(i);
+            Logger.returned();
+            return true;
+        }
+        else {
+            Logger.log("No");
+            return false;
+        }
     }
 
     /**

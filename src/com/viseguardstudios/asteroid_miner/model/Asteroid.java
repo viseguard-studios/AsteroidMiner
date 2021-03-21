@@ -15,8 +15,8 @@ public class Asteroid extends Entity {
     /**
      * Default constructor
      */
-    public Asteroid() {
-    }
+    public Asteroid() { }
+
 
     @Override
     public void RoundEnd(boolean closeToSun) {
@@ -162,6 +162,13 @@ public class Asteroid extends Entity {
      */
     public void Drill() {
         // TODO implement here
+
+        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0:");
+        if(crustSize > 0 && !exploded){
+            Logger.log("Set crustSize to crustSize-1");
+            crustSize -= 1;
+        }
+        else { Logger.log("No, nothing more");}
     }
 
     /**
@@ -180,6 +187,29 @@ public class Asteroid extends Entity {
      */
     public boolean Hide(Vessel v) {
         // TODO implement here
+
+        Logger.log("Check if has not natural resource in the core AND asteroid is not exploded");
+        if(resource.getAmount() == 0 && !exploded){
+            Logger.log("Read neededSpace: v.hidingSpaceRequirement");
+            var neededSpace = v.GetHidingSpaceRequirement();
+            Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
+            var usedSpace = hidingVessel.GetHidingSpaceRequirement();
+
+            Logger.log("1 - usedSpace is bigger than neededSpace?");
+            if(1 - usedSpace >= neededSpace){
+                Logger.log("Does this Vessel using space?");
+                if(neededSpace > 0){
+                    Logger.log("Yes, put it into hidingVessel");
+                    hidingVessel = v;
+                }
+                else{ Logger.log("No.");}
+                Logger.log("this vessel might hide");
+                return true;
+            }
+            else { Logger.log("No, this vessel might not hide");}
+            return false;
+        }
+        else { Logger.log("No, this vessel might not hide");}
         return false;
     }
 
@@ -189,6 +219,12 @@ public class Asteroid extends Entity {
      */
     public void Exit(Vessel v) {
         // TODO implement here
+
+        Logger.log("Check if vessel is using space");
+        if(v == hidingVessel){
+            Logger.log("Yes, and free it");
+            hidingVessel = null;
+        }
     }
 
     /**
@@ -206,6 +242,27 @@ public class Asteroid extends Entity {
      */
     public boolean PlaceItem(Item i) {
         // TODO implement here
+
+        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0 AND has not natural resource in the core:");
+        if(crustSize > 0 && !exploded && resource.getAmount() == 0){
+            Logger.functionCalled("inventory.TryInsertItem()");
+            var hasSpace = inventory.TryInsertItem();
+            Logger.returned();
+            Logger.log("Dose inventory has enough place?");
+            if(hasSpace){
+                Logger.log("Yes");
+                Logger.functionCalled("inventory.InsertItem(i)");
+                inventory.InsertItem(i);
+                Logger.returned();
+                Logger.log("The inserting succeed");
+                return true;
+            }
+            else {
+                Logger.log("No, the Inserting failed");
+                return false;
+            }
+        }
+        else { Logger.log("No, nothing more");}
         return false;
     }
 
@@ -236,4 +293,56 @@ public class Asteroid extends Entity {
     }
 
 
+    public int getCrustSize() {
+        return crustSize;
+    }
+
+    public void setCrustSize(int crustSize) {
+        try {
+            if(crustSize >= 0) this.crustSize = crustSize;
+            else throw new Exception("crustSize must not smaller than 0!");
+        }
+        catch (Exception exp){ }
+
+    }
+
+    public int getMaxHidingSpace() {
+        return maxHidingSpace;
+    }
+
+    public void setMaxHidingSpace(int maxHidingSpace) {
+        this.maxHidingSpace = maxHidingSpace;
+    }
+
+    public boolean isExploded() {
+        return exploded;
+    }
+
+    public void setExploded(boolean exploded) {
+        this.exploded = exploded;
+    }
+
+    public Vessel getHidingVessel() {
+        return hidingVessel;
+    }
+
+    public void setHidingVessel(Vessel hidingVessel) {
+        this.hidingVessel = hidingVessel;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
 }
