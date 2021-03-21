@@ -13,6 +13,7 @@ public abstract class Vessel extends Entity {
     public Vessel(Asteroid a) {
         a.Arrive(this);
         currentAsteroid = a;
+        isHidden = false;
     }
 
     /**
@@ -23,7 +24,7 @@ public abstract class Vessel extends Entity {
     /**
      * Az aktuális tartózkodási helyének (aszteroida) tárolására szolgál.
      */
-    private Asteroid currentAsteroid;
+    protected Asteroid currentAsteroid;
 
     /**
      * Tárolja, hogy melyik játékos irányítja az járművet.
@@ -46,6 +47,16 @@ public abstract class Vessel extends Entity {
      */
     public void Hide() {
         // TODO implement here
+
+        Logger.log("Check if is not hidden");
+        if(!isHidden){
+            Logger.functionCalled("currentAsteroid.Hide(this);");
+            var canHide = currentAsteroid.Hide(this);
+            Logger.returned();
+            Logger.log("Hide, if it might be");
+            isHidden = canHide;
+        }
+        else { Logger.log("Is already hidden, nothing more");}
     }
 
     /**
@@ -54,11 +65,9 @@ public abstract class Vessel extends Entity {
     public void Drill() {
         // TODO implement here
 
-        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0:");
-        if(currentAsteroid.getCrustSize() > 0 && !currentAsteroid.isExploded()){
-            Logger.log("currentAsteroid.crustSize -= 1");
-            currentAsteroid.setCrustSize(currentAsteroid.getCrustSize() - 1);
-        }
+        Logger.functionCalled("currentAsteroid.Drill();");
+        currentAsteroid.Drill();
+        Logger.returned();
     }
 
     /**
@@ -107,6 +116,18 @@ public abstract class Vessel extends Entity {
      */
     public void ExitHiding() {
         // TODO implement here
+
+        Logger.log("Check if is hidden");
+        if(isHidden){
+            Logger.functionCalled("currentAsteroid.Exit(this)");
+            currentAsteroid.Exit(this);
+            Logger.returned();
+            Logger.log("Set isHidden statement to false");
+            isHidden = false;
+        }
+        else {
+            Logger.log("Is not hidden, nothing more");
+        }
     }
 
     /**
@@ -127,6 +148,14 @@ public abstract class Vessel extends Entity {
      */
     public void RoundEnd(boolean closeToSun) {
         // TODO implement here
+    }
+
+    public boolean getHidden(){
+        return isHidden;
+    }
+
+    public void setHidden(boolean hidden){
+        this.isHidden = hidden;
     }
 
 }

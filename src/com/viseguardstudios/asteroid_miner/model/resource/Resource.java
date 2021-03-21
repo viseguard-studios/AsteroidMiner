@@ -43,4 +43,11 @@ public abstract class Resource {
      */
     public abstract boolean Satisfies(Resource r);
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }

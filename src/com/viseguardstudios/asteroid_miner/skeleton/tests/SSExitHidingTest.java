@@ -5,11 +5,11 @@ import com.viseguardstudios.asteroid_miner.model.SpaceShip;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.skeleton.STest;
 import com.viseguardstudios.asteroid_miner.skeleton.Test;
+
 import java.util.Scanner;
 
 @STest
-public class SSDrillTest extends Test {
-
+public class SSExitHidingTest extends Test {
     private Asteroid a;
     private SpaceShip ss;
 
@@ -18,20 +18,15 @@ public class SSDrillTest extends Test {
         a = new Asteroid();
         ss = new SpaceShip(a);
 
-        System.out.println("Enter a asteroid crust size(always enter a integer and bigger than 0!): ");
+        System.out.println("Would you like this spaceship hiding right now? [Y/N]");
         var answer = sc.nextLine();
-        a.setCrustSize((Integer.parseInt(answer)));
-
-        System.out.println("Would you like the asteroid exploded? [Y/N]");
-        answer = sc.nextLine();
-        a.setExploded(answer.equals("Y"));
-
+        ss.setHidden(answer.equals("Y"));
     }
 
     @Override
     public void Run() {
-        Logger.functionCalled("ss.Drill()");
-        ss.Drill();
+        Logger.functionCalled("ss.ExitHiding()");
+        ss.ExitHiding();
         Logger.returned();
     }
 }

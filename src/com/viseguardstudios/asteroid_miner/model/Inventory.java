@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model;
 
 import com.viseguardstudios.asteroid_miner.model.item.Item;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
 
@@ -35,7 +36,10 @@ public class Inventory {
      */
     public boolean InsertItem(Item item) {
         // TODO implement here
-        return false;
+
+        Logger.log("Add the item to inventory");
+        items.add(item);
+        return true;
     }
 
     /**
@@ -44,16 +48,22 @@ public class Inventory {
      */
     public void RemoveItem(Item item) {
         // TODO implement here
+        Logger.log("Remove the item from inventory");
+        try {
+            items.remove(item);
+        }
+        catch (NullPointerException exp){}
     }
 
     /**
      * Ellenőrzi, hogy az adott elem elméletileg belehelyezhető-e a raktárba.
-     * @param item 
      * @return
      */
-    public boolean TryInsertItem(Item item) {
+    public boolean TryInsertItem() {
         // TODO implement here
-        return false;
+
+        Logger.log("Check if the inventory has enough place");
+        return items.stream().count() <= size -1;
     }
 
     /**

@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.model;
 import com.viseguardstudios.asteroid_miner.model.building.Building;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.resource.Resource;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
 
@@ -15,6 +16,12 @@ public class Asteroid extends Entity {
      * Default constructor
      */
     public Asteroid() {
+        resource = new Resource() {
+            @Override
+            public boolean Satisfies(Resource r) {
+                return false;
+            }
+        };
     }
 
     @Override
@@ -146,6 +153,13 @@ public class Asteroid extends Entity {
      */
     public void Drill() {
         // TODO implement here
+
+        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0:");
+        if(crustSize > 0 && !exploded){
+            Logger.log("Set crustSize to crustSize-1");
+            crustSize -= 1;
+        }
+        else { Logger.log("No, nothing more");}
     }
 
     /**
@@ -164,6 +178,29 @@ public class Asteroid extends Entity {
      */
     public boolean Hide(Vessel v) {
         // TODO implement here
+
+        Logger.log("Check if has natural resource in the core AND asteroid is not exploded");
+        if(resource.getAmount() == 0 && !exploded){
+            Logger.log("Read neededSpace: v.hidingSpaceRequirement");
+            var neededSpace = v.GetHidingSpaceRequirement();
+            Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
+            var usedSpace = hidingVessel.GetHidingSpaceRequirement();
+
+            Logger.log("1 - usedSpace is bigger than neededSpace?");
+            if(1 - usedSpace >= neededSpace){
+                Logger.log("Does this Vessel using space?");
+                if(neededSpace > 0){
+                    Logger.log("Yes, put it into hidingVessel");
+                    hidingVessel = v;
+                }
+                else{ Logger.log("No.");}
+                Logger.log("this vessel might hide");
+                return true;
+            }
+            else { Logger.log("No, this vessel might not hide");}
+            return false;
+        }
+        else { Logger.log("No, this vessel might not hide");}
         return false;
     }
 
@@ -173,6 +210,12 @@ public class Asteroid extends Entity {
      */
     public void Exit(Vessel v) {
         // TODO implement here
+
+        Logger.log("Check if vessel is using space");
+        if(v == hidingVessel){
+            Logger.log("Yes, and free it");
+            hidingVessel = null;
+        }
     }
 
     /**
@@ -190,6 +233,27 @@ public class Asteroid extends Entity {
      */
     public boolean PlaceItem(Item i) {
         // TODO implement here
+
+        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0:");
+        if(crustSize > 0 && !exploded){
+            Logger.functionCalled("inventory.TryInsertItem()");
+            var hasSpace = inventory.TryInsertItem();
+            Logger.returned();
+            Logger.log("Dose inventory has enough place?");
+            if(hasSpace){
+                Logger.log("Yes");
+                Logger.functionCalled("inventory.InsertItem(i)");
+                inventory.InsertItem(i);
+                Logger.returned();
+                Logger.log("The inserting succeed");
+                return true;
+            }
+            else {
+                Logger.log("No, the Inserting failed");
+                return false;
+            }
+        }
+        else { Logger.log("No, nothing more");}
         return false;
     }
 
