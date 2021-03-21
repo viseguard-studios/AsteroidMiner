@@ -1,6 +1,8 @@
 package com.viseguardstudios.asteroid_miner.model;
 
 import com.viseguardstudios.asteroid_miner.model.resource.Resource;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+import com.viseguardstudios.asteroid_miner.skeleton.tests.QueueSolarFlareTest;
 
 import java.util.*;
 
@@ -67,6 +69,10 @@ public class GameManager {
         // TODO implement here
     }
 
+    public void setManagedScene(Scene sc) {
+        scene = sc;
+    }
+
     /**
      * Új játékos hozzáadása.
      * @param p
@@ -86,7 +92,9 @@ public class GameManager {
      * Egy játékos aktuális köre - ekkor van lehetősége irányítani a járműveit egyesével.
      */
     public void TakeTurn() {
-        // TODO implement here
+        Logger.log("scene.SolarFlare()");
+        scene.SolarFlare();
+        Logger.returned();
     }
 
     /**
@@ -124,8 +132,7 @@ public class GameManager {
      * @return
      */
     public boolean IsSolarStormActive() {
-        // TODO implement here
-        return false;
+        return CreateStormOn;
     }
 
     /**
@@ -144,10 +151,21 @@ public class GameManager {
     }
 
     /**
-     * 
+     * Beállítja, hogy a kör végén legyen napkitörés.
      */
     public void QueueSolarStorm() {
-        // TODO implement here
+        CreateStormOn = true;
     }
 
+    /**
+     * Játékos hozzáadása a listához.
+     * @param p
+     */
+    public void addPlayer(Player p) {
+        allPlayers.add(p);
+    }
+
+    public void addSettler(SpaceShip s) {
+        //todo
+    }
 }

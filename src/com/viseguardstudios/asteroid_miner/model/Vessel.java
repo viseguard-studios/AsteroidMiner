@@ -45,7 +45,13 @@ public abstract class Vessel extends Entity {
      * Belebújik az adott aszteroidába, ha van benne elegendő hely. Ha nincsen, az aszteroida felszínén marad.
      */
     public void Hide() {
-        // TODO implement here
+
+        if(currentAsteroid!= null){
+            Logger.log("currentAsteroid.Hide(this)");
+            currentAsteroid.Hide(this);
+            Logger.returned();
+
+        }
     }
 
     /**
@@ -110,9 +116,14 @@ public abstract class Vessel extends Entity {
 
     /**
      * Örökölt függvény. Napvihar esetén hívódik meg.
+     * Minden vűtjármű megsemmisül, ha nincs elbújva.
      */
     public void SolarFlare() {
-        // TODO implement here
+        if(!isHidden){
+            Logger.log("this.Die();");
+            this.Die();
+            Logger.returned();
+        }
     }
 
     /**
@@ -122,5 +133,21 @@ public abstract class Vessel extends Entity {
     public void RoundEnd(boolean closeToSun) {
         // TODO implement here
     }
+
+    /**
+     * Beállítja,hogy melyik játékos a tulajdonosa az űrjárműnek.
+     * @param p
+     */
+    public void setOwner(Player p){
+        owner = p;
+    }
+
+    /**
+     * Megsemmisül az adott űrjármú.
+     */
+    public void Die(){
+    //todo
+    }
+
 
 }

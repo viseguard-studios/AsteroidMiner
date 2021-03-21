@@ -15,6 +15,8 @@ public class Asteroid extends Entity {
      * Default constructor
      */
     public Asteroid() {
+        maxHidingSpace = 1;
+
     }
 
     @Override
@@ -55,7 +57,7 @@ public class Asteroid extends Entity {
     /**
      * Ha az aszteroidában jelenleg megbújik egy telepes, akkor eltárolja, melyik telepesről van szó. Ha nem bújik benne senki, null értéket tárol.
      */
-    private Vessel hidingVessel;
+    private Set<Vessel> hidingVessels;
 
     /**
      * Az aszteroida raktára, ami a magba belehelyezett és jelenleg ott tárolt elemeket tartalmazza.
@@ -130,8 +132,13 @@ public class Asteroid extends Entity {
      * @return
      */
     public int GetAvailableHidingSpace() {
-        // TODO implement here
-        return 0;
+        int usedSpace = 0;
+
+        for (Vessel v : hidingVessels ) {
+        usedSpace +=v.GetHidingSpaceRequirement();
+        };
+
+        return maxHidingSpace-usedSpace;
     }
 
     /**
@@ -163,7 +170,13 @@ public class Asteroid extends Entity {
      * @return
      */
     public boolean Hide(Vessel v) {
-        // TODO implement here
+        if (GetAvailableHidingSpace()>=v.GetHidingSpaceRequirement())
+        {
+            if (!hidingVessels.contains(v)) {
+                hidingVessels.add(v);
+                return true;
+            }
+        }
         return false;
     }
 
@@ -172,7 +185,8 @@ public class Asteroid extends Entity {
      * @param v
      */
     public void Exit(Vessel v) {
-        // TODO implement here
+
+        if (hidingVessels.contains(v)) hidingVessels.remove(v);
     }
 
     /**
