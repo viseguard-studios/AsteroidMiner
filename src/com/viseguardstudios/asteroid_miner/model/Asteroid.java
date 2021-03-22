@@ -20,6 +20,8 @@ public class Asteroid extends Entity {
         inventory = new Inventory();
     }
 
+    }
+
 
     @Override
     public void RoundEnd(boolean closeToSun) {
@@ -186,24 +188,21 @@ public class Asteroid extends Entity {
     public boolean Hide(Vessel v) {
         // TODO implement here
 
-        Logger.lognl("Check if has not natural resource in the core AND asteroid is not exploded");
-        if(resource.getAmount() == 0 && !exploded){
-            Logger.lognl("Read neededSpace: v.hidingSpaceRequirement");
+        Logger.log("Check if has not natural resource in the core AND asteroid is not exploded");
+        if(resource == null || resource.getAmount() == 0 && !exploded){
+            Logger.log("Read neededSpace: v.hidingSpaceRequirement");
             var neededSpace = v.GetHidingSpaceRequirement();
             Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
-            var usedSpace = hidingSpaceShip.GetHidingSpaceRequirement();
+            var usedSpace = hidingSpaceShip == null? 0: 1;
 
             Logger.lognl("1 - usedSpace is bigger than neededSpace?");
             if(1 - usedSpace >= neededSpace){
                 Logger.log("Does this Vessel using space?");
-                //TODO Check type
-                /*--------------------------------------------------------------
                 if(neededSpace > 0){
                     Logger.log("Yes, put it into hidingVessel");
                     hidingSpaceShip = v;
                 }
                 else{ Logger.log("No.");}
-                 --------------------------------------------------------------*/
                 Logger.log("this vessel might hide");
                 return true;
             }
@@ -245,8 +244,8 @@ public class Asteroid extends Entity {
     public boolean PlaceItem(Item i) {
         // TODO implement here
 
-        Logger.lognl("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0 AND has not natural resource in the core:");
-        if(crustSize > 0 && !exploded && resource.getAmount() == 0){
+        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is  0 AND has not natural resource in the core:");
+        if(resource == null || resource.getAmount() == 0 && crustSize == 0 && !exploded){
             Logger.functionCalled("inventory.TryInsertItem()");
             var hasSpace = inventory.TryInsertItem();
             Logger.returned();
