@@ -20,7 +20,7 @@ public class Asteroid extends Entity {
         inventory = new Inventory();
     }
 
-    }
+
 
 
     @Override
