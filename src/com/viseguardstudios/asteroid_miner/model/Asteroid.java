@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.model;
 import com.viseguardstudios.asteroid_miner.model.building.Building;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.resource.Resource;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
 
@@ -16,8 +17,9 @@ public class Asteroid extends Entity {
      */
     public Asteroid() {
         maxHidingSpace = 1;
-
+        inventory = new Inventory();
     }
+
 
     @Override
     public void RoundEnd(boolean closeToSun) {
@@ -57,7 +59,7 @@ public class Asteroid extends Entity {
     /**
      * Ha az aszteroidában jelenleg megbújik egy telepes, akkor eltárolja, melyik telepesről van szó. Ha nem bújik benne senki, null értéket tárol.
      */
-    private Set<Vessel> hidingVessels;
+    private Vessel hidingSpaceShip;
 
     /**
      * Az aszteroida raktára, ami a magba belehelyezett és jelenleg ott tárolt elemeket tartalmazza.
@@ -67,7 +69,7 @@ public class Asteroid extends Entity {
     /**
      * A szomszédos aszteroidák tárolója.
      */
-    private Set<Asteroid> neighbours;
+    private List<Asteroid> neighbours = new LinkedList<>();
 
 
     /**
@@ -83,7 +85,7 @@ public class Asteroid extends Entity {
     /**
      * Az aszteroidára épített (véglegesen elhelyezett) építmények tárolója.
      */
-    private Set<Building> buildings;
+    private List<Building> buildings = new LinkedList<>();
 
     /**
      * Az osztály konstruktora.
@@ -106,9 +108,24 @@ public class Asteroid extends Entity {
      * Tárolja, hogy melyik aszteroidák elérhetőek jelenleg az adott aszteroidából.
      * @return
      */
-    public Set<Asteroid> ReachableAsteroids() {
+    public List<Asteroid> ReachableAsteroids() {
         // TODO implement here
-        return null;
+        List<Asteroid> n = new LinkedList<>(neighbours);
+
+        Logger.lognl("foreach b in buildings");
+
+        for (Building b : buildings) {
+
+            Logger.functionCalled("b.GetRoutes()");
+            var r = b.GetRoutes();
+            Logger.returned();
+
+            if(r != null){
+                n.addAll(r);
+            }
+        }
+
+        return n;
     }
 
     /**
@@ -153,6 +170,16 @@ public class Asteroid extends Entity {
      */
     public void Drill() {
         // TODO implement here
+
+        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0:");
+        if(crustSize > 0 && !exploded){
+            Logger.writeln("Yes");
+            Logger.lognl("Set crustSize to crustSize-1");
+            crustSize -= 1;
+        }
+        else {
+            Logger.writeln("No, nothing more");
+        }
     }
 
     /**
@@ -170,13 +197,33 @@ public class Asteroid extends Entity {
      * @return
      */
     public boolean Hide(Vessel v) {
-        if (GetAvailableHidingSpace()>=v.GetHidingSpaceRequirement())
-        {
-            if (!hidingVessels.contains(v)) {
-                hidingVessels.add(v);
+        // TODO implement here
+
+        Logger.lognl("Check if has not natural resource in the core AND asteroid is not exploded");
+        if(resource.getAmount() == 0 && !exploded){
+            Logger.lognl("Read neededSpace: v.hidingSpaceRequirement");
+            var neededSpace = v.GetHidingSpaceRequirement();
+            Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
+            var usedSpace = hidingSpaceShip.GetHidingSpaceRequirement();
+
+            Logger.lognl("1 - usedSpace is bigger than neededSpace?");
+            if(1 - usedSpace >= neededSpace){
+                Logger.log("Does this Vessel using space?");
+                //TODO Check type
+                /*--------------------------------------------------------------
+                if(neededSpace > 0){
+                    Logger.log("Yes, put it into hidingVessel");
+                    hidingSpaceShip = v;
+                }
+                else{ Logger.log("No.");}
+                 --------------------------------------------------------------*/
+                Logger.log("this vessel might hide");
                 return true;
             }
+            else { Logger.lognl("No, this vessel might not hide");}
+            return false;
         }
+        else { Logger.lognl("No, this vessel might not hide");}
         return false;
     }
 
@@ -186,7 +233,13 @@ public class Asteroid extends Entity {
      */
     public void Exit(Vessel v) {
 
-        if (hidingVessels.contains(v)) hidingVessels.remove(v);
+        // TODO implement here
+
+        Logger.log("Check if vessel is using space");
+        if(v == hidingSpaceShip){
+            Logger.log("Yes, and free it");
+            hidingSpaceShip = null;
+        }
     }
 
     /**
@@ -204,6 +257,27 @@ public class Asteroid extends Entity {
      */
     public boolean PlaceItem(Item i) {
         // TODO implement here
+
+        Logger.lognl("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0 AND has not natural resource in the core:");
+        if(crustSize > 0 && !exploded && resource.getAmount() == 0){
+            Logger.functionCalled("inventory.TryInsertItem()");
+            var hasSpace = inventory.TryInsertItem();
+            Logger.returned();
+            Logger.lognl("Dose inventory has enough place?");
+            if(hasSpace){
+                Logger.lognl("Yes");
+                Logger.functionCalled("inventory.InsertItem(i)");
+                inventory.InsertItem(i);
+                Logger.returned();
+                Logger.lognl("The inserting succeed");
+                return true;
+            }
+            else {
+                Logger.lognl("No, the Inserting failed");
+                return false;
+            }
+        }
+        else { Logger.lognl("No, nothing more");}
         return false;
     }
 
@@ -211,7 +285,8 @@ public class Asteroid extends Entity {
      * Új szomszéd hozzáadása.
      * @param a
      */
-    public void AddNeigbour(Asteroid a) {
+    public void AddNeighbour(Asteroid a) {
+        neighbours.add(a);
         // TODO implement here
     }
 
@@ -221,7 +296,7 @@ public class Asteroid extends Entity {
      */
     public Inventory GetInventory() {
         // TODO implement here
-        return null;
+        return inventory;
     }
 
     /**
@@ -233,4 +308,56 @@ public class Asteroid extends Entity {
     }
 
 
+    public int getCrustSize() {
+        return crustSize;
+    }
+
+    public void setCrustSize(int crustSize) {
+        try {
+            if(crustSize >= 0) this.crustSize = crustSize;
+            else throw new Exception("crustSize must not smaller than 0!");
+        }
+        catch (Exception exp){ }
+
+    }
+
+    public int getMaxHidingSpace() {
+        return maxHidingSpace;
+    }
+
+    public void setMaxHidingSpace(int maxHidingSpace) {
+        this.maxHidingSpace = maxHidingSpace;
+    }
+
+    public boolean isExploded() {
+        return exploded;
+    }
+
+    public void setExploded(boolean exploded) {
+        this.exploded = exploded;
+    }
+
+    public Vessel getHidingVessel() {
+        return hidingSpaceShip;
+    }
+
+    public void setHidingVessel(Vessel hidingVessel) {
+        this.hidingSpaceShip = hidingVessel;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
 }

@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.model;
 import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**
  * A telepesekért felelős osztály.
@@ -14,6 +15,7 @@ public class SpaceShip extends Vessel {
      */
     public SpaceShip(Asteroid a) {
         super(a);
+        inventory = new Inventory();
 
     }
 
@@ -45,7 +47,7 @@ public class SpaceShip extends Vessel {
      */
     public int GetHidingSpaceRequirement() {
         // TODO implement here
-        return 0;
+        return 1;
     }
 
     /**
@@ -60,7 +62,16 @@ public class SpaceShip extends Vessel {
      * @param recipe
      */
     public void Craft(Recipe recipe) {
-        // TODO implement here
+
+        Logger.functionCalled("recipe.CanCraft(ss)");
+        boolean cancraft = recipe.CanCraft(this);
+        Logger.returned();
+
+        if (cancraft) {
+            Logger.functionCalled("recipe.Craft(ss)");
+            recipe.Craft(this);
+            Logger.returned();
+        }
     }
 
     /**
@@ -70,7 +81,22 @@ public class SpaceShip extends Vessel {
      */
     public boolean PlaceItem(Item i) {
         // TODO implement here
-        return false;
+
+        Logger.functionCalled("currentAsteroid.PlaceItem(i)");
+        var success = currentAsteroid.PlaceItem(i);
+        Logger.returned();
+        Logger.lognl("Does the inserting succeed?");
+        if(success){
+            Logger.lognl("Yes");
+            Logger.functionCalled("RemoveItem(i)");
+            inventory.RemoveItem(i);
+            Logger.returned();
+            return true;
+        }
+        else {
+            Logger.lognl("No");
+            return false;
+        }
     }
 
     /**
@@ -97,5 +123,20 @@ public class SpaceShip extends Vessel {
     public void SolarFlare() {
 
     }
+
+    /**
+     * A raktár getter-e
+     * @return inventory
+     */
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    /**
+     * A tulajdonos getter-e
+     * @return owner
+     */
+    public Player getOwner() {return owner; }
+
 
 }

@@ -1,5 +1,8 @@
 package com.viseguardstudios.asteroid_miner.skeleton;
 
+
+import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.skeleton.tests.*;
 
 import java.util.Scanner;
@@ -41,6 +44,14 @@ public class SkeletonEntry {
         testRegistry.Register("SolarFlareHitsRobot" ,  new SolarFlareHitsRobot());
         testRegistry.Register("SolarFlareHitsSpaceShip" ,  new SolarFlareHitsSpaceShip());
         testRegistry.Register(" MoveAsteroidField" ,  new MoveAsteroidField());
+        testRegistry.Register("SSDrill", new SSDrillTest());
+        testRegistry.Register("SSHide", new SSHideTest());
+        testRegistry.Register("SSExitHiding", new SSExitHidingTest());
+        testRegistry.Register("SSPlaceResource", new SSPlaceItemTest());
+        testRegistry.Register("CraftRobot", new CraftRobotTest());
+        testRegistry.Register("CraftSpaceStation", new CraftSpaceStationTest());
+        testRegistry.Register("CraftTeleportGate", new CraftTeleportGateTest());
     }
+
 
 }

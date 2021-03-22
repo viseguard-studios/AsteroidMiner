@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model;
 
 import com.viseguardstudios.asteroid_miner.model.item.Item;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
 
@@ -35,34 +36,58 @@ public class Inventory {
      */
     public boolean InsertItem(Item item) {
         // TODO implement here
-        return false;
+
+        Logger.lognl("Add the item to inventory");
+        items.add(item);
+        return true;
     }
 
     /**
      * Elem eltávolítása a tárolóból.
-     * @param item
+     * @param input
      */
-    public void RemoveItem(Item item) {
-        // TODO implement here
+    public int RemoveItem(Item input) {
+        int amount = 0;
+        for(Item item: items){
+            Logger.functionCalled("item.Satisfies(input)");
+            amount = item.Satisfies(input);
+            Logger.returned();
+
+            if(amount != 0){
+                Logger.functionCalled("item.Reduce(amount)");
+                item.Reduce(amount);
+                Logger.returned();
+            }
+        }
+        return amount;
     }
 
     /**
      * Ellenőrzi, hogy az adott elem elméletileg belehelyezhető-e a raktárba.
-     * @param item 
      * @return
      */
-    public boolean TryInsertItem(Item item) {
+    public boolean TryInsertItem() {
         // TODO implement here
-        return false;
+
+        Logger.lognl("Check if the inventory has enough place");
+        return items.stream().count() <= size -1;
     }
 
     /**
      * Visszatér az inventory-ban találtahó item-ek listájával.
      * @return
      */
-    public Set<Item> getItems() {
-        // TODO implement here
-        return null;
-    }
+    public Set<Item> getItems() { return items; }
 
+    /***
+     * A tárhely getter-e
+     * @return size
+     */
+    public int getSize() { return size;}
+
+    /***
+     * A tárhely setter-e, tesztelésre
+     * @param s
+     */
+    public void setSize(int s) {size = s;}
 }

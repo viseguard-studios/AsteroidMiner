@@ -21,7 +21,9 @@ public class SSMoveTest extends Test {
     @Override
     public void Setup(Scanner sc) {
         System.out.print("Use TeleportGate? (Y/N):");
+
         var answer = sc.nextLine();
+        System.out.println();
 
         a1 = new Asteroid();
         a2 = new Asteroid();
@@ -41,7 +43,7 @@ public class SSMoveTest extends Test {
             tg2.SetPair(tg1);
         }
         else {
-            a1.AddNeigbour(a2);
+            a1.AddNeighbour(a2);
         }
     }
 

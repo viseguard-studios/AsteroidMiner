@@ -13,6 +13,7 @@ public abstract class Vessel extends Entity {
     public Vessel(Asteroid a) {
         a.Arrive(this);
         currentAsteroid = a;
+        isHidden = false;
     }
 
     /**
@@ -23,12 +24,12 @@ public abstract class Vessel extends Entity {
     /**
      * Az aktuális tartózkodási helyének (aszteroida) tárolására szolgál.
      */
-    private Asteroid currentAsteroid;
+    protected Asteroid currentAsteroid;
 
     /**
      * Tárolja, hogy melyik játékos irányítja az járművet.
      */
-    private Player owner;
+    protected Player owner;
 
     /**
      * Az osztály konstruktora, beállítja az őt kezelő játékost illetve aszteroidát.
@@ -45,13 +46,16 @@ public abstract class Vessel extends Entity {
      * Belebújik az adott aszteroidába, ha van benne elegendő hely. Ha nincsen, az aszteroida felszínén marad.
      */
     public void Hide() {
+        // TODO implement here
 
-        if(currentAsteroid!= null){
-            Logger.log("currentAsteroid.Hide(this)");
-            currentAsteroid.Hide(this);
+        Logger.log("Check if it is not hidden");
+        if(!isHidden){
+            Logger.functionCalled("currentAsteroid.Hide(this);");
+            var canHide = currentAsteroid.Hide(this);
             Logger.returned();
-
+            isHidden = canHide;
         }
+        else { Logger.lognl("Is already hidden, nothing more");}
     }
 
     /**
@@ -59,6 +63,10 @@ public abstract class Vessel extends Entity {
      */
     public void Drill() {
         // TODO implement here
+
+        Logger.functionCalled("currentAsteroid.Drill();");
+        currentAsteroid.Drill();
+        Logger.returned();
     }
 
     /**
@@ -72,9 +80,9 @@ public abstract class Vessel extends Entity {
         var n = currentAsteroid.ReachableAsteroids();
         Logger.returned();
 
-        Logger.log("Check if n has to: ");
+        Logger.lognl("Check if n has to: ");
         if(n.contains(to)){
-            Logger.log("It has! 🎆");
+            Logger.lognl("It has! 🎆");
 
             Logger.functionCalled("currentAsteroid.Depart(this);");
             this.currentAsteroid.Depart(this);
@@ -85,7 +93,7 @@ public abstract class Vessel extends Entity {
             Logger.returned();
         }
         else {
-            Logger.log("It doesn't :(");
+            Logger.lognl("It doesn't :(");
         }
     }
 
@@ -107,6 +115,18 @@ public abstract class Vessel extends Entity {
      */
     public void ExitHiding() {
         // TODO implement here
+
+        Logger.lognl("Check if is hidden");
+        if(isHidden){
+            Logger.functionCalled("currentAsteroid.Exit(this)");
+            currentAsteroid.Exit(this);
+            Logger.returned();
+            Logger.lognl("Set isHidden statement to false");
+            isHidden = false;
+        }
+        else {
+            Logger.lognl("Is not hidden, nothing more");
+        }
     }
 
     /**
@@ -149,5 +169,18 @@ public abstract class Vessel extends Entity {
     //todo
     }
 
+    public boolean getHidden(){
+        return isHidden;
+    }
+
+    public void setHidden(boolean hidden){
+        this.isHidden = hidden;
+    }
+
+    /**
+     * Az aszteroida getter-e
+     * @return
+     */
+    public Asteroid getCurrentAsteroid() { return currentAsteroid;}
 
 }

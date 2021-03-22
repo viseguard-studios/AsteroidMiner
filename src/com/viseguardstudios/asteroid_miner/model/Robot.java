@@ -13,6 +13,16 @@ public class Robot extends Vessel {
     }
 
     /**
+     * Constructor for crafting
+     * @param p
+     * @param currentAsteroid
+     */
+    public Robot(Player p, Asteroid currentAsteroid) {
+        super(currentAsteroid);
+        owner = p;
+    }
+
+    /**
      * Az osztály konstruktora, beállítja az őt kezelő játékost illetve aszteroidát.
      * @param p 
      * @param a 
