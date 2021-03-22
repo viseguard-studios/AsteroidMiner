@@ -56,7 +56,7 @@ public class Asteroid extends Entity {
     /**
      * Ha az aszteroidában jelenleg megbújik egy telepes, akkor eltárolja, melyik telepesről van szó. Ha nem bújik benne senki, null értéket tárol.
      */
-    private Vessel hidingVessel;
+    private Vessel hidingSpaceShip;
 
     /**
      * Az aszteroida raktára, ami a magba belehelyezett és jelenleg ott tárolt elemeket tartalmazza.
@@ -178,16 +178,19 @@ public class Asteroid extends Entity {
             Logger.log("Read neededSpace: v.hidingSpaceRequirement");
             var neededSpace = v.GetHidingSpaceRequirement();
             Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
-            var usedSpace = hidingVessel.GetHidingSpaceRequirement();
+            var usedSpace = hidingSpaceShip.GetHidingSpaceRequirement();
 
             Logger.log("1 - usedSpace is bigger than neededSpace?");
             if(1 - usedSpace >= neededSpace){
                 Logger.log("Does this Vessel using space?");
+                //TODO Check type
+                /*--------------------------------------------------------------
                 if(neededSpace > 0){
                     Logger.log("Yes, put it into hidingVessel");
-                    hidingVessel = v;
+                    hidingSpaceShip = v;
                 }
                 else{ Logger.log("No.");}
+                 --------------------------------------------------------------*/
                 Logger.log("this vessel might hide");
                 return true;
             }
@@ -206,9 +209,9 @@ public class Asteroid extends Entity {
         // TODO implement here
 
         Logger.log("Check if vessel is using space");
-        if(v == hidingVessel){
+        if(v == hidingSpaceShip){
             Logger.log("Yes, and free it");
-            hidingVessel = null;
+            hidingSpaceShip = null;
         }
     }
 
@@ -307,11 +310,11 @@ public class Asteroid extends Entity {
     }
 
     public Vessel getHidingVessel() {
-        return hidingVessel;
+        return hidingSpaceShip;
     }
 
     public void setHidingVessel(Vessel hidingVessel) {
-        this.hidingVessel = hidingVessel;
+        this.hidingSpaceShip = hidingVessel;
     }
 
     public Inventory getInventory() {

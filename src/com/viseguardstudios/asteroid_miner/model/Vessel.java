@@ -48,12 +48,11 @@ public abstract class Vessel extends Entity {
     public void Hide() {
         // TODO implement here
 
-        Logger.log("Check if is not hidden");
+        Logger.log("Check if it is not hidden");
         if(!isHidden){
             Logger.functionCalled("currentAsteroid.Hide(this);");
             var canHide = currentAsteroid.Hide(this);
             Logger.returned();
-            Logger.log("Hide, if it might be");
             isHidden = canHide;
         }
         else { Logger.log("Is already hidden, nothing more");}
