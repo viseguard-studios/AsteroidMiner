@@ -21,8 +21,6 @@ public class Asteroid extends Entity {
     }
 
 
-
-
     @Override
     public void RoundEnd(boolean closeToSun) {
 
@@ -188,8 +186,8 @@ public class Asteroid extends Entity {
     public boolean Hide(Vessel v) {
         // TODO implement here
 
-        Logger.log("Check if has not natural resource in the core AND asteroid is not exploded");
-        if(resource == null || resource.getAmount() == 0 && !exploded){
+        Logger.log("Check if has not natural resource in the core AND asteroid is not exploded AND currentAsteroid.crustSize is 0");
+        if((resource == null || resource.getAmount() == 0 )&& !exploded && crustSize == 0){
             Logger.log("Read neededSpace: v.hidingSpaceRequirement");
             var neededSpace = v.GetHidingSpaceRequirement();
             Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
@@ -244,8 +242,8 @@ public class Asteroid extends Entity {
     public boolean PlaceItem(Item i) {
         // TODO implement here
 
-        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is  0 AND has not natural resource in the core:");
-        if(resource == null || resource.getAmount() == 0 && crustSize == 0 && !exploded){
+        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is 0 AND has not natural resource in the core:");
+        if((resource == null || resource.getAmount() == 0 )&& crustSize == 0 && !exploded){
             Logger.functionCalled("inventory.TryInsertItem()");
             var hasSpace = inventory.TryInsertItem();
             Logger.returned();

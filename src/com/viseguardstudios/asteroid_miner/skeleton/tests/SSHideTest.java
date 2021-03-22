@@ -21,7 +21,7 @@ public class SSHideTest extends Test {
         ss = new SpaceShip(a);
         ss2 = new SpaceShip(a);
 
-        System.out.println("Would you like this spaceship hiding right now? [Y/N]");
+        System.out.println("Should this SpaceShip be already hidden? [Y/N]");
         var answer = sc.nextLine();
         ss.setHidden(answer.equals("Y"));
 
@@ -33,7 +33,12 @@ public class SSHideTest extends Test {
             a.setResource(is);
         }
 
-        System.out.println("Would you like the asteroid exploded? [Y/N]");
+        System.out.println("Would you like to set the asteroid crust size to 0? [Y/N]");
+        answer = sc.nextLine();
+        if(answer.equals("Y")) a.setCrustSize(0);
+        else a.setCrustSize(1);
+
+        System.out.println("Would you like the asteroid to be exploded? [Y/N]");
         answer = sc.nextLine();
         a.setExploded(answer.equals("Y"));
 
