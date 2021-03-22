@@ -21,7 +21,7 @@ public class SolarFlareHitsRobot extends Test {
         System.out.print("Hide robot? (Y/N):");
         String answer = sc.nextLine().toLowerCase();
 
-        if (answer == "y"){
+        if (answer.equals("y")){
             Logger.functionCalled("r.Hide();");
             r.Hide();
             Logger.returned();

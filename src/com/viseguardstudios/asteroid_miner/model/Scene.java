@@ -13,12 +13,13 @@ public class Scene {
      * Default constructor
      */
     public Scene() {
+        entities = new ArrayList<>();
     }
 
     /**
      * A játékban szereplő összes entitás tárolója.
      */
-    protected Set<Entity> entities;
+    protected ArrayList<Entity> entities;
 
 
     /**
@@ -64,10 +65,12 @@ public class Scene {
      * A napviharról szóló értesítést továbbítja az com.viseguardstudios.asteroid_miner.model.Entity felé
      */
     public void SolarFlare() {
-        for (Entity e : entities){
-            Logger.log("e.SolarFlare();");
-            e.SolarFlare();
-            Logger.returned();
+        if (!entities.isEmpty()){
+            for (Entity e : entities){
+                Logger.log("e.SolarFlare();");
+                e.SolarFlare();
+                Logger.returned();
+            }
         }
     }
 

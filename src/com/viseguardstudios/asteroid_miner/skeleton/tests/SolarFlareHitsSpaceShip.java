@@ -21,7 +21,7 @@ public class SolarFlareHitsSpaceShip extends Test {
         System.out.print("Hide SpaceShip? (Y/N):");
         String answer = sc.nextLine().toLowerCase();
 
-        if (answer == "y"){
+        if (answer.equals("y")){
             Logger.functionCalled("r.Hide();");
             s.Hide();
             Logger.returned();
