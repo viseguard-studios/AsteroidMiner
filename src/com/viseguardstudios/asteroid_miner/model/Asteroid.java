@@ -58,7 +58,7 @@ public class Asteroid extends Entity {
     /**
      * Ha az aszteroidában jelenleg megbújik egy telepes, akkor eltárolja, melyik telepesről van szó. Ha nem bújik benne senki, null értéket tárol.
      */
-    private Vessel hidingVessel;
+    private Vessel hidingSpaceShip;
 
     /**
      * Az aszteroida raktára, ami a magba belehelyezett és jelenleg ott tárolt elemeket tartalmazza.
@@ -197,18 +197,21 @@ public class Asteroid extends Entity {
         if(resource.getAmount() == 0 && !exploded){
             Logger.lognl("Read neededSpace: v.hidingSpaceRequirement");
             var neededSpace = v.GetHidingSpaceRequirement();
-            Logger.lognl("Read usedSpace: hidingVessel.hidingSpaceRequirement");
-            var usedSpace = hidingVessel.GetHidingSpaceRequirement();
+            Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
+            var usedSpace = hidingSpaceShip.GetHidingSpaceRequirement();
 
             Logger.lognl("1 - usedSpace is bigger than neededSpace?");
             if(1 - usedSpace >= neededSpace){
-                Logger.lognl("Does this Vessel using space?");
+                Logger.log("Does this Vessel using space?");
+                //TODO Check type
+                /*--------------------------------------------------------------
                 if(neededSpace > 0){
-                    Logger.lognl("Yes, put it into hidingVessel");
-                    hidingVessel = v;
+                    Logger.log("Yes, put it into hidingVessel");
+                    hidingSpaceShip = v;
                 }
-                else{ Logger.lognl("No.");}
-                Logger.lognl("this vessel might hide");
+                else{ Logger.log("No.");}
+                 --------------------------------------------------------------*/
+                Logger.log("this vessel might hide");
                 return true;
             }
             else { Logger.lognl("No, this vessel might not hide");}
@@ -225,10 +228,10 @@ public class Asteroid extends Entity {
     public void Exit(Vessel v) {
         // TODO implement here
 
-        Logger.lognl("Check if vessel is using space");
-        if(v == hidingVessel){
-            Logger.lognl("Yes, and free it");
-            hidingVessel = null;
+        Logger.log("Check if vessel is using space");
+        if(v == hidingSpaceShip){
+            Logger.log("Yes, and free it");
+            hidingSpaceShip = null;
         }
     }
 
@@ -328,11 +331,11 @@ public class Asteroid extends Entity {
     }
 
     public Vessel getHidingVessel() {
-        return hidingVessel;
+        return hidingSpaceShip;
     }
 
     public void setHidingVessel(Vessel hidingVessel) {
-        this.hidingVessel = hidingVessel;
+        this.hidingSpaceShip = hidingVessel;
     }
 
     public Inventory getInventory() {
