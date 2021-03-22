@@ -144,19 +144,6 @@ public class Asteroid extends Entity {
         // TODO implement here
     }
 
-    /**
-     * Visszaadja, hogy hány telepes számára van még hely elbújásra jelenleg az aszteroidában, attól függően, hogy jelentleg elbújt-e telepes az aszteroidában.
-     * @return
-     */
-    public int GetAvailableHidingSpace() {
-        int usedSpace = 0;
-
-        for (Vessel v : hidingVessels ) {
-        usedSpace +=v.GetHidingSpaceRequirement();
-        };
-
-        return maxHidingSpace-usedSpace;
-    }
 
     /**
      * Aszteroida felfedése a térképen, amennyiben még nem volt felfedve.
