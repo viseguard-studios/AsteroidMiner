@@ -1,5 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model;
 
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+
 import java.util.*;
 
 /**
@@ -29,7 +31,17 @@ public class Scene {
      * @param e
      */
     public void AddEntity(Entity e) {
-        // TODO implement here
+        if (!entities.contains(e)){
+            entities.add(e);
+        }
+    }
+
+    /**
+     * Egy entitást kiveszük a fenntartott listákból.
+     * @param v
+     */
+    public void removeEntity(Entity v) {
+        if (entities.contains(v))  entities.remove(v);
     }
 
     /**
@@ -52,7 +64,14 @@ public class Scene {
      * A napviharról szóló értesítést továbbítja az com.viseguardstudios.asteroid_miner.model.Entity felé
      */
     public void SolarFlare() {
-        // TODO implement here
+        for (Entity e : entities){
+            Logger.log("e.SolarFlare();");
+            e.SolarFlare();
+            Logger.returned();
+        }
     }
 
+    public void setManager(GameManager gm) {
+        manager=gm;
+    }
 }

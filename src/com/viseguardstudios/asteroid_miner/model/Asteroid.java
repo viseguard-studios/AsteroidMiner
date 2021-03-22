@@ -16,6 +16,7 @@ public class Asteroid extends Entity {
      * Default constructor
      */
     public Asteroid() {
+        maxHidingSpace = 1;
         inventory = new Inventory();
     }
 
@@ -148,8 +149,13 @@ public class Asteroid extends Entity {
      * @return
      */
     public int GetAvailableHidingSpace() {
-        // TODO implement here
-        return 0;
+        int usedSpace = 0;
+
+        for (Vessel v : hidingVessels ) {
+        usedSpace +=v.GetHidingSpaceRequirement();
+        };
+
+        return maxHidingSpace-usedSpace;
     }
 
     /**
@@ -226,6 +232,7 @@ public class Asteroid extends Entity {
      * @param v
      */
     public void Exit(Vessel v) {
+
         // TODO implement here
 
         Logger.log("Check if vessel is using space");

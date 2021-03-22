@@ -136,9 +136,14 @@ public abstract class Vessel extends Entity {
 
     /**
      * Örökölt függvény. Napvihar esetén hívódik meg.
+     * Minden vűtjármű megsemmisül, ha nincs elbújva.
      */
     public void SolarFlare() {
-        // TODO implement here
+        if(!isHidden){
+            Logger.log("this.Die();");
+            this.Die();
+            Logger.returned();
+        }
     }
 
     /**
@@ -147,6 +152,21 @@ public abstract class Vessel extends Entity {
      */
     public void RoundEnd(boolean closeToSun) {
         // TODO implement here
+    }
+
+    /**
+     * Beállítja,hogy melyik játékos a tulajdonosa az űrjárműnek.
+     * @param p
+     */
+    public void setOwner(Player p){
+        owner = p;
+    }
+
+    /**
+     * Megsemmisül az adott űrjármú.
+     */
+    public void Die(){
+    //todo
     }
 
     public boolean getHidden(){
