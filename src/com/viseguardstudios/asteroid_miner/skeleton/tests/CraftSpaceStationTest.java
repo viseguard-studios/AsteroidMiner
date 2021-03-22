@@ -2,6 +2,8 @@ package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
 
 import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.GameManager;
+import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.building.SpaceStation;
 import com.viseguardstudios.asteroid_miner.model.item.Coal;
@@ -21,6 +23,8 @@ public class CraftSpaceStationTest extends Test {
     Asteroid a;
     SpaceShip ss;
     SpaceStationRecipe recipe;
+    private GameManager gm;
+    private Scene scene;
 
 
     @Override
@@ -29,10 +33,17 @@ public class CraftSpaceStationTest extends Test {
         /***
          * inicializálás
          */
+        gm = new GameManager();
+        scene = new Scene();
+        scene.setManager(gm);
+
         a = new Asteroid();
+        scene.AddEntity(a);
         a.GetInventory().setSize(10);
+
         ss = new SpaceShip(a);
         ss.getInventory().setSize(10);
+
         recipe = new SpaceStationRecipe();
 
 
