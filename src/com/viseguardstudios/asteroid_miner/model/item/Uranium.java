@@ -13,6 +13,10 @@ public class Uranium extends Item {
     public Uranium() {
     }
 
+    public Uranium(int a) {
+        super(a);
+    }
+
     /**
      * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
      * Ha nem használható, 0-val tér vissza.

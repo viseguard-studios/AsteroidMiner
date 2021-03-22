@@ -13,6 +13,10 @@ public class Ice extends Item {
     public Ice() {
     }
 
+    public Ice(int a) {
+        super(a);
+    }
+
     /**
      * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
      * Ha nem használható, 0-val tér vissza.

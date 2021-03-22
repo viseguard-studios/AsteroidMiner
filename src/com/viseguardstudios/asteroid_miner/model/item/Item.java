@@ -15,6 +15,13 @@ public abstract class Item {
     }
 
     /**
+     *  Konstruktor mennyiség beállítással
+     */
+    public Item(int a) {
+        amount = a;
+    }
+
+    /**
      * Az elem darabszámát tárolja.
      */
     protected int amount;

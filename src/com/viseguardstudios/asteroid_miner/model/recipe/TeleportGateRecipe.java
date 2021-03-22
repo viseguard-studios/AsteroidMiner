@@ -4,8 +4,7 @@ import com.viseguardstudios.asteroid_miner.model.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Inventory;
 import com.viseguardstudios.asteroid_miner.model.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
-import com.viseguardstudios.asteroid_miner.model.item.Item;
-import com.viseguardstudios.asteroid_miner.model.item.TeleportGateItem;
+import com.viseguardstudios.asteroid_miner.model.item.*;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.Set;
@@ -19,6 +18,9 @@ public class TeleportGateRecipe extends Recipe {
      * Default constructor
      */
     public TeleportGateRecipe() {
+        input.add(new Iron(2));
+        input.add(new Ice());
+        input.add(new Uranium());
     }
 
     /**

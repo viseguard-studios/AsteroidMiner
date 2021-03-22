@@ -15,6 +15,10 @@ public class TeleportGateItem extends Item {
     public TeleportGateItem() {
     }
 
+    public TeleportGateItem(int a) {
+        super(a);
+    }
+
     /**
      * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
      * Ha nem használható, 0-val tér vissza.

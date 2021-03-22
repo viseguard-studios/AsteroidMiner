@@ -1,6 +1,9 @@
 package com.viseguardstudios.asteroid_miner.model.recipe;
 
 import com.viseguardstudios.asteroid_miner.model.*;
+import com.viseguardstudios.asteroid_miner.model.item.Coal;
+import com.viseguardstudios.asteroid_miner.model.item.Iron;
+import com.viseguardstudios.asteroid_miner.model.item.Uranium;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**
@@ -12,6 +15,9 @@ public class RobotRecipe extends Recipe {
      * Default constructor
      */
     public RobotRecipe() {
+        input.add(new Iron());
+        input.add(new Coal());
+        input.add(new Uranium());
     }
 
     /**
