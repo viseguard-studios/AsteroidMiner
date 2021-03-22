@@ -43,6 +43,9 @@ public class SkeletonEntry {
         testRegistry.Register("SSHide", new SSHideTest());
         testRegistry.Register("SSExitHiding", new SSExitHidingTest());
         testRegistry.Register("SSPlaceResource", new SSPlaceItemTest());
+        testRegistry.Register("CraftRobot", new CraftRobotTest());
+        testRegistry.Register("CraftSpaceStation", new CraftSpaceStationTest());
+        testRegistry.Register("CraftTeleportGate", new CraftTeleportGateTest());
     }
 
 

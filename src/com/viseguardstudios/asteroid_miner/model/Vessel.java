@@ -29,7 +29,7 @@ public abstract class Vessel extends Entity {
     /**
      * Tárolja, hogy melyik játékos irányítja az járművet.
      */
-    private Player owner;
+    protected Player owner;
 
     /**
      * Az osztály konstruktora, beállítja az őt kezelő játékost illetve aszteroidát.
@@ -157,5 +157,11 @@ public abstract class Vessel extends Entity {
     public void setHidden(boolean hidden){
         this.isHidden = hidden;
     }
+
+    /**
+     * Az aszteroida getter-e
+     * @return
+     */
+    public Asteroid getCurrentAsteroid() { return currentAsteroid;}
 
 }

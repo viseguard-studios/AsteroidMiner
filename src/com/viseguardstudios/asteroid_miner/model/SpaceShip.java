@@ -15,6 +15,7 @@ public class SpaceShip extends Vessel {
      */
     public SpaceShip(Asteroid a) {
         super(a);
+        inventory = new Inventory();
 
     }
 
@@ -61,7 +62,16 @@ public class SpaceShip extends Vessel {
      * @param recipe
      */
     public void Craft(Recipe recipe) {
-        // TODO implement here
+
+        Logger.functionCalled("recipe.CanCraft(ss)");
+        boolean cancraft = recipe.CanCraft(this);
+        Logger.returned();
+
+        if (cancraft) {
+            Logger.functionCalled("recipe.Craft(ss)");
+            recipe.Craft(this);
+            Logger.returned();
+        }
     }
 
     /**
@@ -113,5 +123,20 @@ public class SpaceShip extends Vessel {
     public void SolarFlare() {
 
     }
+
+    /**
+     * A raktár getter-e
+     * @return inventory
+     */
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    /**
+     * A tulajdonos getter-e
+     * @return owner
+     */
+    public Player getOwner() {return owner; }
+
 
 }

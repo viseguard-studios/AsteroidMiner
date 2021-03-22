@@ -15,7 +15,9 @@ public class Asteroid extends Entity {
     /**
      * Default constructor
      */
-    public Asteroid() { }
+    public Asteroid() {
+        inventory = new Inventory();
+    }
 
 
     @Override
