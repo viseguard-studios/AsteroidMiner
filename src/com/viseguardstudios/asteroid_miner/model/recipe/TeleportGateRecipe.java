@@ -7,6 +7,7 @@ import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.item.*;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -51,13 +52,13 @@ public class TeleportGateRecipe extends Recipe {
         Inventory inv = ss.getInventory();
         Logger.returned();
         Logger.functionCalled("inv.GetItems()");
-        Set<Item> items = inv.getItems();
+        List<Item> items = inv.getItems();
         Logger.returned();
         Logger.functionCalled("a.getInventory()");
         Inventory inventory = a.GetInventory();
         Logger.returned();
         Logger.functionCalled("inventory.GetItems()");
-        Set<Item> aItems = inventory.getItems();
+        List<Item> aItems = inventory.getItems();
         Logger.returned();
 
         /***

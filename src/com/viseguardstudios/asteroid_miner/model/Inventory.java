@@ -27,7 +27,7 @@ public class Inventory {
     /**
      * A tárolóban aktuálisan tárolt elemek.
      */
-    private Set<Item> items;
+    private List<Item> items = new LinkedList<>();
 
     /**
      * Új elem hozzáadása a tárolóhoz, amennyiben van benne szabad hely (kapacitás).  Sikeres művelet esetén igaz, sikertelen művelet esetén hamis visszatérési értéke van.
@@ -77,7 +77,7 @@ public class Inventory {
      * Visszatér az inventory-ban találtahó item-ek listájával.
      * @return
      */
-    public Set<Item> getItems() { return items; }
+    public List<Item> getItems() { return items; }
 
     /***
      * A tárhely getter-e

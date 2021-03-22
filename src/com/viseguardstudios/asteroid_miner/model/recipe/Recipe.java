@@ -17,12 +17,13 @@ public abstract class Recipe {
      * Default constructor
      */
     public Recipe() {
+
     }
 
     /**
      * Az aktuális recepthez szükséges hozzávalók tárolása.
      */
-    protected Set<Item> input;
+    protected List<Item> input = new LinkedList<>();
 
     /**
      * Meghatározza, hogy egy adott raktárban és aszteroidán lévő kibányászott nyersanyagkészlet elegendő-e az adott recept elkészítéséhez.
@@ -41,13 +42,13 @@ public abstract class Recipe {
         Inventory inv = ss.getInventory();
         Logger.returned();
         Logger.functionCalled("inv.GetItems()");
-        Set<Item> items = inv.getItems();
+        List<Item> items = inv.getItems();
         Logger.returned();
         Logger.functionCalled("a.getInventory()");
         Inventory inventory = a.GetInventory();
         Logger.returned();
         Logger.functionCalled("inventory.GetItems()");
-        Set<Item> aItems = inventory.getItems();
+        List<Item> aItems = inventory.getItems();
         Logger.returned();
 
         /***
@@ -156,7 +157,7 @@ public abstract class Recipe {
      *  Az összetevők listájának getter-e
      * @return input
      */
-    public Set<Item> getInput(){
+    public List<Item> getInput(){
         return input;
     }
 
