@@ -1,6 +1,10 @@
 package com.viseguardstudios.asteroid_miner.model.building;
 
 import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.GameManager;
+import com.viseguardstudios.asteroid_miner.model.Robot;
+import com.viseguardstudios.asteroid_miner.model.Scene;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
 
@@ -15,14 +19,30 @@ public class SpaceStation extends Building {
     public SpaceStation() {
     }
 
+
     /**
      * Meghívódik ha az adott aszteroidán egy űrállomás épült. Ekkor a játék befejeződik.
      * @param a 
-     * @return
      */
-    public SpaceStation SpaceStation(Asteroid a) {
-        // TODO implement here
-        return null;
+    public SpaceStation (Asteroid a) {
+        /***
+         * Elhelyezzük a megfelelő aszteroidán
+         */
+        Logger.functionCalled("a.AddBuilding(this)");
+        a.AddBuilding(this);
+        Logger.returned();
+        /****
+         * Jelezzük a game manager-nek, hogy a játékot megnyertük, felépült az állomás
+         */
+        Logger.functionCalled("a.GetScene()");
+        Scene scene = a.GetScene();
+        Logger.returned();
+        Logger.functionCalled("scene.GetManager()");
+        GameManager manager = scene.GetManager();
+        Logger.returned();
+        Logger.functionCalled("manager.EndGame()");
+        manager.EndGame();
+        Logger.returned();
     }
 
     /**

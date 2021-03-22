@@ -11,28 +11,30 @@ public abstract class Item {
      * Default constructor
      */
     public Item() {
+        amount = 1;
     }
 
     /**
      * Az elem darabszámát tárolja.
      */
-    private int amount;
+    protected int amount;
 
 
 
     /**
-     * Meghatározza, hogy az átadott com.viseguardstudios.asteroid_miner.model.item.Item használható-e a jelenlegi helyett.
+     * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
+     * Ha nem használható, 0-val tér vissza.
      * @param i 
      * @return
      */
-    public abstract boolean Satisfies(Item i);
+    public abstract int Satisfies(Item i);
 
     /**
      * A megadott számmal csökkenti az adott com.viseguardstudios.asteroid_miner.model.item.Item méretét (számosságát), amennyiben ez lehetséges.
      * @param a
      */
     public void Reduce(int a) {
-        // TODO implement here
+        amount-=a;
     }
 
     /**
@@ -42,5 +44,12 @@ public abstract class Item {
     public void Activate(SpaceShip s) {
         // TODO implement here
     }
+
+    /**
+     * A rendelkezésre álló mennyiség getter-e.
+     * @return amount
+     */
+
+    public int getAmount(){return amount;};
 
 }

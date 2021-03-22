@@ -44,15 +44,22 @@ public class Inventory {
 
     /**
      * Elem eltávolítása a tárolóból.
-     * @param item
+     * @param input
      */
-    public void RemoveItem(Item item) {
-        // TODO implement here
-        Logger.log("Remove the item from inventory");
-        try {
-            items.remove(item);
+    public int RemoveItem(Item input) {
+        int amount = 0;
+        for(Item item: items){
+            Logger.functionCalled("item.Satisfies(input)");
+            amount = item.Satisfies(input);
+            Logger.returned();
+
+            if(amount != 0){
+                Logger.functionCalled("item.Reduce(amount)");
+                item.Reduce(amount);
+                Logger.returned();
+            }
         }
-        catch (NullPointerException exp){}
+        return amount;
     }
 
     /**
@@ -70,9 +77,17 @@ public class Inventory {
      * Visszatér az inventory-ban találtahó item-ek listájával.
      * @return
      */
-    public Set<Item> getItems() {
-        // TODO implement here
-        return null;
-    }
+    public Set<Item> getItems() { return items; }
 
+    /***
+     * A tárhely getter-e
+     * @return size
+     */
+    public int getSize() { return size;}
+
+    /***
+     * A tárhely setter-e, tesztelésre
+     * @param s
+     */
+    public void setSize(int s) {size = s;}
 }

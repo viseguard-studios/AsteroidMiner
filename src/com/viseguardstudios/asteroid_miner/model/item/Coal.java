@@ -14,14 +14,21 @@ public class Coal extends Item {
     }
 
     /**
-     * Meghatározza, hogy az átadott com.viseguardstudios.asteroid_miner.model.item.Item használható-e a jelenlegi helyett.
-     * @param i 
-     * @return
+     * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
+     * Ha nem használható, 0-val tér vissza.
+     * @param i
+     * @return amount
      */
     @Override
-    public boolean Satisfies(Item i) {
-        // TODO implement here
-        return false;
+    public int Satisfies(Item i) {
+        if(i instanceof Coal){
+           if(i.getAmount()<=this.amount) //megvan az összes szükséges darab
+               return i.getAmount();
+           else
+               return this.amount; //kevesebb darab van a szükségesnél
+        }
+        else //nem egyezik az elemtípus
+            return 0;
     }
 
 }
