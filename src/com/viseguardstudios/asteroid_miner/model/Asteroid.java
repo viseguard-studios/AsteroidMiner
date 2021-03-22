@@ -176,11 +176,11 @@ public class Asteroid extends Entity {
         // TODO implement here
 
         Logger.log("Check if has not natural resource in the core AND asteroid is not exploded");
-        if(resource.getAmount() == 0 && !exploded){
+        if(resource == null || resource.getAmount() == 0 && !exploded){
             Logger.log("Read neededSpace: v.hidingSpaceRequirement");
             var neededSpace = v.GetHidingSpaceRequirement();
             Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
-            var usedSpace = hidingSpaceShip.GetHidingSpaceRequirement();
+            var usedSpace = hidingSpaceShip == null? 0: 1;
 
             Logger.log("1 - usedSpace is bigger than neededSpace?");
             if(1 - usedSpace >= neededSpace){
@@ -231,7 +231,7 @@ public class Asteroid extends Entity {
         // TODO implement here
 
         Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is  0 AND has not natural resource in the core:");
-        if(crustSize == 0 && !exploded && resource.getAmount() == 0){
+        if(resource == null || resource.getAmount() == 0 && crustSize == 0 && !exploded){
             Logger.functionCalled("inventory.TryInsertItem()");
             var hasSpace = inventory.TryInsertItem();
             Logger.returned();

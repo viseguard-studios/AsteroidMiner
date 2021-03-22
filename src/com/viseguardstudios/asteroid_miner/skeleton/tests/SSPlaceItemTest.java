@@ -1,9 +1,11 @@
 package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
 import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.Inventory;
 import com.viseguardstudios.asteroid_miner.model.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.item.Iron;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
+import com.viseguardstudios.asteroid_miner.model.resource.IronResource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.skeleton.STest;
 import com.viseguardstudios.asteroid_miner.skeleton.Test;
@@ -21,10 +23,20 @@ public class SSPlaceItemTest extends Test {
         a = new Asteroid();
         ss = new SpaceShip(a);
         i = new Iron();
+        Inventory inventory = new Inventory();
+        a.setInventory(inventory);
 
         System.out.println("Would you like this spaceship hiding right now? [Y/N]");
         var answer = sc.nextLine();
         ss.setHidden(answer.equals("Y"));
+
+        System.out.println("Would you like to set the natural resource amount to 0? [Y/N]");
+        answer = sc.nextLine();
+        if(!answer.equals("Y")) {
+            IronResource is = new IronResource();
+            is.setAmount(1);
+            a.setResource(is);
+        }
 
         System.out.println("Enter a asteroid crust size(always enter a integer and bigger than 0!): ");
         answer = sc.nextLine();
