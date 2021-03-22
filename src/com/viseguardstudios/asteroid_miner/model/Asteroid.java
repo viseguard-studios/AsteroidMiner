@@ -111,7 +111,7 @@ public class Asteroid extends Entity {
         // TODO implement here
         List<Asteroid> n = new LinkedList<>(neighbours);
 
-        Logger.log("foreach b in buildings");
+        Logger.lognl("foreach b in buildings");
 
         for (Building b : buildings) {
 
@@ -167,10 +167,13 @@ public class Asteroid extends Entity {
 
         Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0:");
         if(crustSize > 0 && !exploded){
-            Logger.log("Set crustSize to crustSize-1");
+            Logger.writeln("Yes");
+            Logger.lognl("Set crustSize to crustSize-1");
             crustSize -= 1;
         }
-        else { Logger.log("No, nothing more");}
+        else {
+            Logger.writeln("No, nothing more");
+        }
     }
 
     /**
@@ -190,28 +193,28 @@ public class Asteroid extends Entity {
     public boolean Hide(Vessel v) {
         // TODO implement here
 
-        Logger.log("Check if has not natural resource in the core AND asteroid is not exploded");
+        Logger.lognl("Check if has not natural resource in the core AND asteroid is not exploded");
         if(resource.getAmount() == 0 && !exploded){
-            Logger.log("Read neededSpace: v.hidingSpaceRequirement");
+            Logger.lognl("Read neededSpace: v.hidingSpaceRequirement");
             var neededSpace = v.GetHidingSpaceRequirement();
-            Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
+            Logger.lognl("Read usedSpace: hidingVessel.hidingSpaceRequirement");
             var usedSpace = hidingVessel.GetHidingSpaceRequirement();
 
-            Logger.log("1 - usedSpace is bigger than neededSpace?");
+            Logger.lognl("1 - usedSpace is bigger than neededSpace?");
             if(1 - usedSpace >= neededSpace){
-                Logger.log("Does this Vessel using space?");
+                Logger.lognl("Does this Vessel using space?");
                 if(neededSpace > 0){
-                    Logger.log("Yes, put it into hidingVessel");
+                    Logger.lognl("Yes, put it into hidingVessel");
                     hidingVessel = v;
                 }
-                else{ Logger.log("No.");}
-                Logger.log("this vessel might hide");
+                else{ Logger.lognl("No.");}
+                Logger.lognl("this vessel might hide");
                 return true;
             }
-            else { Logger.log("No, this vessel might not hide");}
+            else { Logger.lognl("No, this vessel might not hide");}
             return false;
         }
-        else { Logger.log("No, this vessel might not hide");}
+        else { Logger.lognl("No, this vessel might not hide");}
         return false;
     }
 
@@ -222,9 +225,9 @@ public class Asteroid extends Entity {
     public void Exit(Vessel v) {
         // TODO implement here
 
-        Logger.log("Check if vessel is using space");
+        Logger.lognl("Check if vessel is using space");
         if(v == hidingVessel){
-            Logger.log("Yes, and free it");
+            Logger.lognl("Yes, and free it");
             hidingVessel = null;
         }
     }
@@ -245,26 +248,26 @@ public class Asteroid extends Entity {
     public boolean PlaceItem(Item i) {
         // TODO implement here
 
-        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0 AND has not natural resource in the core:");
+        Logger.lognl("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0 AND has not natural resource in the core:");
         if(crustSize > 0 && !exploded && resource.getAmount() == 0){
             Logger.functionCalled("inventory.TryInsertItem()");
             var hasSpace = inventory.TryInsertItem();
             Logger.returned();
-            Logger.log("Dose inventory has enough place?");
+            Logger.lognl("Dose inventory has enough place?");
             if(hasSpace){
-                Logger.log("Yes");
+                Logger.lognl("Yes");
                 Logger.functionCalled("inventory.InsertItem(i)");
                 inventory.InsertItem(i);
                 Logger.returned();
-                Logger.log("The inserting succeed");
+                Logger.lognl("The inserting succeed");
                 return true;
             }
             else {
-                Logger.log("No, the Inserting failed");
+                Logger.lognl("No, the Inserting failed");
                 return false;
             }
         }
-        else { Logger.log("No, nothing more");}
+        else { Logger.lognl("No, nothing more");}
         return false;
     }
 
@@ -283,7 +286,7 @@ public class Asteroid extends Entity {
      */
     public Inventory GetInventory() {
         // TODO implement here
-        return null;
+        return inventory;
     }
 
     /**

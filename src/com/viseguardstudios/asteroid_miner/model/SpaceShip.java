@@ -85,16 +85,16 @@ public class SpaceShip extends Vessel {
         Logger.functionCalled("currentAsteroid.PlaceItem(i)");
         var success = currentAsteroid.PlaceItem(i);
         Logger.returned();
-        Logger.log("Does the inserting succeed?");
+        Logger.lognl("Does the inserting succeed?");
         if(success){
-            Logger.log("Yes");
+            Logger.lognl("Yes");
             Logger.functionCalled("RemoveItem(i)");
             inventory.RemoveItem(i);
             Logger.returned();
             return true;
         }
         else {
-            Logger.log("No");
+            Logger.lognl("No");
             return false;
         }
     }

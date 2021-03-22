@@ -35,7 +35,7 @@ public class Logger {
 
     public static void returned(){
         depth--;
-        log("return;");
+        lognl("return;");
     }
 
     /** A fuggveny a parameterben kapott uzenetet a standard outputra tovabbitja
@@ -50,10 +50,30 @@ public class Logger {
         }
     }
 
+    public static void lognl(String message) {
+        if(enabled) {
+            for (int i = 0; i < depth; i++)
+                System.out.print("\t");
+            System.out.println(message);
+        }
+    }
+
     public static void log(String message) {
         if(enabled) {
             for (int i = 0; i < depth; i++)
                 System.out.print("\t");
+            System.out.print(message);
+        }
+    }
+
+    public static void write(String message) {
+        if(enabled) {
+            System.out.print(message);
+        }
+    }
+
+    public static void writeln(String message) {
+        if(enabled) {
             System.out.println(message);
         }
     }

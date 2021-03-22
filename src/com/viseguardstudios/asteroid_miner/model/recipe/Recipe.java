@@ -61,7 +61,7 @@ public abstract class Recipe {
          * Megvizsgálja, hogy a telepesnél van-e elég item a készítéshez
          */
         for(Item input: input ){
-            Logger.log("Check if SpaceShip inventory has enough supply");
+            Logger.lognl("Check if SpaceShip inventory has enough supply");
             for(Item item: items ) {
                 Logger.functionCalled("item.Satisfies(input)");
                 neededItems-= item.Satisfies(input);
@@ -69,13 +69,13 @@ public abstract class Recipe {
             }
 
             if(neededItems==0){
-                Logger.log("It has enough supply.");
+                Logger.lognl("It has enough supply.");
             }
             /***
              * Ha nincs elég item a telepesnél, az aszteroida raktárának item-eit is megvizsgáljuk
              */
             else {
-                Logger.log("Check if Asteroid inventory has the remaining supply");
+                Logger.lognl("Check if Asteroid inventory has the remaining supply");
                 for(Item aItem: aItems ) {
                     Logger.functionCalled("aItem.Satisfies(input)");
                     neededItems-= aItem.Satisfies(input);
@@ -88,11 +88,11 @@ public abstract class Recipe {
          * Ha van elég item összesen az elkészítéshez, igazzal, ellenkező esetben hamissal tér vissza
          */
         if(neededItems==0) {
-            Logger.log("The recipe can be crafted, we have enough supply!");
+            Logger.lognl("The recipe can be crafted, we have enough supply!");
             return true;
         }
         else {
-            Logger.log("The recipe can't be crafted!");
+            Logger.lognl("The recipe can't be crafted!");
             return false;
         }
     }
@@ -119,7 +119,7 @@ public abstract class Recipe {
         /***
          * Az összes lehetséges recepthez szükséges item-et eltávolítjuk a telepes/aszteroida raktárából
          */
-        Logger.log("Removing the necessary items from SpaceShip or Asteroid inventory.");
+        Logger.lognl("Removing the necessary items from SpaceShip or Asteroid inventory.");
         for(Item input: input){
             Logger.functionCalled("inv.RemoveItem(input)");
             int amount= inv.RemoveItem(input);

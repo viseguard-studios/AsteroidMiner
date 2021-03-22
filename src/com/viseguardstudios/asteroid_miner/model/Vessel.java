@@ -48,15 +48,15 @@ public abstract class Vessel extends Entity {
     public void Hide() {
         // TODO implement here
 
-        Logger.log("Check if is not hidden");
+        Logger.lognl("Check if is not hidden");
         if(!isHidden){
             Logger.functionCalled("currentAsteroid.Hide(this);");
             var canHide = currentAsteroid.Hide(this);
             Logger.returned();
-            Logger.log("Hide, if it might be");
+            Logger.lognl("Hide, if it might be");
             isHidden = canHide;
         }
-        else { Logger.log("Is already hidden, nothing more");}
+        else { Logger.lognl("Is already hidden, nothing more");}
     }
 
     /**
@@ -81,9 +81,9 @@ public abstract class Vessel extends Entity {
         var n = currentAsteroid.ReachableAsteroids();
         Logger.returned();
 
-        Logger.log("Check if n has to: ");
+        Logger.lognl("Check if n has to: ");
         if(n.contains(to)){
-            Logger.log("It has! 🎆");
+            Logger.lognl("It has! 🎆");
 
             Logger.functionCalled("currentAsteroid.Depart(this);");
             this.currentAsteroid.Depart(this);
@@ -94,7 +94,7 @@ public abstract class Vessel extends Entity {
             Logger.returned();
         }
         else {
-            Logger.log("It doesn't :(");
+            Logger.lognl("It doesn't :(");
         }
     }
 
@@ -117,16 +117,16 @@ public abstract class Vessel extends Entity {
     public void ExitHiding() {
         // TODO implement here
 
-        Logger.log("Check if is hidden");
+        Logger.lognl("Check if is hidden");
         if(isHidden){
             Logger.functionCalled("currentAsteroid.Exit(this)");
             currentAsteroid.Exit(this);
             Logger.returned();
-            Logger.log("Set isHidden statement to false");
+            Logger.lognl("Set isHidden statement to false");
             isHidden = false;
         }
         else {
-            Logger.log("Is not hidden, nothing more");
+            Logger.lognl("Is not hidden, nothing more");
         }
     }
 

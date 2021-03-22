@@ -29,7 +29,7 @@ public class RobotRecipe extends Recipe {
         /***
          * új robot létrehozása, konstruktor meghívása
          */
-        Logger.log("Creating a robot, constructor: ");
+        Logger.lognl("Creating a robot, constructor: ");
         Logger.functionCalled("Robot(p,ss.getCurrentAsteroid())");
         Robot r = new Robot(p,ss.getCurrentAsteroid());
         Logger.returned();

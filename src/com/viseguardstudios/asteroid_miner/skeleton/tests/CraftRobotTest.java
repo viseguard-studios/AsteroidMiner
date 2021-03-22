@@ -32,8 +32,10 @@ public class CraftRobotTest extends Test {
          */
         a = new Asteroid();
         a.GetInventory().setSize(10);
+
         ss = new SpaceShip(a);
         ss.getInventory().setSize(10);
+
         recipe = new RobotRecipe();
 
 
@@ -72,6 +74,7 @@ public class CraftRobotTest extends Test {
 
     @Override
     public void Run() {
+
         Logger.functionCalled("ss.Craft(recipe)");
         ss.Craft(recipe);
         Logger.returned();

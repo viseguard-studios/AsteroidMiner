@@ -11,7 +11,8 @@ import java.util.Scanner;
 @STest
 public class SSHideTest extends Test {
     private Asteroid a;
-    private SpaceShip ss, ss2;
+    private SpaceShip ss;
+    private SpaceShip ss2;
 
     @Override
     public void Setup(Scanner sc) {
@@ -25,8 +26,12 @@ public class SSHideTest extends Test {
 
         System.out.println("Would you like to set the natural resource amount to 0? [Y/N]");
         answer = sc.nextLine();
-        if(answer.equals("Y")) a.getResource().setAmount(0);
-        else a.getResource().setAmount(1);
+        if(answer.equals("Y")) {
+            a.getResource().setAmount(0);
+        }
+        else {
+            a.getResource().setAmount(1);
+        }
 
         System.out.println("Would you like the asteroid exploded? [Y/N]");
         answer = sc.nextLine();
@@ -34,7 +39,9 @@ public class SSHideTest extends Test {
 
         System.out.println("Would you like someone else hiding in the asteroid right now? [Y/N]");
         answer = sc.nextLine();
-        if(answer.equals("Y"))  a.setHidingVessel(ss2);
+        if(answer.equals("Y")){
+            a.setHidingVessel(ss2);
+        }
 
     }
 

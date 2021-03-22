@@ -37,7 +37,7 @@ public class Inventory {
     public boolean InsertItem(Item item) {
         // TODO implement here
 
-        Logger.log("Add the item to inventory");
+        Logger.lognl("Add the item to inventory");
         items.add(item);
         return true;
     }
@@ -69,7 +69,7 @@ public class Inventory {
     public boolean TryInsertItem() {
         // TODO implement here
 
-        Logger.log("Check if the inventory has enough place");
+        Logger.lognl("Check if the inventory has enough place");
         return items.stream().count() <= size -1;
     }
 

@@ -2,7 +2,6 @@ package com.viseguardstudios.asteroid_miner.model.recipe;
 
 import com.viseguardstudios.asteroid_miner.model.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Inventory;
-import com.viseguardstudios.asteroid_miner.model.Robot;
 import com.viseguardstudios.asteroid_miner.model.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
@@ -76,7 +75,7 @@ public class TeleportGateRecipe extends Recipe {
          * Megvizsgálja, hogy a telepesnél van-e elég item a készítéshez
          */
         for(Item input: input ){
-            Logger.log("Check if SpaceShip inventory has enough supply");
+            Logger.lognl("Check if SpaceShip inventory has enough supply");
             for(Item item: items ) {
                 Logger.functionCalled("item.Satisfies(input)");
                 removedFromSS+= item.Satisfies(input);
@@ -86,13 +85,13 @@ public class TeleportGateRecipe extends Recipe {
             neededItems-= removedFromSS;
 
             if(neededItems==0){
-                Logger.log("It has enough supply.");
+                Logger.lognl("It has enough supply.");
             }
             /***
              * Ha nincs elég item a telepesnél, az aszteroida raktárának item-eit is megvizsgáljuk
              */
             else {
-                Logger.log("Check if Asteroid inventory has the remaining supply");
+                Logger.lognl("Check if Asteroid inventory has the remaining supply");
                 for(Item aItem: aItems ) {
                     Logger.functionCalled("aItem.Satisfies(input)");
                     neededItems-= aItem.Satisfies(input);
@@ -105,10 +104,10 @@ public class TeleportGateRecipe extends Recipe {
          * Ha van elég item összesen az elkészítéshez, igazzal, ellenkező esetben hamissal tér vissza
          */
         if(neededItems==0) {
-            Logger.log("We have enough supply!");
+            Logger.lognl("We have enough supply!");
         }
         else {
-            Logger.log("The recipe can't be crafted!");
+            Logger.lognl("The recipe can't be crafted!");
             return false;
         }
 
@@ -123,15 +122,15 @@ public class TeleportGateRecipe extends Recipe {
         /***
          *Később általánosításra kerül, hiányzó belső működés miatt egyelőre konkrét számmal hasonlít össze (kapuk által elfoglalt hely)
          */
-        Logger.log("Checking if the SpaceShip has enough space for storing the gates.");
+        Logger.lognl("Checking if the SpaceShip has enough space for storing the gates.");
         if(SpaceLeft< 2){
-            Logger.log("There isn't enough space to store gates. The recipe can't be crafted. ");
+            Logger.lognl("There isn't enough space to store gates. The recipe can't be crafted. ");
             return false;
         }
         /***
          * Minden feltétel teljesül, el lehet készíteni a receptet.
          */
-        Logger.log("There is enough space to store gates. We can craft the recipe. ");
+        Logger.lognl("There is enough space to store gates. We can craft the recipe. ");
         return true;
     }
 
@@ -141,14 +140,14 @@ public class TeleportGateRecipe extends Recipe {
         /***
          * Új teleportkapu-pár létrehozása, konstruktor meghívása
          */
-        Logger.log("Creating a teleport gate pair, constructor: ");
+        Logger.lognl("Creating a teleport gate pair, constructor: ");
         Logger.functionCalled("TeleportGateItem()");
         TeleportGateItem gate = new TeleportGateItem();
         Logger.returned();
         /***
          * A telepes raktárába belehelyezzük a kapukat
          */
-        Logger.log("Inserting teleport gates to SpaceShip inventory.");
+        Logger.lognl("Inserting teleport gates to SpaceShip inventory.");
         Logger.functionCalled("ss.getInventory().InsertItem(gate)");
         ss.getInventory().InsertItem(gate);
         Logger.returned();
