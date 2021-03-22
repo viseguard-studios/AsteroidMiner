@@ -28,7 +28,7 @@ public abstract class Entity {
      */
     public Scene GetScene() {
         // TODO implement here
-        return null;
+        return scene;
     }
 
     /**
@@ -36,4 +36,7 @@ public abstract class Entity {
      */
     public abstract void SolarFlare();
 
+    public void setScene(Scene s) {
+        this.scene = s;
+    }
 }

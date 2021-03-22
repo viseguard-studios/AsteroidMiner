@@ -34,6 +34,7 @@ public class Scene {
     public void AddEntity(Entity e) {
         if (!entities.contains(e)){
             entities.add(e);
+            e.setScene(this);
         }
     }
 
@@ -58,7 +59,7 @@ public class Scene {
      */
     public GameManager GetManager() {
         // TODO implement here
-        return null;
+        return manager;
     }
 
     /**
