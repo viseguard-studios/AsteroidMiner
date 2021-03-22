@@ -43,7 +43,7 @@ public class SkeletonEntry {
         testRegistry.Register("QueueSolarFlareTest" ,  new QueueSolarFlareTest());
         testRegistry.Register("SolarFlareHitsRobot" ,  new SolarFlareHitsRobot());
         testRegistry.Register("SolarFlareHitsSpaceShip" ,  new SolarFlareHitsSpaceShip());
-        testRegistry.Register(" MoveAsteroidField" ,  new MoveAsteroidField());
+        testRegistry.Register("MoveAsteroidField" ,  new MoveAsteroidField());
         testRegistry.Register("SSDrill", new SSDrillTest());
         testRegistry.Register("SSHide", new SSHideTest());
         testRegistry.Register("SSExitHiding", new SSExitHidingTest());
