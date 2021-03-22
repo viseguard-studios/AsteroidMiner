@@ -26,12 +26,8 @@ public class SSPlaceItemTest extends Test {
         Inventory inventory = new Inventory();
         a.setInventory(inventory);
 
-        System.out.println("Should this SpaceShip be already hidden? [Y/N]");
-        var answer = sc.nextLine();
-        ss.setHidden(answer.equals("Y"));
-
         System.out.println("Would you like to set the natural resource amount to 0? [Y/N]");
-        answer = sc.nextLine();
+         var answer = sc.nextLine();
         if(!answer.equals("Y")) {
             IronResource is = new IronResource();
             is.setAmount(1);
@@ -42,6 +38,11 @@ public class SSPlaceItemTest extends Test {
         answer = sc.nextLine();
         if(answer.equals("Y")) a.setCrustSize(0);
         else a.setCrustSize(1);
+
+        System.out.println("Should the inventory has free space? [Y/N]");
+        answer = sc.nextLine();
+        if(answer.equals("Y")) a.getInventory().setSize(1);
+        else a.getInventory().setSize(0);
 
         System.out.println("Would you like the asteroid to be exploded? [Y/N]");
         answer = sc.nextLine();

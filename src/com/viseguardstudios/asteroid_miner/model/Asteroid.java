@@ -247,7 +247,7 @@ public class Asteroid extends Entity {
             Logger.functionCalled("inventory.TryInsertItem()");
             var hasSpace = inventory.TryInsertItem();
             Logger.returned();
-            Logger.lognl("Dose inventory has enough place?");
+            Logger.lognl("Does inventory has enough place?");
             if(hasSpace){
                 Logger.lognl("Yes");
                 Logger.functionCalled("inventory.InsertItem(i)");
