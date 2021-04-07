@@ -23,7 +23,7 @@ public class FileOpener {
     public void loadFile() {
         while (input.hasNext()) {
             String nextLine = input.nextLine();
-            commands.add(nextLine.split(" "));
+            commands.add(nextLine.split(" ")); //TODO sorokra törje?
         }
     }
     //getter for commands
@@ -36,12 +36,18 @@ public class FileOpener {
      * @param input
      * @return
      */
-    public  String cutComments(String input){
+    public static String cutComments(String input){
         return input.split("#")[0];
 
     }
 
-    public ArrayList<String> getNameAndPropsFromLine(String input) throws Exception {
+    /**
+     * Returns the split version of an object describer
+     * @param input - "{type prop1="" prop2="" ... }"
+     * @return {"type";"prop1=""";"prop2=""";}
+     * @throws Exception
+     */
+    public static ArrayList<String> getNameAndPropsFromLine(String input) throws Exception {
 
         ArrayList<String> found = new ArrayList<>();
 
@@ -63,10 +69,17 @@ public class FileOpener {
         return found;
     }
 
-    public String[] getPropNameAndValue(String input) throws Exception {
+    /**
+     * Splits a property's name and value
+     * @param input "prop1="x""
+     * @return {"prop1";"x"}
+     * @throws Exception
+     */
+    public static String[] getPropNameAndValue(String input) throws Exception {
         String[] temp = input.strip().split("=");
         try {
-            temp[1] = temp[1].split("\"")[1];
+            if(temp.length!=2) throw new Exception();
+            temp[1] = temp[1].split("\"")[1];  //Todo Check if this part works correctly
         }
         catch (Exception e)
         {
