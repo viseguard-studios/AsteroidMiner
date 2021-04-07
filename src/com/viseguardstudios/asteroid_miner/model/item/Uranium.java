@@ -10,12 +10,18 @@ public class Uranium extends Item {
     /**
      * Default constructor
      */
-    public Uranium() {
+    public Uranium(){
+        counter = 0;
     }
 
     public Uranium(int a) {
-        super(a);
+        counter = a;
     }
+
+    /**
+     * Hányszor volt már érintkezés a nappal
+     */
+    private  int counter;
 
     /**
      * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
