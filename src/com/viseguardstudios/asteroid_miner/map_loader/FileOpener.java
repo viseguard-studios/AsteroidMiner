@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class FileOpener {
     File file;
     Scanner input;
-    ArrayList<String[]> commands;
+    ArrayList<String> commands;
 
     public FileOpener(String filePath) {
         commands = new ArrayList<>();
@@ -23,11 +23,11 @@ public class FileOpener {
     public void loadFile() {
         while (input.hasNext()) {
             String nextLine = input.nextLine();
-            commands.add(nextLine.split(" ")); //TODO sorokra törje?
+            commands.add(nextLine); 
         }
     }
     //getter for commands
-    public ArrayList<String[]> getCommands() {
+    public ArrayList<String> getCommands() {
         return commands;
     }
 
@@ -79,7 +79,7 @@ public class FileOpener {
         String[] temp = input.strip().split("=");
         try {
             if(temp.length!=2) throw new Exception();
-            temp[1] = temp[1].split("\"")[1];  //Todo Check if this part works correctly
+            temp[1] = temp[1].split("\"")[1];  //Todo Check if this part works correctly (
         }
         catch (Exception e)
         {
