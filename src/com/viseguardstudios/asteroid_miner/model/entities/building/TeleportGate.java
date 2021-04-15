@@ -1,4 +1,4 @@
-package com.viseguardstudios.asteroid_miner.model.building;
+package com.viseguardstudios.asteroid_miner.model.entities.building;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 
@@ -13,6 +13,16 @@ public class TeleportGate extends Building {
      * Default constructor
      */
     public TeleportGate() {
+    }
+
+    @Override
+    public void RoundEnd(boolean closeToSun) {
+
+    }
+
+    @Override
+    public void SolarFlare() {
+
     }
 
     /**

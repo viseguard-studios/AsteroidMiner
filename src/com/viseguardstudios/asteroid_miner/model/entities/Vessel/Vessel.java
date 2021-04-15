@@ -3,12 +3,13 @@ package com.viseguardstudios.asteroid_miner.model.entities.Vessel;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.entities.Entity;
+import com.viseguardstudios.asteroid_miner.model.entities.MovableEntity;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**
  * Egy-egy járműért (pl. telepes vagy robot) felelős osztály.
  */
-public abstract class Vessel extends Entity {
+public abstract class Vessel extends MovableEntity {
 
     /**
      * Default constructor

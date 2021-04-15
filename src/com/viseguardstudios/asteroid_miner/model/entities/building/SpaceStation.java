@@ -1,4 +1,4 @@
-package com.viseguardstudios.asteroid_miner.model.building;
+package com.viseguardstudios.asteroid_miner.model.entities.building;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.GameManager;
@@ -16,6 +16,16 @@ public class SpaceStation extends Building {
      * Default constructor
      */
     public SpaceStation() {
+    }
+
+    @Override
+    public void RoundEnd(boolean closeToSun) {
+
+    }
+
+    @Override
+    public void SolarFlare() {
+
     }
 
 
