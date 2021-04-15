@@ -1,20 +1,16 @@
-package com.viseguardstudios.asteroid_miner.model.item;
+package com.viseguardstudios.asteroid_miner.model.item.resource;
 
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 /**
  * A jég reprezentálására szolgál az com.viseguardstudios.asteroid_miner.model.Inventory-ban.
  */
-public class Ice extends Item {
+public class Ice extends Resource {
 
     /**
      * Default constructor
      */
     public Ice() {
-    }
-
-    public Ice(int a) {
-        super(a);
     }
 
     /**
@@ -25,14 +21,8 @@ public class Ice extends Item {
      */
     @Override
     public int Satisfies(Item i) {
-        if(i instanceof Ice){
-            if(i.getAmount()<=this.amount) //megvan az összes szükséges darab
-                return i.getAmount();
-            else
-                return this.amount; //kevesebb darab van a szükségesnél
-        }
-        else //nem egyezik az elemtípus
-            return 0;
+        //TODO
+        return -1;
     }
 
 }

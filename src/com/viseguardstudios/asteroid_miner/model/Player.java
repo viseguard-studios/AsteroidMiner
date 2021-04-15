@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model;
 
-import com.viseguardstudios.asteroid_miner.model.resource.Resource;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 
 import java.util.ArrayList;
 

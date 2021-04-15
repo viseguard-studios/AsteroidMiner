@@ -1,6 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.item;
 
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 
 /**
  * A már kibányászott nyersanyagok hordozható elemekké válnak, ebben a formában tárolja őket az osztály. Egy típusú, adott mennyiségű azonos elemet, illetve hordozható épületet (pl. teleportkapu-pár) tárol.
@@ -11,20 +11,8 @@ public abstract class Item {
      * Default constructor
      */
     public Item() {
-        amount = 1;
-    }
 
-    /**
-     *  Konstruktor mennyiség beállítással
-     */
-    public Item(int a) {
-        amount = a;
     }
-
-    /**
-     * Az elem darabszámát tárolja.
-     */
-    protected int amount;
 
 
 
@@ -36,13 +24,6 @@ public abstract class Item {
      */
     public abstract int Satisfies(Item i);
 
-    /**
-     * A megadott számmal csökkenti az adott com.viseguardstudios.asteroid_miner.model.item.Item méretét (számosságát), amennyiben ez lehetséges.
-     * @param a
-     */
-    public void Reduce(int a) {
-        amount-=a;
-    }
 
     /**
      * Aktiválható tárgyaknál( pl.Teleport kapu) használt függvény. Alapból nem csinál semmit.
@@ -51,12 +32,5 @@ public abstract class Item {
     public void Activate(SpaceShip s) {
         // TODO implement here
     }
-
-    /**
-     * A rendelkezésre álló mennyiség getter-e.
-     * @return amount
-     */
-
-    public int getAmount(){return amount;};
 
 }

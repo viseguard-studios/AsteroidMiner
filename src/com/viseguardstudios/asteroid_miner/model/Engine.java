@@ -7,10 +7,13 @@ import java.util.*;
  */
 public class Engine {
 
+    Scene scene;
+
     /**
      * Default constructor
      */
     public Engine() {
+        System.out.println("Created Engine");
     }
 
 
@@ -18,14 +21,27 @@ public class Engine {
      * A program indítása.
      */
     public void StartApplication() {
-        // TODO implement here
+        System.out.println("Application started");
+
+        //TODO Handle commands
     }
 
     /**
      * Egy új játék kezdése.
      */
     public void StartGame() {
-        // TODO implement here
+        var gm = new GameManager();
+
+        scene = new Scene();
+        scene.setManager(gm);
+
+        gm.setManagedScene(scene);
+
+        //gm.AddPlayer();
+
+        gm.InitGame();
+
+        gm.StartGame();
     }
 
     /**

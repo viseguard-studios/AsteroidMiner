@@ -1,14 +1,16 @@
 package com.viseguardstudios.asteroid_miner.model.recipe;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Inventory;
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.item.*;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Uranium;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Teleportkapu-párok elkészítéséhez szükséges speciális recept típus.

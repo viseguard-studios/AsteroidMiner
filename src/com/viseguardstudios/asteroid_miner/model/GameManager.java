@@ -1,8 +1,10 @@
 package com.viseguardstudios.asteroid_miner.model;
 
-import com.viseguardstudios.asteroid_miner.model.resource.Resource;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
-import com.viseguardstudios.asteroid_miner.skeleton.tests.QueueSolarFlareTest;
 
 import java.util.*;
 
@@ -10,12 +12,6 @@ import java.util.*;
  * A játék menetének irányításáért felelős osztály.
  */
 public class GameManager {
-
-    /**
-     * Default constructor
-     */
-    public GameManager() {
-    }
 
     /**
      * The player who is taking the turn currently
@@ -63,10 +59,20 @@ public class GameManager {
     private Scene scene;
 
     /**
+     * Default constructor
+     */
+    public GameManager() {
+    }
+
+    /**
      * A játékmenet inicializálásáért felel.
      */
     public void InitGame() {
         // TODO implement here
+
+        //Generate stuff
+        GenerateScene();
+
     }
 
     public void setManagedScene(Scene sc) {
@@ -109,6 +115,7 @@ public class GameManager {
      */
     private void GenerateScene() {
         // TODO implement here
+        GenerateAsteroids();
     }
 
     /**
@@ -124,7 +131,15 @@ public class GameManager {
      * Az aszteroidamező inicializálása, játék inicializálás során hozzuk létre.
      */
     private void GenerateAsteroids() {
-        // TODO implement here
+        for (int i = 0; i < 100; i++) {
+            //Create pos
+
+            var a = new Asteroid();
+
+            scene.AddEntity(a);
+        }
+
+        //Connect the asteroids that are close together.
     }
 
     /**

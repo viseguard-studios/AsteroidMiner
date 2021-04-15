@@ -1,15 +1,13 @@
 package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.GameManager;
 import com.viseguardstudios.asteroid_miner.model.Scene;
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
-import com.viseguardstudios.asteroid_miner.model.building.SpaceStation;
-import com.viseguardstudios.asteroid_miner.model.item.Coal;
-import com.viseguardstudios.asteroid_miner.model.item.Ice;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
-import com.viseguardstudios.asteroid_miner.model.recipe.RobotRecipe;
 import com.viseguardstudios.asteroid_miner.model.recipe.SpaceStationRecipe;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.skeleton.STest;

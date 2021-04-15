@@ -1,4 +1,6 @@
-package com.viseguardstudios.asteroid_miner.model;
+package com.viseguardstudios.asteroid_miner.model.entities;
+
+import com.viseguardstudios.asteroid_miner.model.Scene;
 
 /**
  * Egy adott entitás ( vizuális megjelenítéssel rendelkező játékelem) osztálya.

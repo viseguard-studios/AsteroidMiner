@@ -1,9 +1,11 @@
 package com.viseguardstudios.asteroid_miner.model.recipe;
 
 import com.viseguardstudios.asteroid_miner.model.*;
-import com.viseguardstudios.asteroid_miner.model.item.Coal;
-import com.viseguardstudios.asteroid_miner.model.item.Iron;
-import com.viseguardstudios.asteroid_miner.model.item.Uranium;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Robot;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Uranium;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**

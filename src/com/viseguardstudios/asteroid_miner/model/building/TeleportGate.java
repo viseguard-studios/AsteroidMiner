@@ -1,6 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.building;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 
 import java.util.*;
 

@@ -1,8 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.item;
 
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
-import com.viseguardstudios.asteroid_miner.model.item.Item;
-import com.viseguardstudios.asteroid_miner.model.recipe.TeleportGateRecipe;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 
 /**
  * Teleportkapu amikor még a telepesnél van.

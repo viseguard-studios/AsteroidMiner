@@ -1,7 +1,7 @@
 package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.skeleton.STest;
 import com.viseguardstudios.asteroid_miner.skeleton.Test;

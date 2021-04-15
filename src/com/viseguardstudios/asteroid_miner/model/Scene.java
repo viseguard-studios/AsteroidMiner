@@ -1,5 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model;
 
+import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
@@ -10,16 +11,15 @@ import java.util.*;
 public class Scene {
 
     /**
+     * A játékban szereplő összes entitás tárolója.
+     */
+    protected ArrayList<Entity> entities  = new ArrayList<>();
+
+    /**
      * Default constructor
      */
     public Scene() {
-        entities = new ArrayList<>();
     }
-
-    /**
-     * A játékban szereplő összes entitás tárolója.
-     */
-    protected ArrayList<Entity> entities;
 
 
     /**
@@ -63,7 +63,7 @@ public class Scene {
     }
 
     /**
-     * A napviharról szóló értesítést továbbítja az com.viseguardstudios.asteroid_miner.model.Entity felé
+     * A napviharról szóló értesítést továbbítja az com.viseguardstudios.asteroid_miner.model.entities.Entity felé
      */
     public void SolarFlare() {
         if (!entities.isEmpty()){

@@ -1,8 +1,6 @@
 package com.viseguardstudios.asteroid_miner.skeleton;
 
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.skeleton.tests.*;
 
 import java.util.Scanner;

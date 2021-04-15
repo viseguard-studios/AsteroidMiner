@@ -1,8 +1,8 @@
 package com.viseguardstudios.asteroid_miner.model.recipe;
 
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.building.SpaceStation;
-import com.viseguardstudios.asteroid_miner.model.item.*;
+import com.viseguardstudios.asteroid_miner.model.item.resource.*;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**

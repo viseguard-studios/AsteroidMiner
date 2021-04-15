@@ -1,11 +1,11 @@
-package com.viseguardstudios.asteroid_miner.model.item;
+package com.viseguardstudios.asteroid_miner.model.item.resource;
 
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 /**
  * Az uránium reprezentálására szolgál az com.viseguardstudios.asteroid_miner.model.Inventory-ban.
  */
-public class Uranium extends Item {
+public class Uranium extends Resource {
 
     /**
      * Default constructor
@@ -13,9 +13,6 @@ public class Uranium extends Item {
     public Uranium() {
     }
 
-    public Uranium(int a) {
-        super(a);
-    }
 
     /**
      * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
@@ -25,14 +22,8 @@ public class Uranium extends Item {
      */
     @Override
     public int Satisfies(Item i) {
-        if(i instanceof Uranium){
-            if(i.getAmount()<=this.amount) //megvan az összes szükséges darab
-                return i.getAmount();
-            else
-                return this.amount; //kevesebb darab van a szükségesnél
-        }
-        else //nem egyezik az elemtípus
-            return 0;
+        //TODO
+        return -1;
     }
 
 }

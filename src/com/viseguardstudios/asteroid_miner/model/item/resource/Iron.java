@@ -1,20 +1,16 @@
-package com.viseguardstudios.asteroid_miner.model.item;
+package com.viseguardstudios.asteroid_miner.model.item.resource;
 
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 /**
  * A Vas reprezentálására szolgál az com.viseguardstudios.asteroid_miner.model.Inventory-ban.
  */
-public class Iron extends Item {
+public class Iron extends Resource {
 
     /**
      * Default constructor
      */
     public Iron() {
-    }
-
-    public Iron(int a) {
-        super(a);
     }
 
     /**
@@ -25,14 +21,8 @@ public class Iron extends Item {
      */
     @Override
     public int Satisfies(Item i) {
-        if(i instanceof Iron){
-            if(i.getAmount()<=this.amount) //megvan az összes szükséges darab
-                return i.getAmount();
-            else
-                return this.amount; //kevesebb darab van a szükségesnél
-        }
-        else //nem egyezik az elemtípus
-            return 0;
+        //TODO
+        return -1;
     }
 
 }

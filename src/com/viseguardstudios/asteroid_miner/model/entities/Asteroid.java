@@ -1,8 +1,10 @@
-package com.viseguardstudios.asteroid_miner.model;
+package com.viseguardstudios.asteroid_miner.model.entities;
 
+import com.viseguardstudios.asteroid_miner.model.Inventory;
 import com.viseguardstudios.asteroid_miner.model.building.Building;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
-import com.viseguardstudios.asteroid_miner.model.resource.Resource;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
