@@ -71,4 +71,8 @@ public class SpaceStation extends Building {
         return null;
     }
 
+    @Override
+    public AsteroidPlaces getPlace() {
+        return AsteroidPlaces.Inside;
+    }
 }

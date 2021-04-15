@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model.entities;
 
 import com.viseguardstudios.asteroid_miner.model.Scene;
+import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 /**
  * Egy adott entitás ( vizuális megjelenítéssel rendelkező játékelem) osztálya.
@@ -17,6 +18,9 @@ public abstract class Entity {
      * A játéktér tárolója.
      */
     protected Scene scene;
+
+
+    public Vector2 pos;
 
     /**
      * Akkor hívódik meg, ha az adott körben már minden játékos lépett. A robotok ezt használják például a mozgásra.

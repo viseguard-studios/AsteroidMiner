@@ -59,4 +59,9 @@ public class TeleportGate extends Building {
         // TODO implement here
     }
 
+    @Override
+    public AsteroidPlaces getPlace() {
+        //TODO If it started to wander it should return vessel to ensure it has space
+        return AsteroidPlaces.Orbit;
+    }
 }
