@@ -1,29 +1,44 @@
 package com.viseguardstudios.asteroid_miner.model.item.resource;
 
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 /**
- * Az uránium reprezentálására szolgál az com.viseguardstudios.asteroid_miner.model.Inventory-ban.
+ * Az uránium reprezentálására szolgál.
  */
 public class Uranium extends Resource {
 
+    private int counter; //számláló a robbanáshoz
+
     /**
-     * Default constructor
+     * Konstruktor
      */
-    public Uranium() {
+    public Uranium(){
+        counter = 0;
     }
-
-
     /**
-     * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
-     * Ha nem használható, 0-val tér vissza.
-     * @param i
-     * @return amount
+     * Meghatározza, hogy az átadott Item használható-e a jelenlegi helyett.
      */
     @Override
-    public int Satisfies(Item i) {
-        //TODO
-        return -1;
+    public boolean satisfies(Item i) {
+        if(i instanceof Uranium)
+            return true;
+        else //nem egyezik az elemtípus
+            return false;
+    }
+
+    /**
+     *Napközelben a számláló határának elérése után felrobbantja a hozzá tartozó aszteroidát
+     */
+    @Override
+    public void nearSun(Asteroid a) {
+        if(a != null){ //ha a raktár egy aszteroidához tartozik (telepes, ufo raktárában védett)
+            counter+=1;
+            //ha elérte a robbanás határát
+            if(counter >= 3) {
+                a.explode(); //aszteroida robban
+            }
+        }
     }
 
 }

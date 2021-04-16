@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.model.entities;
 import com.viseguardstudios.asteroid_miner.model.Inventory;
 import com.viseguardstudios.asteroid_miner.model.entities.building.Building;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
+import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
@@ -19,7 +20,7 @@ public class Asteroid extends Entity {
      */
     public Asteroid() {
         maxHidingSpace = 1;
-        inventory = new Inventory();
+        inventory = new AsteroidInventory();
     }
 
 
@@ -66,7 +67,7 @@ public class Asteroid extends Entity {
     /**
      * Az aszteroida raktára, ami a magba belehelyezett és jelenleg ott tárolt elemeket tartalmazza.
      */
-    private Inventory inventory;
+    private AsteroidInventory inventory;
 
     /**
      * A szomszédos aszteroidák tárolója.
@@ -102,7 +103,7 @@ public class Asteroid extends Entity {
     /**
      * Felrobban az aszteroida. Felrobbantja az összes rajta tartózkodó járművet, hozzáférhetetlenné teszi a raktárat és a rajta lévő épületeket, értesíti a szomszédos aszteroidákat a robbanásról.
      */
-    public void Explode() {
+    public void explode() {
         // TODO implement here
     }
 
@@ -277,15 +278,6 @@ public class Asteroid extends Entity {
     }
 
     /**
-     * Visszaadja az aszteroida raktárát.
-     * @return
-     */
-    public Inventory GetInventory() {
-        // TODO implement here
-        return inventory;
-    }
-
-    /**
      * Napvihar esetén hívódik meg minden entitáson, az aszteroidákon nem történik művelet ilyenkor.
      */
     @Override
@@ -331,11 +323,11 @@ public class Asteroid extends Entity {
         this.hidingSpaceShip = hidingVessel;
     }
 
-    public Inventory getInventory() {
+    public AsteroidInventory getInventory() {
         return inventory;
     }
 
-    public void setInventory(Inventory inventory) {
+    public void setInventory(AsteroidInventory inventory) {
         this.inventory = inventory;
     }
 

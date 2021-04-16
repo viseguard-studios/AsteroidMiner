@@ -1,36 +1,31 @@
 package com.viseguardstudios.asteroid_miner.model.item;
 
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
+
 
 /**
- * A már kibányászott nyersanyagok hordozható elemekké válnak, ebben a formában tárolja őket az osztály. Egy típusú, adott mennyiségű azonos elemet, illetve hordozható épületet (pl. teleportkapu-pár) tárol.
+ * Raktárban tárolható elemtípusok gyűjtőosztálya.
  */
 public abstract class Item {
 
-    /**
-     * Default constructor
-     */
-    public Item() {
-
-    }
-
-
+    private IInventory inventory;
 
     /**
-     * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
-     * Ha nem használható, 0-val tér vissza.
-     * @param i 
-     * @return
+     * Alapértelmezetten üres metódusok:
+     * activate: teleportkapu felüldefiniálja -> kapuk lerakásához szükséges
+     * nearSun: napközelben különleges tulajdonságú nyersanyagok felüldefiniálják
+     * turnEnd: vízjég párolgási tulajdonságát visszaállítja a kör végén
      */
-    public abstract int Satisfies(Item i);
-
+    public void activate(IInventory inv){}
+    public void nearSun(Asteroid a){};
+    public void turnEnd(){};
 
     /**
-     * Aktiválható tárgyaknál( pl.Teleport kapu) használt függvény. Alapból nem csinál semmit.
-     * @param s
+     *Elemek összehasonlítására szolgál
      */
-    public void Activate(SpaceShip s) {
-        // TODO implement here
-    }
+    public abstract boolean satisfies(Item item);
+
 
 }

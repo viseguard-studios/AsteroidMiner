@@ -4,6 +4,7 @@ import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Inventory;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
+import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
@@ -18,7 +19,7 @@ public class SpaceShip extends Vessel {
      */
     public SpaceShip(Asteroid a) {
         super(a);
-        inventory = new Inventory();
+        inventory = new SSInventory();
 
     }
 
@@ -30,7 +31,7 @@ public class SpaceShip extends Vessel {
     /**
      * A telepes által folyamatosan hordozott raktár.
      */
-    private Inventory inventory;
+    private SSInventory inventory;
 
 
     /**
@@ -92,7 +93,7 @@ public class SpaceShip extends Vessel {
         if(success){
             Logger.lognl("Yes");
             Logger.functionCalled("RemoveItem(i)");
-            inventory.RemoveItem(i);
+            inventory.removeItem(i);
             Logger.returned();
             return true;
         }
@@ -131,7 +132,7 @@ public class SpaceShip extends Vessel {
      * A raktár getter-e
      * @return inventory
      */
-    public Inventory getInventory() {
+    public SSInventory getInventory() {
         return inventory;
     }
 

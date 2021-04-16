@@ -3,6 +3,8 @@ package com.viseguardstudios.asteroid_miner.model.recipe;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Inventory;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
+import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
@@ -39,13 +41,13 @@ public abstract class Recipe {
         Asteroid a = ss.getCurrentAsteroid();
         Logger.returned();
         Logger.functionCalled("ss.getInventory()");
-        Inventory inv = ss.getInventory();
+        SSInventory inv = ss.getInventory();
         Logger.returned();
         Logger.functionCalled("inv.GetItems()");
         List<Item> items = inv.getItems();
         Logger.returned();
         Logger.functionCalled("a.getInventory()");
-        Inventory inventory = a.GetInventory();
+        AsteroidInventory inventory = a.getInventory();
         Logger.returned();
         Logger.functionCalled("inventory.GetItems()");
         List<Item> aItems = inventory.getItems();
@@ -111,10 +113,10 @@ public abstract class Recipe {
         Asteroid a = ss.getCurrentAsteroid();
         Logger.returned();
         Logger.functionCalled("ss.getInventory()");
-        Inventory inv = ss.getInventory();
+        SSInventory inv = ss.getInventory();
         Logger.returned();
         Logger.functionCalled("a.GetInventory()");
-        Inventory inventory = a.GetInventory();
+        AsteroidInventory inventory = a.getInventory();
         Logger.returned();
 
         /***

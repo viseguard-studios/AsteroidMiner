@@ -12,7 +12,7 @@ public class TeleportGate extends Building {
     /**
      * Default constructor
      */
-    public TeleportGate() {
+    public TeleportGate(int id) {
     }
 
     @Override
@@ -63,5 +63,14 @@ public class TeleportGate extends Building {
     public AsteroidPlaces getPlace() {
         //TODO If it started to wander it should return vessel to ensure it has space
         return AsteroidPlaces.Orbit;
+    }
+
+    public TeleportGate getIdPair(int id){
+    }
+
+    public void setPair(TeleportGate pair){
+    }
+
+    public void addIdListItem(TeleportGate tg){
     }
 }
