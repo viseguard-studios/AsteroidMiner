@@ -53,5 +53,8 @@ public class Robot extends Vessel {
     }
 
 
-
+    @Override
+    public AsteroidPlaces getPlace() {
+        return AsteroidPlaces.Vessel;
+    }
 }

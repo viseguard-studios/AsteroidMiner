@@ -1,5 +1,8 @@
 package com.viseguardstudios.asteroid_miner.model;
 
+import com.viseguardstudios.asteroid_miner.commands.Command;
+import com.viseguardstudios.asteroid_miner.commands.CommandExecutor;
+
 import java.util.*;
 
 /**
@@ -7,13 +10,27 @@ import java.util.*;
  */
 public class Engine {
 
+
+
+    static Engine instance;
+
     Scene scene;
+
+    boolean running;
+
+
+
+    CommandExecutor cmdexec;
 
     /**
      * Default constructor
+     * @param args
      */
-    public Engine() {
+    public Engine(String[] args) {
+        instance = this;
         System.out.println("Created Engine");
+        cmdexec = new CommandExecutor();
+
     }
 
 
@@ -23,13 +40,22 @@ public class Engine {
     public void StartApplication() {
         System.out.println("Application started");
 
+        Scanner in = new Scanner(System.in);
+
+        running = true;
+
         //TODO Handle commands
+        while (running){
+            var line = in.nextLine();
+            cmdexec.execute(line);
+        }
     }
 
     /**
      * Egy új játék kezdése.
      */
-    public void StartGame() {
+    public void StartGame(int seed) {
+        System.out.println("Starting game");
         var gm = new GameManager();
 
         scene = new Scene();
@@ -37,9 +63,11 @@ public class Engine {
 
         gm.setManagedScene(scene);
 
+
+
         //gm.AddPlayer();
 
-        gm.InitGame();
+        gm.InitGame(seed);
 
         gm.StartGame();
     }
@@ -49,6 +77,15 @@ public class Engine {
      */
     public void EndGame() {
         // TODO implement here
+    }
+
+
+    public CommandExecutor getCmdexec() {
+        return cmdexec;
+    }
+
+    public static Engine getInstance() {
+        return instance;
     }
 
 }

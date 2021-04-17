@@ -1,7 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.recipe;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.Inventory;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
@@ -58,7 +57,7 @@ public abstract class Recipe {
          */
         int neededItems = 0;
         for(Item i: input)
-            neededItems+=i.getAmount();
+            neededItems+=0;//i.getAmount();
 
         /***
          * Megvizsgálja, hogy a telepesnél van-e elég item a készítéshez
@@ -67,7 +66,7 @@ public abstract class Recipe {
             Logger.lognl("Check if SpaceShip inventory has enough supply");
             for(Item item: items ) {
                 Logger.functionCalled("item.Satisfies(input)");
-                neededItems-= item.Satisfies(input);
+                neededItems-=0;// item.satisfies(input);
                 Logger.returned();
             }
 
@@ -81,7 +80,7 @@ public abstract class Recipe {
                 Logger.lognl("Check if Asteroid inventory has the remaining supply");
                 for(Item aItem: aItems ) {
                     Logger.functionCalled("aItem.Satisfies(input)");
-                    neededItems-= aItem.Satisfies(input);
+                    neededItems-=0;// aItem.satisfies(input);
                     Logger.returned();
                 }
             }
@@ -125,18 +124,18 @@ public abstract class Recipe {
         Logger.lognl("Removing the necessary items from SpaceShip or Asteroid inventory.");
         for(Item input: input){
             Logger.functionCalled("inv.RemoveItem(input)");
-            int amount= inv.RemoveItem(input);
+            int amount = 0;// inv.removeItem(input);
             Logger.returned();
             Logger.functionCalled("input.Reduce(amount)");
-            input.Reduce(amount);
+            //input.reduce(amount);
             Logger.returned();
 
             /***
              * Az adott item-ből nincs elegendő a telepesnél, így az aszteroidából távolítjuk el a maradékot
              */
-            if(amount != input.getAmount()){
+            if(amount != 0/* input.getAmount()*/){
                 Logger.functionCalled("inventory.RemoveItem(input)");
-                inv.RemoveItem(input);
+                inv.removeItem(input);
                 Logger.returned();
             }
         }

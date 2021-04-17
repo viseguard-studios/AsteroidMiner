@@ -66,6 +66,7 @@ public class TeleportGate extends Building {
     }
 
     public TeleportGate getIdPair(int id){
+        return null;
     }
 
     public void setPair(TeleportGate pair){

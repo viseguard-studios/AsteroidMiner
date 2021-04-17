@@ -1,13 +1,12 @@
 package com.viseguardstudios.asteroid_miner.model.recipe;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.Inventory;
+
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.*;
-import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Uranium;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
@@ -23,9 +22,9 @@ public class TeleportGateRecipe extends Recipe {
      * Default constructor
      */
     public TeleportGateRecipe() {
-        input.add(new Iron(2));
-        input.add(new Ice());
-        input.add(new Uranium());
+        //input.add(new Iron(2));
+        //input.add(new Ice());
+        //input.add(new Uranium());
     }
 
     /**
@@ -70,7 +69,7 @@ public class TeleportGateRecipe extends Recipe {
          */
         int neededItems = 0;
         for(Item i: input)
-            neededItems+=i.getAmount();
+            neededItems+=1;
 
         /**
          * A telepes raktárából a készítéshez eltávolítandó elemeket számolja,
@@ -85,7 +84,7 @@ public class TeleportGateRecipe extends Recipe {
             Logger.lognl("Check if SpaceShip inventory has enough supply");
             for(Item item: items ) {
                 Logger.functionCalled("item.Satisfies(input)");
-                removedFromSS+= item.Satisfies(input);
+                removedFromSS += 0;// item.satisfies(input);
                 Logger.returned();
             }
 
@@ -101,7 +100,7 @@ public class TeleportGateRecipe extends Recipe {
                 Logger.lognl("Check if Asteroid inventory has the remaining supply");
                 for(Item aItem: aItems ) {
                     Logger.functionCalled("aItem.Satisfies(input)");
-                    neededItems-= aItem.Satisfies(input);
+                    neededItems -=0;// aItem.satisfies(input);
                     Logger.returned();
                 }
             }
@@ -121,9 +120,11 @@ public class TeleportGateRecipe extends Recipe {
         /***
          * A telepes tárhelyének vizsgálata.
          */
-        int SpaceLeft = ss.getInventory().getSize();
+        //TODO Fix this
+
+        int SpaceLeft = 0;//ss.getInventory().getSize();
         for(Item i: ss.getInventory().getItems()){
-            SpaceLeft-=i.getAmount();
+            SpaceLeft-=1;
         }
 
         /***
@@ -149,14 +150,14 @@ public class TeleportGateRecipe extends Recipe {
          */
         Logger.lognl("Creating a teleport gate pair, constructor: ");
         Logger.functionCalled("TeleportGateItem()");
-        TeleportGateItem gate = new TeleportGateItem();
+        TeleportGateItem gate = new TeleportGateItem(0);
         Logger.returned();
         /***
          * A telepes raktárába belehelyezzük a kapukat
          */
         Logger.lognl("Inserting teleport gates to SpaceShip inventory.");
         Logger.functionCalled("ss.getInventory().InsertItem(gate)");
-        ss.getInventory().InsertItem(gate);
+        ss.getInventory().insertItem(gate);
         Logger.returned();
     };
 

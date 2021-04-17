@@ -1,7 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.entities.Vessel;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.Inventory;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
@@ -143,4 +142,8 @@ public class SpaceShip extends Vessel {
     public Player getOwner() {return owner; }
 
 
+    @Override
+    public AsteroidPlaces getPlace() {
+        return AsteroidPlaces.Vessel;
+    }
 }

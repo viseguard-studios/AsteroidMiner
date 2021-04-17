@@ -21,10 +21,6 @@ public abstract class Building extends MovableEntity {
      */
     private Asteroid asteroid;
 
-    /**
-     * Azt jelöli,hogy az épület hol helyezkedik el az aszteroidán.
-     */
-    private BuildingPlace position;
 
     /**
      * Akkor hívódik meg, ha valamilyen okból az épület megsemmisül.

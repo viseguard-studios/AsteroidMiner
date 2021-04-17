@@ -14,11 +14,11 @@ public class SpaceStationRecipe extends Recipe {
      * Default constructor
      */
     public SpaceStationRecipe() {
-            input.add(new Coal(3));
-            input.add(new Ice(3));
-            input.add(new Uranium(3));
-            input.add(new Titan(3));
-            input.add(new Iron(3));
+            //input.add(new Coal(3));
+            //input.add(new Ice(3));
+            //input.add(new Uranium(3));
+            //input.add(new Titan(3));
+            //input.add(new Iron(3));
     }
 
     /**

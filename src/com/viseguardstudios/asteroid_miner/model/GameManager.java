@@ -13,6 +13,9 @@ import java.util.*;
  */
 public class GameManager {
 
+    Random rnd;
+    boolean deterministic;
+
     /**
      * The player who is taking the turn currently
      */
@@ -66,9 +69,20 @@ public class GameManager {
 
     /**
      * A játékmenet inicializálásáért felel.
+     * @param seed
      */
-    public void InitGame() {
+    public void InitGame(int seed) {
         // TODO implement here
+
+        if(seed == 0){
+            System.out.println("Deterministic game");
+            rnd = new Random(0);
+            deterministic = true;
+        }
+        else {
+            rnd = new Random(seed);
+            deterministic = false;
+        }
 
         //Generate stuff
         GenerateScene();

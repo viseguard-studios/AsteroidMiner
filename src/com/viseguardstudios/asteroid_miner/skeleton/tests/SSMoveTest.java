@@ -33,10 +33,10 @@ public class SSMoveTest extends Test {
 
 
         if(answer.equals("Y")){
-            TeleportGate tg1 = new TeleportGate();
+            TeleportGate tg1 = new TeleportGate(0);
             a1.AddBuilding(tg1);
 
-            TeleportGate tg2 = new TeleportGate();
+            TeleportGate tg2 = new TeleportGate(0);
             a2.AddBuilding(tg2);
 
             tg1.SetPair(tg2);

@@ -1,6 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.entities;
 
-import com.viseguardstudios.asteroid_miner.model.Inventory;
+
 import com.viseguardstudios.asteroid_miner.model.entities.building.Building;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
@@ -188,7 +188,7 @@ public class Asteroid extends Entity {
      */
     public boolean Hide(Vessel v) {
         // TODO implement here
-
+        /*
         Logger.log("Check if has not natural resource in the core AND asteroid is not exploded AND currentAsteroid.crustSize is 0");
         if((resource == null || resource.getAmount() == 0 )&& !exploded && crustSize == 0){
             Logger.log("Read neededSpace: v.hidingSpaceRequirement");
@@ -211,6 +211,8 @@ public class Asteroid extends Entity {
             return false;
         }
         else { Logger.lognl("No, this vessel might not hide");}
+        */
+
         return false;
     }
 
@@ -244,7 +246,7 @@ public class Asteroid extends Entity {
      */
     public boolean PlaceItem(Item i) {
         // TODO implement here
-
+/*
         Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is 0 AND has not natural resource in the core:");
         if((resource == null || resource.getAmount() == 0 )&& crustSize == 0 && !exploded){
             Logger.functionCalled("inventory.TryInsertItem()");
@@ -265,6 +267,8 @@ public class Asteroid extends Entity {
             }
         }
         else { Logger.lognl("No, nothing more");}
+
+ */
         return false;
     }
 

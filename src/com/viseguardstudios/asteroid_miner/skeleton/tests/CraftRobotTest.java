@@ -3,8 +3,9 @@ package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.item.Ice;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
-import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
+
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.RobotRecipe;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
@@ -28,10 +29,10 @@ public class CraftRobotTest extends Test {
          * inicializálás
          */
         a = new Asteroid();
-        a.GetInventory().setSize(10);
+        //a.getInventory().setSize(10);
 
         ss = new SpaceShip(a);
-        ss.getInventory().setSize(10);
+        //ss.getInventory().setSize(10);
 
         recipe = new RobotRecipe();
 
@@ -43,7 +44,7 @@ public class CraftRobotTest extends Test {
          */
         if(answer.equals("Y")) {
             for(Item i: recipe.getInput())
-            ss.getInventory().InsertItem(i);
+            ss.getInventory().insertItem(i);
         }
         /**
          * ha a SpaceShip-ben nem, de az Aszteroidában és a SpaceShip-ben együtt van elég anyag, akkor az Aszteroida
@@ -55,15 +56,15 @@ public class CraftRobotTest extends Test {
             answer = sc.nextLine();
             if(answer.equals("Y")) {
                 for (Item i : recipe.getInput())
-                    a.GetInventory().InsertItem(i);
+                    a.getInventory().insertItem(i);
             }
             /**
              * Ha a kettőben együtt nincs elég item a hozzávalókhoz, 1-1 item-et adunk csak hozzá a raktárakhoz (így a
              * loop-ok lefutnak, de sikertelen lesz a craftolás).
              */
             else {
-                a.GetInventory().InsertItem(new Coal());
-                ss.getInventory().InsertItem(new Ice());
+                a.getInventory().insertItem(new Coal());
+                ss.getInventory().insertItem(new Ice());
             }
         }
 
