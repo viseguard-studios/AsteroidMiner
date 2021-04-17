@@ -12,5 +12,3 @@ public class IceCreator extends ResourceCreator {
      */
     public static Ice createIce(){
         return new Ice();
-    }
-}

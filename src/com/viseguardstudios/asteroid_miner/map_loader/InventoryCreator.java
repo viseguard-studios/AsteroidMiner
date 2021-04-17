@@ -1,49 +1,83 @@
 package com.viseguardstudios.asteroid_miner.map_loader;
 
-import com.viseguardstudios.asteroid_miner.map_loader.resource.CoalCreator;
-import com.viseguardstudios.asteroid_miner.model.item.Coal;
-import com.viseguardstudios.asteroid_miner.model.resource.Resource;
+
+import com.viseguardstudios.asteroid_miner.map_loader.item.*;
+import com.viseguardstudios.asteroid_miner.model.item.Item;
+import com.viseguardstudios.asteroid_miner.model.item.TeleportGateItem;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public abstract class InventoryCreator {
 
-    /** Compiles a list of resources that need to be added. Note: empty lines are ignored
+    /**
+     * Compiles a list of resources that need to be added. Note: empty lines are ignored
+     * Note: TeleGateItems ARE NOT INCLUDED!
+     *
      * @param inputLines Format:
-     *      * ****************
-     *      *  "{ufoInventory}",
-     *      *  "   {res1}",
-     *      *  "",
-     *      *  "   {res2}",
-     *      *  "{/...Inventory}"
-     *      *
-     *      * ****************
+     * ****************
+     *  "{...Inventory\resorces}",
+     *  "   {res1}",
+     *  "",
+     *  "   {res2}",
+     *  "{/...Inventory\resorces}"
+     * ****************
      * @return
      */
-    protected ArrayList<Resource> getResourcesFromList(ArrayList<String> inputLines){
+    protected static ArrayList<Resource> getResources(ArrayList<String> inputLines) {
         ArrayList<Resource> found = new ArrayList<>();
 
-        for (int currentLine = 0; currentLine<inputLines.size(); currentLine++){
-            String temp = inputLines.get(currentLine);
-            temp = FileOpener.cutComments(temp);
-            try {
-                ArrayList<String> args = FileOpener.getNameAndPropsFromLine(temp);
-                temp = args.get(0).toLowerCase(Locale.ROOT); //toLower for security
-
-                switch (temp){  //TODO correct way of working?
-                    case "coal":
-                        found.add(new Coal()); //TODO change resources to implement current model!!!
-                        break;
+        for (String rawLine : inputLines) {
+            String currentType = FileOpener.getObjType(rawLine);
+            if (currentType != null) {
+                switch (currentType) {
                     default:
                         break;
+                    case "uranium":  //fontos, ez érzékeny a nagy- és kisbetűkre!
+                    case "uran":
+                        found.add(UraniumCreator.createUranium(rawLine));
+                        break;
+                    case "iron":
+                        found.add(IronCreator.createIron());
+                        break;
+                    case "coal":
+                        found.add(CoalCreator.createCoal());
+                        break;
+                    case "ice":
+                        found.add(IceCreator.createIce());
+                        break;
+                    case "titanium":
+                    case "titan":
+                        found.add(TitaniumCreator.createTitanium());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-
         }
         return found;
     }
 
+    /**
+     * Compiles a list of the teleports that need to be added. Note: empty lines are ignored
+     * Note: EVERY OTHER ITEM IS IGNORED!
+     *
+     * @param inputLines Format:
+        * ****************
+        *  "{...Inventory\resorces}",
+        *  "   {telegateItem ...}",
+        *  "",
+        *  "   {telegateItem ...}",
+        *  "{/...Inventory\resorces}"
+        *
+        * ****************
+     * @return
+     */
+    protected static ArrayList<TeleportGateItem> getTeleportGates(ArrayList<String> inputLines){
+        ArrayList<TeleportGateItem> teles = new ArrayList<>();
+
+        for (String rawLine : inputLines){
+            if (FileOpener.getObjType(rawLine).equals("telegateItem")){
+            teles.add(TeleItemCreator.createTeleItem(rawLine));
+            }
+        }
+        return teles;
+    }
 }
