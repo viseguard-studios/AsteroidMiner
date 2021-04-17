@@ -41,4 +41,9 @@ public class Uranium extends Resource {
         }
     }
 
+    @Override
+    public String getName() {
+        return "Uranium";
+    }
+
 }

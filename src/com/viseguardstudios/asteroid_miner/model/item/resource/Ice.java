@@ -1,4 +1,4 @@
-package com.viseguardstudios.asteroid_miner.model.item;
+package com.viseguardstudios.asteroid_miner.model.item.resource;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
@@ -49,6 +49,15 @@ public class Ice extends Resource {
             }
         }
     }
+
+    @Override
+    public String getName() {
+        return "Ice";
+    }
+
+    //#######################
+    //Getter-Setters
+    //#######################
 
     /**
      * Párolgás gettere, settere

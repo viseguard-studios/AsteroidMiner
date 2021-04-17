@@ -14,6 +14,10 @@ public class Engine {
 
     static Engine instance;
 
+    public Scene getScene() {
+        return scene;
+    }
+
     Scene scene;
 
     boolean running;

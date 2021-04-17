@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model.entities;
 
 import com.viseguardstudios.asteroid_miner.model.Scene;
+import com.viseguardstudios.asteroid_miner.util.Namer;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 /**
@@ -8,11 +9,6 @@ import com.viseguardstudios.asteroid_miner.util.Vector2;
  */
 public abstract class Entity {
 
-    /**
-     * Default constructor
-     */
-    public Entity() {
-    }
 
     /**
      * A játéktér tárolója.
@@ -21,6 +17,29 @@ public abstract class Entity {
 
 
     public Vector2 pos;
+
+
+
+    String name;
+
+    public void setName(String s){
+        name =s;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Default constructor
+     */
+    public Entity(String name) {
+        this.name = name;
+    }
+
+    public Entity(){
+        this.name = Namer.getName(this.getClass());
+    }
 
     /**
      * Akkor hívódik meg, ha az adott körben már minden játékos lépett. A robotok ezt használják például a mozgásra.
@@ -45,4 +64,10 @@ public abstract class Entity {
     public void setScene(Scene s) {
         this.scene = s;
     }
+
+
+    public void printStatus(){
+        System.out.println(name);
+    }
+
 }

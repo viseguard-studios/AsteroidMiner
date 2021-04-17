@@ -290,6 +290,21 @@ public class Asteroid extends Entity {
     }
 
 
+    @Override
+    public void printStatus() {
+        super.printStatus();
+        System.out.println("Crust: "+crustSize);
+        System.out.println("Vessels:");
+
+        System.out.println("Resources:");
+        System.out.println("- " + resource.getName());
+
+        System.out.println("Teleport Gates:");
+    }
+
+    //#################################
+    //Getter-Setters
+    //#################################
     public int getCrustSize() {
         return crustSize;
     }

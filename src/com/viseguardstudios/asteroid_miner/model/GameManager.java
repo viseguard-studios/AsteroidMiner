@@ -3,8 +3,10 @@ package com.viseguardstudios.asteroid_miner.model;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+import com.viseguardstudios.asteroid_miner.util.RandomCollection;
 
 import java.util.*;
 
@@ -82,10 +84,11 @@ public class GameManager {
         else {
             rnd = new Random(seed);
             deterministic = false;
+            GenerateScene();
         }
 
         //Generate stuff
-        GenerateScene();
+
 
     }
 
@@ -137,8 +140,14 @@ public class GameManager {
      * @return
      */
     private Resource GenerateNewResource() {
-        // TODO implement here
-        return null;
+
+        RandomCollection<Resource> resources = new RandomCollection<>(rnd);
+
+        resources.add(1, new Coal());
+
+        return resources.next();
+
+        //return null;
     }
 
     /**
@@ -147,9 +156,14 @@ public class GameManager {
     private void GenerateAsteroids() {
         for (int i = 0; i < 100; i++) {
             //Create pos
+            var res = GenerateNewResource();
+
 
             var a = new Asteroid();
+            a.setResource(res);
+            a.setCrustSize(rnd.nextInt(3));
 
+            a.setName("Asteroid_"+i);
             scene.AddEntity(a);
         }
 

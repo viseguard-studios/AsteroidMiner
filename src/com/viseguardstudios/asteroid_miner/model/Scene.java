@@ -10,6 +10,10 @@ import java.util.*;
  */
 public class Scene {
 
+    public ArrayList<Entity> getEntities() {
+        return entities;
+    }
+
     /**
      * A játékban szereplő összes entitás tárolója.
      */

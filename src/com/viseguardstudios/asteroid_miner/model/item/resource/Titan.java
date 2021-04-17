@@ -18,4 +18,9 @@ public class Titan extends Resource {
             return false;
     }
 
+    @Override
+    public String getName() {
+        return "Titan";
+    }
+
 }

@@ -2,7 +2,7 @@ package com.viseguardstudios.asteroid_miner.model.recipe;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.building.SpaceStation;
-import com.viseguardstudios.asteroid_miner.model.item.Ice;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
 import com.viseguardstudios.asteroid_miner.model.item.resource.*;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 

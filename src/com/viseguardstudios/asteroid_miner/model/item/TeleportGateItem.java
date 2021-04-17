@@ -30,6 +30,11 @@ public class TeleportGateItem extends Item {
             return false;
     }
 
+    @Override
+    public String getName() {
+        return "Teleport Gate";
+    }
+
     /**
      * Teleportkapuk lerakásáért felel.
      */

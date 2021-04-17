@@ -19,4 +19,9 @@ public class Iron extends Resource {
             return false;
     }
 
+    @Override
+    public String getName() {
+        return "Iron";
+    }
+
 }
