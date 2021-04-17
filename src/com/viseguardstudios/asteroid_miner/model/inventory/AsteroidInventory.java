@@ -31,13 +31,15 @@ public class AsteroidInventory implements IInventory{
     }
 
     /**
-     * Új elem hozzáadása a listához, a meghíváskor tudjuk, hogy hozzáadható az új item (van rá kapacitás),
-     * ezért ezt nem kell ellenőrizni
+     * Új elem hozzáadása a listához
      */
     @Override
     public boolean insertItem(Item item) {
-        items.add(item);
-        return true;
+        if(capacity > items.size()) {
+            items.add(item);
+            return true;
+        } else
+            return false;
     }
 
     /***

@@ -36,7 +36,6 @@ public class TeleportGateItem extends Item {
 
     public void activate(SSInventory inv){
         //eltávolítja magát a raktárból
-        inv.removeItem(this);
         inv.removeGate(this);
         //kapu létrehozása
         TeleportGate gate = new TeleportGate(id);

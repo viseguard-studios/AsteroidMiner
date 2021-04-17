@@ -42,20 +42,24 @@ public class SSInventory implements IInventory{
     }
 
     /**
-     * Új elem, illetve teleportkapu hozzáadása a listához, a meghíváskor tudjuk, hogy hozzáadható az új item (van rá kapacitás),
-     * ezért ezt nem kell ellenőrizni
+     * Új elem, illetve teleportkapu hozzáadása a listához
      */
     @Override
     public boolean insertItem(Item item) {
-        items.add(item);
-        return true;
+        if(capacity > items.size()) {
+            items.add(item);
+            return true;
+        } else
+            return false;
     }
 
     public boolean insertGate(TeleportGateItem gate){
-        tgs.add(gate);
-        return true;
+        if(tgCapacity > tgs.size()) {
+            tgs.add(gate);
+            return true;
+        } else
+            return false;
     }
-
     /***
      *Elem, illetve teleportkapu eltávolítása, ha megtalálható a listában
      */
