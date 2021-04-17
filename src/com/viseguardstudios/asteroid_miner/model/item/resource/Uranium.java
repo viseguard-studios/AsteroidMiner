@@ -16,15 +16,21 @@ public class Uranium extends Resource {
     public Uranium(){
         counter = 0;
     }
+
+    /**
+     * Konstruktor értékátadással
+     */
+    public Uranium(int i){
+        if(i>2) throw new IllegalArgumentException("Uranium can't have more than 2 exposures!");
+        counter = i;
+    }
     /**
      * Meghatározza, hogy az átadott Item használható-e a jelenlegi helyett.
      */
     @Override
     public boolean satisfies(Item i) {
-        if(i instanceof Uranium)
-            return true;
-        else //nem egyezik az elemtípus
-            return false;
+        //nem egyezik az elemtípus
+        return (i instanceof Uranium);
     }
 
     /**
