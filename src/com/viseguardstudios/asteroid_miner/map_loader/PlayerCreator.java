@@ -10,15 +10,15 @@ public class PlayerCreator {
         player.setName("default");
         String processedInput = FileOpener.cutComments(input);
 
-        if (FileOpener.getNameAndPropsFromLine((processedInput)).size()!=1) // If we have properties
+        if (FileOpener.getTypeAndPropsFromLine((processedInput)).size()!=1) // If we have properties
           {
           //Getting the name, it should be the only property TODO should we ignore instead?
             try {
-                if (!FileOpener.getNameAndPropsFromLine(processedInput).get(0).contentEquals("name")) //If the property is not "name"
+                if (!FileOpener.getTypeAndPropsFromLine(processedInput).get(0).contentEquals("name")) //If the property is not "name"
                     {
                      throw  new Exception("Bad property in object describer");
                     }
-             processedInput = FileOpener.getNameAndPropsFromLine(processedInput).get(1);
+             processedInput = FileOpener.getTypeAndPropsFromLine(processedInput).get(1);
              player.setName(processedInput);
              }
              catch (Exception e)
