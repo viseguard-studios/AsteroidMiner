@@ -23,6 +23,7 @@ public class Robot extends Vessel {
     public Robot(Player p, Asteroid currentAsteroid) {
         super(currentAsteroid);
         owner = p;
+        p.addVessel(this);
     }
 
     /**

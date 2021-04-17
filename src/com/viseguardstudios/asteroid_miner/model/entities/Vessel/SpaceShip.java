@@ -67,12 +67,12 @@ public class SpaceShip extends Vessel {
     public void Craft(Recipe recipe) {
 
         Logger.functionCalled("cancraft = recipe.CanCraft(ss)");
-        boolean cancraft = recipe.CanCraft(this);
+        boolean cancraft = recipe.canCraft(this);
         Logger.returned();
 
         if (cancraft) {
             Logger.functionCalled("recipe.Craft(ss)");
-            recipe.Craft(this);
+            recipe.craft(this);
             Logger.returned();
         }
     }

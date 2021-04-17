@@ -9,6 +9,8 @@ import java.util.*;
  */
 public class TeleportGate extends Building {
 
+    private Map<TeleportGate,Integer> idList;
+
     /**
      * Default constructor
      */
@@ -73,5 +75,10 @@ public class TeleportGate extends Building {
     }
 
     public void addIdListItem(TeleportGate tg){
+    }
+
+
+    public int generateId(){
+        return -1; //to be implemented
     }
 }

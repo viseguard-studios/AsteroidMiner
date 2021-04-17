@@ -26,21 +26,9 @@ public class RobotRecipe extends Recipe {
      * Létrehozza a kívánt terméket a receptből.
      * @param ss
      */
-    protected void MakeResult(SpaceShip ss){
-        /***
-         * tulajdonos lekérdezése
-         */
-        Logger.functionCalled("ss.getOwner()");
+    protected void makeResult(SpaceShip ss){
         Player p = ss.getOwner();
-        Logger.returned();
-
-        /***
-         * új robot létrehozása, konstruktor meghívása
-         */
-        Logger.lognl("Creating a robot, constructor: ");
-        Logger.functionCalled("Robot(p,ss.getCurrentAsteroid())");
         Robot r = new Robot(p,ss.getCurrentAsteroid());
-        Logger.returned();
-    };
+    }
 
 }

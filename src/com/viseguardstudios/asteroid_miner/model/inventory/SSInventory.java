@@ -100,6 +100,9 @@ public class SSInventory implements IInventory{
         return items;
     }
 
+    public ArrayList<TeleportGateItem> getGates() {return tgs;}
+    public int getTgCapacity(){return tgCapacity;}
+
     /**
      * Minden item nearSun metódusát meghívja
      */

@@ -1,17 +1,20 @@
 package com.viseguardstudios.asteroid_miner.model.recipe;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
-
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.*;
+import com.viseguardstudios.asteroid_miner.model.item.Ice;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Uranium;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Teleportkapu-párok elkészítéséhez szükséges speciális recept típus.
@@ -22,20 +25,16 @@ public class TeleportGateRecipe extends Recipe {
      * Default constructor
      */
     public TeleportGateRecipe() {
-        //input.add(new Iron(2));
-        //input.add(new Ice());
-        //input.add(new Uranium());
+        input.add(new Iron());
+        input.add(new Iron());
+        input.add(new Ice());
+        input.add(new Uranium());
     }
 
     /**
      * A sikeres készítés után ilyen típusú eredményhez ("elemhez") lehet hozzájutni.
      */
-    private TeleportGate result;
-
-    /**
-     * Az elkészült dolog mennyisége (egyszerre hány egység készül el belőle)
-     */
-    private int amount;
+    private TeleportGate result = new TeleportGate(-1);
 
     /**
      * Létrehozza a kívánt terméket a receptből, figyelembe véve a telepes tárhelyét.
@@ -43,122 +42,32 @@ public class TeleportGateRecipe extends Recipe {
      */
 
     @Override
-    public boolean CanCraft(SpaceShip ss) {
-
-        /***
-         * Az aszteroida és a telepes raktárának vizsgálatához szükséges dolgok lekérdezése (raktárak elemkészlete)
-         */
-        Logger.functionCalled("ss.GetAsteroid()");
-        Asteroid a = ss.getCurrentAsteroid();
-        Logger.returned();
-        Logger.functionCalled("ss.getInventory()");
-        SSInventory inv = ss.getInventory();
-        Logger.returned();
-        Logger.functionCalled("inv.GetItems()");
-        List<Item> items = inv.getItems();
-        Logger.returned();
-        Logger.functionCalled("a.getInventory()");
-        AsteroidInventory inventory = a.getInventory();
-        Logger.returned();
-        Logger.functionCalled("inventory.GetItems()");
-        List<Item> aItems = inventory.getItems();
-        Logger.returned();
-
-        /***
-         * Összegyűjti, hogy összesen hány darab megfelelő elemet kell megtalálni a raktárakban
-         */
-        int neededItems = 0;
-        for(Item i: input)
-            neededItems+=1;
-
-        /**
-         * A telepes raktárából a készítéshez eltávolítandó elemeket számolja,
-         * a kapuk behelyezéséhez szükséges szabad hely ellenőrzéséhez fog kelleni.
-         */
-        int removedFromSS = 0;
-
-        /***
-         * Megvizsgálja, hogy a telepesnél van-e elég item a készítéshez
-         */
-        for(Item input: input ){
-            Logger.lognl("Check if SpaceShip inventory has enough supply");
-            for(Item item: items ) {
-                Logger.functionCalled("item.Satisfies(input)");
-                removedFromSS += 0;// item.satisfies(input);
-                Logger.returned();
-            }
-
-            neededItems-= removedFromSS;
-
-            if(neededItems==0){
-                Logger.lognl("It has enough supply.");
-            }
-            /***
-             * Ha nincs elég item a telepesnél, az aszteroida raktárának item-eit is megvizsgáljuk
-             */
-            else {
-                Logger.lognl("Check if Asteroid inventory has the remaining supply");
-                for(Item aItem: aItems ) {
-                    Logger.functionCalled("aItem.Satisfies(input)");
-                    neededItems -=0;// aItem.satisfies(input);
-                    Logger.returned();
-                }
-            }
-        }
-
-        /***
-         * Ha van elég item összesen az elkészítéshez, igazzal, ellenkező esetben hamissal tér vissza
-         */
-        if(neededItems==0) {
-            Logger.lognl("We have enough supply!");
-        }
-        else {
-            Logger.lognl("The recipe can't be crafted!");
+    public boolean canCraft(SpaceShip ss) {
+        //ha a 2 teleportkapunak van elég hely a raktárban
+        if(ss.getInventory().getTgCapacity() >= (ss.getInventory().getGates().size()+2))
+            super.canCraft(ss);
+        else
             return false;
-        }
-
-        /***
-         * A telepes tárhelyének vizsgálata.
-         */
-        //TODO Fix this
-
-        int SpaceLeft = 0;//ss.getInventory().getSize();
-        for(Item i: ss.getInventory().getItems()){
-            SpaceLeft-=1;
-        }
-
-        /***
-         *Később általánosításra kerül, hiányzó belső működés miatt egyelőre konkrét számmal hasonlít össze (kapuk által elfoglalt hely)
-         */
-        Logger.lognl("Checking if the SpaceShip has enough space for storing the gates.");
-        if(SpaceLeft< 2){
-            Logger.lognl("There isn't enough space to store gates. The recipe can't be crafted. ");
-            return false;
-        }
-        /***
-         * Minden feltétel teljesül, el lehet készíteni a receptet.
-         */
-        Logger.lognl("There is enough space to store gates. We can craft the recipe. ");
-        return true;
+        return false;
     }
 
 
 
-    protected void MakeResult(SpaceShip ss){
+    protected void makeResult(SpaceShip ss){
+
         /***
          * Új teleportkapu-pár létrehozása, konstruktor meghívása
          */
-        Logger.lognl("Creating a teleport gate pair, constructor: ");
-        Logger.functionCalled("TeleportGateItem()");
-        TeleportGateItem gate = new TeleportGateItem(0);
-        Logger.returned();
+        int id = result.generateId();
+        TeleportGateItem gate1 = new TeleportGateItem(id);
+        TeleportGateItem gate2 = new TeleportGateItem(id);
         /***
          * A telepes raktárába belehelyezzük a kapukat
          */
-        Logger.lognl("Inserting teleport gates to SpaceShip inventory.");
-        Logger.functionCalled("ss.getInventory().InsertItem(gate)");
-        ss.getInventory().insertItem(gate);
-        Logger.returned();
-    };
+        ss.getInventory().insertGate(gate1);
+        ss.getInventory().insertGate(gate2);
+    }
+
+
 
 }
