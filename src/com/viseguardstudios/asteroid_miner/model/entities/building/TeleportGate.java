@@ -36,7 +36,8 @@ public class TeleportGate extends Building {
     @Override
     public void SolarFlare() {
         ArrayList<Asteroid> neighbours = (ArrayList<Asteroid>) currentAsteroid.getPhysicalNeighbours();
-        int bound = neighbours.size();
+        if(neighbours.size()==0) return; //ha nincs szomszéd, nem tud mozogni
+        int bound = neighbours.size()-1;
         //választ egy random indexet a szomszédok listájának lehetséges indexei közül
         Random rand = new Random();
         int chosen = rand.nextInt(bound);
