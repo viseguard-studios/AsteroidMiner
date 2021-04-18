@@ -4,7 +4,6 @@ package com.viseguardstudios.asteroid_miner.map_loader;
 import com.viseguardstudios.asteroid_miner.map_loader.item.*;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.TeleportGateItem;
-import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 
 import java.util.ArrayList;
 
@@ -24,8 +23,8 @@ public abstract class InventoryCreator {
      * ****************
      * @return
      */
-    protected static ArrayList<Resource> getResources(ArrayList<String> inputLines) {
-        ArrayList<Resource> found = new ArrayList<>();
+    protected static ArrayList<Item> getResources(ArrayList<String> inputLines) {
+        ArrayList<Item> found = new ArrayList<>();
 
         for (String rawLine : inputLines) {
             String currentType = FileOpener.getObjType(rawLine);

@@ -22,7 +22,7 @@ public class AstInventoryCreator extends InventoryCreator {
      */
     public static AsteroidInventory createAstInvertory(ArrayList<String> inputLines){
         AsteroidInventory inventory = new AsteroidInventory(); //TODO kapacitás bevezetése!
-        ArrayList<Resource> items = InventoryCreator.getResources(inputLines); //itt siman at lehet adni modisitas nelkül
+        ArrayList<Item> items = InventoryCreator.getResources(inputLines); //itt siman at lehet adni modisitas nelkül
         for (Item item: items) {
             inventory.insertItem(item);
         }

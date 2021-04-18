@@ -4,6 +4,7 @@ import com.viseguardstudios.asteroid_miner.map_loader.FileOpener;
 import com.viseguardstudios.asteroid_miner.map_loader.InventoryCreator;
 
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
+import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.TeleportGateItem;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 
@@ -24,9 +25,9 @@ public class SpaceShipInventoryCreator extends InventoryCreator {
         if(ids[0]==-1||ids[1]==-1) throw new Exception("End of resource describer not found.");
 
         ArrayList<String> rawResorces = new ArrayList<String>(inputLines.subList(ids[0],ids[1]+1));
-        ArrayList<Resource> resources = getResources(rawResorces);
+        ArrayList<Item> resources = getResources(rawResorces);
 
-        for (Resource res: resources) {
+        for (Item res: resources) {
             inventory.insertItem(res);
         }
 
