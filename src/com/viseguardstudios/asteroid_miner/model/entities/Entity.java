@@ -8,6 +8,8 @@ import com.viseguardstudios.asteroid_miner.util.Vector2;
  */
 public abstract class Entity {
 
+    protected String name;
+
     /**
      * Default constructor
      */

@@ -1,12 +1,14 @@
 package com.viseguardstudios.asteroid_miner.model.entities;
 
 
+import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.building.Building;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 import java.util.*;
 
@@ -21,6 +23,32 @@ public class Asteroid extends Entity {
     public Asteroid() {
         maxHidingSpace = 1;
         inventory = new AsteroidInventory();
+    }
+
+    /**
+     * Aszteroida létrehozása
+     * @param inventory
+     * @param name
+     * @param pos
+     * @param maxHidingSpace
+     * @param coreSize
+     * @param crustSize
+     * @param exploded
+     * @param revealed
+     * @param visited
+     */
+    public Asteroid(Scene scene, AsteroidInventory inventory, String name, Vector2 pos, int maxHidingSpace, int coreSize, int crustSize, boolean exploded, boolean revealed, boolean visited){
+        this.scene = scene;
+        this.inventory = inventory;
+        this.name = name;
+        this.pos = pos;
+        this.maxHidingSpace = maxHidingSpace;
+        this.coreSize = coreSize;
+        this.crustSize = crustSize;
+        this.exploded = exploded;
+        this.revealed = revealed;
+        this.visited = visited;
+        this.resource = null; // TODO beállítás
     }
 
 
@@ -86,6 +114,16 @@ public class Asteroid extends Entity {
     private Set<Vessel> stationed;
 
     /**
+     * Az aszteroida körül lévő, mozgó entitások.
+     */
+    private Set<MovableEntity> orbit;
+
+    /**
+     * Az aszteroidában jelenleg lévő, mozgó entitások. tárolója.
+     */
+    private Set<MovableEntity> inside;
+
+    /**
      * Az aszteroidára épített (véglegesen elhelyezett) építmények tárolója.
      */
     private List<Building> buildings = new LinkedList<>();
@@ -136,7 +174,10 @@ public class Asteroid extends Entity {
      * @param v
      */
     public void Depart(Vessel v) {
-        // TODO implement here
+        MovableEntity.AsteroidPlaces place = v.getPlace();
+        if (place== MovableEntity.AsteroidPlaces.Vessel){
+            stationed.remove(v);
+        }
     }
 
     /**
@@ -144,7 +185,10 @@ public class Asteroid extends Entity {
      * @param v
      */
     public void Arrive(Vessel v) {
-        // TODO implement here
+        MovableEntity.AsteroidPlaces place = v.getPlace();
+        if (place== MovableEntity.AsteroidPlaces.Vessel){
+         stationed.add(v);
+        }
     }
 
 
@@ -236,7 +280,27 @@ public class Asteroid extends Entity {
      * @param b
      */
     public void AddBuilding(Building b) {
-        // TODO implement here
+        MovableEntity.AsteroidPlaces place = b.getPlace();
+        if (place== MovableEntity.AsteroidPlaces.Orbit){
+            orbit.add(b); //Todo Mikor kell a mennyiségetellenőrizni?
+        }
+        if (place== MovableEntity.AsteroidPlaces.Inside){
+            inside.add(b);
+        }
+    }
+
+    /**
+     * Elveszi a jelölt épületet az aszteroidától.
+     * @param b
+     */
+    public void RemoveBuilding(Building b) {
+        MovableEntity.AsteroidPlaces place = b.getPlace();
+        if (place== MovableEntity.AsteroidPlaces.Orbit){
+            orbit.remove(b); //Todo Mikor kell a mennyiségetellenőrizni?
+        }
+        if (place== MovableEntity.AsteroidPlaces.Inside){
+            inside.remove(b);
+        }
     }
 
     /**

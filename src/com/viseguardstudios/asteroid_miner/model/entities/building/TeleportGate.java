@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model.entities.building;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import jdk.jfr.Label;
 
 import java.util.*;
 
@@ -11,10 +12,25 @@ public class TeleportGate extends Building {
 
     private Map<TeleportGate,Integer> idList;
 
+    private int pairID;
+
     /**
      * Default constructor
+     *
      */
-    public TeleportGate(int id) {
+    public TeleportGate(int pairID) {
+        this.pairID = pairID;
+    }
+
+    /**
+     * Teleportkapu létrehozása.
+     * @param home hova kerüljön
+     * @param pairID pár id-je
+     */
+    public TeleportGate(Asteroid home, int pairID) {
+        this.pairID = pairID;
+        this.currentAsteroid = home;
+        home.AddBuilding(this);
     }
 
     @Override
@@ -67,11 +83,21 @@ public class TeleportGate extends Building {
         return AsteroidPlaces.Orbit;
     }
 
+    /**
+     * Visszaadja, hogy a párjának milyen ID-je lenne
+     * @return
+     */
+    public int getPairID(){return pairID;}
+
     public TeleportGate getIdPair(int id){
         return null;
     }
 
+    @Label("MI EZ?? VAN MÁSIK METÓDUS IS!!!")
+    @Deprecated
     public void setPair(TeleportGate pair){
+
+        //TODO MIÉRT VAN KÉT PÁR???
     }
 
     public void addIdListItem(TeleportGate tg){
