@@ -44,14 +44,14 @@ public class TeleportGateItem extends Item {
         inv.removeGate(this);
         //kapu létrehozása
         TeleportGate gate = new TeleportGate(id);
+        //hozzáadja az Id-ket tartalmazó listához a most létrehozott kaput
+        gate.addIdListItem(gate,id);
         //pár megkeresése
-        TeleportGate pair = gate.getIdPair(id);
+        TeleportGate pair = gate.getIdPair(id, gate);
         //ha megtalálta a párt -> beállítja a kapuknál is
         if(pair != null){
             gate.setPair(pair);
             pair.setPair(gate);
         }
-        //hozzáadja az Id-ket tartalmazó listához a most létrehozott kaput
-        gate.addIdListItem(gate);
     }
 }

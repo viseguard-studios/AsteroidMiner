@@ -12,22 +12,6 @@ import java.util.*;
  */
 public class SpaceStation extends Building {
 
-    /**
-     * Default constructor
-     */
-    public SpaceStation() {
-    }
-
-    @Override
-    public void RoundEnd(boolean closeToSun) {
-
-    }
-
-    @Override
-    public void SolarFlare() {
-
-    }
-
 
     /**
      * Meghívódik ha az adott aszteroidán egy űrállomás épült. Ekkor a játék befejeződik.
@@ -37,39 +21,29 @@ public class SpaceStation extends Building {
         /***
          * Elhelyezzük a megfelelő aszteroidán
          */
-        Logger.functionCalled("a.AddBuilding(this)");
         a.AddBuilding(this);
-        Logger.returned();
         /****
          * Jelezzük a game manager-nek, hogy a játékot megnyertük, felépült az állomás
          */
-        Logger.functionCalled("a.GetScene()");
         Scene scene = a.GetScene();
-        Logger.returned();
-        Logger.functionCalled("scene.GetManager()");
         GameManager manager = scene.GetManager();
-        Logger.returned();
-        Logger.functionCalled("manager.EndGame()");
         manager.EndGame();
-        Logger.returned();
     }
 
     /**
-     * Az űrállomás felrobbanásakor hívódik meg.  Ez gyakorlatban sosem fog megtörténni, hiszen amint felépül az űrállomás, a játékot megnyerik.
-     * @param a
+     * Üres metódusok, miután felépült egy űrállomás, a játéknak vége,
+     * ezért ezek a metódusok sosem hívódnak meg, nincs következménye.
      */
-    public void Explode(Asteroid a) {
-        // TODO implement here
-    }
 
-    /**
-     * Az ebből az épületből elérhető extra aszteroidákat adja vissza.
-     * @return
-     */
-    public Set<Asteroid> GetRoutes() {
-        // TODO implement here
-        return null;
-    }
+    @Override
+    public void SolarFlare() {}
+
+    @Override
+    public void explode() {}
+
+    @Override
+    public void RoundEnd(boolean closeToSun){}
+
 
     @Override
     public AsteroidPlaces getPlace() {

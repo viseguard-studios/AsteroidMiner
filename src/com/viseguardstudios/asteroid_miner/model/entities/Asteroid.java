@@ -6,7 +6,6 @@ import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
-import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
 
@@ -14,20 +13,6 @@ import java.util.*;
  * Egy aszteroidát jelöl. Minden példányának létrejöttekor beállítódnak a generátor által a tulajdonságai.
  */
 public class Asteroid extends Entity {
-
-    /**
-     * Default constructor
-     */
-    public Asteroid() {
-        maxHidingSpace = 1;
-        inventory = new AsteroidInventory();
-    }
-
-
-    @Override
-    public void RoundEnd(boolean closeToSun) {
-
-    }
 
     /**
      * Az aszteroida magjának mérete, ennyi egységnyi nyersanyag bányászható ki belőle a játék elején, és bányászat után ennyi egységnyi item helyezhető vissza bele.
@@ -81,30 +66,72 @@ public class Asteroid extends Entity {
     private Resource resource;
 
     /**
-     * Az aszteroidán jelenleg állomásozó járművek tárolója.
+     * Az aszteroidán jelenleg állomásozó járművek, épületek tárolói.
      */
-    private Set<Vessel> stationed;
+    private Set<Vessel> stationed = new HashSet<>();
+    private Set<MovableEntity> orbit = new HashSet<>();
+    private Set<MovableEntity> inside = new HashSet<>();
 
     /**
-     * Az aszteroidára épített (véglegesen elhelyezett) építmények tárolója.
+     * Ki van-e már bányászva az aszteroida magja teljesen
      */
-    private List<Building> buildings = new LinkedList<>();
+    private boolean mined;
+
 
     /**
-     * Az osztály konstruktora.
-     * @param r 
-     * @return
+     * Default constructor
      */
-    public Asteroid Asteroid(Resource r) {
-        // TODO implement here
-        return null;
+    public Asteroid(Resource r) {
+        maxHidingSpace = 1;
+        mined = false;
+        exploded = false;
+        coreSize = 5;
+        crustSize = 5;
+        resource = r;
+        inventory = new AsteroidInventory();
+        for(int i=0; i<coreSize; i++){
+            inventory.insertItem(resource);
+        }
     }
 
     /**
-     * Felrobban az aszteroida. Felrobbantja az összes rajta tartózkodó járművet, hozzáférhetetlenné teszi a raktárat és a rajta lévő épületeket, értesíti a szomszédos aszteroidákat a robbanásról.
+     * Default constructor
+     */
+    public Asteroid() {
+        maxHidingSpace = 1;
+        inventory = new AsteroidInventory();
+        mined = false;
+        exploded = false;
+        coreSize = 5;
+        crustSize = 5;
+    }
+
+
+    /**
+     * Kör végén végrehajtandó dolgok
+     * @param closeToSun
+     */
+    @Override
+    public void RoundEnd(boolean closeToSun) {
+        inventory.roundEnd();
+        if(closeToSun)
+            inventory.nearSun(this);
+    }
+
+    /**
+     * Felrobban az aszteroida. Felrobbantja az összes rajta tartózkodó járművet, hozzáférhetetlenné teszi a raktárat és a rajta lévő épületeket.
      */
     public void explode() {
-        // TODO implement here
+        exploded = true;
+        //járműveknek, épületeknek jelzi a robbanást
+        for(Vessel v: stationed)
+            v.AsteroidExploded();
+        for(MovableEntity o: orbit)
+            o.AsteroidExploded();
+        for(MovableEntity i: inside)
+            i.AsteroidExploded();
+        //raktár is felrobban
+        inventory.explode();
     }
 
     /**
@@ -112,39 +139,61 @@ public class Asteroid extends Entity {
      * @return
      */
     public List<Asteroid> ReachableAsteroids() {
-        // TODO implement here
+        //természetes szomszédok
         List<Asteroid> n = new LinkedList<>(neighbours);
-
-        Logger.lognl("foreach b in buildings");
-
-        for (Building b : buildings) {
-
-            Logger.functionCalled("b.GetRoutes()");
-            var r = b.GetRoutes();
-            Logger.returned();
-
+        //extra szomszédok, ha vannak
+        for (MovableEntity orb: orbit) {
+            Building b = (Building)orb;
+            var r = b.getRoutes();
             if(r != null){
-                n.addAll(r);
+                n.add(r);
             }
         }
-
         return n;
     }
 
     /**
      * Egy adott jármű elhagyja az aszteroidát, törlődik az ott tartózkodók közül.
-     * @param v
      */
-    public void Depart(Vessel v) {
-        // TODO implement here
+    public void depart(MovableEntity v) {
+        if(v.getPlace() == MovableEntity.AsteroidPlaces.Vessel) {
+            if(stationed.contains(v))
+                stationed.remove(v);
+        }
+        else if (v.getPlace() == MovableEntity.AsteroidPlaces.Orbit){
+            if(orbit.contains(v))
+                orbit.remove(v);
+        }
+
     }
 
     /**
      * Egy adott jármű érkezik az aszteroidára, regisztrálja az ott tartózkodók közé.
-     * @param v
      */
-    public void Arrive(Vessel v) {
-        // TODO implement here
+    public void arrive(MovableEntity v) {
+        if(v.getPlace() == MovableEntity.AsteroidPlaces.Vessel) {
+            if(!stationed.contains(v))
+                stationed.add((Vessel) v);
+        }
+        else if (v.getPlace() == MovableEntity.AsteroidPlaces.Orbit){
+            if(!orbit.contains(v))
+                orbit.add(v);
+        }
+        /**
+         * Szomszédok felfedése
+         */
+        if(!visited){
+            visited=true;
+            for(Asteroid n: ReachableAsteroids())
+                n.reveal();
+        }
+    }
+
+    /**
+     * Aszteroida felfedése
+     */
+    private void reveal() {
+        if(!revealed) revealed =true;
     }
 
 
@@ -152,24 +201,16 @@ public class Asteroid extends Entity {
      * Aszteroida felfedése a térképen, amennyiben még nem volt felfedve.
      */
     public void Reveal() {
-        // TODO implement here
+        if(!revealed)
+        revealed = true;
     }
 
     /**
      * Akkor hívódik meg amikor az aszteroida kérgén lévő lyukat akarják mélyíteni.
      */
     public void Drill() {
-        // TODO implement here
-
-        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is bigger than 0:");
-        if(crustSize > 0 && !exploded){
-            Logger.writeln("Yes");
-            Logger.lognl("Set crustSize to crustSize-1");
+        if(crustSize > 0 && !exploded)
             crustSize -= 1;
-        }
-        else {
-            Logger.writeln("No, nothing more");
-        }
     }
 
     /**
@@ -177,8 +218,12 @@ public class Asteroid extends Entity {
      * @return
      */
     public Item Mine() {
-        // TODO implement here
-        return null;
+        if(exploded || crustSize==0 || inventory.getItems().size()==0)
+            return null;
+        inventory.removeItem(resource);
+        if(inventory.getItems().size()==0)
+            mined=true;
+        return resource;
     }
 
     /**
@@ -187,33 +232,20 @@ public class Asteroid extends Entity {
      * @return
      */
     public boolean Hide(Vessel v) {
-        // TODO implement here
-        /*
-        Logger.log("Check if has not natural resource in the core AND asteroid is not exploded AND currentAsteroid.crustSize is 0");
-        if((resource == null || resource.getAmount() == 0 )&& !exploded && crustSize == 0){
-            Logger.log("Read neededSpace: v.hidingSpaceRequirement");
+        if( (inventory.getItems().size()==0) && !exploded && crustSize == 0){
             var neededSpace = v.GetHidingSpaceRequirement();
-            Logger.log("Read usedSpace: hidingVessel.hidingSpaceRequirement");
             var usedSpace = hidingSpaceShip == null? 0: 1;
-
-            Logger.lognl("1 - usedSpace is bigger than neededSpace?");
+            //ha van elég helye elbújni
             if(1 - usedSpace >= neededSpace){
-                Logger.log("Does this Vessel using space?");
                 if(neededSpace > 0){
-                    Logger.log("Yes, put it into hidingVessel");
                     hidingSpaceShip = v;
                 }
-                else{ Logger.log("No.");}
-                Logger.log("this vessel might hide");
+                v.setHidden(true);
                 return true;
             }
-            else { Logger.lognl("No, this vessel might not hide");}
-            return false;
+            return false; //nincs elég hely
         }
-        else { Logger.lognl("No, this vessel might not hide");}
-        */
-
-        return false;
+        return false; //más aszteroida követelmény nem teljesül
     }
 
     /**
@@ -221,22 +253,43 @@ public class Asteroid extends Entity {
      * @param v
      */
     public void Exit(Vessel v) {
-
-        // TODO implement here
-
-        Logger.log("Check if vessel is using space");
+        if(!v.getHidden()) return;
         if(v == hidingSpaceShip){
-            Logger.log("Yes, and free it");
             hidingSpaceShip = null;
+        }
+        v.setHidden(false);
+    }
+
+    /**
+     * Hozzáad egy új épületet az aszteroidához, helynek megfelelően.
+     * @param b
+     */
+    public void AddBuilding(Building b) {
+        if(b.getPlace()== MovableEntity.AsteroidPlaces.Inside) {
+            if(!inside.contains(b)) {
+                inside.add(b);
+                b.setPos(this.getPos());
+            }
+        }
+        else if(b.getPlace()== MovableEntity.AsteroidPlaces.Orbit) {
+            if(!orbit.contains(b)) {
+                orbit.add(b);
+                b.setPos(this.getPos());
+            }
         }
     }
 
     /**
-     * Hozzáad egy új épületet az aszteroidához.
+     * Épület eltávolítása az aszteroidáról
      * @param b
      */
-    public void AddBuilding(Building b) {
-        // TODO implement here
+    public void removeBuilding(Building b){
+        if(b.getPlace()== MovableEntity.AsteroidPlaces.Inside)
+            if(inside.contains(b))
+                inside.remove(b);
+            else if (b.getPlace() == MovableEntity.AsteroidPlaces.Orbit)
+                if(orbit.contains(b))
+                    orbit.remove(b);
     }
 
     /**
@@ -245,50 +298,38 @@ public class Asteroid extends Entity {
      * @return
      */
     public boolean PlaceItem(Item i) {
-        // TODO implement here
-/*
-        Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is 0 AND has not natural resource in the core:");
-        if((resource == null || resource.getAmount() == 0 )&& crustSize == 0 && !exploded){
-            Logger.functionCalled("inventory.TryInsertItem()");
-            var hasSpace = inventory.TryInsertItem();
-            Logger.returned();
-            Logger.lognl("Does inventory has enough place?");
-            if(hasSpace){
-                Logger.lognl("Yes");
-                Logger.functionCalled("inventory.InsertItem(i)");
-                inventory.InsertItem(i);
-                Logger.returned();
-                Logger.lognl("The inserting succeed");
-                return true;
-            }
-            else {
-                Logger.lognl("No, the Inserting failed");
-                return false;
-            }
+        boolean canPlace = false;
+        if(mined && !exploded){
+            canPlace = inventory.tryInsertItem(i);
+            if(canPlace)
+                inventory.insertItem(i);
         }
-        else { Logger.lognl("No, nothing more");}
-
- */
-        return false;
+        return canPlace;
     }
 
     /**
      * Új szomszéd hozzáadása.
-     * @param a
      */
     public void AddNeighbour(Asteroid a) {
-        neighbours.add(a);
-        // TODO implement here
+        if(!neighbours.contains(a))
+             neighbours.add(a);
     }
 
     /**
-     * Napvihar esetén hívódik meg minden entitáson, az aszteroidákon nem történik művelet ilyenkor.
+     * Napvihar esetén hívódik meg minden entitáson, aki rajta tartózkodik.
      */
     @Override
     public void SolarFlare() {
-        // TODO implement here
+        for(MovableEntity o : orbit)
+            o.SolarFlare();
+        for(MovableEntity s: stationed)
+            s.SolarFlare();
     }
 
+    /**
+     * További getterek, setterek
+     * @return
+     */
 
     @Override
     public void printStatus() {
@@ -356,5 +397,9 @@ public class Asteroid extends Entity {
 
     public void setResource(Resource resource) {
         this.resource = resource;
+    }
+
+    public List<Asteroid> getPhysicalNeighbours(){
+        return neighbours;
     }
 }

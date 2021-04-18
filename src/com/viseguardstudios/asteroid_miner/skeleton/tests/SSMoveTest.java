@@ -39,8 +39,8 @@ public class SSMoveTest extends Test {
             TeleportGate tg2 = new TeleportGate(0);
             a2.AddBuilding(tg2);
 
-            tg1.SetPair(tg2);
-            tg2.SetPair(tg1);
+            tg1.setPair(tg2);
+            tg2.setPair(tg1);
         }
         else {
             a1.AddNeighbour(a2);

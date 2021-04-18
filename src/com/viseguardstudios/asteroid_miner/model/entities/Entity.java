@@ -15,6 +15,7 @@ public abstract class Entity {
      */
     protected Scene scene;
 
+    protected Asteroid currentAsteroid;
 
     public Vector2 pos;
 
@@ -52,22 +53,32 @@ public abstract class Entity {
      * @return
      */
     public Scene GetScene() {
-        // TODO implement here
         return scene;
     }
+    public void setScene(Scene s) {
+        this.scene = s;
+    }
+
 
     /**
      * Napviharról értesíti az egységet.
      */
     public abstract void SolarFlare();
 
-    public void setScene(Scene s) {
-        this.scene = s;
-    }
-
 
     public void printStatus(){
         System.out.println(name);
     }
 
+    public abstract void explode();
+
+    /**
+     * További getterek, setterek
+     */
+
+    public Asteroid getCurrentAsteroid(){return currentAsteroid;}
+
+    public Vector2 getPos(){return pos;}
+
+    public void setPos(Vector2 newpos) {this.pos = newpos;}
 }

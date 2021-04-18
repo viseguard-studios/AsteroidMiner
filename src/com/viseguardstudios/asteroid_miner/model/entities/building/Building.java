@@ -11,40 +11,9 @@ import java.util.*;
 public abstract class Building extends MovableEntity {
 
     /**
-     * Default constructor
+     * Felüldefiniálandó metódus, az épületből elérhető extra aszteroidákat adja vissza
      */
-    public Building() {
-    }
-
-    /**
-     * Az épület lerakási helye (aszteroida).
-     */
-    private Asteroid asteroid;
-
-
-    /**
-     * Akkor hívódik meg, ha valamilyen okból az épület megsemmisül.
-     */
-    public void Explode() {
-        // TODO implement here
-    }
-
-    /**
-     * Az ebből az épületből elérhető extra aszteroidákat adja vissza.
-     * @return
-     */
-    public Set<Asteroid> GetRoutes() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * Az osztály konstruktora, beállítja az aktuális tartózkodási helyet.
-     * @param a 
-     * @return
-     */
-    public Building Building(Asteroid a) {
-        // TODO implement here
+    public Asteroid getRoutes() {
         return null;
     }
 

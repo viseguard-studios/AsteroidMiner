@@ -56,7 +56,7 @@ public class GameManager {
     /**
      * A játék telepeseinek tárolója.
      */
-    private SpaceShip settlers;
+    private List<SpaceShip> settlers = new LinkedList<>();
 
     /**
      * Az adott játékhoz tartozó játéktér.
@@ -209,6 +209,10 @@ public class GameManager {
     }
 
     public void addSettler(SpaceShip s) {
-        //todo
+        settlers.add(s);
+    }
+
+    public void removeSettler(SpaceShip spaceShip) {
+        settlers.remove(spaceShip);
     }
 }
