@@ -121,6 +121,7 @@ public class FileOpener {
      */
     public static String getPropValue(String rawLine, String searched){
         String value = null;
+        searched = searched.toLowerCase(); // a biztonság kedvéért
         ArrayList<String> args = prepareLine(rawLine);
         int index = getPropIndex(args,searched);
         if(index>=-1){
