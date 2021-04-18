@@ -4,9 +4,12 @@ import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.util.RandomCollection;
+import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 import java.util.*;
 
@@ -41,7 +44,7 @@ public class GameManager {
     /**
      * A játékban szereplő aszteroidák listája.
      */
-    private Set<Asteroid> asteroids;
+    private Set<Asteroid> asteroids = new HashSet<>();
 
     /**
      * Jelzi, hogy a játék befejeződött-e már.
@@ -144,6 +147,8 @@ public class GameManager {
         RandomCollection<Resource> resources = new RandomCollection<>(rnd);
 
         resources.add(1, new Coal());
+        resources.add(2, new Iron());
+        resources.add(2, new Ice());
 
         return resources.next();
 
@@ -154,18 +159,45 @@ public class GameManager {
      * Az aszteroidamező inicializálása, játék inicializálás során hozzuk létre.
      */
     private void GenerateAsteroids() {
-        for (int i = 0; i < 100; i++) {
-            //Create pos
+        for (int i = 0; i < 10; i++) {
+
             var res = GenerateNewResource();
+            var count = rnd.nextInt(5);
 
+            //Create pos
+            var pos = new Vector2(rnd.nextInt(10), rnd.nextInt(10));
 
-            var a = new Asteroid();
-            a.setResource(res);
+            var a = new Asteroid(res,count);
+            a.setPos(pos);
+            //a.setResource(res);
             a.setCrustSize(rnd.nextInt(3));
 
             a.setName("Asteroid_"+i);
             scene.AddEntity(a);
+            asteroids.add(a);
         }
+
+
+        for (var ast : asteroids) {
+            var pos = ast.getPos();
+
+            while (ast.getPhysicalNeighbours().size() < 3){
+                Asteroid closest = null;
+                double dist_closest = 100000000;
+
+                for (var p : asteroids) {
+                    var dist = ast.getPos().distance(p.getPos());
+                    if(dist < dist_closest && ast != p && !ast.getPhysicalNeighbours().contains(p)){
+                        dist_closest = dist;
+                        closest =  p;
+                    }
+                }
+
+                ast.AddNeighbour(closest);
+            }
+
+        }
+
 
         //Connect the asteroids that are close together.
     }

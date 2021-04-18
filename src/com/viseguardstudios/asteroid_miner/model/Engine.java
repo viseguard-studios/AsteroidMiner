@@ -48,7 +48,6 @@ public class Engine {
 
         running = true;
 
-        //TODO Handle commands
         while (running){
             var line = in.nextLine();
             cmdexec.execute(line);

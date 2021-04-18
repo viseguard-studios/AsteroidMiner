@@ -317,10 +317,6 @@ public class Asteroid extends Entity {
             s.SolarFlare();
     }
 
-    /**
-     * További getterek, setterek
-     * @return
-     */
 
     @Override
     public void printStatus() {
@@ -328,10 +324,19 @@ public class Asteroid extends Entity {
         System.out.println("Crust: "+crustSize);
         System.out.println("Vessels:");
 
-        System.out.println("Resources:");
-        //System.out.println("- " + resource.getName());
+        System.out.println("Items:");
+        for (var item :
+                inventory.getItems()) {
+            System.out.println("- "+ item.getName());
+        }
 
         System.out.println("Teleport Gates:");
+
+        System.out.println("Neighbours:");
+        for (var a :
+                neighbours) {
+            System.out.println("- " + a.getName());
+        }
     }
 
     //#################################

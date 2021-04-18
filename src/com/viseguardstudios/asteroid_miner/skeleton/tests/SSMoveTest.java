@@ -51,7 +51,7 @@ public class SSMoveTest extends Test {
     public void Run() {
 
         Logger.functionCalled("ss.Move(a2)");
-        ss.Move(a2);
+        ss.move(a2);
         Logger.returned();
     }
 }

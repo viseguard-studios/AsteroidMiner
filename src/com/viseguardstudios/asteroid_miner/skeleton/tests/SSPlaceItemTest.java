@@ -30,7 +30,7 @@ public class SSPlaceItemTest extends Test {
         if(!answer.equals("Y")) {
             Iron is = new Iron();
             //is.setAmount(1);
-            a.setResource(is);
+            //a.setResource(is);
         }
 
         System.out.println("Would you like to set the asteroid crust size to 0? [Y/N]");
