@@ -1,4 +1,7 @@
-package com.viseguardstudios.asteroid_miner.model;
+package com.viseguardstudios.asteroid_miner.model.entities.Vessel;
+
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.Player;
 
 /**
  * Egy speciális jármű, a robot tevékenységeit, tulajdonságait tartalmazza.
@@ -20,6 +23,7 @@ public class Robot extends Vessel {
     public Robot(Player p, Asteroid currentAsteroid) {
         super(currentAsteroid);
         owner = p;
+        p.addVessel(this);
     }
 
     /**
@@ -50,5 +54,8 @@ public class Robot extends Vessel {
     }
 
 
-
+    @Override
+    public AsteroidPlaces getPlace() {
+        return AsteroidPlaces.Vessel;
+    }
 }

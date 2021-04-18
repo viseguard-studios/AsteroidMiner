@@ -1,7 +1,7 @@
 package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.Robot;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Robot;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.skeleton.Test;
 

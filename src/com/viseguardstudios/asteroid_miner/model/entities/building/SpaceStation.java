@@ -1,8 +1,7 @@
-package com.viseguardstudios.asteroid_miner.model.building;
+package com.viseguardstudios.asteroid_miner.model.entities.building;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.GameManager;
-import com.viseguardstudios.asteroid_miner.model.Robot;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
@@ -17,6 +16,16 @@ public class SpaceStation extends Building {
      * Default constructor
      */
     public SpaceStation() {
+    }
+
+    @Override
+    public void RoundEnd(boolean closeToSun) {
+
+    }
+
+    @Override
+    public void SolarFlare() {
+
     }
 
 
@@ -62,4 +71,8 @@ public class SpaceStation extends Building {
         return null;
     }
 
+    @Override
+    public AsteroidPlaces getPlace() {
+        return AsteroidPlaces.Inside;
+    }
 }

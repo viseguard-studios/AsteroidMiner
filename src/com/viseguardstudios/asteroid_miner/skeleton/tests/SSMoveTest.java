@@ -1,8 +1,8 @@
 package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
-import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.skeleton.STest;
 import com.viseguardstudios.asteroid_miner.skeleton.Test;
@@ -33,10 +33,10 @@ public class SSMoveTest extends Test {
 
 
         if(answer.equals("Y")){
-            TeleportGate tg1 = new TeleportGate();
+            TeleportGate tg1 = new TeleportGate(0);
             a1.AddBuilding(tg1);
 
-            TeleportGate tg2 = new TeleportGate();
+            TeleportGate tg2 = new TeleportGate(0);
             a2.AddBuilding(tg2);
 
             tg1.SetPair(tg2);

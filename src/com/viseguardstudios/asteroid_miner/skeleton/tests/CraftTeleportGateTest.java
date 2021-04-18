@@ -1,12 +1,11 @@
 package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
-import com.viseguardstudios.asteroid_miner.model.item.Coal;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
 import com.viseguardstudios.asteroid_miner.model.item.Ice;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
-import com.viseguardstudios.asteroid_miner.model.recipe.SpaceStationRecipe;
 import com.viseguardstudios.asteroid_miner.model.recipe.TeleportGateRecipe;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.skeleton.STest;
@@ -29,9 +28,9 @@ public class CraftTeleportGateTest extends Test {
          * inicializálás
          */
         a = new Asteroid();
-        a.GetInventory().setSize(10);
+        //a.getInventory().setSize(10);
         ss = new SpaceShip(a);
-        ss.getInventory().setSize(10);
+        //ss.getInventory().setSize(10);
         recipe = new TeleportGateRecipe();
 
 
@@ -42,7 +41,7 @@ public class CraftTeleportGateTest extends Test {
          */
         if(answer.equals("Y")) {
             for(Item i: recipe.getInput())
-            ss.getInventory().InsertItem(i);
+            ss.getInventory().insertItem(i);
         }
         /**
          * ha a SpaceShip-ben nem, de az Aszteroidában és a SpaceShip-ben együtt van elég anyag, akkor az Aszteroida
@@ -54,7 +53,7 @@ public class CraftTeleportGateTest extends Test {
             answer = sc.nextLine();
             if(answer.equals("Y")) {
                 for (Item i : recipe.getInput())
-                    a.GetInventory().InsertItem(i);
+                    a.getInventory().insertItem(i);
             }
             /**
              * Ha a kettőben együtt nincs elég item a hozzávalókhoz, 1-1 item-et adunk csak hozzá a raktárakhoz (így a
@@ -64,10 +63,10 @@ public class CraftTeleportGateTest extends Test {
                 System.out.println("Does the SpaceShip have enough space to store the teleport gate pair? (Y/N)");
                 answer = sc.nextLine();
                 if(answer.equals("N")) {
-                    ss.getInventory().setSize(1);
+                    //ss.getInventory().setSize(1);
                 }
-                a.GetInventory().InsertItem(new Coal());
-                ss.getInventory().InsertItem(new Ice());
+                a.getInventory().insertItem(new Coal());
+                ss.getInventory().insertItem(new Ice());
             }
         }
 

@@ -1,8 +1,8 @@
 package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
-import com.viseguardstudios.asteroid_miner.model.resource.IronResource;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.skeleton.STest;
 import com.viseguardstudios.asteroid_miner.skeleton.Test;
@@ -28,8 +28,8 @@ public class SSHideTest extends Test {
         System.out.println("Would you like to set the natural resource amount to 0? [Y/N]");
         answer = sc.nextLine();
         if(!answer.equals("Y")) {
-            IronResource is = new IronResource();
-            is.setAmount(1);
+            Iron is = new Iron();
+            //is.setAmount(1);
             a.setResource(is);
         }
 

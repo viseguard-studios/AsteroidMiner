@@ -1,6 +1,9 @@
-package com.viseguardstudios.asteroid_miner.model;
+package com.viseguardstudios.asteroid_miner.model.entities.Vessel;
 
-import com.viseguardstudios.asteroid_miner.model.building.TeleportGate;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.Player;
+import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
+import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
@@ -15,7 +18,7 @@ public class SpaceShip extends Vessel {
      */
     public SpaceShip(Asteroid a) {
         super(a);
-        inventory = new Inventory();
+        inventory = new SSInventory();
 
     }
 
@@ -27,7 +30,7 @@ public class SpaceShip extends Vessel {
     /**
      * A telepes által folyamatosan hordozott raktár.
      */
-    private Inventory inventory;
+    private SSInventory inventory;
 
 
     /**
@@ -64,12 +67,12 @@ public class SpaceShip extends Vessel {
     public void Craft(Recipe recipe) {
 
         Logger.functionCalled("cancraft = recipe.CanCraft(ss)");
-        boolean cancraft = recipe.CanCraft(this);
+        boolean cancraft = recipe.canCraft(this);
         Logger.returned();
 
         if (cancraft) {
             Logger.functionCalled("recipe.Craft(ss)");
-            recipe.Craft(this);
+            recipe.craft(this);
             Logger.returned();
         }
     }
@@ -89,7 +92,7 @@ public class SpaceShip extends Vessel {
         if(success){
             Logger.lognl("Yes");
             Logger.functionCalled("RemoveItem(i)");
-            inventory.RemoveItem(i);
+            inventory.removeItem(i);
             Logger.returned();
             return true;
         }
@@ -128,7 +131,7 @@ public class SpaceShip extends Vessel {
      * A raktár getter-e
      * @return inventory
      */
-    public Inventory getInventory() {
+    public SSInventory getInventory() {
         return inventory;
     }
 
@@ -139,4 +142,8 @@ public class SpaceShip extends Vessel {
     public Player getOwner() {return owner; }
 
 
+    @Override
+    public AsteroidPlaces getPlace() {
+        return AsteroidPlaces.Vessel;
+    }
 }

@@ -1,47 +1,52 @@
 package com.viseguardstudios.asteroid_miner.model.item;
 
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
-import com.viseguardstudios.asteroid_miner.model.item.Item;
-import com.viseguardstudios.asteroid_miner.model.recipe.TeleportGateRecipe;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
+import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 
 /**
- * Teleportkapu amikor még a telepesnél van.
+ * A még le nem rakott teleportkapukért felelős osztály, amiket a telepes a raktárában tárol.
  */
 public class TeleportGateItem extends Item {
 
+    private int id; //azonosító
+
     /**
-     * Default constructor
+     * Konstruktor id beállítással
      */
-    public TeleportGateItem() {
+    public TeleportGateItem(int i){
+        id = i;
     }
 
-    public TeleportGateItem(int a) {
-        super(a);
-    }
 
     /**
-     * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
-     * Ha nem használható, 0-val tér vissza.
-     * @param i
-     * @return amount
+     * Meghatározza, hogy az átadott Item használható-e a jelenlegi helyett.
      */
     @Override
-    public int Satisfies(Item i) {
-        if(i instanceof TeleportGateItem){
-            if(i.getAmount()<=this.amount) //megvan az összes szükséges darab
-                return i.getAmount();
-            else
-                return this.amount; //kevesebb darab van a szükségesnél
-        }
-        else //nem egyezik az elemtípus
-            return 0;
+    public boolean satisfies(Item item) {
+        if(item instanceof TeleportGateItem)
+            return true;
+        else
+            return false;
     }
 
     /**
-     * A teleportkapuk lehelyezését végző függvény.
-     * @param s
+     * Teleportkapuk lerakásáért felel.
      */
-    public void Activate(SpaceShip s) {
-        // TODO implement here
+
+    public void activate(SSInventory inv){
+        //eltávolítja magát a raktárból
+        inv.removeGate(this);
+        //kapu létrehozása
+        TeleportGate gate = new TeleportGate(id);
+        //pár megkeresése
+        TeleportGate pair = gate.getIdPair(id);
+        //ha megtalálta a párt -> beállítja a kapuknál is
+        if(pair != null){
+            gate.setPair(pair);
+            pair.setPair(gate);
+        }
+        //hozzáadja az Id-ket tartalmazó listához a most létrehozott kaput
+        gate.addIdListItem(gate);
     }
 }

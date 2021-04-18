@@ -1,13 +1,14 @@
-package com.viseguardstudios.asteroid_miner.model.building;
+package com.viseguardstudios.asteroid_miner.model.entities.building;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.MovableEntity;
 
 import java.util.*;
 
 /**
  * Az épülettípusok közös ősosztálya.
  */
-public abstract class Building {
+public abstract class Building extends MovableEntity {
 
     /**
      * Default constructor
@@ -20,10 +21,6 @@ public abstract class Building {
      */
     private Asteroid asteroid;
 
-    /**
-     * Azt jelöli,hogy az épület hol helyezkedik el az aszteroidán.
-     */
-    private BuildingPlace position;
 
     /**
      * Akkor hívódik meg, ha valamilyen okból az épület megsemmisül.

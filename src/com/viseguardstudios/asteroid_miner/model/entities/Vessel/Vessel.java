@@ -1,11 +1,15 @@
-package com.viseguardstudios.asteroid_miner.model;
+package com.viseguardstudios.asteroid_miner.model.entities.Vessel;
 
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.Player;
+import com.viseguardstudios.asteroid_miner.model.entities.Entity;
+import com.viseguardstudios.asteroid_miner.model.entities.MovableEntity;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**
  * Egy-egy járműért (pl. telepes vagy robot) felelős osztály.
  */
-public abstract class Vessel extends Entity {
+public abstract class Vessel extends MovableEntity {
 
     /**
      * Default constructor
@@ -82,15 +86,20 @@ public abstract class Vessel extends Entity {
 
         Logger.lognl("Check if n has to: ");
         if(n.contains(to)){
-            Logger.lognl("It has! 🎆");
+            Logger.lognl("It has!");
 
-            Logger.functionCalled("currentAsteroid.Depart(this);");
-            this.currentAsteroid.Depart(this);
-            Logger.returned();
+            {//Abstract
 
-            Logger.functionCalled("to.Arrive(this);");
-            to.Arrive(this);
-            Logger.returned();
+                Logger.functionCalled("currentAsteroid.Depart(this);");
+                this.currentAsteroid.Depart(this);
+                Logger.returned();
+
+                Logger.functionCalled("to.Arrive(this);");
+                to.Arrive(this);
+                Logger.returned();
+
+            }
+
         }
         else {
             Logger.lognl("It doesn't :(");

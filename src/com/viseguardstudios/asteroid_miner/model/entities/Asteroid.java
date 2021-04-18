@@ -1,8 +1,11 @@
-package com.viseguardstudios.asteroid_miner.model;
+package com.viseguardstudios.asteroid_miner.model.entities;
 
-import com.viseguardstudios.asteroid_miner.model.building.Building;
+
+import com.viseguardstudios.asteroid_miner.model.entities.building.Building;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
+import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
-import com.viseguardstudios.asteroid_miner.model.resource.Resource;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 import java.util.*;
@@ -17,7 +20,7 @@ public class Asteroid extends Entity {
      */
     public Asteroid() {
         maxHidingSpace = 1;
-        inventory = new Inventory();
+        inventory = new AsteroidInventory();
     }
 
 
@@ -64,7 +67,7 @@ public class Asteroid extends Entity {
     /**
      * Az aszteroida raktára, ami a magba belehelyezett és jelenleg ott tárolt elemeket tartalmazza.
      */
-    private Inventory inventory;
+    private AsteroidInventory inventory;
 
     /**
      * A szomszédos aszteroidák tárolója.
@@ -100,7 +103,7 @@ public class Asteroid extends Entity {
     /**
      * Felrobban az aszteroida. Felrobbantja az összes rajta tartózkodó járművet, hozzáférhetetlenné teszi a raktárat és a rajta lévő épületeket, értesíti a szomszédos aszteroidákat a robbanásról.
      */
-    public void Explode() {
+    public void explode() {
         // TODO implement here
     }
 
@@ -185,7 +188,7 @@ public class Asteroid extends Entity {
      */
     public boolean Hide(Vessel v) {
         // TODO implement here
-
+        /*
         Logger.log("Check if has not natural resource in the core AND asteroid is not exploded AND currentAsteroid.crustSize is 0");
         if((resource == null || resource.getAmount() == 0 )&& !exploded && crustSize == 0){
             Logger.log("Read neededSpace: v.hidingSpaceRequirement");
@@ -208,6 +211,8 @@ public class Asteroid extends Entity {
             return false;
         }
         else { Logger.lognl("No, this vessel might not hide");}
+        */
+
         return false;
     }
 
@@ -241,7 +246,7 @@ public class Asteroid extends Entity {
      */
     public boolean PlaceItem(Item i) {
         // TODO implement here
-
+/*
         Logger.log("Check if currentAsteroid is not exploded AND currentAsteroid.crustSize is 0 AND has not natural resource in the core:");
         if((resource == null || resource.getAmount() == 0 )&& crustSize == 0 && !exploded){
             Logger.functionCalled("inventory.TryInsertItem()");
@@ -262,6 +267,8 @@ public class Asteroid extends Entity {
             }
         }
         else { Logger.lognl("No, nothing more");}
+
+ */
         return false;
     }
 
@@ -272,15 +279,6 @@ public class Asteroid extends Entity {
     public void AddNeighbour(Asteroid a) {
         neighbours.add(a);
         // TODO implement here
-    }
-
-    /**
-     * Visszaadja az aszteroida raktárát.
-     * @return
-     */
-    public Inventory GetInventory() {
-        // TODO implement here
-        return inventory;
     }
 
     /**
@@ -329,11 +327,11 @@ public class Asteroid extends Entity {
         this.hidingSpaceShip = hidingVessel;
     }
 
-    public Inventory getInventory() {
+    public AsteroidInventory getInventory() {
         return inventory;
     }
 
-    public void setInventory(Inventory inventory) {
+    public void setInventory(AsteroidInventory inventory) {
         this.inventory = inventory;
     }
 

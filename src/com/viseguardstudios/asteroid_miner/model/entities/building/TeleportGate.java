@@ -1,6 +1,6 @@
-package com.viseguardstudios.asteroid_miner.model.building;
+package com.viseguardstudios.asteroid_miner.model.entities.building;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 
 import java.util.*;
 
@@ -9,10 +9,22 @@ import java.util.*;
  */
 public class TeleportGate extends Building {
 
+    private Map<TeleportGate,Integer> idList;
+
     /**
      * Default constructor
      */
-    public TeleportGate() {
+    public TeleportGate(int id) {
+    }
+
+    @Override
+    public void RoundEnd(boolean closeToSun) {
+
+    }
+
+    @Override
+    public void SolarFlare() {
+
     }
 
     /**
@@ -49,4 +61,24 @@ public class TeleportGate extends Building {
         // TODO implement here
     }
 
+    @Override
+    public AsteroidPlaces getPlace() {
+        //TODO If it started to wander it should return vessel to ensure it has space
+        return AsteroidPlaces.Orbit;
+    }
+
+    public TeleportGate getIdPair(int id){
+        return null;
+    }
+
+    public void setPair(TeleportGate pair){
+    }
+
+    public void addIdListItem(TeleportGate tg){
+    }
+
+
+    public int generateId(){
+        return -1; //to be implemented
+    }
 }

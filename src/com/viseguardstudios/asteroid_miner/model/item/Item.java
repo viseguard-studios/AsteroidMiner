@@ -1,62 +1,31 @@
 package com.viseguardstudios.asteroid_miner.model.item;
 
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
+
 
 /**
- * A már kibányászott nyersanyagok hordozható elemekké válnak, ebben a formában tárolja őket az osztály. Egy típusú, adott mennyiségű azonos elemet, illetve hordozható épületet (pl. teleportkapu-pár) tárol.
+ * Raktárban tárolható elemtípusok gyűjtőosztálya.
  */
 public abstract class Item {
 
-    /**
-     * Default constructor
-     */
-    public Item() {
-        amount = 1;
-    }
+    private IInventory inventory;
 
     /**
-     *  Konstruktor mennyiség beállítással
+     * Alapértelmezetten üres metódusok:
+     * activate: teleportkapu felüldefiniálja -> kapuk lerakásához szükséges
+     * nearSun: napközelben különleges tulajdonságú nyersanyagok felüldefiniálják
+     * turnEnd: vízjég párolgási tulajdonságát visszaállítja a kör végén
      */
-    public Item(int a) {
-        amount = a;
-    }
+    public void activate(IInventory inv){}
+    public void nearSun(Asteroid a){};
+    public void turnEnd(){};
 
     /**
-     * Az elem darabszámát tárolja.
+     *Elemek összehasonlítására szolgál
      */
-    protected int amount;
+    public abstract boolean satisfies(Item item);
 
-
-
-    /**
-     * Meghatározza, hogy az átadott item használható-e a jelenlegi helyett, és ha igen, milyen mennyiségben.
-     * Ha nem használható, 0-val tér vissza.
-     * @param i 
-     * @return
-     */
-    public abstract int Satisfies(Item i);
-
-    /**
-     * A megadott számmal csökkenti az adott com.viseguardstudios.asteroid_miner.model.item.Item méretét (számosságát), amennyiben ez lehetséges.
-     * @param a
-     */
-    public void Reduce(int a) {
-        amount-=a;
-    }
-
-    /**
-     * Aktiválható tárgyaknál( pl.Teleport kapu) használt függvény. Alapból nem csinál semmit.
-     * @param s
-     */
-    public void Activate(SpaceShip s) {
-        // TODO implement here
-    }
-
-    /**
-     * A rendelkezésre álló mennyiség getter-e.
-     * @return amount
-     */
-
-    public int getAmount(){return amount;};
 
 }

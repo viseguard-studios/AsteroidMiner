@@ -1,8 +1,10 @@
 package com.viseguardstudios.asteroid_miner.model.recipe;
 
-import com.viseguardstudios.asteroid_miner.model.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.Inventory;
-import com.viseguardstudios.asteroid_miner.model.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
+import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
@@ -13,74 +15,55 @@ import java.util.*;
  */
 public abstract class Recipe {
 
-    /**
-     * Default constructor
-     */
-    public Recipe() {
-
-    }
 
     /**
      * Az aktuális recepthez szükséges hozzávalók tárolása.
      */
-    protected List<Item> input = new LinkedList<>();
+    protected ArrayList<Item> input = new ArrayList<Item>();
 
     /**
      * Meghatározza, hogy egy adott raktárban és aszteroidán lévő kibányászott nyersanyagkészlet elegendő-e az adott recept elkészítéséhez.
      * @param ss
-     * @return
+     * @return elkészíthető-e
      */
-    public boolean CanCraft(SpaceShip ss) {
+    public boolean canCraft(SpaceShip ss) {
 
         /***
          * Az aszteroida és a telepes raktárának vizsgálatához szükséges dolgok lekérdezése (raktárak elemkészlete)
          */
-        Logger.functionCalled("ss.GetAsteroid()");
         Asteroid a = ss.getCurrentAsteroid();
-        Logger.returned();
-        Logger.functionCalled("ss.getInventory()");
-        Inventory inv = ss.getInventory();
-        Logger.returned();
-        Logger.functionCalled("inv.GetItems()");
-        List<Item> items = inv.getItems();
-        Logger.returned();
-        Logger.functionCalled("a.getInventory()");
-        Inventory inventory = a.GetInventory();
-        Logger.returned();
-        Logger.functionCalled("inventory.GetItems()");
-        List<Item> aItems = inventory.getItems();
-        Logger.returned();
+        SSInventory inv = ss.getInventory();
+        ArrayList<Item> items = new ArrayList<Item>(inv.getItems());
+        AsteroidInventory inventory = a.getInventory();
+        ArrayList<Item> aItems = new ArrayList<Item>(inventory.getItems());
+        ArrayList<Item> recipe = new ArrayList<Item>(input);
 
-        /***
-         * Összegyűjti, hogy összesen hány darab megfelelő elemet kell megtalálni a raktárakban
-         */
-        int neededItems = 0;
-        for(Item i: input)
-            neededItems+=i.getAmount();
 
         /***
          * Megvizsgálja, hogy a telepesnél van-e elég item a készítéshez
          */
-        for(Item input: input ){
-            Logger.lognl("Check if SpaceShip inventory has enough supply");
-            for(Item item: items ) {
-                Logger.functionCalled("item.Satisfies(input)");
-                neededItems-= item.Satisfies(input);
-                Logger.returned();
+        for(Item rec: recipe ) {
+            for (Item item : items) {
+                if (item.satisfies(rec)) {
+                    recipe.remove(rec);
+                    items.remove(item);
+                    break;
+                }
             }
+        }
 
-            if(neededItems==0){
-                Logger.lognl("It has enough supply.");
-            }
-            /***
-             * Ha nincs elég item a telepesnél, az aszteroida raktárának item-eit is megvizsgáljuk
-             */
-            else {
-                Logger.lognl("Check if Asteroid inventory has the remaining supply");
-                for(Item aItem: aItems ) {
-                    Logger.functionCalled("aItem.Satisfies(input)");
-                    neededItems-= aItem.Satisfies(input);
-                    Logger.returned();
+        /**
+         * Ha megvan minden hozzávaló, kilép, ha nem, az aszteroida raktárában keres tovább
+         */
+        if(recipe.size()==0)  //ha megvan az összes szükséges hozzávaló
+            return true;
+
+        for(Item rec: recipe ) {
+            for (Item aItem : aItems) {
+                if (aItem.satisfies(rec)) {
+                    recipe.remove(rec);
+                    aItems.remove(aItem);
+                    break;
                 }
             }
         }
@@ -88,76 +71,50 @@ public abstract class Recipe {
         /***
          * Ha van elég item összesen az elkészítéshez, igazzal, ellenkező esetben hamissal tér vissza
          */
-        if(neededItems==0) {
-            Logger.lognl("The recipe can be crafted, we have enough supply!");
+        if(recipe.size()==0)
             return true;
-        }
-        else {
-            Logger.lognl("The recipe can't be crafted!");
+        else
             return false;
-        }
     }
+
 
     /**
      * Akkor hívódik meg ha ténylegesen le akarjuk gyártani ezt a receptet.
-     * @param ss
      */
-    public void Craft(SpaceShip ss) {
+    public void craft(SpaceShip ss) {
 
         /***
          * Az aszteroida és a telepes raktárának vizsgálatához szükséges dolgok lekérdezése (raktárak elemkészlete)
          */
-        Logger.functionCalled("ss.GetAsteroid()");
         Asteroid a = ss.getCurrentAsteroid();
-        Logger.returned();
-        Logger.functionCalled("ss.getInventory()");
-        Inventory inv = ss.getInventory();
-        Logger.returned();
-        Logger.functionCalled("a.GetInventory()");
-        Inventory inventory = a.GetInventory();
-        Logger.returned();
+        SSInventory inv = ss.getInventory();
+        AsteroidInventory inventory = a.getInventory();
 
         /***
-         * Az összes lehetséges recepthez szükséges item-et eltávolítjuk a telepes/aszteroida raktárából
+         * Az összes lehetséges recepthez szükséges item-et eltávolítjuk a telepes/aszteroida raktárából (ha a telepesnél nincs, az aszteroidán lesz belőle)
          */
-        Logger.lognl("Removing the necessary items from SpaceShip or Asteroid inventory.");
         for(Item input: input){
-            Logger.functionCalled("inv.RemoveItem(input)");
-            int amount= inv.RemoveItem(input);
-            Logger.returned();
-            Logger.functionCalled("input.Reduce(amount)");
-            input.Reduce(amount);
-            Logger.returned();
-
-            /***
-             * Az adott item-ből nincs elegendő a telepesnél, így az aszteroidából távolítjuk el a maradékot
-             */
-            if(amount != input.getAmount()){
-                Logger.functionCalled("inventory.RemoveItem(input)");
-                inv.RemoveItem(input);
-                Logger.returned();
-            }
+            if(!inv.removeItem(input))
+                inventory.removeItem(input);
         }
 
         /***
          * Sikeres eltávolítások után az eredmény elkészítése
          */
-        Logger.functionCalled("MakeResult(ss)");
-        MakeResult(ss);
-        Logger.returned();
+        makeResult(ss);
     }
 
     /**
      * Létrehozza a kívánt terméket a receptből.
      * @param ss
      */
-    protected abstract void MakeResult(SpaceShip ss);
+    protected abstract void makeResult(SpaceShip ss);
 
     /**
      *  Az összetevők listájának getter-e
      * @return input
      */
-    public List<Item> getInput(){
+    public ArrayList<Item> getInput(){
         return input;
     }
 
