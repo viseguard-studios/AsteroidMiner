@@ -34,6 +34,14 @@ public class Player {
     private Resource searching_for;
 
     /**
+     * az űrjárművek lista getter -e.
+     * @return
+     */
+    public ArrayList<Vessel> getOwnedVessels() {
+        return ownedVessels;
+    }
+
+    /**
      * Hozzáadunk egy űrjárművet a játékoshoz
      * @param v
      */

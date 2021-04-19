@@ -73,6 +73,10 @@ public class GameManager {
     public GameManager() {
     }
 
+    public Set<Player> getAllPlayers() {
+        return allPlayers;
+    }
+
     /**
      * A játékmenet inicializálásáért felel.
      * @param seed
