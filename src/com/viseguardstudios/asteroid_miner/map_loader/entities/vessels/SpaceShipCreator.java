@@ -1,12 +1,11 @@
 package com.viseguardstudios.asteroid_miner.map_loader.entities.vessels;
 
 import com.viseguardstudios.asteroid_miner.map_loader.FileOpener;
-import com.viseguardstudios.asteroid_miner.map_loader.InventoryCreator;
+import com.viseguardstudios.asteroid_miner.map_loader.ItemCreator;
 import com.viseguardstudios.asteroid_miner.map_loader.entities.VesselCreator;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Robot;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.TeleportGateItem;
@@ -69,7 +68,7 @@ public class SpaceShipCreator extends VesselCreator {
         if(ids[0]==-1||ids[1]==-1) throw new Exception("End of resource describer not found.");
 
         ArrayList<String> rawResources = new ArrayList<String>(rawLines.subList(ids[0],ids[1]+1));
-        ArrayList<Item> resources = InventoryCreator.getResources(rawResources);
+        ArrayList<Item> resources = ItemCreator.getResources(rawResources);
 
         for (Item res: resources) {
             spaceShip.getInventory().insertItem(res);
@@ -85,7 +84,7 @@ public class SpaceShipCreator extends VesselCreator {
         if(ids[0]==-1||ids[1]==-1) throw new Exception("End of telegates describer not found.");
 
         ArrayList<String> rawTeles = new ArrayList<String>(rawLines.subList(ids[0],ids[1]+1));
-        ArrayList<TeleportGateItem> teles = InventoryCreator.getTeleportGates(rawTeles);
+        ArrayList<TeleportGateItem> teles = ItemCreator.getTeleportGates(rawTeles);
 
         for (TeleportGateItem tele:teles) {
             spaceShip.getInventory().insertGate(tele);

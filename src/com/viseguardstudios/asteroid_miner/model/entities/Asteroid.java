@@ -18,18 +18,9 @@ import java.util.*;
  */
 public class Asteroid extends Entity {
 
-    /**
-
-     * Default constructor
-     */
-    public Asteroid() {
-        maxHidingSpace = 1;
-        inventory = new AsteroidInventory();
-    }
 
     /**
      * Aszteroida létrehozása
-     * @param inventory
      * @param name
      * @param pos
      * @param maxHidingSpace
@@ -39,10 +30,10 @@ public class Asteroid extends Entity {
      * @param revealed
      * @param visited
      */
-    public Asteroid(Scene scene, AsteroidInventory inventory, String name, Vector2 pos, int maxHidingSpace, int coreSize, int crustSize, boolean exploded, boolean revealed, boolean visited){
+    public Asteroid(Scene scene, String name, Vector2 pos, int maxHidingSpace, int coreSize, int crustSize, boolean exploded, boolean revealed, boolean visited){
         this.scene = scene;
-        this.inventory = inventory;
         this.name = name;
+        this.inventory = new AsteroidInventory();
         this.pos = pos;
         this.maxHidingSpace = maxHidingSpace;
         this.coreSize = coreSize;
@@ -241,10 +232,11 @@ public class Asteroid extends Entity {
 
     public void Arrive(Vessel v) {
         MovableEntity.AsteroidPlaces place = v.getPlace();
-        if (place== MovableEntity.AsteroidPlaces.Vessel){
-         stationed.add(v);
+        if (place == MovableEntity.AsteroidPlaces.Vessel) {
+            stationed.add(v);
         }
-//TODO: The Fuck is this
+    }
+        //TODO: The Fuck is this
     public void arrive(MovableEntity v) {
         if(v.getPlace() == MovableEntity.AsteroidPlaces.Vessel) {
             if(!stationed.contains(v))
@@ -260,7 +252,7 @@ public class Asteroid extends Entity {
         if(!visited){
             visited=true;
             for(Asteroid n: ReachableAsteroids())
-                n.reveal();
+                n.Reveal();
         }
     }
 
@@ -465,7 +457,7 @@ Adams branch
         this.hidingSpaceShip = hidingVessel;
     }
 
-    public AsteroidInventory getInventory() {
+    public AsteroidInventory getInventory(){
         return inventory;
     }
 

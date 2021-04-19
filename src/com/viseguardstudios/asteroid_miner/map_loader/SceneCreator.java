@@ -17,4 +17,11 @@ public class SceneCreator {
 
         return scene;
     }
+
+    public static Scene createSceneFromFile(ArrayList<String> inputLines){
+        Scene scene = new Scene();
+        //must create entities here
+
+        return scene;
+    }
 }

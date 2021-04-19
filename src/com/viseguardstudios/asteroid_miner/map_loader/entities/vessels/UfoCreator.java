@@ -1,15 +1,12 @@
 package com.viseguardstudios.asteroid_miner.map_loader.entities.vessels;
 
 import com.viseguardstudios.asteroid_miner.map_loader.FileOpener;
-import com.viseguardstudios.asteroid_miner.map_loader.InventoryCreator;
+import com.viseguardstudios.asteroid_miner.map_loader.ItemCreator;
 import com.viseguardstudios.asteroid_miner.map_loader.entities.VesselCreator;
-import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.UFO;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
-import com.viseguardstudios.asteroid_miner.model.item.TeleportGateItem;
 
 import java.util.ArrayList;
 
@@ -52,7 +49,7 @@ public class UfoCreator  extends VesselCreator {
         UFO ufo = new UFO(home,name);
 
         ArrayList<String> rawResources = new ArrayList<String>(rawLines.subList(ids[0],ids[1]+1));
-        ArrayList<Item> resources = InventoryCreator.getResources(rawResources);
+        ArrayList<Item> resources = ItemCreator.getResources(rawResources);
 
         for (Item res: resources) {
             ufo.getInventory().insertItem(res);

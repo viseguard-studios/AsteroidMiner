@@ -40,6 +40,7 @@ public class FileOpener {
                 return p;
             }
         }
+        return null;
     }
 
     @Label("Important")
@@ -232,6 +233,7 @@ public class FileOpener {
         if (startLine>=inputLines.size()) throw new Exception("Starting line number exceeds input length.");
         int[] ids = {-1,-1}; // kezdo index es befejezo index
 
+        name = name.toLowerCase();
         for (int i = startLine; i<inputLines.size();i++){
             String currentLine = inputLines.get(i);
             if(getObjType(currentLine).equals(name)){
