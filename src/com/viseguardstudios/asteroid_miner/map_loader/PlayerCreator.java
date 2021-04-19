@@ -29,4 +29,15 @@ public class PlayerCreator {
         return player;
     }
 
+    public static Player PlayerFromFile(String inputLine) throws Exception {
+        Player player = new Player();
+        String name = "default";
+        String param = FileOpener.getPropValue(inputLine,"name");
+        if (param!=null){
+            name =  param;
+        }
+        player.setName(name);
+        return player;
+    }
+
 }

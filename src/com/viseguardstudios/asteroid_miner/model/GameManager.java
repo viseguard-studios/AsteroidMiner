@@ -69,6 +69,11 @@ public class GameManager {
     public GameManager() {
     }
 
+    public GameManager(int sunDist, boolean gameEnded, boolean stormQueued) {
+        //TODO kell-e név?
+    }
+
+
     /**
      * A játékmenet inicializálásáért felel.
      * @param seed
