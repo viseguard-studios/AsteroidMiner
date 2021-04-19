@@ -36,7 +36,7 @@ public class CraftSpaceStationTest extends Test {
         scene.setManager(gm);
 
         a = new Asteroid();
-        scene.AddEntity(a);
+        scene.addEntity(a);
         //a.GetInventory().setSize(10);
 
         ss = new SpaceShip(a);

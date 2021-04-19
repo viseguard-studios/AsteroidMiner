@@ -23,14 +23,6 @@ public abstract class Entity {
 
     String name;
 
-    public void setName(String s){
-        name =s;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     /**
      * Default constructor
      */
@@ -38,9 +30,9 @@ public abstract class Entity {
         this.name = name;
     }
 
-    public Entity(){
-        this.name = Namer.getName(this.getClass());
-    }
+    public Entity(){ }
+
+
 
     /**
      * Akkor hívódik meg, ha az adott körben már minden játékos lépett. A robotok ezt használják például a mozgásra.
@@ -81,4 +73,18 @@ public abstract class Entity {
     public Vector2 getPos(){return pos;}
 
     public void setPos(Vector2 newpos) {this.pos = newpos;}
+
+
+    public void setDefaultName(){
+        this.name = Namer.getName(this.getClass());
+    }
+
+    public void setName(String s){
+        name =s;
+    }
+
+    public String getName() {
+        return name;
+    }
+
 }

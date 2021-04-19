@@ -323,6 +323,10 @@ public class Asteroid extends Entity {
         super.printStatus();
         System.out.println("Crust: "+crustSize);
         System.out.println("Vessels:");
+        for (var vessel :
+                this.stationed) {
+            System.out.println("- "+ vessel.getName());
+        }
 
         System.out.println("Items:");
         for (var item :

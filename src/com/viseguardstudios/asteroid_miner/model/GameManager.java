@@ -8,6 +8,7 @@ import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+import com.viseguardstudios.asteroid_miner.util.Namer;
 import com.viseguardstudios.asteroid_miner.util.RandomCollection;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
 
@@ -39,12 +40,12 @@ public class GameManager {
     /**
      * A játék játékosainak listája.
      */
-    private Set<Player> allPlayers;
+    private Set<Player> allPlayers = new HashSet<>();
 
     /**
      * A játékban szereplő aszteroidák listája.
      */
-    private Set<Asteroid> asteroids = new HashSet<>();
+    private List<Asteroid> asteroids = new ArrayList<>();
 
     /**
      * Jelzi, hogy a játék befejeződött-e már.
@@ -87,7 +88,7 @@ public class GameManager {
         else {
             rnd = new Random(seed);
             deterministic = false;
-            GenerateScene();
+            generateScene();
         }
 
         //Generate stuff
@@ -100,24 +101,16 @@ public class GameManager {
     }
 
     /**
-     * Új játékos hozzáadása.
-     * @param p
-     */
-    public void AddPlayer(Player p) {
-        // TODO implement here
-    }
-
-    /**
      * Új játék indításáért felel.
      */
-    public void StartGame() {
+    public void startGame() {
         // TODO implement here
     }
 
     /**
      * Egy játékos aktuális köre - ekkor van lehetősége irányítani a járműveit egyesével.
      */
-    public void TakeTurn() {
+    public void takeTurn() {
         Logger.log("scene.SolarFlare()");
         scene.SolarFlare();
         Logger.returned();
@@ -126,16 +119,32 @@ public class GameManager {
     /**
      * Aktuális játék befejezése.
      */
-    public void EndGame() {
+    public void endGame() {
         // TODO implement here
     }
+
 
     /**
      * Játék inicializálás során a játéktér elemeinek inicializálása.
      */
-    private void GenerateScene() {
+    private void generateScene() {
         // TODO implement here
         GenerateAsteroids();
+
+        for (var pl : allPlayers) {
+
+            for (int i = 0; i < 3; i++) {
+
+                var ai = rnd.nextInt(asteroids.size());
+
+                var ss = new SpaceShip(asteroids.get(ai));
+                ss.setName("SpaceShip_"+ Namer.getNextID(ss.getClass()));
+                pl.addVessel(ss);
+
+                settlers.add(ss);
+                scene.addEntity(ss);
+            }
+        }
     }
 
     /**
@@ -173,7 +182,7 @@ public class GameManager {
             a.setCrustSize(rnd.nextInt(3));
 
             a.setName("Asteroid_"+i);
-            scene.AddEntity(a);
+            scene.addEntity(a);
             asteroids.add(a);
         }
 
@@ -201,6 +210,7 @@ public class GameManager {
 
         //Connect the asteroids that are close together.
     }
+
 
     /**
      * Visszaadja, hogy jelenleg napviharban van-e az aszteroidamező.
@@ -232,6 +242,8 @@ public class GameManager {
         CreateStormOn = true;
     }
 
+
+
     /**
      * Játékos hozzáadása a listához.
      * @param p
@@ -246,5 +258,10 @@ public class GameManager {
 
     public void removeSettler(SpaceShip spaceShip) {
         settlers.remove(spaceShip);
+    }
+
+
+    public List<SpaceShip> getSettlers(){
+        return settlers;
     }
 }
