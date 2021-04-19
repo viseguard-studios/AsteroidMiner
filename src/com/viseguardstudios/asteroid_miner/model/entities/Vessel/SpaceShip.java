@@ -22,6 +22,13 @@ public class SpaceShip extends Vessel {
 
     }
 
+    public SpaceShip(Asteroid a, Player owner, String name) {
+        super(a);
+        inventory = new SSInventory();
+        this.owner = owner;
+        this.name = name;
+    }
+
     /**
      * Az utoljára lehelyezett kapu referenciája. Arra használjuk hogy a telepes által lerakott kapu párokat össze lehessen kötni.
      */

@@ -23,7 +23,7 @@ public abstract class InventoryCreator {
      * ****************
      * @return
      */
-    protected static ArrayList<Item> getResources(ArrayList<String> inputLines) {
+    public static ArrayList<Item> getResources(ArrayList<String> inputLines) {
         ArrayList<Item> found = new ArrayList<>();
 
         for (String rawLine : inputLines) {
@@ -69,7 +69,7 @@ public abstract class InventoryCreator {
         * ****************
      * @return
      */
-    protected static ArrayList<TeleportGateItem> getTeleportGates(ArrayList<String> inputLines){
+    public static ArrayList<TeleportGateItem> getTeleportGates(ArrayList<String> inputLines){
         ArrayList<TeleportGateItem> teles = new ArrayList<>();
 
         for (String rawLine : inputLines){

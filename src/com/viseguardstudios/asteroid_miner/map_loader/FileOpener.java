@@ -1,18 +1,52 @@
 package com.viseguardstudios.asteroid_miner.map_loader;
 
 
+import com.viseguardstudios.asteroid_miner.model.GameManager;
+import com.viseguardstudios.asteroid_miner.model.Player;
+import com.viseguardstudios.asteroid_miner.model.Scene;
+import jdk.jfr.Label;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class FileOpener {
-    File file;
-    Scanner input;
-    ArrayList<String> commands;
+    private static File file;
+    private static Scanner input;
+    private static ArrayList<String> commands;
 
-    public FileOpener(String filePath) {
+    public static Scene scene = new Scene();
+    public static GameManager manager = new GameManager();
+
+    private static List<Player> players = new ArrayList<>();
+
+    public static void addPlayer(Player player){
+
+        // TODO azonos nevű playerek ne lehessenek benne
+       if (!players.contains(player)){
+           players.add(player);
+       }
+    }
+
+    /**
+     * Visszaadja az első ilyen nevű playert. NE LEGYEN TÖBB EGYFORMA NEVŰ!
+     * @param name
+     * @return
+     */
+    public static Player getPlayerByName(String name){
+
+        for (Player p : players) {
+            if(p.getName().equals(name)){
+                return p;
+            }
+        }
+    }
+
+    @Label("Important")
+    /**
+     * Fájl beolvasás előkészítése, FILEOPENER HASZNÁLATA ELŐTT FUTTATNI KELL
+     */
+    public static void build(String filePath) {
         commands = new ArrayList<>();
         file = new File(filePath);
         try {
@@ -22,7 +56,7 @@ public class FileOpener {
         }
     }
     //loads and parse files to make commands (heavily rely on the correction of the user input)
-    public void loadFile() {
+    public static void loadFile() {
         while (input.hasNext()) {
             String nextLine = input.nextLine();
             commands.add(nextLine); 

@@ -9,7 +9,17 @@ import java.util.ArrayList;
 
 public class InfInventoryCreator extends InventoryCreator {
 
-    public static InfiniteInventory createAstInvertory(ArrayList<String> inputLines){
+    /**
+     * Létrehoz egy aszteroida tárhelyet.
+     * @param inputLines
+     * ******
+     * {ufoInventory}
+     * ...
+     * {/ufoInventory}
+     * ******
+     * @return
+     */
+    public static InfiniteInventory createAstInventory(ArrayList<String> inputLines){
         InfiniteInventory inventory = new InfiniteInventory(); //TODO kell foglalkozni, ha van item?
         ArrayList<Item> items = InventoryCreator.getResources(inputLines); //itt siman at lehet adni modisitas nelkül
         for (Item item: items) {

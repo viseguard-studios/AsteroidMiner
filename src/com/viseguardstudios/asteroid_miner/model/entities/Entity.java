@@ -11,6 +11,22 @@ public abstract class Entity {
     protected String name;
 
     /**
+     * Név lekérdezése
+     * @return
+     */
+    public String getName(){
+        return new String(name);
+    }
+
+    /**
+     * Név átállítása
+     * @param name
+     */
+    public void setName(String name){
+        this.name = name;
+    }
+
+    /**
      * Default constructor
      */
     public Entity() {

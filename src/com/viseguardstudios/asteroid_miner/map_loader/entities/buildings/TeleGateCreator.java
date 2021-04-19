@@ -26,7 +26,7 @@ public class TeleGateCreator extends BuildingCreator {
      * @return
      */
     public static TeleportGate createTeleportGate(String rawLine, Asteroid home){
-        String name = "default"; //TODO kell-e név a teleportkapunak?
+        String name = "default";
         int ID =-1;
         //nev
         String param = FileOpener.getPropValue(rawLine,"name");
@@ -37,7 +37,7 @@ public class TeleGateCreator extends BuildingCreator {
         if(param!=null){
             ID = Integer.parseInt(param);
         }
-        return new TeleportGate(home,ID); //TODO ID-K HOGYAN???
+        return new TeleportGate(home,name,ID); //TODO ID-K HOGYAN???
 
     }
 }

@@ -32,7 +32,7 @@ public class RobotCreator extends VesselCreator {
      */
     public static Robot createRobot(String rawLine, Asteroid home) throws Exception {
         String name = "default";
-        String player = null;
+        String playerName = null;
         boolean isHidden = false; //alapértelmezetten nem bújtunk el
         String param = FileOpener.getPropValue(rawLine,"name");
         if (param!=null){
@@ -40,7 +40,7 @@ public class RobotCreator extends VesselCreator {
         }
         param = FileOpener.getPropValue(rawLine,"player");
         if (param!=null){
-            player =  param;
+            playerName =  param;
         }
         else {
             throw new Exception("Robot without assigned player found!");
@@ -50,9 +50,10 @@ public class RobotCreator extends VesselCreator {
             isHidden = FileOpener.getBoolValue(param);
         }
 
-        Player owner = FileOpener.getPlayer(player); //TODO HOGY KÉRDEZZÜK LE A PLAYERT?
-        Robot robot = new Robot(owner,home);
-        robot.setHidden(isHidden);
+        Player owner = FileOpener.getPlayerByName(playerName);
+        Robot robot = new Robot(owner,home,name);
+        if(isHidden)
+            robot.Hide();
         return robot;
 
     }

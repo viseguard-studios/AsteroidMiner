@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class SpaceShipInventoryCreator extends InventoryCreator {
 
+    @Deprecated
     public static SSInventory createSSInventory(ArrayList<String> inputLines) throws Exception {
 
         // Nyersanyagok betöltése
@@ -41,7 +42,7 @@ public class SpaceShipInventoryCreator extends InventoryCreator {
         if(ids[0]==-1||ids[1]==-1) throw new Exception("End of telegates describer not found.");
 
         ArrayList<String> rawTeles = new ArrayList<String>(inputLines.subList(ids[0],ids[1]+1));
-        ArrayList<TeleportGateItem> teles = getTeleportGates(inputLines);
+        ArrayList<TeleportGateItem> teles = getTeleportGates(rawTeles);
 
         for (TeleportGateItem tele:teles) {
             inventory.insertGate(tele);

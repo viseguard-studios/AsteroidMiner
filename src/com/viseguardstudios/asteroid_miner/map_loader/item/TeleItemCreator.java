@@ -18,6 +18,6 @@ public class TeleItemCreator extends ItemCreator {
     if(param!=null){
         ID = Integer.parseInt(param);
     }
-    return new TeleportGateItem(ID); //TODO ID-K HOGYAN???
+    return new TeleportGateItem(ID);
     }
 }

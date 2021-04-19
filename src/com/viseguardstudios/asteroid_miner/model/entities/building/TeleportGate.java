@@ -27,7 +27,8 @@ public class TeleportGate extends Building {
      * @param home hova kerüljön
      * @param pairID pár id-je
      */
-    public TeleportGate(Asteroid home, int pairID) {
+    public TeleportGate(Asteroid home,String name, int pairID) {
+        this.name = name;
         this.pairID = pairID;
         this.currentAsteroid = home;
         home.AddBuilding(this);

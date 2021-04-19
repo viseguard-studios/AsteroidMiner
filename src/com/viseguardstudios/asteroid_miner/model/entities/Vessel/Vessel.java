@@ -20,6 +20,8 @@ public abstract class Vessel extends MovableEntity {
         isHidden = false;
     }
 
+
+
     /**
      * Ha jelenleg el van bújva az aszteroidájában, igaz, ellenkező esetben hamis.
      */
