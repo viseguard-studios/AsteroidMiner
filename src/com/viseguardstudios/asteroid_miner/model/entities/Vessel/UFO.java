@@ -17,6 +17,17 @@ public class UFO extends Vessel{
         inventory = new InfiniteInventory();
     }
 
+    /**
+     * Konstruktor névvel.
+     *
+     **/
+    public UFO(Asteroid a, String name) {
+        super(a);
+        this.name = name;
+        this.owner = null;
+        inventory = new InfiniteInventory();
+    }
+
     @Override
     public AsteroidPlaces getPlace() {
         return AsteroidPlaces.Vessel;

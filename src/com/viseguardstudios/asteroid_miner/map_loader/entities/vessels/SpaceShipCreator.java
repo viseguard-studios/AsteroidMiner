@@ -91,8 +91,6 @@ public class SpaceShipCreator extends VesselCreator {
             spaceShip.getInventory().insertGate(tele);
         }
 
-
-
         return spaceShip;
 
 
