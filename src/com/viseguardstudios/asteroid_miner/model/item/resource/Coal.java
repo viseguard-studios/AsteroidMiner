@@ -19,4 +19,9 @@ public class Coal extends Resource {
             return false;
     }
 
+    @Override
+    public String getName() {
+        return "Coal";
+    }
+
 }

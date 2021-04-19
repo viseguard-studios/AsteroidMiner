@@ -28,4 +28,5 @@ public abstract class Item {
     public abstract boolean satisfies(Item item);
 
 
+    public abstract String getName();
 }

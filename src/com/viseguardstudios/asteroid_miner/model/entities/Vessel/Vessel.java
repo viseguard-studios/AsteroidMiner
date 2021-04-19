@@ -4,6 +4,8 @@ import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.MovableEntity;
+import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
+import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**
@@ -15,7 +17,7 @@ public abstract class Vessel extends MovableEntity {
      * Default constructor
      */
     public Vessel(Asteroid a) {
-        a.Arrive(this);
+        a.arrive(this);
         currentAsteroid = a;
         isHidden = false;
     }
@@ -28,83 +30,35 @@ public abstract class Vessel extends MovableEntity {
     private boolean isHidden;
 
     /**
-     * Az aktuális tartózkodási helyének (aszteroida) tárolására szolgál.
-     */
-    protected Asteroid currentAsteroid;
-
-    /**
      * Tárolja, hogy melyik játékos irányítja az járművet.
      */
     protected Player owner;
 
     /**
-     * Az osztály konstruktora, beállítja az őt kezelő játékost illetve aszteroidát.
-     * @param p 
-     * @param a 
-     * @return
-     */
-    public Vessel Vessel(Player p, Asteroid a) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
      * Belebújik az adott aszteroidába, ha van benne elegendő hely. Ha nincsen, az aszteroida felszínén marad.
      */
     public void Hide() {
-        // TODO implement here
-
-        Logger.log("Check if it is not hidden");
         if(!isHidden){
-            Logger.functionCalled("currentAsteroid.Hide(this);");
             var canHide = currentAsteroid.Hide(this);
-            Logger.returned();
             isHidden = canHide;
         }
-        else { Logger.lognl("Is already hidden, nothing more");}
     }
 
     /**
      * Fúr egy egységnyit az aszteroida köpenyéből, ha még nincs teljesen átfúrva. Ha át van fúrva, nem történik művelet.
      */
     public void Drill() {
-        // TODO implement here
-
-        Logger.functionCalled("currentAsteroid.Drill();");
         currentAsteroid.Drill();
-        Logger.returned();
     }
 
     /**
-     * Az jármű átlép egy szomszédos aszteroidára.
-     * @param to
+     * Bányászat, ha lehetséges
      */
-    public void Move(Asteroid to) {
-        // TODO implement here
-
-        Logger.functionCalled("a.ReachableAsteroids()");
-        var n = currentAsteroid.ReachableAsteroids();
-        Logger.returned();
-
-        Logger.lognl("Check if n has to: ");
-        if(n.contains(to)){
-            Logger.lognl("It has!");
-
-            {//Abstract
-
-                Logger.functionCalled("currentAsteroid.Depart(this);");
-                this.currentAsteroid.Depart(this);
-                Logger.returned();
-
-                Logger.functionCalled("to.Arrive(this);");
-                to.Arrive(this);
-                Logger.returned();
-
-            }
-
-        }
-        else {
-            Logger.lognl("It doesn't :(");
+    public void Mine(){
+        if(!isHidden){
+            Item mined = currentAsteroid.Mine();
+            if(mined != null)
+                this.getInventory().insertItem(mined);
         }
     }
 
@@ -117,33 +71,20 @@ public abstract class Vessel extends MovableEntity {
     /**
      * Felrobban  a jármű (egy aszteroida robbanásának hatására).
      */
-    public void Explode() {
-        // TODO implement here
+    public void explode() {
+        scene.removeEntity(this);
     }
 
     /**
      * A jármű kibújik az aszteroida magjából, ha el volt bújva benne. Ha nem, nem történik művelet.
      */
     public void ExitHiding() {
-        // TODO implement here
-
-        Logger.lognl("Check if is hidden");
         if(isHidden){
-            Logger.functionCalled("currentAsteroid.Exit(this)");
             currentAsteroid.Exit(this);
-            Logger.returned();
-            Logger.lognl("Set isHidden statement to false");
             isHidden = false;
-        }
-        else {
-            Logger.lognl("Is not hidden, nothing more");
         }
     }
 
-    /**
-     * A jelenlegi aszeroida ezen keresztül szól a telep/robot-nak, hogy felrobbant.
-     */
-    public abstract void AsteroidExploded();
 
     /**
      * Örökölt függvény. Napvihar esetén hívódik meg.
@@ -151,9 +92,7 @@ public abstract class Vessel extends MovableEntity {
      */
     public void SolarFlare() {
         if(!isHidden){
-            Logger.log("this.Die();");
-            this.Die();
-            Logger.returned();
+            explode();
         }
     }
 
@@ -173,13 +112,6 @@ public abstract class Vessel extends MovableEntity {
         owner = p;
     }
 
-    /**
-     * Megsemmisül az adott űrjármú.
-     */
-    public void Die(){
-    //todo
-    }
-
     public boolean getHidden(){
         return isHidden;
     }
@@ -188,10 +120,6 @@ public abstract class Vessel extends MovableEntity {
         this.isHidden = hidden;
     }
 
-    /**
-     * Az aszteroida getter-e
-     * @return
-     */
-    public Asteroid getCurrentAsteroid() { return currentAsteroid;}
+    public abstract IInventory getInventory();
 
 }

@@ -2,6 +2,7 @@ package com.viseguardstudios.asteroid_miner.commands;
 
 import com.viseguardstudios.asteroid_miner.commands.cmds.HelpCmd;
 import com.viseguardstudios.asteroid_miner.commands.cmds.StartgameCmd;
+import com.viseguardstudios.asteroid_miner.commands.cmds.StatusCmd;
 
 import java.util.*;
 
@@ -20,6 +21,7 @@ public class CommandExecutor {
     private void registerCommands(){
         registerCommand(new StartgameCmd());
         registerCommand(new HelpCmd());
+        registerCommand(new StatusCmd());
     }
 
     public void registerCommand(Command cmd){

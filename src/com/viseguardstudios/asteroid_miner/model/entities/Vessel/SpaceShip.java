@@ -19,7 +19,6 @@ public class SpaceShip extends Vessel {
     public SpaceShip(Asteroid a) {
         super(a);
         inventory = new SSInventory();
-
     }
 
     public SpaceShip(Asteroid a, Player owner, String name) {
@@ -30,41 +29,17 @@ public class SpaceShip extends Vessel {
     }
 
     /**
-     * Az utoljára lehelyezett kapu referenciája. Arra használjuk hogy a telepes által lerakott kapu párokat össze lehessen kötni.
-     */
-    private TeleportGate lastPlacedGate;
-
-    /**
      * A telepes által folyamatosan hordozott raktár.
      */
     private SSInventory inventory;
 
 
     /**
-     * Az osztály konstruktora, beállítja az őt kezelő játékost illetve aszteroidát.
-     * @param p 
-     * @param a 
-     * @return
-     */
-    public SpaceShip SpaceShip(Player p, Asteroid a) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
      * A telepesek által az aszteroida magjában elfoglalt hely nagyságát adja vissza.
      * @return
      */
     public int GetHidingSpaceRequirement() {
-        // TODO implement here
         return 1;
-    }
-
-    /**
-     * Teljesen átfúrt, nem üres magú aszteroidán való tartózkodás esetén a telepes egy egységet kibányászik az ott található nyersanyagból. Az így keletkező elem a telepes raktárába kerül.  Ha sikertelen a művelet (nem teljesülnek a feltételek), nem történik művelet.
-     */
-    public void Mine() {
-        // TODO implement here
     }
 
     /**
@@ -72,16 +47,9 @@ public class SpaceShip extends Vessel {
      * @param recipe
      */
     public void Craft(Recipe recipe) {
-
-        Logger.functionCalled("cancraft = recipe.CanCraft(ss)");
         boolean cancraft = recipe.canCraft(this);
-        Logger.returned();
-
-        if (cancraft) {
-            Logger.functionCalled("recipe.Craft(ss)");
+        if (cancraft)
             recipe.craft(this);
-            Logger.returned();
-        }
     }
 
     /**
@@ -90,23 +58,12 @@ public class SpaceShip extends Vessel {
      * @return
      */
     public boolean PlaceItem(Item i) {
-        // TODO implement here
-
-        Logger.functionCalled("currentAsteroid.PlaceItem(i)");
         var success = currentAsteroid.PlaceItem(i);
-        Logger.returned();
-        Logger.lognl("Does the inserting succeed?");
         if(success){
-            Logger.lognl("Yes");
-            Logger.functionCalled("RemoveItem(i)");
             inventory.removeItem(i);
-            Logger.returned();
             return true;
         }
-        else {
-            Logger.lognl("No");
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -114,24 +71,14 @@ public class SpaceShip extends Vessel {
      * @param i
      */
     public void ActivateItem(Item i) {
-        // TODO implement here
-    }
-
-    /**
-     * A jelenlegi aszeroida ezen keresztül szól a telep/robot-nak, hogy felrobbant.
-     */
-    public void AsteroidExploded(){
-
+        i.activate(inventory);
     }
 
     @Override
-    public void RoundEnd(boolean closeToSun) {
-
-    }
-
-    @Override
-    public void SolarFlare() {
-
+    public void explode() {
+        super.explode();
+        inventory.explode();
+        scene.GetManager().removeSettler(this);
     }
 
     /**
