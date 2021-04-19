@@ -73,6 +73,21 @@ public class GameManager {
         //TODO kell-e név?
     }
 
+    /**
+     * Visszaadja az első ilyen nevű playert. NE LEGYEN TÖBB EGYFORMA NEVŰ!
+     * @param name
+     * @return
+     */
+    public Player getPlayerByName(String name){
+
+        for (Player p : allPlayers) {
+            if(p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * A játékmenet inicializálásáért felel.
@@ -107,6 +122,14 @@ public class GameManager {
      */
     public void AddPlayer(Player p) {
         // TODO implement here
+    }
+
+    /**
+     * Aszteroida hozzáadása
+     * @param asteroid
+     */
+    public void AddAsteroid(Asteroid asteroid){
+        asteroids.add(asteroid);
     }
 
     /**

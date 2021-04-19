@@ -18,31 +18,6 @@ public class FileOpener {
     public static Scene scene = new Scene();
     public static GameManager manager = new GameManager();
 
-    private static List<Player> players = new ArrayList<>();
-
-    public static void addPlayer(Player player){
-
-        // TODO azonos nevű playerek ne lehessenek benne
-       if (!players.contains(player)){
-           players.add(player);
-       }
-    }
-
-    /**
-     * Visszaadja az első ilyen nevű playert. NE LEGYEN TÖBB EGYFORMA NEVŰ!
-     * @param name
-     * @return
-     */
-    public static Player getPlayerByName(String name){
-
-        for (Player p : players) {
-            if(p.getName().equals(name)){
-                return p;
-            }
-        }
-        return null;
-    }
-
     @Label("Important")
     /**
      * Fájl beolvasás előkészítése, FILEOPENER HASZNÁLATA ELŐTT FUTTATNI KELL

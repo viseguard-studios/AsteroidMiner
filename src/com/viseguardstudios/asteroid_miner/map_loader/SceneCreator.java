@@ -22,7 +22,7 @@ public class SceneCreator {
 
     public static Scene createSceneFromFile(ArrayList<String> inputLines){
         Scene scene = new Scene();
-        scene.setManager(GMCreator.createManager(inputLines,scene));
+        GMCreator.createManager(inputLines,scene);
 
         return scene;
     }

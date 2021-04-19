@@ -22,6 +22,12 @@ public class AsteroidCreator extends EntityCreator {
         scene.AddEntity(new Asteroid());
     }
 
+    /**
+     * Aszteroida létrehozása. Ezután szükséges a GM-ben elhelyezés és még a szomszédságok beállítása.
+     * @param rawLines
+     * @param scene
+     * @return
+     */
     public static Asteroid createAsteroid(ArrayList<String> rawLines, Scene scene){
         String describer = rawLines.get(0);
         String name = "default";
@@ -106,7 +112,7 @@ public class AsteroidCreator extends EntityCreator {
         }
         child = new ArrayList<String>(rawLines.subList(ids[0],ids[1]+1));
         try {
-            VesselCreator.createVessels(child,asteroid);// Létrehozza és az aszteroidára pakolja
+            VesselCreator.createVessels(child,scene.GetManager(),asteroid);// Létrehozza és az aszteroidára pakolja
         } catch (Exception e) {
             e.printStackTrace();
         }

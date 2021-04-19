@@ -1,7 +1,9 @@
 package com.viseguardstudios.asteroid_miner.map_loader.entities.vessels;
 
 import com.viseguardstudios.asteroid_miner.map_loader.FileOpener;
+import com.viseguardstudios.asteroid_miner.map_loader.GMCreator;
 import com.viseguardstudios.asteroid_miner.map_loader.entities.VesselCreator;
+import com.viseguardstudios.asteroid_miner.model.GameManager;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
@@ -30,7 +32,7 @@ public class RobotCreator extends VesselCreator {
      * @return
      * @throws Exception
      */
-    public static Robot createRobot(String rawLine, Asteroid home) throws Exception {
+    public static Robot createRobot(String rawLine, GameManager manager ,Asteroid home) throws Exception {
         String name = "default";
         String playerName = null;
         boolean isHidden = false; //alapértelmezetten nem bújtunk el
@@ -50,7 +52,7 @@ public class RobotCreator extends VesselCreator {
             isHidden = FileOpener.getBoolValue(param);
         }
 
-        Player owner = FileOpener.getPlayerByName(playerName);
+        Player owner = manager.getPlayerByName(playerName);
         Robot robot = new Robot(owner,home,name);
         if(isHidden)
             robot.Hide();

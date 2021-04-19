@@ -5,6 +5,7 @@ import com.viseguardstudios.asteroid_miner.map_loader.entities.vessels.RobotCrea
 import com.viseguardstudios.asteroid_miner.map_loader.entities.vessels.SpaceShipCreator;
 import com.viseguardstudios.asteroid_miner.map_loader.entities.vessels.UfoCreator;
 import com.viseguardstudios.asteroid_miner.map_loader.item.*;
+import com.viseguardstudios.asteroid_miner.model.GameManager;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
@@ -31,7 +32,7 @@ public abstract class VesselCreator extends MovableEntityCreator{
      * ****************
      * @return
      */
-    public static void createVessels(ArrayList<String> inputLines, Asteroid home) throws Exception {
+    public static void createVessels(ArrayList<String> inputLines, GameManager manager, Asteroid home) throws Exception {
         String rawLine = null;
         for (int i = 0; i<inputLines.size(); i++) {
             rawLine = inputLines.get(i);
@@ -44,7 +45,7 @@ public abstract class VesselCreator extends MovableEntityCreator{
                         break;
                     case "robot":
                         try {
-                            RobotCreator.createRobot(rawLine, home);
+                            RobotCreator.createRobot(rawLine,manager, home);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -69,7 +70,7 @@ public abstract class VesselCreator extends MovableEntityCreator{
                         }
                         if(ids[0]==-1||ids[1]==-1) throw new Exception("End of SpaceShip describer not found.");
                         rawDescriber = new ArrayList<String>(inputLines.subList(ids[0],ids[1]+1));
-                        SpaceShipCreator.createSpaceShip(rawDescriber,home);
+                        SpaceShipCreator.createSpaceShip(rawDescriber,manager,home);
                         break;
                 }
             }
