@@ -207,7 +207,7 @@ public class GameManager {
         for (int i = 0; i < 10; i++) {
 
             var res = GenerateNewResource();
-            var count = rnd.nextInt(5);
+            var count = rnd.nextInt(5)+1;
 
             //Create pos
             var pos = new Vector2(rnd.nextInt(10), rnd.nextInt(10));
@@ -215,7 +215,7 @@ public class GameManager {
             var a = new Asteroid(res,count);
             a.setPos(pos);
             //a.setResource(res);
-            a.setCrustSize(rnd.nextInt(3));
+            a.setCrustSize(rnd.nextInt(3)+1);
 
             a.setName("A_"+i);
             scene.addEntity(a);

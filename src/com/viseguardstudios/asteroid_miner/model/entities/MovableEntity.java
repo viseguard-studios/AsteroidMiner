@@ -24,6 +24,7 @@ public abstract class MovableEntity extends Entity {
         currentAsteroid.depart(this);
         to.arrive(this);
         this.pos = to.getPos();
+        this.currentAsteroid = to;
     }
 
     /**
