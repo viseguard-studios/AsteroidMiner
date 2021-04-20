@@ -51,7 +51,9 @@ public class TeleportGate extends Building {
     */
 
     @Override
-    public void RoundEnd(boolean closeToSun) {}
+    public void roundEnd(boolean closeToSun) {
+        super.roundEnd(closeToSun);
+    }
 
     /**
      * Napszél éri a kaput, aminek hatására egy véletlenszerű, szomszédos aszteroidára mozog át.

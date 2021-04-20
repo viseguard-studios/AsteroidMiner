@@ -123,8 +123,8 @@ public abstract class Vessel extends MovableEntity {
      * Akkor hívódik meg, ha az adott körben már minden játékos lépett. A robotok ezt használják például a mozgásra.
      * @param closeToSun
      */
-    public void RoundEnd(boolean closeToSun) {
-        // TODO implement here
+    public void roundEnd(boolean closeToSun) {
+        super.roundEnd(closeToSun);
     }
 
     /**

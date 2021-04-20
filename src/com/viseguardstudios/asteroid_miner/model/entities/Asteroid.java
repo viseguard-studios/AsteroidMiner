@@ -145,7 +145,8 @@ public class Asteroid extends Entity {
      * @param closeToSun
      */
     @Override
-    public void RoundEnd(boolean closeToSun) {
+    public void roundEnd(boolean closeToSun) {
+        super.roundEnd(closeToSun);
         inventory.roundEnd();
         if(closeToSun)
             inventory.nearSun(this);

@@ -35,9 +35,11 @@ public abstract class Entity {
      * Akkor hívódik meg, ha az adott körben már minden játékos lépett. A robotok ezt használják például a mozgásra.
      * @param closeToSun
      */
-    public void RoundEnd(boolean closeToSun){
+    public void roundEnd(boolean closeToSun){
         turnUsed = false;
     };
+
+
 
     /**
      * A játéktér getter-e.
@@ -62,6 +64,8 @@ public abstract class Entity {
     }
 
     public abstract void explode();
+
+
 
     /**
      * További getterek, setterek
