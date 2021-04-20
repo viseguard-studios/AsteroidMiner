@@ -8,10 +8,6 @@ import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
  */
 public class Coal extends Resource {
 
-    public Coal(){
-        type = "Coal";
-    }
-
     /**
      * Meghatározza, hogy az átadott Item használható-e a jelenlegi helyett.
      */

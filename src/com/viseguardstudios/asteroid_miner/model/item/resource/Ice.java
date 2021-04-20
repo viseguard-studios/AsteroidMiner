@@ -15,7 +15,6 @@ public class Ice extends Resource {
      * Konstruktor
      */
     public Ice(){
-        type = "Ice";
         evaporated = false;
     }
 

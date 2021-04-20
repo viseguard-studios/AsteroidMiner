@@ -32,7 +32,7 @@ public class MineCmd extends Command {
                         if(mined != null){
                             var ast = v.getCurrentAsteroid();
                             System.out.println(ast.getName()+" mined ");
-                            System.out.println("* Item: " + mined.getType());
+                            System.out.println("* Item: " + mined.getName());
                         }
                         else {
                             System.out.println("can't mine");

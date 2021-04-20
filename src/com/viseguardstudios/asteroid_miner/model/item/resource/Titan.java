@@ -7,10 +7,6 @@ import com.viseguardstudios.asteroid_miner.model.item.Item;
  */
 public class Titan extends Resource {
 
-    public Titan(){
-        type = "Titan";
-    }
-
     /**
      * Meghatározza, hogy az átadott Item használható-e a jelenlegi helyett.
      */
