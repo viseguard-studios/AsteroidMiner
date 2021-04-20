@@ -77,7 +77,7 @@ public class Engine {
      * Játékmenetek befejezése.
      */
     public void EndGame() {
-        // TODO implement here
+        System.out.println("Game ended");
     }
 
 

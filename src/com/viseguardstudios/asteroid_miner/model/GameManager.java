@@ -204,7 +204,7 @@ public class GameManager {
      * Aktuális játék befejezése.
      */
     public void endGame() {
-        // TODO implement here
+        System.out.println("Current game is over");
     }
 
 
