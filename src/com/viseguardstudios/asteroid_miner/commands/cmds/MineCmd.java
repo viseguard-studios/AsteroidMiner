@@ -7,6 +7,7 @@ import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
+import java.util.List;
 import java.util.Set;
 
 public class MineCmd extends Command {
@@ -23,7 +24,7 @@ public class MineCmd extends Command {
         }
 
         GameManager gm = Engine.getInstance().getScene().GetManager();
-        Set<Player> players = gm.getAllPlayers();
+        List<Player> players = gm.getAllPlayers();
         for (Player player : players) {
             if(player == gm.getCurrentPlayer()){
                 for (Vessel v : player.getOwnedVessels()) {

@@ -53,7 +53,7 @@ public class Scene {
     /**
      * Az összes entitás RoundEnd() metódusát meghívja, befejezi az adott kört.
      */
-    public void RoundEnded() {
+    public void roundEnded() {
         // TODO implement here
     }
 
@@ -68,7 +68,7 @@ public class Scene {
     /**
      * A napviharról szóló értesítést továbbítja az com.viseguardstudios.asteroid_miner.model.entities.Entity felé
      */
-    public void SolarFlare() {
+    public void solarFlare() {
         if (!entities.isEmpty()){
             for (Entity e : entities){
                 Logger.log("e.SolarFlare();");

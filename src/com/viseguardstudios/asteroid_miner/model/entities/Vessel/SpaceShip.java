@@ -33,7 +33,7 @@ public class SpaceShip extends Vessel {
      */
     @Override
     public boolean placeItem(Item i) {
-        var success = currentAsteroid.PlaceItem(i);
+        var success = currentAsteroid.placeItem(i);
         if(success){
             inventory.removeItem(i);
             return true;
@@ -101,7 +101,7 @@ public class SpaceShip extends Vessel {
     @Override
     public void printStatus() {
         //super.printStatus();
-        System.out.println("Turn used: ?");
+        System.out.println("Turn used: " + (turnUsed ? "true":"false"));
 
         System.out.println(currentAsteroid.getName());
 

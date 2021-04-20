@@ -6,6 +6,7 @@ import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class PlaceCmd extends Command {
             System.out.println("Not enough params");
             return;
         }
-        Set<Player> players = Engine.getInstance().getScene().GetManager().getAllPlayers();
+        List<Player> players = Engine.getInstance().getScene().GetManager().getAllPlayers();
         for(Player player : players){
             for(Vessel v : player.getOwnedVessels()){
                 if(v.getName().equals(params[2])){
