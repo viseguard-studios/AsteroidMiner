@@ -214,13 +214,13 @@ public class Asteroid extends Entity {
      * Egy adott jármű érkezik az aszteroidára, regisztrálja az ott tartózkodók közé.
      */
 
-    public void Arrive(Vessel v) {
+   /* public void Arrive(Vessel v) {
         MovableEntity.AsteroidPlaces place = v.getPlace();
         if (place == MovableEntity.AsteroidPlaces.Vessel) {
             stationed.add(v);
         }
     }
-
+*/
     public void arrive(MovableEntity v) {
         if(v.getPlace() == MovableEntity.AsteroidPlaces.Vessel) {
             if(!stationed.contains(v))
