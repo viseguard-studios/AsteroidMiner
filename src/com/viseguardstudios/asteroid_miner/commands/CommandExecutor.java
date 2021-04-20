@@ -26,6 +26,11 @@ public class CommandExecutor {
         registerCommand(new PlaceCmd());
         registerCommand(new EndturnCmd());
         registerCommand(new CraftCmd());
+        registerCommand(new PickupCmd());
+        registerCommand(new SolarDistCmd());
+        registerCommand(new SolarFlareCmd());
+        registerCommand(new NeighboursCmd());
+
     }
 
     public void registerCommand(Command cmd){
