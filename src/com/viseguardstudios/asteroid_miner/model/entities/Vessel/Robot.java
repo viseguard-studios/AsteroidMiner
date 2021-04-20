@@ -56,7 +56,7 @@ public class Robot extends Vessel {
      * Üres metódus, robot nem tud bányászni
      */
     @Override
-    public Item Mine(){
+    public Item mine(){
         return null;
     }
 

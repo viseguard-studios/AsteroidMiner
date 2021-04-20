@@ -31,7 +31,7 @@ public class SSDrillTest extends Test {
     @Override
     public void Run() {
         Logger.functionCalled("ss.Drill()");
-        ss.Drill();
+        ss.drill();
         Logger.returned();
     }
 }

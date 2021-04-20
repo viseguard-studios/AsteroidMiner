@@ -53,19 +53,28 @@ public abstract class Vessel extends MovableEntity {
     /**
      * Fúr egy egységnyit az aszteroida köpenyéből, ha még nincs teljesen átfúrva. Ha át van fúrva, nem történik művelet.
      */
-    public boolean Drill() {
-        return currentAsteroid.Drill();
+    public boolean drill() {
+        var res =currentAsteroid.Drill();
+        if(res)
+            turnUsed = true;
+        return res;
     }
 
     /**
      * Bányászat, ha lehetséges
      */
-    public Item Mine(){
+    public Item mine(){
+        if(turnUsed){
+            return null;
+        }
+
         Item mined = null;
         if(!isHidden){
             mined = currentAsteroid.Mine();
             if(mined != null)
                 this.getInventory().insertItem(mined);
+
+            turnUsed = true;
         }
         return mined;
     }

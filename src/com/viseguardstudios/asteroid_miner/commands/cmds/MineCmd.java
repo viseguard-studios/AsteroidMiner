@@ -8,7 +8,6 @@ import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 import java.util.List;
-import java.util.Set;
 
 public class MineCmd extends Command {
     @Override
@@ -29,7 +28,7 @@ public class MineCmd extends Command {
             if(player == gm.getCurrentPlayer()){
                 for (Vessel v : player.getOwnedVessels()) {
                     if (v.getName().equals(params[1])){
-                        Item mined = v.Mine();
+                        Item mined = v.mine();
                         if(mined != null){
                             var ast = v.getCurrentAsteroid();
                             System.out.println(ast.getName()+" mined ");

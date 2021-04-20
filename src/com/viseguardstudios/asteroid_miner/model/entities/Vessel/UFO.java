@@ -47,7 +47,7 @@ public class UFO extends Vessel{
 
     //Nem képes bányászni
     @Override
-    public boolean Drill() {
+    public boolean drill() {
         //Do nothing
         return false;
     }
