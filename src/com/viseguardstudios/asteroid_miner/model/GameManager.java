@@ -56,9 +56,35 @@ public class GameManager {
     private boolean gameEnded;
 
     /**
-     * 
+     * Kör végén lesz-e napkitörés
      */
     private boolean CreateStormOn;
+
+    /**
+     * Napkitörés középpontja
+     */
+    private Vector2 solarStormCenter;
+
+    /**
+     * Napkitörés középpontjának állítása
+     * @param center
+     */
+    public void setSolarStormCenter(Vector2 center){
+        solarStormCenter = center;
+    }
+
+    /**
+     * Napkitörés sugara
+     */
+    private int solarStromRadius;
+
+    /**
+     * Napkitörés sugarának állítása
+     * @param radius
+     */
+    public void setSolarStromRadius(int radius){
+        solarStromRadius = radius;
+    }
 
     /**
      * A játék telepeseinek tárolója.
@@ -298,6 +324,7 @@ public class GameManager {
     public void QueueSolarStorm() {
         CreateStormOn = true;
     }
+
 
 
 
