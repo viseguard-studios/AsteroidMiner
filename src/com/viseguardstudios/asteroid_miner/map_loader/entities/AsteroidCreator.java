@@ -87,6 +87,8 @@ public class AsteroidCreator extends EntityCreator {
         }
         Asteroid asteroid = new Asteroid(scene, name, pos,maxHidingSpace,coreSize,crustSize,exploded,revealed,visted);
 
+        scene.addEntity(asteroid);
+
         // GYERMEKEK
         // inventory
         int[] ids = {-1,-1};

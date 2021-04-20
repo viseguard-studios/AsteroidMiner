@@ -17,7 +17,7 @@ public class TeleGateCreator extends BuildingCreator {
     @Deprecated
     @Override
     public void create() {
-        scene.addEntity(new TeleportGate(1)); //TODO: NEW id
+        scene.addEntity(new TeleportGate(1));
     }
 
     /**
@@ -37,7 +37,9 @@ public class TeleGateCreator extends BuildingCreator {
         if(param!=null){
             ID = Integer.parseInt(param);
         }
-        return new TeleportGate(home,name,ID); //TODO ID-K HOGYAN???
+        TeleportGate tg = new TeleportGate(home,name,ID);
+        home.GetScene().addEntity(tg);
+        return tg;
 
     }
 }

@@ -338,6 +338,7 @@ public class GameManager {
 
     public void addSettler(SpaceShip s) {
         settlers.add(s);
+        scene.addEntity(s);
     }
 
     public void removeSettler(SpaceShip spaceShip) {
