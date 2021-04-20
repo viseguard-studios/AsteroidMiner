@@ -21,10 +21,15 @@ public abstract class MovableEntity extends Entity {
      * Az entitás mozgását valósítja meg: eltávolítás az aktuális helyről, hozzáadás az újhoz, pozíció beállítása
      */
     public void move(Asteroid to){
+        if(turnUsed){
+            return;
+        }
         currentAsteroid.depart(this);
         to.arrive(this);
         this.pos = to.getPos();
         this.currentAsteroid = to;
+
+        turnUsed = true;
     }
 
     /**

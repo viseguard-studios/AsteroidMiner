@@ -6,6 +6,7 @@ import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.MovableEntity;
 import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
+import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**
@@ -53,19 +54,31 @@ public abstract class Vessel extends MovableEntity {
     /**
      * Fúr egy egységnyit az aszteroida köpenyéből, ha még nincs teljesen átfúrva. Ha át van fúrva, nem történik művelet.
      */
-    public boolean Drill() {
-        return currentAsteroid.Drill();
+    public boolean drill() {
+        if(turnUsed)
+            return false;
+
+        var res =currentAsteroid.Drill();
+        if(res)
+            turnUsed = true;
+        return res;
     }
 
     /**
      * Bányászat, ha lehetséges
      */
-    public Item Mine(){
+    public Item mine(){
+        if(turnUsed){
+            return null;
+        }
+
         Item mined = null;
         if(!isHidden){
             mined = currentAsteroid.Mine();
             if(mined != null)
                 this.getInventory().insertItem(mined);
+
+            turnUsed = true;
         }
         return mined;
     }
@@ -113,6 +126,11 @@ public abstract class Vessel extends MovableEntity {
     public void RoundEnd(boolean closeToSun) {
         // TODO implement here
     }
+
+    /**
+     * Craft-oláshoz szükséges, csak Spaceship tud craftolni
+     */
+    public abstract boolean Craft(Recipe recipe);
 
     /**
      * Beállítja,hogy melyik játékos a tulajdonosa az űrjárműnek.

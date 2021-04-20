@@ -7,7 +7,6 @@ import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
-import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.util.Namer;
 import com.viseguardstudios.asteroid_miner.util.RandomCollection;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
@@ -24,10 +23,6 @@ public class GameManager {
     Random rnd;
     boolean deterministic;
 
-    /**
-     * The player who is taking the turn currently
-     */
-    private Player currentPlayer;
 
     /**
      * Az aktuálisan irányítható jármű (akit a soron lévő játékos jelenleg irányít).
@@ -42,7 +37,13 @@ public class GameManager {
     /**
      * A játék játékosainak listája.
      */
-    private Set<Player> allPlayers = new HashSet<>();
+    private List<Player> allPlayers = new ArrayList<>();
+
+    /**
+     * The player who is taking the turn currently
+     */
+    private Player currentPlayer;
+    private int playerID;
 
     /**
      * A játékban szereplő aszteroidák listája.
@@ -119,13 +120,8 @@ public class GameManager {
         scene = sc;
     }
 
-    /**
-
-     * Új játékos hozzáadása.
-     * @param p
-     */
-    public void AddPlayer(Player p) {
-        // TODO implement here
+    public Scene getManagedScene() {
+        return scene;
     }
 
     /**
@@ -140,16 +136,28 @@ public class GameManager {
      * Új játék indításáért felel.
      */
     public void startGame() {
-        // TODO implement here
+        currentPlayer = allPlayers.get(0);
+        playerID = 0;
     }
 
     /**
      * Egy játékos aktuális köre - ekkor van lehetősége irányítani a járműveit egyesével.
      */
     public void takeTurn() {
-        Logger.log("scene.SolarFlare()");
-        scene.SolarFlare();
-        Logger.returned();
+        if(this.CreateStormOn){
+            Vector2 pos = new Vector2(rnd.nextInt(10),rnd.nextInt(10));
+            int radius = rnd.nextInt(20);
+            scene.solarFlare(pos, radius);
+        }
+
+
+        scene.roundEnded();
+
+        playerID++;
+        if(playerID >= allPlayers.size())
+            playerID = 0;
+
+        currentPlayer = allPlayers.get(playerID);
     }
 
     /**
@@ -300,7 +308,7 @@ public class GameManager {
         return settlers;
     }
 
-    public Set<Player> getAllPlayers() {
+    public List<Player> getAllPlayers() {
         return allPlayers;
     }
 

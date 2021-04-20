@@ -33,12 +33,17 @@ public class MoveCmd extends Command {
             }
         }
 
-        System.out.println("Neighbours:");
-
         if (entity == null) {
             System.out.println("No such Entity");
             return;
         }
+
+        if(entity.turnUsed){
+            System.out.println("Turn is already used");
+            return;
+        }
+
+        System.out.println("Neighbours:");
 
         List<Asteroid> reachableAsteroids = entity.getCurrentAsteroid().ReachableAsteroids();
         for (int i = 0, reachableAsteroidsSize = reachableAsteroids.size(); i < reachableAsteroidsSize; i++) {

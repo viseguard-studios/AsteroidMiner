@@ -12,13 +12,12 @@ public abstract class Entity {
 
     protected String name;
 
-
     /**
      * A játéktér tárolója.
      */
     protected Scene scene;
 
-    //protected Asteroid currentAsteroid;
+    public boolean turnUsed = false;
 
     public Vector2 pos;
 
@@ -29,7 +28,6 @@ public abstract class Entity {
         this.name = name;
     }
 
-
     public Entity(){ }
 
 
@@ -37,7 +35,9 @@ public abstract class Entity {
      * Akkor hívódik meg, ha az adott körben már minden játékos lépett. A robotok ezt használják például a mozgásra.
      * @param closeToSun
      */
-    public abstract void RoundEnd(boolean closeToSun);
+    public void RoundEnd(boolean closeToSun){
+        turnUsed = false;
+    };
 
     /**
      * A játéktér getter-e.

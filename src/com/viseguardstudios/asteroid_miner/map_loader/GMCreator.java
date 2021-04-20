@@ -1,10 +1,13 @@
 package com.viseguardstudios.asteroid_miner.map_loader;
 
 import com.viseguardstudios.asteroid_miner.map_loader.entities.AsteroidCreator;
+import com.viseguardstudios.asteroid_miner.map_loader.entities.buildings.TeleGateCreator;
+import com.viseguardstudios.asteroid_miner.map_loader.entities.vessels.SpaceShipCreator;
 import com.viseguardstudios.asteroid_miner.model.GameManager;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ public class GMCreator {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         ArrayList<String> rawAsteroidList = new ArrayList<String>(inputLines.subList(ids[0],ids[1]+1));
 
         String describer = rawAsteroidList.get(0);
@@ -73,19 +77,17 @@ public class GMCreator {
         manager.setManagedScene(scene);
 
         for (Player p: players) {
-            manager.AddPlayer(p);
+            manager.addPlayer(p);
         }
 
         //aszteroidák
 
         List<Asteroid> asteroidsWithoutConnections = new ArrayList<>();
-
-
-
-        for (int i = 0;i<inputLines.size();i++){
-            ids = new int[]{-1,-1};
+        //TODO move to FileOpener getAllChild(inputlines, "childname") IF DOES NOT WORK
+        for (int i = 0; i<inputLines.size();i++){
+            ids = new int[]{-1,inputLines.size()};
             try {
-                ids = FileOpener.getChildLoc(inputLines,"asteroid",i);
+                ids = FileOpener.getChildLoc(inputLines, "asteroid", i);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -97,6 +99,8 @@ public class GMCreator {
             i = ids[1]+1;
         }
 
+
+
         //Todo kapcsolatok felállítása, Kész?
         try {
             ids = FileOpener.getChildLoc(inputLines,"astRelations",0);
@@ -105,13 +109,33 @@ public class GMCreator {
         }
         ArrayList<String> rawRelations = new ArrayList<String>(inputLines.subList(ids[0],ids[1]+1));
         MrConnector.createNeighborhood(asteroidsWithoutConnections,rawRelations);
-        //Todo Aszteroidák áthelyezése a GameManagerbe
+        //Asteroidák átadása a Managernek
+
+        for (Asteroid a:asteroidsWithoutConnections
+             ) {
+            manager.AddAsteroid(a);
+        }
+
+
 
         //Todo Teleportkapuk összekapcsolása
 
+
+
         //Todo Scenebe az entitások beregisztrálása
+
+        for (Asteroid a: asteroidsWithoutConnections
+             ) {
+            scene.addEntity(a);
+        }
+        //TODO other entities ?
+
+
         //Todo Seed beállítása
-        //Todo Telepesek beregisztrálása a GameManagerbe
+
+        
+        //Telepesek beregisztrálása a GameManagerbe DONE (keresd a SpaceShipCreator-ben)
+
 
         return;
     }
