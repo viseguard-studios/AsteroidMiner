@@ -468,4 +468,8 @@ Adams branch
     public List<Asteroid> getPhysicalNeighbours(){
         return neighbours;
     }
+
+    public boolean isMined() {
+        return mined;
+    }
 }

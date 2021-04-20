@@ -77,7 +77,7 @@ public class GMCreator {
         manager.setManagedScene(scene);
 
         for (Player p: players) {
-            manager.AddPlayer(p);
+            manager.addPlayer(p);
         }
 
         //aszteroidák

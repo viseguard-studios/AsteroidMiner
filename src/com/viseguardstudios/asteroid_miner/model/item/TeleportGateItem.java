@@ -15,6 +15,7 @@ public class TeleportGateItem extends Item {
      * Konstruktor id beállítással
      */
     public TeleportGateItem(int i){
+        type = "Gate";
         id = i;
     }
 

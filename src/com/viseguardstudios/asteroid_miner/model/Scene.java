@@ -2,6 +2,7 @@ package com.viseguardstudios.asteroid_miner.model;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 import java.util.*;
 
@@ -10,14 +11,14 @@ import java.util.*;
  */
 public class Scene {
 
-    public ArrayList<Entity> getEntities() {
+    public List<Entity> getEntities() {
         return entities;
     }
 
     /**
      * A játékban szereplő összes entitás tárolója.
      */
-    protected ArrayList<Entity> entities  = new ArrayList<>();
+    protected List<Entity> entities  = new ArrayList<>();
 
     /**
      * Default constructor
@@ -53,7 +54,7 @@ public class Scene {
     /**
      * Az összes entitás RoundEnd() metódusát meghívja, befejezi az adott kört.
      */
-    public void RoundEnded() {
+    public void roundEnded() {
         // TODO implement here
     }
 
@@ -67,13 +68,16 @@ public class Scene {
 
     /**
      * A napviharról szóló értesítést továbbítja az com.viseguardstudios.asteroid_miner.model.entities.Entity felé
+     * @param pos
+     * @param radius
      */
-    public void SolarFlare() {
+    public void solarFlare(Vector2 pos, int radius) {
         if (!entities.isEmpty()){
-            for (Entity e : entities){
-                Logger.log("e.SolarFlare();");
+            for (int i = 0; i < entities.size(); i++) {
+                Entity e = entities.get(i);
+                //Logger.log("e.SolarFlare();");
                 e.SolarFlare();
-                Logger.returned();
+                //Logger.returned();
             }
         }
     }

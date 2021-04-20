@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.commands.cmds;
 
 import com.viseguardstudios.asteroid_miner.commands.Command;
+import com.viseguardstudios.asteroid_miner.model.Engine;
 
 public class EndturnCmd extends Command {
 
@@ -11,6 +12,6 @@ public class EndturnCmd extends Command {
 
     @Override
     public void Execute(String[] params) {
-            //TODO: Implement
+        Engine.getInstance().getGameManager().takeTurn();
     }
 }

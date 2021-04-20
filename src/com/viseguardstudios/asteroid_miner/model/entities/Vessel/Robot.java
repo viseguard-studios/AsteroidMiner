@@ -4,6 +4,7 @@ import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
+import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 
 /**
  * Egy speciális jármű, a robot tevékenységeit, tulajdonságait tartalmazza.
@@ -44,6 +45,16 @@ public class Robot extends Vessel {
     }
 
     /**
+     * Cannot craft
+     * @param recipe
+     * @return
+     */
+    @Override
+    public boolean Craft(Recipe recipe) {
+        return false;
+    }
+
+    /**
      * Robotnak nincs raktára
      * @return
      */
@@ -56,7 +67,7 @@ public class Robot extends Vessel {
      * Üres metódus, robot nem tud bányászni
      */
     @Override
-    public Item Mine(){
+    public Item mine(){
         return null;
     }
 

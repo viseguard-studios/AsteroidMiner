@@ -14,6 +14,7 @@ public class Uranium extends Resource {
      * Konstruktor
      */
     public Uranium(){
+        type = "Uranium";
         counter = 0;
     }
 

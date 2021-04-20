@@ -24,6 +24,25 @@ public class NeighboursCmd extends Command {
         List<Asteroid> asteroids = Engine.getInstance().getScene().GetManager().getAsteroids();
         for(Asteroid a : asteroids){
             if(a.getName().equals(params[1])){
+                System.out.println("Neighbours:");
+
+                String rType;
+
+                int number = 1;
+                for (Asteroid neighbour : a.getPhysicalNeighbours()){
+                    if(neighbour.getCrustSize() == 0){
+                        if (neighbour.isMined())
+                            rType = "Empty";
+                        else
+                            rType = neighbour.getInventory().getItems().get(0).getType();
+                    }
+                    else
+                        rType = "?";
+                    System.out.println("0" + number + " - "
+                            + neighbour.getName() + " - "
+                            + rType);
+                }
+                return;
 
             }
         }
