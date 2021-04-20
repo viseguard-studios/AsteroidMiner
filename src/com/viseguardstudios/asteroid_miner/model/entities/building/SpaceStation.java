@@ -15,6 +15,7 @@ public class SpaceStation extends Building {
      * @param a 
      */
     public SpaceStation (Asteroid a) {
+        name = "default";
         /***
          * Elhelyezzük a megfelelő aszteroidán
          */

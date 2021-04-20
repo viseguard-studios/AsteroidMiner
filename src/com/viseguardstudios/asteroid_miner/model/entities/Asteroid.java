@@ -1,11 +1,15 @@
 package com.viseguardstudios.asteroid_miner.model.entities;
 
 
+import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.building.Building;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
+import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+import com.viseguardstudios.asteroid_miner.util.Vector2;
+
 
 import java.util.*;
 
@@ -14,7 +18,40 @@ import java.util.*;
  */
 public class Asteroid extends Entity {
 
+
     /**
+     * Aszteroida létrehozása
+     * @param name
+     * @param pos
+     * @param maxHidingSpace
+     * @param coreSize
+     * @param crustSize
+     * @param exploded
+     * @param revealed
+     * @param visited
+     */
+    public Asteroid(Scene scene, String name, Vector2 pos, int maxHidingSpace, int coreSize, int crustSize, boolean exploded, boolean revealed, boolean visited){
+        this.scene = scene;
+        this.name = name;
+        this.inventory = new AsteroidInventory();
+        this.pos = pos;
+        this.maxHidingSpace = maxHidingSpace;
+        this.coreSize = coreSize;
+        this.crustSize = crustSize;
+        this.exploded = exploded;
+        this.revealed = revealed;
+        this.visited = visited;
+        this.resource = null; // TODO beállítás
+    }
+
+/* duplicated
+    @Override
+    public void RoundEnd(boolean closeToSun) {
+
+    }
+*/
+    /**
+
      * Az aszteroida magjának mérete, ennyi egységnyi nyersanyag bányászható ki belőle a játék elején, és bányászat után ennyi egységnyi item helyezhető vissza bele.
      */
     private int coreSize;
@@ -63,11 +100,24 @@ public class Asteroid extends Entity {
      * Az aszteroidán jelenleg állomásozó járművek, épületek tárolói.
      */
     private Set<Vessel> stationed = new HashSet<>();
-    private Set<MovableEntity> orbit = new HashSet<>();
-    private Set<MovableEntity> inside = new HashSet<>();
+    
+
 
     /**
+
+     * Az aszteroida körül lévő, mozgó entitások.
+     */
+  private Set<MovableEntity> orbit = new HashSet<>();
+
+    /**
+     * Az aszteroidában jelenleg lévő, mozgó entitások. tárolója.
+     */
+  private Set<MovableEntity> inside = new HashSet<>();
+    /**
+     * Az aszteroidára épített (véglegesen elhelyezett) építmények tárolója.
+=======
      * Ki van-e már bányászva az aszteroida magja teljesen
+
      */
     private boolean mined;
 
@@ -147,6 +197,14 @@ public class Asteroid extends Entity {
     /**
      * Egy adott jármű elhagyja az aszteroidát, törlődik az ott tartózkodók közül.
      */
+/* Adams branch
+    public void Depart(Vessel v) {
+        MovableEntity.AsteroidPlaces place = v.getPlace();
+        if (place== MovableEntity.AsteroidPlaces.Vessel){
+            stationed.remove(v);
+        }
+        */
+//TODO: somethings not quite right
     public void depart(MovableEntity v) {
         if(v.getPlace() == MovableEntity.AsteroidPlaces.Vessel) {
             if(stationed.contains(v))
@@ -157,11 +215,20 @@ public class Asteroid extends Entity {
                 orbit.remove(v);
         }
 
+
     }
 
     /**
      * Egy adott jármű érkezik az aszteroidára, regisztrálja az ott tartózkodók közé.
      */
+
+    public void Arrive(Vessel v) {
+        MovableEntity.AsteroidPlaces place = v.getPlace();
+        if (place == MovableEntity.AsteroidPlaces.Vessel) {
+            stationed.add(v);
+        }
+    }
+        //TODO: The Fuck is this
     public void arrive(MovableEntity v) {
         if(v.getPlace() == MovableEntity.AsteroidPlaces.Vessel) {
             if(!stationed.contains(v))
@@ -177,16 +244,10 @@ public class Asteroid extends Entity {
         if(!visited){
             visited=true;
             for(Asteroid n: ReachableAsteroids())
-                n.reveal();
+                n.Reveal();
         }
     }
 
-    /**
-     * Aszteroida felfedése
-     */
-    private void reveal() {
-        if(!revealed) revealed =true;
-    }
 
 
     /**
@@ -256,6 +317,15 @@ public class Asteroid extends Entity {
      * @param b
      */
     public void AddBuilding(Building b) {
+/*
+Adams branch
+        MovableEntity.AsteroidPlaces place = b.getPlace();
+        if (place== MovableEntity.AsteroidPlaces.Orbit){
+            orbit.add(b); //Todo Mikor kell a mennyiségetellenőrizni?
+        }
+        if (place== MovableEntity.AsteroidPlaces.Inside){
+            inside.add(b);
+*/
         if(b.getPlace()== MovableEntity.AsteroidPlaces.Inside) {
             if(!inside.contains(b)) {
                 inside.add(b);
@@ -267,10 +337,13 @@ public class Asteroid extends Entity {
                 orbit.add(b);
                 b.setPos(this.getPos());
             }
+
         }
     }
 
     /**
+
+
      * Épület eltávolítása az aszteroidáról
      * @param b
      */
@@ -281,6 +354,7 @@ public class Asteroid extends Entity {
             else if (b.getPlace() == MovableEntity.AsteroidPlaces.Orbit)
                 if(orbit.contains(b))
                     orbit.remove(b);
+
     }
 
     /**
@@ -383,7 +457,7 @@ public class Asteroid extends Entity {
         this.hidingSpaceShip = hidingVessel;
     }
 
-    public AsteroidInventory getInventory() {
+    public AsteroidInventory getInventory(){
         return inventory;
     }
 

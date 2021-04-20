@@ -73,6 +73,28 @@ public class GameManager {
     public GameManager() {
     }
 
+
+    public GameManager(int sunDist, boolean gameEnded, boolean stormQueued) {
+        //TODO kell-e név?
+    }
+
+    /**
+     * Visszaadja az első ilyen nevű playert. NE LEGYEN TÖBB EGYFORMA NEVŰ!
+     * @param name
+     * @return
+     */
+    public Player getPlayerByName(String name){
+
+        for (Player p : allPlayers) {
+            if(p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+
+
     public Set<Player> getAllPlayers() {
         return allPlayers;
     }
@@ -102,6 +124,23 @@ public class GameManager {
 
     public void setManagedScene(Scene sc) {
         scene = sc;
+    }
+
+    /**
+
+     * Új játékos hozzáadása.
+     * @param p
+     */
+    public void AddPlayer(Player p) {
+        // TODO implement here
+    }
+
+    /**
+     * Aszteroida hozzáadása
+     * @param asteroid
+     */
+    public void AddAsteroid(Asteroid asteroid){
+        asteroids.add(asteroid);
     }
 
     /**

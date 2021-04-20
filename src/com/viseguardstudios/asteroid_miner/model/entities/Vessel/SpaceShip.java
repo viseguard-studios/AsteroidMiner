@@ -21,6 +21,13 @@ public class SpaceShip extends Vessel {
         inventory = new SSInventory();
     }
 
+    public SpaceShip(Asteroid a, Player owner, String name) {
+        super(a);
+        inventory = new SSInventory();
+        this.owner = owner;
+        this.name = name;
+    }
+
     /**
      * A telepes által folyamatosan hordozott raktár.
      */

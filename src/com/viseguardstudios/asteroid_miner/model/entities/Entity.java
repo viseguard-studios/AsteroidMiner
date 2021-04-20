@@ -10,6 +10,32 @@ import com.viseguardstudios.asteroid_miner.util.Vector2;
 public abstract class Entity {
 
 
+    protected String name;
+
+    /**
+     * Név lekérdezése
+     * @return
+     */
+    public String getName(){
+        return new String(name);
+    }
+
+    /**
+     * Név átállítása
+     * @param name
+     */
+    public void setName(String name){
+        this.name = name;
+    }
+
+    /**
+     * Default constructor
+     */
+    public Entity() {
+    }
+
+
+
     /**
      * A játéktér tárolója.
      */
@@ -19,10 +45,6 @@ public abstract class Entity {
 
     public Vector2 pos;
 
-
-
-    String name;
-
     /**
      * Default constructor
      */
@@ -30,7 +52,9 @@ public abstract class Entity {
         this.name = name;
     }
 
+
     public Entity(){ }
+
 
 
 

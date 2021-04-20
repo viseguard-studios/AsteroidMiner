@@ -26,6 +26,21 @@ public class Player {
      */
     private String name;
 
+    /**
+    * Név lekérdezése;
+    */
+    public String getName(){
+        return name;
+    }
+
+    /**
+     * Név beállítása
+     * @param name
+     */
+    public  void setName(String name){
+        this.name = name;
+    }
+
 
 
     /**
