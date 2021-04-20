@@ -212,7 +212,6 @@ public class GameManager {
      * Játék inicializálás során a játéktér elemeinek inicializálása.
      */
     private void generateScene() {
-        // TODO implement here
         GenerateAsteroids();
 
         for (var pl : allPlayers) {

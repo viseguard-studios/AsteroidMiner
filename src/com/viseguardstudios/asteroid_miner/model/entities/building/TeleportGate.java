@@ -44,12 +44,7 @@ public class TeleportGate extends Building {
         this.currentAsteroid = home;
         home.AddBuilding(this);
     }
-/* Titusz's branch
-    public TeleportGate(int id) {
-        id =gateId;
 
-    }
-    */
 
     @Override
     public void roundEnd(boolean closeToSun) {
@@ -111,6 +106,7 @@ public class TeleportGate extends Building {
     public AsteroidPlaces getPlace() {
         //TODO If it started to wander it should return vessel to ensure it has space
         // Ádám: szerintem ez nem jó ötlet, inkább vegyük ki a teleportkapu mennyiségi korlátozást
+
         return AsteroidPlaces.Orbit;
     }
 

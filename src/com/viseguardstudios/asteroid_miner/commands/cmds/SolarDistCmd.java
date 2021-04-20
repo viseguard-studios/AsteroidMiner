@@ -15,7 +15,7 @@ public class SolarDistCmd extends Command {
         GameManager current = Engine.getInstance().getScene().getManager();
         int dist = Integer.parseInt(params[1]);
         current.ChangeAFDistance(dist);
-        //TODO kell-e ez?
-        // System.out.println("Solar distance changed to "+dist);
+
+        System.out.println("Solar distance changed to "+dist);
     }
 }
