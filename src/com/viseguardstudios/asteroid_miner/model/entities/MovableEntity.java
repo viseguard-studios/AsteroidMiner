@@ -6,12 +6,11 @@ package com.viseguardstudios.asteroid_miner.model.entities;
 
 public abstract class MovableEntity extends Entity {
 
+
     protected Asteroid currentAsteroid;
 
     /**
      * Default constructor
-     *
-     * @param name
      */
     public MovableEntity() {
     }
@@ -32,6 +31,10 @@ public abstract class MovableEntity extends Entity {
      */
     public void AsteroidExploded(){
         explode();
+    }
+
+    public Asteroid getCurrentAsteroid() {
+        return currentAsteroid;
     }
 
     public enum AsteroidPlaces{

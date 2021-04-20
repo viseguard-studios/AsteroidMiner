@@ -385,7 +385,7 @@ Adams branch
 
     @Override
     public void printStatus() {
-        super.printStatus();
+        //super.printStatus();
         System.out.println("Crust: " + crustSize);
         System.out.println("Vessels:");
         for (var vessel :
@@ -399,15 +399,19 @@ Adams branch
                 System.out.println("- " + item.getName());
             }
         }
+        else {
+            System.out.println("?");
+        }
 
 
         System.out.println("Teleport Gates:");
-
+/*
         System.out.println("Neighbours:");
         for (var a :
                 neighbours) {
             System.out.println("- " + a.getName());
         }
+ */
     }
 
     //#################################

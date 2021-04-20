@@ -101,8 +101,6 @@ public class GameManager {
      * @param seed a játék random generátorjának kezdő értéke
      */
     public void initGame(int seed) {
-        // TODO implement here
-
         if(seed == 0){
             System.out.println("Deterministic game");
             rnd = new Random(0);
@@ -115,8 +113,6 @@ public class GameManager {
         }
 
         //Generate stuff
-
-
     }
 
     public void setManagedScene(Scene sc) {
@@ -178,7 +174,7 @@ public class GameManager {
                 var ai = rnd.nextInt(asteroids.size());
 
                 var ss = new SpaceShip(asteroids.get(ai));
-                ss.setName("SpaceShip_"+ Namer.getNextID(ss.getClass()));
+                ss.setName("SS_"+ Namer.getNextID(ss.getClass()));
                 pl.addVessel(ss);
 
                 settlers.add(ss);
@@ -221,7 +217,7 @@ public class GameManager {
             //a.setResource(res);
             a.setCrustSize(rnd.nextInt(3));
 
-            a.setName("Asteroid_"+i);
+            a.setName("A_"+i);
             scene.addEntity(a);
             asteroids.add(a);
         }

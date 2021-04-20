@@ -25,8 +25,13 @@ public class DrillCmd extends Command {
         Set<Player> players = Engine.getInstance().getScene().GetManager().getAllPlayers();
         for(Player player : players){
             for(Vessel v : player.getOwnedVessels()){
-                if(v.getName().equals(params[1]))
+                if(v.getName().equals(params[1])) {
                     v.Drill();
+
+                    var ast = v.getCurrentAsteroid();
+
+                    System.out.println(ast.getName()+" crust = "+ast.getCrustSize());
+                }
                 return;
             }
         }

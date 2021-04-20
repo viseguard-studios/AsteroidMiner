@@ -18,7 +18,7 @@ public abstract class Entity {
      */
     protected Scene scene;
 
-    protected Asteroid currentAsteroid;
+    //protected Asteroid currentAsteroid;
 
     public Vector2 pos;
 
@@ -67,7 +67,7 @@ public abstract class Entity {
      * További getterek, setterek
      */
 
-    public Asteroid getCurrentAsteroid(){return currentAsteroid;}
+    //public Asteroid getCurrentAsteroid(){return currentAsteroid;}
 
     public Vector2 getPos(){return pos;}
 

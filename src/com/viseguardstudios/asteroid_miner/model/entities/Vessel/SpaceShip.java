@@ -31,10 +31,8 @@ public class SpaceShip extends Vessel {
      */
     private SSInventory inventory;
 
-
     /**
      * A telepesek által az aszteroida magjában elfoglalt hely nagyságát adja vissza.
-     * @return
      */
     public int GetHidingSpaceRequirement() {
         return 1;
@@ -42,7 +40,6 @@ public class SpaceShip extends Vessel {
 
     /**
      * A telepes az aktuálisan rendelkezésére álló elemekből egy "receptet" készít.  A felhasznált elemek elhasználódnak, törlődnek a raktárból.
-     * @param recipe
      */
     public void Craft(Recipe recipe) {
         boolean cancraft = recipe.canCraft(this);
@@ -94,8 +91,27 @@ public class SpaceShip extends Vessel {
     public Player getOwner() {return owner; }
 
 
+
     @Override
     public AsteroidPlaces getPlace() {
         return AsteroidPlaces.Vessel;
+    }
+
+    @Override
+    public void printStatus() {
+        //super.printStatus();
+        System.out.println("Turn used: ?");
+
+        System.out.println(currentAsteroid.getName());
+
+        System.out.println("Resources:");
+        for (var item : inventory.getItems()) {
+            System.out.println("- "+ item.getName());
+        }
+
+        System.out.println("Teleport Gates:");
+        for (var item : inventory.getGates()) {
+            System.out.println("- "+ item.getName());
+        }
     }
 }
