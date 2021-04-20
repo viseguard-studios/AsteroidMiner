@@ -85,7 +85,7 @@ public class GMCreator {
         List<Asteroid> asteroidsWithoutConnections = new ArrayList<>();
         //TODO move to FileOpener getAllChild(inputlines, "childname") IF DOES NOT WORK
         for (int i = 0; i<inputLines.size();i++){
-            ids = new int[]{-1,inputLines.size()};
+            ids = new int[]{-1,-1};
             try {
                 ids = FileOpener.getChildLoc(inputLines, "asteroid", i);
             } catch (Exception e) {

@@ -214,13 +214,13 @@ public class Asteroid extends Entity {
      * Egy adott jármű érkezik az aszteroidára, regisztrálja az ott tartózkodók közé.
      */
 
-    public void Arrive(Vessel v) {
+   /* public void Arrive(Vessel v) {
         MovableEntity.AsteroidPlaces place = v.getPlace();
         if (place == MovableEntity.AsteroidPlaces.Vessel) {
             stationed.add(v);
         }
     }
-
+*/
     public void arrive(MovableEntity v) {
         if(v.getPlace() == MovableEntity.AsteroidPlaces.Vessel) {
             if(!stationed.contains(v))
@@ -365,6 +365,18 @@ Adams branch
                 inventory.insertItem(i);
         }
         return canPlace;
+    }
+    /**
+     * Elem kivétele.
+     * @param item
+     * @return null ha nincs, amúgy az első Item ami megfelel a neki
+     */
+    public Item pickupItem(Item item)
+    {
+        List<Item> items = inventory.getItems();
+        int i =0;
+        while (!items.get(i).satisfies(item) && i < items.size()) i++;
+        return i >=items.size() ? null : items.get(i);
     }
 
     /**
