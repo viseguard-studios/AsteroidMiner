@@ -40,7 +40,9 @@ public class SpaceStation extends Building {
     public void explode() {}
 
     @Override
-    public void RoundEnd(boolean closeToSun){}
+    public void roundEnd(boolean closeToSun){
+        super.roundEnd(closeToSun);
+    }
 
 
     @Override

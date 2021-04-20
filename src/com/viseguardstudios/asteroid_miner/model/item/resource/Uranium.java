@@ -49,7 +49,7 @@ public class Uranium extends Resource {
 
     @Override
     public String getName() {
-        return "Uranium Exp: " + counter;
+        return ("Uranium Exp:"+counter);
     }
 
 }

@@ -51,7 +51,9 @@ public class TeleportGate extends Building {
     */
 
     @Override
-    public void RoundEnd(boolean closeToSun) {}
+    public void roundEnd(boolean closeToSun) {
+        super.roundEnd(closeToSun);
+    }
 
     /**
      * Napszél éri a kaput, aminek hatására egy véletlenszerű, szomszédos aszteroidára mozog át.
@@ -106,6 +108,7 @@ public class TeleportGate extends Building {
     @Override
     public AsteroidPlaces getPlace() {
         //TODO If it started to wander it should return vessel to ensure it has space
+        // Ádám: szerintem ez nem jó ötlet, inkább vegyük ki a teleportkapu mennyiségi korlátozást
         return AsteroidPlaces.Orbit;
     }
 
@@ -124,8 +127,6 @@ public class TeleportGate extends Building {
     @Label("MI EZ?? VAN MÁSIK METÓDUS IS!!!")
     @Deprecated
     public void setPair(TeleportGate pair){
-
-        //TODO MIÉRT VAN KÉT PÁR???
     }
  Duplicated methods in merge
      *Teleportkapu párjának megkeresése ID alapján, ha létezik

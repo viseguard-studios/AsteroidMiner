@@ -145,7 +145,8 @@ public class Asteroid extends Entity {
      * @param closeToSun
      */
     @Override
-    public void RoundEnd(boolean closeToSun) {
+    public void roundEnd(boolean closeToSun) {
+        super.roundEnd(closeToSun);
         inventory.roundEnd();
         if(closeToSun)
             inventory.nearSun(this);
@@ -315,7 +316,7 @@ public class Asteroid extends Entity {
 Adams branch
         MovableEntity.AsteroidPlaces place = b.getPlace();
         if (place== MovableEntity.AsteroidPlaces.Orbit){
-            orbit.add(b); //Todo Mikor kell a mennyiségetellenőrizni?
+            orbit.add(b);
         }
         if (place== MovableEntity.AsteroidPlaces.Inside){
             inside.add(b);

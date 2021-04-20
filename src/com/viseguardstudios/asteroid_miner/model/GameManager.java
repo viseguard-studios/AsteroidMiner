@@ -79,7 +79,11 @@ public class GameManager {
 
 
     public GameManager(int sunDist, boolean gameEnded, boolean stormQueued) {
+        this.sunDistance = sunDist;
+        this.gameEnded = gameEnded;
+        this.CreateStormOn = stormQueued;
         //TODO kell-e név?
+        // NEM!
     }
 
     /**
@@ -125,6 +129,17 @@ public class GameManager {
     }
 
     /**
+
+     * Új játékos hozzáadása.
+     * @param p
+     */
+    public void AddPlayer(Player p) {
+        if(!allPlayers.contains(p)){
+            allPlayers.add(p);
+        }
+    }
+
+    /**
      * Aszteroida hozzáadása
      * @param asteroid
      */
@@ -149,7 +164,6 @@ public class GameManager {
             int radius = rnd.nextInt(20);
             scene.solarFlare(pos, radius);
         }
-
 
         scene.roundEnded();
 
@@ -264,19 +278,18 @@ public class GameManager {
         return CreateStormOn;
     }
 
-    /**
+    /**A mező naptól való távolságának állítása
      * @param d
      */
     public void ChangeAFDistance(int d) {
-        // TODO implement here
+        sunDistance = d;
     }
 
     /**
      * @return
      */
     public int GetAFDistance() {
-        // TODO implement here
-        return 0;
+        return sunDistance;
     }
 
     /**
