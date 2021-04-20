@@ -32,7 +32,7 @@ public class PlaceCmd extends Command {
                     System.out.println("Items:");
                     int number = 1;
                     for (Item i : v.getInventory().getItems()){
-                        //TODO item neve?
+                        System.out.println(i+": "+i.getName());
                         number++;
                     }
                     Scanner sc = new Scanner(System.in);
