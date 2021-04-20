@@ -29,6 +29,7 @@ public class RobotRecipe extends Recipe {
     protected void makeResult(SpaceShip ss){
         Player p = ss.getOwner();
         //TODO generate new name
+        // Mire gondolsz??
         Robot r = new Robot(p,ss.getCurrentAsteroid(),"r");
     }
 

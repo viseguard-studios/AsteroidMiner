@@ -112,6 +112,8 @@ public abstract class Vessel extends MovableEntity {
      */
     public void RoundEnd(boolean closeToSun) {
         // TODO implement here
+        // Itt nem hiszem, hogy bármi is kéne történjen.
+        // A robotban igen
     }
 
     /**

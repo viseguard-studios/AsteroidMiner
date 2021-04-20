@@ -315,7 +315,7 @@ public class Asteroid extends Entity {
 Adams branch
         MovableEntity.AsteroidPlaces place = b.getPlace();
         if (place== MovableEntity.AsteroidPlaces.Orbit){
-            orbit.add(b); //Todo Mikor kell a mennyiségetellenőrizni?
+            orbit.add(b);
         }
         if (place== MovableEntity.AsteroidPlaces.Inside){
             inside.add(b);

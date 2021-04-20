@@ -78,7 +78,11 @@ public class GameManager {
 
 
     public GameManager(int sunDist, boolean gameEnded, boolean stormQueued) {
+        this.sunDistance = sunDist;
+        this.gameEnded = gameEnded;
+        this.CreateStormOn = stormQueued;
         //TODO kell-e név?
+        // NEM!
     }
 
     /**
@@ -129,7 +133,9 @@ public class GameManager {
      * @param p
      */
     public void AddPlayer(Player p) {
-        // TODO implement here
+        if(!allPlayers.contains(p)){
+            allPlayers.add(p);
+        }
     }
 
     /**
@@ -260,19 +266,18 @@ public class GameManager {
         return CreateStormOn;
     }
 
-    /**
+    /**A mező naptól való távolságának állítása
      * @param d
      */
     public void ChangeAFDistance(int d) {
-        // TODO implement here
+        sunDistance = d;
     }
 
     /**
      * @return
      */
     public int GetAFDistance() {
-        // TODO implement here
-        return 0;
+        return sunDistance;
     }
 
     /**
