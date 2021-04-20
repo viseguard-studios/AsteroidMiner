@@ -12,7 +12,7 @@ public class SolarDistCmd extends Command {
 
     @Override
     public void Execute(String[] params) {
-        GameManager current = Engine.getInstance().getScene().GetManager();
+        GameManager current = Engine.getInstance().getScene().getManager();
         int dist = Integer.parseInt(params[1]);
         current.ChangeAFDistance(dist);
         //TODO kell-e ez?

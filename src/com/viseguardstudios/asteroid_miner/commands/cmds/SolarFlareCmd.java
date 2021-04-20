@@ -16,7 +16,7 @@ public class SolarFlareCmd extends Command {
     int x = Integer.parseInt(params[1]); //X koor
     int y = Integer.parseInt(params[2]); //Y koor
     int rad = Integer.parseInt(params[3]); //sugár
-    GameManager current = Engine.getInstance().getScene().GetManager();
+    GameManager current = Engine.getInstance().getScene().getManager();
     current.QueueSolarStorm();
     current.setSolarStormCenter(new Vector2(x,y));
     current.setSolarStromRadius(rad);
