@@ -13,11 +13,6 @@ public abstract class Item {
     private IInventory inventory;
 
     /**
-     * az item típusa
-     */
-    protected String type;
-
-    /**
      * Alapértelmezetten üres metódusok:
      * activate: teleportkapu felüldefiniálja -> kapuk lerakásához szükséges
      * nearSun: napközelben különleges tulajdonságú nyersanyagok felüldefiniálják

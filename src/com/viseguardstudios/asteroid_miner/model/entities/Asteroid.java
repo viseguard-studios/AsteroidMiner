@@ -376,7 +376,10 @@ Adams branch
     {
         List<Item> items = inventory.getItems();
         int i =0;
-        while (!items.get(i).getName().equals(itemType) && i < items.size()) i++;
+
+        while (!items.get(i).getName().equals(itemType) && i < items.size())
+            i++;
+
         Item item = i >=items.size() ? null : items.get(i);
         if(item != null) inventory.removeItem(item);
         return item;
@@ -487,6 +490,7 @@ Adams branch
     }
 
     public boolean isMined() {
-        return mined;
+        //return mined;
+        return crustSize <= 0;
     }
 }

@@ -56,6 +56,7 @@ public class CraftCmd extends Command {
                                 System.out.println("Recipe can't be crafted");
                         }
                     }
+                    break;
                 }
             }
         }

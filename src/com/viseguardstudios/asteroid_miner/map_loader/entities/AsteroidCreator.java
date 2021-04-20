@@ -101,7 +101,7 @@ public class AsteroidCreator extends EntityCreator {
             e.printStackTrace();
         }
 
-        if (ids[0] != -1 || ids[1] != -1) {
+        if (ids[0] != -1 && ids[1] != -1) {
 
             ArrayList<String> child = new ArrayList<String>(rawLines.subList(ids[0], ids[1] + 1));
             ArrayList<Item> items = ItemCreator.getResources(child); //itt siman at lehet adni modisitas nelkül
@@ -151,12 +151,17 @@ public class AsteroidCreator extends EntityCreator {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        var child = new ArrayList<String>(rawLines.subList(ids[0], ids[1] + 1));
-        try {
-            BuildingCreator.createBuildings(child, asteroid);// Létrehozza és az aszteroidára pakolja
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (ids[0] != -1 || ids[1] != -1) {
+
+            var child = new ArrayList<String>(rawLines.subList(ids[0], ids[1] + 1));
+            try {
+                BuildingCreator.createBuildings(child, asteroid);// Létrehozza és az aszteroidára pakolja
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+
         return asteroid;
 
     }

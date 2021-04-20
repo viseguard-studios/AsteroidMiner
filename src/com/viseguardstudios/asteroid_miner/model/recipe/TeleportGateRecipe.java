@@ -45,10 +45,9 @@ public class TeleportGateRecipe extends Recipe {
     public boolean canCraft(SpaceShip ss) {
         //ha a 2 teleportkapunak van elég hely a raktárban
         if(ss.getInventory().getTgCapacity() >= (ss.getInventory().getGates().size()+2))
-            super.canCraft(ss);
+            return super.canCraft(ss);
         else
             return false;
-        return false;
     }
 
 

@@ -19,7 +19,7 @@ public class PlaceCmd extends Command {
     @Override
     public void Execute(String[] params) {
         if(params.length < 3){
-            System.out.println("Not enough params");
+            System.out.println("Not enough params: place from <vessel>");
             return;
         }
 
@@ -48,6 +48,6 @@ public class PlaceCmd extends Command {
                 }
             }
         }
-        System.out.println("Vessel not found");
+        //System.out.println("Vessel not found");
     }
 }

@@ -24,24 +24,24 @@ public class PickupCmd extends Command {
 
         GameManager gm = Engine.getInstance().getScene().getManager();
         List<Player> players = gm.getAllPlayers();
-        for(Player player : players){
-            if(player == gm.getCurrentPlayer()){
-                for(Vessel v : player.getOwnedVessels()){
-                    if(v.getName().equals(params[3])) {
-                        if(v.getCurrentAsteroid().isMined()){
-                            String type = params[1];
-                            Item item = v.getCurrentAsteroid().pickupItem(type);
-                            v.getInventory().insertItem(item);
-                            if(item == null)
-                                System.out.println("can't find the item");
-                        }
-                        else
-                            System.out.println("can't pick uo items");
-                    }
+        var player = gm.getCurrentPlayer();
 
+        for(Vessel v : player.getOwnedVessels()){
+            if(v.getName().equals(params[3])) {
+                if(v.getCurrentAsteroid().isMined()){
+                    String type = params[1];
+                    Item item = v.getCurrentAsteroid().pickupItem(type);
+                    v.getInventory().insertItem(item);
+                    if(item == null)
+                        System.out.println("can't find the item");
                 }
+                else
+                    System.out.println("can't pick up items");
             }
+
         }
-        System.out.println("Vessel not found");
+
+
+        //System.out.println("Vessel not found");
     }
 }

@@ -31,6 +31,7 @@ public class RobotRecipe extends Recipe {
         Player p = ss.getOwner();
 
         Robot r = new Robot(p,ss.getCurrentAsteroid(), Namer.getName(Robot.class));
+        Engine.getInstance().getScene().addEntity(r);
     }
 
 }

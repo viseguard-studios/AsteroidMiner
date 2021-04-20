@@ -23,6 +23,7 @@ public class SpaceShip extends Vessel {
         super(a);
         inventory = new SSInventory();
         this.owner = owner;
+        owner.addVessel(this);
         this.name = name;
     }
 

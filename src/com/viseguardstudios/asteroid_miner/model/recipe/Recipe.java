@@ -42,11 +42,14 @@ public abstract class Recipe {
         /***
          * Megvizsgálja, hogy a telepesnél van-e elég item a készítéshez
          */
-        for(Item rec: recipe ) {
-            for (Item item : items) {
+        for (int i = 0; i < recipe.size(); i++) {
+            Item rec = recipe.get(i);
+            for (int j = 0; j < items.size(); j++) {
+                Item item = items.get(j);
                 if (item.satisfies(rec)) {
                     recipe.remove(rec);
                     items.remove(item);
+                    i--;
                     break;
                 }
             }
@@ -58,11 +61,14 @@ public abstract class Recipe {
         if(recipe.size()==0)  //ha megvan az összes szükséges hozzávaló
             return true;
 
-        for(Item rec: recipe ) {
-            for (Item aItem : aItems) {
+        for (int i = 0; i < recipe.size(); i++) {
+            Item rec = recipe.get(i);
+            for (int j = 0; j < aItems.size(); j++) {
+                Item aItem = aItems.get(j);
                 if (aItem.satisfies(rec)) {
                     recipe.remove(rec);
                     aItems.remove(aItem);
+                    i--;
                     break;
                 }
             }

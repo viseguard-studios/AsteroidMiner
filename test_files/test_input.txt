@@ -1,1 +1,2 @@
-startgame 0 P:\BME\Proj_Lab\Project\AsteroidMiner\test_files\test.txt 1
+startgame 0 P:\BME\Proj_Lab\Project\AsteroidMiner\test_files\crafting_test.vsgstd 1
+craft s1 Base
