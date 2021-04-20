@@ -55,6 +55,8 @@ public class UfoCreator  extends VesselCreator {
             ufo.getInventory().insertItem(res);
         }
 
+        //adds ufo to scenes entities
+        home.GetScene().addEntity(ufo);
         return ufo;
 
 
