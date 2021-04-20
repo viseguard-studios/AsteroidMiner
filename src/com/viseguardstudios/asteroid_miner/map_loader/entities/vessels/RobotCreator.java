@@ -56,6 +56,9 @@ public class RobotCreator extends VesselCreator {
         Robot robot = new Robot(owner,home,name);
         if(isHidden)
             robot.Hide();
+
+        //register into Scene
+        manager.getManagedScene().addEntity(robot);
         return robot;
 
     }

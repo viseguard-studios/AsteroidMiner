@@ -119,6 +119,10 @@ public class GameManager {
         scene = sc;
     }
 
+    public Scene getManagedScene() {
+        return scene;
+    }
+
     /**
 
      * Új játékos hozzáadása.

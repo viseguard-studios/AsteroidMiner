@@ -195,7 +195,7 @@ public class Asteroid extends Entity {
             stationed.remove(v);
         }
         */
-//TODO: somethings not quite right
+
     public void depart(MovableEntity v) {
         if(v.getPlace() == MovableEntity.AsteroidPlaces.Vessel) {
             if(stationed.contains(v))
@@ -219,7 +219,7 @@ public class Asteroid extends Entity {
             stationed.add(v);
         }
     }
-        //TODO: The Fuck is this
+
     public void arrive(MovableEntity v) {
         if(v.getPlace() == MovableEntity.AsteroidPlaces.Vessel) {
             if(!stationed.contains(v))

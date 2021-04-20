@@ -62,7 +62,6 @@ public class Scene {
      * @return
      */
     public GameManager GetManager() {
-        // TODO implement here
         return manager;
     }
 

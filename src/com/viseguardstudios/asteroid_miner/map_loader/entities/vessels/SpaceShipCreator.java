@@ -58,6 +58,8 @@ public class SpaceShipCreator extends VesselCreator {
         SpaceShip spaceShip = new SpaceShip(home,owner,name);
         if(isHidden)
             spaceShip.Hide();
+        //adds spaceship to manager
+        manager.addSettler(spaceShip);
 
         //Inventory létrehozása
 
