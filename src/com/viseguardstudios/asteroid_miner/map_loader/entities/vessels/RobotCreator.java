@@ -18,12 +18,12 @@ public class RobotCreator extends VesselCreator {
     @Deprecated
     @Override
     public void create() {
-        scene.AddEntity(new Robot(new Asteroid())); //creating Robot from thin air
+        scene.addEntity(new Robot(new Asteroid())); //creating Robot from thin air
     }
 
     @Deprecated
     public void create(Asteroid a) {
-        scene.AddEntity(new Robot(a));
+        scene.addEntity(new Robot(a));
     }
 
     /**

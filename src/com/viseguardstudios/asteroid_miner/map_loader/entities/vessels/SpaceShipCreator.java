@@ -19,7 +19,7 @@ public class SpaceShipCreator extends VesselCreator {
     @Deprecated
     @Override
     public void create() {
-        scene.AddEntity(new SpaceShip(new Asteroid())); //creating SS from thin air
+        scene.addEntity(new SpaceShip(new Asteroid())); //creating SS from thin air
     }
 
     @Deprecated
@@ -30,7 +30,7 @@ public class SpaceShipCreator extends VesselCreator {
     @Deprecated
     public void create(Asteroid a)
     {
-        scene.AddEntity(new SpaceShip(a));
+        scene.addEntity(new SpaceShip(a));
     }
 
     public static SpaceShip createSpaceShip(ArrayList<String> rawLines, GameManager manager, Asteroid home) throws Exception {

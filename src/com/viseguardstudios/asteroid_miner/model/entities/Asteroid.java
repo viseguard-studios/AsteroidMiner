@@ -41,15 +41,8 @@ public class Asteroid extends Entity {
         this.exploded = exploded;
         this.revealed = revealed;
         this.visited = visited;
-        this.resource = null; // TODO beállítás
     }
 
-/* duplicated
-    @Override
-    public void RoundEnd(boolean closeToSun) {
-
-    }
-*/
     /**
 
      * Az aszteroida magjának mérete, ennyi egységnyi nyersanyag bányászható ki belőle a játék elején, és bányászat után ennyi egységnyi item helyezhető vissza bele.
@@ -115,9 +108,7 @@ public class Asteroid extends Entity {
   private Set<MovableEntity> inside = new HashSet<>();
     /**
      * Az aszteroidára épített (véglegesen elhelyezett) építmények tárolója.
-=======
      * Ki van-e már bányászva az aszteroida magja teljesen
-
      */
     private boolean mined;
 
@@ -362,7 +353,7 @@ Adams branch
      * @param i 
      * @return
      */
-    public boolean PlaceItem(Item i) {
+    public boolean placeItem(Item i) {
         boolean canPlace = false;
         if(mined && !exploded){
             canPlace = inventory.tryInsertItem(i);
@@ -375,7 +366,7 @@ Adams branch
     /**
      * Új szomszéd hozzáadása.
      */
-    public void AddNeighbour(Asteroid a) {
+    public void addNeighbour(Asteroid a) {
         if(!neighbours.contains(a))
              neighbours.add(a);
     }
@@ -395,18 +386,20 @@ Adams branch
     @Override
     public void printStatus() {
         super.printStatus();
-        System.out.println("Crust: "+crustSize);
+        System.out.println("Crust: " + crustSize);
         System.out.println("Vessels:");
         for (var vessel :
                 this.stationed) {
-            System.out.println("- "+ vessel.getName());
+            System.out.println("- " + vessel.getName());
         }
 
         System.out.println("Items:");
-        for (var item :
-                inventory.getItems()) {
-            System.out.println("- "+ item.getName());
+        if (crustSize <= 0) {
+            for (var item : inventory.getItems()) {
+                System.out.println("- " + item.getName());
+            }
         }
+
 
         System.out.println("Teleport Gates:");
 

@@ -43,7 +43,7 @@ public class SSMoveTest extends Test {
             tg2.setPair(tg1);
         }
         else {
-            a1.AddNeighbour(a2);
+            a1.addNeighbour(a2);
         }
     }
 

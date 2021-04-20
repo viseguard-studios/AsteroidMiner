@@ -17,7 +17,7 @@ public class TeleGateCreator extends BuildingCreator {
     @Deprecated
     @Override
     public void create() {
-        scene.AddEntity(new TeleportGate(1)); //TODO: NEW id
+        scene.addEntity(new TeleportGate(1)); //TODO: NEW id
     }
 
     /**

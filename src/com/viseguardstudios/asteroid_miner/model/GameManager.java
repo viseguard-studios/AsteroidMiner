@@ -19,6 +19,8 @@ import java.util.*;
  */
 public class GameManager {
 
+    boolean debug = false;
+
     Random rnd;
     boolean deterministic;
 
@@ -67,6 +69,7 @@ public class GameManager {
      */
     private Scene scene;
 
+
     /**
      * Default constructor
      */
@@ -93,17 +96,11 @@ public class GameManager {
         return null;
     }
 
-
-
-    public Set<Player> getAllPlayers() {
-        return allPlayers;
-    }
-
     /**
      * A játékmenet inicializálásáért felel.
-     * @param seed
+     * @param seed a játék random generátorjának kezdő értéke
      */
-    public void InitGame(int seed) {
+    public void initGame(int seed) {
         // TODO implement here
 
         if(seed == 0){
@@ -245,7 +242,7 @@ public class GameManager {
                     }
                 }
 
-                ast.AddNeighbour(closest);
+                ast.addNeighbour(closest);
             }
 
         }
@@ -306,5 +303,9 @@ public class GameManager {
 
     public List<SpaceShip> getSettlers(){
         return settlers;
+    }
+
+    public Set<Player> getAllPlayers() {
+        return allPlayers;
     }
 }

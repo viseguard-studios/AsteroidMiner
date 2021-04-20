@@ -68,7 +68,7 @@ public class Engine {
         }
         //gm.AddPlayer();
 
-        gm.InitGame(seed);
+        gm.initGame(seed);
 
         gm.startGame();
     }

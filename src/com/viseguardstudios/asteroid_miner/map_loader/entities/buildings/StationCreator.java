@@ -15,7 +15,7 @@ public class StationCreator extends BuildingCreator {
     @Deprecated
     @Override
     public void create() {
-        scene.AddEntity(new SpaceStation(null)); //TODO: NEW id
+        scene.addEntity(new SpaceStation(null)); //TODO: NEW id
     }
 
     public static SpaceStation createSpaceStation(Asteroid home){

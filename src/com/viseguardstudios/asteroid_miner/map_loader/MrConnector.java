@@ -40,8 +40,8 @@ public class MrConnector {
                 String ast2raw = FileOpener.getPropValue(rawLine, "ast2");
                 Asteroid ast1 = asteroidByName(asteroids,ast1raw);
                 Asteroid ast2 = asteroidByName(asteroids,ast2raw);
-                ast1.AddNeighbour(ast2);
-                ast2.AddNeighbour(ast1);
+                ast1.addNeighbour(ast2);
+                ast2.addNeighbour(ast1);
             }
         }
 

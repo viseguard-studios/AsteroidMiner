@@ -19,7 +19,7 @@ public class AsteroidCreator extends EntityCreator {
     @Deprecated
     @Override
     public void create() {
-        scene.AddEntity(new Asteroid());
+        scene.addEntity(new Asteroid());
     }
 
     /**

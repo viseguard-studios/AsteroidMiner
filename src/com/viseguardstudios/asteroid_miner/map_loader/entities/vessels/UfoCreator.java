@@ -14,7 +14,7 @@ public class UfoCreator  extends VesselCreator {
     @Deprecated
     @Override
     public void create() {
-        scene.AddEntity(new UFO(new Asteroid())); //creating UFO from thin air
+        scene.addEntity(new UFO(new Asteroid())); //creating UFO from thin air
     }
 
     @Deprecated
@@ -25,7 +25,7 @@ public class UfoCreator  extends VesselCreator {
     @Deprecated
     public void create(Asteroid a)
     {
-        scene.AddEntity(new UFO(a));
+        scene.addEntity(new UFO(a));
     }
 
     public static UFO createUFO(ArrayList<String> rawLines, Asteroid home) throws Exception {

@@ -2,11 +2,9 @@ package com.viseguardstudios.asteroid_miner.model.entities.Vessel;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Player;
-import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
-import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**
  * A telepesekért felelős osztály.
@@ -58,7 +56,7 @@ public class SpaceShip extends Vessel {
      * @return
      */
     public boolean PlaceItem(Item i) {
-        var success = currentAsteroid.PlaceItem(i);
+        var success = currentAsteroid.placeItem(i);
         if(success){
             inventory.removeItem(i);
             return true;
