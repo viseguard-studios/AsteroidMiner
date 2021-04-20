@@ -54,6 +54,9 @@ public abstract class Vessel extends MovableEntity {
      * Fúr egy egységnyit az aszteroida köpenyéből, ha még nincs teljesen átfúrva. Ha át van fúrva, nem történik művelet.
      */
     public boolean drill() {
+        if(turnUsed)
+            return false;
+
         var res =currentAsteroid.Drill();
         if(res)
             turnUsed = true;

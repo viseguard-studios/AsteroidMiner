@@ -144,12 +144,17 @@ public class GameManager {
      * Egy játékos aktuális köre - ekkor van lehetősége irányítani a járműveit egyesével.
      */
     public void takeTurn() {
-        scene.solarFlare();
+        if(this.CreateStormOn){
+            Vector2 pos = new Vector2(rnd.nextInt(10),rnd.nextInt(10));
+            int radius = rnd.nextInt(20);
+            scene.solarFlare(pos, radius);
+        }
+
 
         scene.roundEnded();
 
         playerID++;
-        if(playerID > allPlayers.size())
+        if(playerID >= allPlayers.size())
             playerID = 0;
 
         currentPlayer = allPlayers.get(playerID);
