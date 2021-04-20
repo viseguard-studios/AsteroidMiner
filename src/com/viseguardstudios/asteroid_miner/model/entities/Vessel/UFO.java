@@ -5,6 +5,7 @@ import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.inventory.InfiniteInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
+import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 
 public class UFO extends Vessel{
     InfiniteInventory inventory;
@@ -60,6 +61,16 @@ public class UFO extends Vessel{
     @Override
     public void SolarFlare() {
         //DO not die
+    }
+
+    /**
+     * Can not craft
+     * @param recipe
+     * @return
+     */
+    @Override
+    public boolean Craft(Recipe recipe) {
+        return false;
     }
 
     @Override

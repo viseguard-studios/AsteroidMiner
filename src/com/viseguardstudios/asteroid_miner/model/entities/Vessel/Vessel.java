@@ -6,6 +6,7 @@ import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.MovableEntity;
 import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
+import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 
 /**
@@ -125,6 +126,11 @@ public abstract class Vessel extends MovableEntity {
     public void RoundEnd(boolean closeToSun) {
         // TODO implement here
     }
+
+    /**
+     * Craft-oláshoz szükséges, csak Spaceship tud craftolni
+     */
+    public abstract boolean Craft(Recipe recipe);
 
     /**
      * Beállítja,hogy melyik játékos a tulajdonosa az űrjárműnek.

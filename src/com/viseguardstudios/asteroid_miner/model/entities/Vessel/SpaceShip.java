@@ -56,10 +56,16 @@ public class SpaceShip extends Vessel {
     /**
      * A telepes az aktuálisan rendelkezésére álló elemekből egy "receptet" készít.  A felhasznált elemek elhasználódnak, törlődnek a raktárból.
      */
-    public void Craft(Recipe recipe) {
-        boolean cancraft = recipe.canCraft(this);
-        if (cancraft)
-            recipe.craft(this);
+    public boolean Craft(Recipe recipe) {
+        if(!turnUsed){
+            boolean cancraft = recipe.canCraft(this);
+            if (cancraft){
+                recipe.craft(this);
+                turnUsed=true;
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

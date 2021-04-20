@@ -25,6 +25,7 @@ public class CommandExecutor {
         registerCommand(new HideCmd());
         registerCommand(new PlaceCmd());
         registerCommand(new EndturnCmd());
+        registerCommand(new CraftCmd());
     }
 
     public void registerCommand(Command cmd){
