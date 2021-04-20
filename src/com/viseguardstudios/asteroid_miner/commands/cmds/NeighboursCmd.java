@@ -18,7 +18,7 @@ public class NeighboursCmd extends Command {
             System.out.println("Not enough params");
             return;
         }
-        List<Asteroid> asteroids = Engine.getInstance().getScene().GetManager().getAsteroids();
+        List<Asteroid> asteroids = Engine.getInstance().getScene().getManager().getAsteroids();
         for(Asteroid a : asteroids){
             if(a.getName().equals(params[1])){
                 System.out.println("Neighbours:");

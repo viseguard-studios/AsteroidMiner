@@ -98,6 +98,6 @@ public class Engine {
     }
 
     public GameManager getGameManager(){
-        return scene.GetManager();
+        return scene.getManager();
     }
 }

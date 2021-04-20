@@ -68,7 +68,7 @@ public class Scene {
      * A manager attribútum getter-e.
      * @return
      */
-    public GameManager GetManager() {
+    public GameManager getManager() {
         return manager;
     }
 

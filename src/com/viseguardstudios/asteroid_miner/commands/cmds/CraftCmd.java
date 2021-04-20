@@ -21,10 +21,10 @@ public class CraftCmd extends Command {
     @Override
     public void Execute(String[] params) {
         if(params.length < 2){
-            System.out.println("Not enough params");
+            System.out.println("Not enough params: craft <spaceShip> <recipe>");
             return;
         }
-        GameManager gm = Engine.getInstance().getScene().GetManager();
+        GameManager gm = Engine.getInstance().getScene().getManager();
         List<Player> players = gm.getAllPlayers();
         Recipe recipe;
         for(Player player : players){
