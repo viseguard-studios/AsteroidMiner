@@ -15,10 +15,11 @@ public class StationCreator extends BuildingCreator {
     @Deprecated
     @Override
     public void create() {
-        scene.addEntity(new SpaceStation(null)); //TODO: NEW id
-    }
+        scene.addEntity(new SpaceStation(null)); }
 
     public static SpaceStation createSpaceStation(Asteroid home){
-        return new SpaceStation(home);
+                SpaceStation station = new SpaceStation(home);
+                home.GetScene().addEntity(station);
+                return station;
     }
 }
