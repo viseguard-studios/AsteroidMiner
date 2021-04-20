@@ -25,6 +25,9 @@ public abstract class ItemCreator {
         ArrayList<Item> found = new ArrayList<>();
 
         for (String rawLine : inputLines) {
+            if(rawLine.isBlank() || rawLine.isEmpty())
+                continue;
+
             String currentType = FileOpener.getObjType(rawLine);
             if (currentType != null) {
                 switch (currentType) {

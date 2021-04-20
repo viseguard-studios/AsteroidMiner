@@ -63,6 +63,10 @@ public class FileOpener {
 
         ArrayList<String> found = new ArrayList<>();
 
+        if(input.isBlank() || input.isEmpty()){
+            return found;
+        }
+
         try {
             String temp = input.split("\\{")[1];
             temp = temp.split("\\}")[0];
@@ -87,7 +91,7 @@ public class FileOpener {
      * @return {"prop1";"x"}
      */
     protected static String[] getPropNameAndValue(String input){
-        String[] temp = input.strip().split("=");
+        String[] temp = input.strip().toLowerCase().split("=");
         try {
             if(temp.length!=2) throw new Exception("Bad format in object property");
             temp[1] = temp[1].split("\"")[1];  //Todo Check if this part works correctly (
@@ -109,6 +113,9 @@ public class FileOpener {
         boolean found = false;
         int firstIndex = -1;
         for (int i = 0; i<args.size(); i++){
+            var token = args.get(i);
+            if(!token.contains("="))
+                continue;
             try {
                 String parameterName = getPropNameAndValue(args.get(i))[0];
                 if(parameterName.equals(searched)){
@@ -134,7 +141,7 @@ public class FileOpener {
         searched = searched.toLowerCase(); // a biztonság kedvéért
         ArrayList<String> args = prepareLine(rawLine);
         int index = getPropIndex(args,searched);
-        if(index>=-1){
+        if(index>-1){
             try {
                 value = args.get(index);
                 value = getPropNameAndValue(value)[1];
@@ -217,6 +224,10 @@ public class FileOpener {
                     break;
                 }
         }
+        if(ids[0] == -1) {
+            return ids;
+        }
+
         String endMarker = "/"+name;
         for (int i = ids[0]; i<inputLines.size();i++){
             String currentLine = inputLines.get(i);

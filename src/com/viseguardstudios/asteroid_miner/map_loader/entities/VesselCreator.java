@@ -36,6 +36,9 @@ public abstract class VesselCreator extends MovableEntityCreator{
         String rawLine = null;
         for (int i = 0; i<inputLines.size(); i++) {
             rawLine = inputLines.get(i);
+            if(rawLine.isEmpty() || rawLine.isBlank())
+                continue;
+
             String currentType = FileOpener.getObjType(rawLine);
             int[] ids = {-1, -1};
             ArrayList<String> rawDescriber= null;

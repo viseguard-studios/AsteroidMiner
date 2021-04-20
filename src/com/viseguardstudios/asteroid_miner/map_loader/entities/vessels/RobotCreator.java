@@ -40,7 +40,7 @@ public class RobotCreator extends VesselCreator {
         if (param!=null){
             name =  param;
         }
-        param = FileOpener.getPropValue(rawLine,"player");
+        param = FileOpener.getPropValue(rawLine,"ownerPlayer");
         if (param!=null){
             playerName =  param;
         }

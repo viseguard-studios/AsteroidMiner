@@ -13,7 +13,7 @@ public class TeleportGate extends Building {
     /**
      * az eddig lerakott teleportkapuk azonosítókkal párosítva.
      */
-    private static TreeMap<TeleportGate,Integer> idList;
+    private static Map<TeleportGate,Integer> idList = new HashMap<>();
 
    // private int gateId;
     private TeleportGate pair = null;

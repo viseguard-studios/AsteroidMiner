@@ -36,6 +36,8 @@ public class UfoCreator  extends VesselCreator {
             name =  param;
         }
 
+        UFO ufo = new UFO(home, name);
+
         //Inventory létrehozása
 
         int[] ids = {-1,-1};
@@ -44,17 +46,15 @@ public class UfoCreator  extends VesselCreator {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(ids[0]==-1||ids[1]==-1) throw new Exception("End of resource describer not found.");
+        if(ids[0]!=-1||ids[1]!=-1) {// throw new Exception("End of resource describer not found.");
 
-        UFO ufo = new UFO(home,name);
+            ArrayList<String> rawResources = new ArrayList<String>(rawLines.subList(ids[0], ids[1] + 1));
+            ArrayList<Item> resources = ItemCreator.getResources(rawResources);
 
-        ArrayList<String> rawResources = new ArrayList<String>(rawLines.subList(ids[0],ids[1]+1));
-        ArrayList<Item> resources = ItemCreator.getResources(rawResources);
-
-        for (Item res: resources) {
-            ufo.getInventory().insertItem(res);
+            for (Item res : resources) {
+                ufo.getInventory().insertItem(res);
+            }
         }
-
         //adds ufo to scenes entities
         home.GetScene().addEntity(ufo);
         return ufo;

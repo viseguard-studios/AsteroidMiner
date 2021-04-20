@@ -1,0 +1,1 @@
+startgame 0 P:\BME\Proj_Lab\Project\AsteroidMiner\test_files\test.txt 1

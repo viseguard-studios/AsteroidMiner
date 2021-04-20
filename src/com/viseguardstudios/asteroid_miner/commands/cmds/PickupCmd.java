@@ -12,7 +12,7 @@ import java.util.List;
 public class PickupCmd extends Command {
     @Override
     public String getName() {
-        return "drill";
+        return "pickup";
     }
 
     @Override

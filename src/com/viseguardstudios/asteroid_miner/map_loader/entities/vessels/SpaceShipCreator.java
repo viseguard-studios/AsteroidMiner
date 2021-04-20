@@ -42,7 +42,7 @@ public class SpaceShipCreator extends VesselCreator {
         if (param!=null){
             name =  param;
         }
-        param = FileOpener.getPropValue(describer,"player");
+        param = FileOpener.getPropValue(describer,"ownerPlayer");
         if (param!=null){
             playerName =  param;
         }
@@ -69,13 +69,14 @@ public class SpaceShipCreator extends VesselCreator {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(ids[0]==-1||ids[1]==-1) throw new Exception("End of resource describer not found.");
+        if(ids[0]!=-1||ids[1]!=-1) { //throw new Exception("End of resource describer not found.");
 
-        ArrayList<String> rawResources = new ArrayList<String>(rawLines.subList(ids[0],ids[1]+1));
-        ArrayList<Item> resources = ItemCreator.getResources(rawResources);
+            ArrayList<String> rawResources = new ArrayList<String>(rawLines.subList(ids[0], ids[1] + 1));
+            ArrayList<Item> resources = ItemCreator.getResources(rawResources);
 
-        for (Item res: resources) {
-            spaceShip.getInventory().insertItem(res);
+            for (Item res : resources) {
+                spaceShip.getInventory().insertItem(res);
+            }
         }
 
         // Teleportkapuk betöltése
@@ -85,15 +86,16 @@ public class SpaceShipCreator extends VesselCreator {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(ids[0]==-1||ids[1]==-1) throw new Exception("End of telegates describer not found.");
+        if(ids[0]!=-1||ids[1]!=-1) {// throw new Exception("End of telegates describer not found.");
 
-        ArrayList<String> rawTeles = new ArrayList<String>(rawLines.subList(ids[0],ids[1]+1));
-        ArrayList<TeleportGateItem> teles = ItemCreator.getTeleportGates(rawTeles);
+            ArrayList<String> rawTeles = new ArrayList<String>(rawLines.subList(ids[0], ids[1] + 1));
+            ArrayList<TeleportGateItem> teles = ItemCreator.getTeleportGates(rawTeles);
 
-        for (TeleportGateItem tele:teles) {
-            spaceShip.getInventory().insertGate(tele);
+            for (TeleportGateItem tele : teles) {
+                spaceShip.getInventory().insertGate(tele);
+            }
         }
-
+        
         return spaceShip;
 
 

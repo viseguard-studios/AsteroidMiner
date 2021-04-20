@@ -30,6 +30,9 @@ public abstract class BuildingCreator extends MovableEntityCreator{
         String rawLine = null;
         for (int i = 0; i<inputLines.size(); i++) {
             rawLine = inputLines.get(i);
+            if(rawLine.isEmpty() || rawLine.isBlank())
+                continue;
+
             String currentType = FileOpener.getObjType(rawLine);
             ArrayList<String> rawDescriber= null;
             if (currentType != null) {

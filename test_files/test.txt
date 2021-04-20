@@ -1,0 +1,56 @@
+{player name="player_1"}
+
+
+{astList name="Komplex_Test"}
+
+    {asteroid position="10,331" name="A0" exploded="false" coreSize="1" maxHidingSpace="1" crustSize="1" revealed="yes" visited="yes" mined="yes"}
+    
+        {orbitAsteroid}
+
+        {telegate name="G1" teleId="1"}
+
+        {/orbitAsteroid}
+        
+        {vesselsOnAsteroid}
+            
+            {spaceShip name="S1" ownerPlayer="player_1" isHidden="no" }
+
+            
+            {/spaceShip}
+
+            {ufo name="UFO1"}
+
+            {/ufo}
+
+            {robot name="R1" ownerPlayer="player_1" isHidden="no"}
+        
+        {/vesselsOnAsteroid}
+    
+    {/asteroid}
+    
+    {asteroid position="110,100" name="Asteroid_1" exploded="no" coreSize="3" maxHidingSpace="1" crustSize="1" revealed="yes" visited="no"}
+
+        {orbitAsteroid}
+
+            {telegate name="G2" teleId="1"}
+
+        {/orbitAsteroid}
+
+        {asteroidInventory}
+
+            {iron}
+
+            {iron}
+
+            {iron}
+        {/asteroidInventory}
+    {/asteroid}
+    
+    
+
+{/astList}
+
+{astRelations}
+
+
+{/astRelations}

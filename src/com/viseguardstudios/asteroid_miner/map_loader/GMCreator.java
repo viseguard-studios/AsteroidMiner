@@ -26,8 +26,11 @@ public class GMCreator {
 
         String currentLine = null;
         String currentType = null;
-        for (int i = 0; i>inputLines.size(); i++){
+        for (int i = 0; i < inputLines.size(); i++){
             currentLine = inputLines.get(i);
+            if(currentLine.isEmpty() || currentLine.isBlank())
+                continue;
+
             currentType = FileOpener.getObjType(currentLine);
             if(currentType.equals("player")){
                 try {
