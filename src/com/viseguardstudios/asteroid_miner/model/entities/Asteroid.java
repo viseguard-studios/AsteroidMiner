@@ -379,6 +379,10 @@ Adams branch
         return i >=items.size() ? null : items.get(i);
     }
 
+    public Item pickupItem(int i)
+    {
+        return i>inventory.getItems().size() ? null : inventory.getItems().get(i);
+    }
     /**
      * Új szomszéd hozzáadása.
      */
