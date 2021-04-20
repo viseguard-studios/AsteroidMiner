@@ -33,7 +33,7 @@ public class QueueSolarFlareTest extends Test {
     public void Run() {
 
         Logger.log("gm.TakeTurn()");
-        gm.TakeTurn();
+        gm.takeTurn();
         Logger.returned();
 
     }

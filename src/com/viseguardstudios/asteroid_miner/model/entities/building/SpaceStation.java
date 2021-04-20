@@ -3,9 +3,6 @@ package com.viseguardstudios.asteroid_miner.model.entities.building;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.GameManager;
 import com.viseguardstudios.asteroid_miner.model.Scene;
-import com.viseguardstudios.asteroid_miner.skeleton.Logger;
-
-import java.util.*;
 
 /**
  * A játékosok által megépítendő űrállomás épület típust jelöli. Speciális tulajdonsága, hogy amikor megépül akkor a játék befejeződik.
@@ -28,7 +25,7 @@ public class SpaceStation extends Building {
          */
         Scene scene = a.GetScene();
         GameManager manager = scene.GetManager();
-        manager.EndGame();
+        manager.endGame();
     }
 
     /**

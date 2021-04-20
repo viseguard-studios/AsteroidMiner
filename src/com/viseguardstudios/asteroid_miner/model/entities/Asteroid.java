@@ -96,12 +96,6 @@ public class Asteroid extends Entity {
      */
     private List<Asteroid> neighbours = new LinkedList<>();
 
-
-    /**
-     * Az aszteroida magjában lévő nyersanyagkészlet.
-     */
-    private Resource resource;
-
     /**
      * Az aszteroidán jelenleg állomásozó járművek, épületek tárolói.
      */
@@ -127,20 +121,18 @@ public class Asteroid extends Entity {
      */
     private boolean mined;
 
-
     /**
      * Default constructor
      */
-    public Asteroid(Resource r) {
+    public Asteroid(Resource r, int amount) {
         maxHidingSpace = 1;
         mined = false;
         exploded = false;
-        coreSize = 5;
+        coreSize = amount;
         crustSize = 5;
-        resource = r;
         inventory = new AsteroidInventory();
-        for(int i=0; i<coreSize; i++){
-            inventory.insertItem(resource);
+        for(int i=0; i<amount; i++){
+            inventory.insertItem(r);
         }
     }
 
@@ -281,10 +273,11 @@ public class Asteroid extends Entity {
     public Item Mine() {
         if(exploded || crustSize==0 || inventory.getItems().size()==0)
             return null;
-        inventory.removeItem(resource);
+        Item res = inventory.getItems().get(0);
+        inventory.removeItem(res);
         if(inventory.getItems().size()==0)
             mined=true;
-        return resource;
+        return res;
     }
 
     /**
@@ -301,7 +294,6 @@ public class Asteroid extends Entity {
                 if(neededSpace > 0){
                     hidingSpaceShip = v;
                 }
-                v.setHidden(true);
                 return true;
             }
             return false; //nincs elég hely
@@ -318,7 +310,6 @@ public class Asteroid extends Entity {
         if(v == hidingSpaceShip){
             hidingSpaceShip = null;
         }
-        v.setHidden(false);
     }
 
     /**
@@ -400,21 +391,30 @@ Adams branch
             s.SolarFlare();
     }
 
-    /**
-     * További getterek, setterek
-     * @return
-     */
 
     @Override
     public void printStatus() {
         super.printStatus();
         System.out.println("Crust: "+crustSize);
         System.out.println("Vessels:");
+        for (var vessel :
+                this.stationed) {
+            System.out.println("- "+ vessel.getName());
+        }
 
-        System.out.println("Resources:");
-        System.out.println("- " + resource.getName());
+        System.out.println("Items:");
+        for (var item :
+                inventory.getItems()) {
+            System.out.println("- "+ item.getName());
+        }
 
         System.out.println("Teleport Gates:");
+
+        System.out.println("Neighbours:");
+        for (var a :
+                neighbours) {
+            System.out.println("- " + a.getName());
+        }
     }
 
     //#################################
@@ -463,14 +463,6 @@ Adams branch
 
     public void setInventory(AsteroidInventory inventory) {
         this.inventory = inventory;
-    }
-
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
     }
 
     public List<Asteroid> getPhysicalNeighbours(){

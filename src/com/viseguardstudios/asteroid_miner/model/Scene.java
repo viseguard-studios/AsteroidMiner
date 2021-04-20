@@ -35,7 +35,7 @@ public class Scene {
      * Új entitás hozzáadása a játékmenethez.
      * @param e
      */
-    public void AddEntity(Entity e) {
+    public void addEntity(Entity e) {
         if (!entities.contains(e)){
             entities.add(e);
             e.setScene(this);

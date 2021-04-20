@@ -1,6 +1,5 @@
 package com.viseguardstudios.asteroid_miner.model;
 
-import com.viseguardstudios.asteroid_miner.commands.Command;
 import com.viseguardstudios.asteroid_miner.commands.CommandExecutor;
 
 import java.util.*;
@@ -14,15 +13,11 @@ public class Engine {
 
     static Engine instance;
 
-    public Scene getScene() {
-        return scene;
-    }
-
     Scene scene;
 
     boolean running;
 
-
+    private int playerCount;
 
     CommandExecutor cmdexec;
 
@@ -48,7 +43,6 @@ public class Engine {
 
         running = true;
 
-        //TODO Handle commands
         while (running){
             var line = in.nextLine();
             cmdexec.execute(line);
@@ -67,13 +61,16 @@ public class Engine {
 
         gm.setManagedScene(scene);
 
+        for (int i = 0; i < playerCount; i++) {
+            var p = new Player();
 
-
+            gm.addPlayer(p);
+        }
         //gm.AddPlayer();
 
         gm.InitGame(seed);
 
-        gm.StartGame();
+        gm.startGame();
     }
 
     /**
@@ -92,4 +89,15 @@ public class Engine {
         return instance;
     }
 
+    public void setPlayerCount(int player_count) {
+        this.playerCount = player_count;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public GameManager getGameManager(){
+        return scene.GetManager();
+    }
 }
