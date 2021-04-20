@@ -23,7 +23,7 @@ public class PlaceCmd extends Command {
             return;
         }
 
-        GameManager gm = Engine.getInstance().getScene().GetManager();
+        GameManager gm = Engine.getInstance().getScene().getManager();
         List<Player> players = gm.getAllPlayers();
         for(Player player : players){
             if(player == gm.getCurrentPlayer()){

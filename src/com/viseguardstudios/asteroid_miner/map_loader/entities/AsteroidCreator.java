@@ -112,7 +112,7 @@ public class AsteroidCreator extends EntityCreator {
         }
         child = new ArrayList<String>(rawLines.subList(ids[0],ids[1]+1));
         try {
-            VesselCreator.createVessels(child,scene.GetManager(),asteroid);// Létrehozza és az aszteroidára pakolja
+            VesselCreator.createVessels(child,scene.getManager(),asteroid);// Létrehozza és az aszteroidára pakolja
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -7,7 +7,6 @@ import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 
 import java.util.List;
-import java.util.Set;
 
 public class HideCmd extends Command {
     @Override
@@ -22,7 +21,7 @@ public class HideCmd extends Command {
             return;
         }
 
-        GameManager gm = Engine.getInstance().getScene().GetManager();
+        GameManager gm = Engine.getInstance().getScene().getManager();
         List<Player> players = gm.getAllPlayers();
         for (Player player : players) {
             if(player == gm.getCurrentPlayer()){
