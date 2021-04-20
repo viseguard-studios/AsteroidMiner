@@ -93,6 +93,7 @@ public abstract class Vessel extends MovableEntity {
      * Felrobban  a jármű (egy aszteroida robbanásának hatására).
      */
     public void explode() {
+        super.explode();
         scene.removeEntity(this);
     }
 

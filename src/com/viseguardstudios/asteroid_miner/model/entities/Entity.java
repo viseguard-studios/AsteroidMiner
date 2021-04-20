@@ -63,7 +63,9 @@ public abstract class Entity {
         System.out.println(name);
     }
 
-    public abstract void explode();
+    public void explode(){
+        System.out.println("[EVENT] "+ getName()+" exploded");
+    };
 
 
 

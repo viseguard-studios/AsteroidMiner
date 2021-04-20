@@ -156,6 +156,7 @@ public class Asteroid extends Entity {
      * Felrobban az aszteroida. Felrobbantja az összes rajta tartózkodó járművet, hozzáférhetetlenné teszi a raktárat és a rajta lévő épületeket.
      */
     public void explode() {
+        super.explode();
         exploded = true;
         //járműveknek, épületeknek jelzi a robbanást
         for(Vessel v: stationed)
@@ -368,21 +369,20 @@ Adams branch
     }
     /**
      * Elem kivétele.
-     * @param item
+     * @param itemType item típusa
      * @return null ha nincs, amúgy az első Item ami megfelel a neki
      */
-    public Item pickupItem(Item item)
+    public Item pickupItem(String itemType)
     {
         List<Item> items = inventory.getItems();
         int i =0;
-        while (!items.get(i).satisfies(item) && i < items.size()) i++;
-        return i >=items.size() ? null : items.get(i);
+        while (!items.get(i).getName().equals(itemType) && i < items.size()) i++;
+        Item item = i >=items.size() ? null : items.get(i);
+        if(item != null) inventory.removeItem(item);
+        return item;
     }
 
-    public Item pickupItem(int i)
-    {
-        return i>inventory.getItems().size() ? null : inventory.getItems().get(i);
-    }
+
     /**
      * Új szomszéd hozzáadása.
      */
