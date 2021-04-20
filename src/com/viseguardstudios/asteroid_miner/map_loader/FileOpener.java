@@ -32,7 +32,7 @@ public class FileOpener {
         }
     }
     //loads and parse files to make commands (heavily rely on the correction of the user input)
-    public static void loadFile() {
+    public void loadFile() {
         while (input.hasNext()) {
             String nextLine = input.nextLine();
             commands.add(nextLine); 
@@ -211,18 +211,20 @@ public class FileOpener {
         name = name.toLowerCase();
         for (int i = startLine; i<inputLines.size();i++){
             String currentLine = inputLines.get(i);
-            if(getObjType(currentLine).equals(name)){
-                ids[0] = i;
-                break;
-            }
+            if(!currentLine.trim().isEmpty())
+                if(getObjType(currentLine).equals(name)){
+                    ids[0] = i;
+                    break;
+                }
         }
         String endMarker = "/"+name;
         for (int i = ids[0]; i<inputLines.size();i++){
             String currentLine = inputLines.get(i);
-            if(getObjType(currentLine).equals(endMarker)){
-                ids[1] = i;
-                break;
-            }
+            if(!currentLine.trim().isEmpty())
+                if(getObjType(currentLine).equals(endMarker)){
+                    ids[1] = i;
+                    break;
+                }
         }
         return ids;
     }

@@ -72,6 +72,15 @@ public class Engine {
 
         gm.startGame();
     }
+    /**
+     * Új játék fájlból
+     * **/
+    public void StartGame(int seed, Scene scene) {
+        System.out.println("Starting game");
+        this.scene = scene;
+        scene.getManager().initGame(seed);
+        scene.getManager().startGame();
+    }
 
     /**
      * Játékmenetek befejezése.
@@ -99,5 +108,9 @@ public class Engine {
 
     public GameManager getGameManager(){
         return scene.getManager();
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
     }
 }

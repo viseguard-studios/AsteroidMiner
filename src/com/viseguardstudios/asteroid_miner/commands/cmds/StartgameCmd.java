@@ -1,6 +1,9 @@
 package com.viseguardstudios.asteroid_miner.commands.cmds;
 
 import com.viseguardstudios.asteroid_miner.commands.Command;
+import com.viseguardstudios.asteroid_miner.map_loader.FileOpener;
+import com.viseguardstudios.asteroid_miner.map_loader.GMCreator;
+import com.viseguardstudios.asteroid_miner.map_loader.SceneCreator;
 import com.viseguardstudios.asteroid_miner.model.Engine;
 
 public class StartgameCmd extends Command {
@@ -21,8 +24,17 @@ public class StartgameCmd extends Command {
         String file = params[2];
         int player_count = Integer.parseInt(params[3]);
 
-        Engine.getInstance().setPlayerCount(player_count);
+        if (seed == 0)
+        {
 
-        Engine.getInstance().StartGame(seed);
+            FileOpener fileOpener = new FileOpener();
+            fileOpener.build(file);
+            fileOpener.loadFile();
+            Engine.getInstance().StartGame(seed,SceneCreator.createSceneFromFile(fileOpener.getCommands()));
+        }else {
+            Engine.getInstance().setPlayerCount(player_count);
+
+            Engine.getInstance().StartGame(seed);
+        }
     }
 }
