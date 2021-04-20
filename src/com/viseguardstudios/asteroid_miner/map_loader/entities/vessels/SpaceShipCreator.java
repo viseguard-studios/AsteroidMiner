@@ -54,7 +54,7 @@ public class SpaceShipCreator extends VesselCreator {
             isHidden = FileOpener.getBoolValue(param);
         }
 
-        Player owner = manager.getPlayerByName(playerName); //TODO HOGY KÉRDEZZÜK LE A PLAYERT?
+        Player owner = manager.getPlayerByName(playerName);
         SpaceShip spaceShip = new SpaceShip(home,owner,name);
         if(isHidden)
             spaceShip.Hide();

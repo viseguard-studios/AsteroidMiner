@@ -42,6 +42,7 @@ public class TeleportGate extends Building {
         this.pairID = pairID;
         this.currentAsteroid = home;
         home.AddBuilding(this);
+    }
 /* Titusz's branch
     public TeleportGate(int id) {
         id =gateId;

@@ -34,8 +34,15 @@ public class GMCreator {
         }
 
         //tulajdonságok
+        int[] ids = {-1,-1};
+        try {
+            ids = FileOpener.getChildLoc(inputLines,"astList",0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> rawAsteroidList = new ArrayList<String>(inputLines.subList(ids[0],ids[1]+1));
 
-        String describer = inputLines.get(0);
+        String describer = rawAsteroidList.get(0);
         int sunDist = -1;
         boolean gameEnded = false;
         boolean stormQueued = false;
@@ -73,13 +80,7 @@ public class GMCreator {
 
         List<Asteroid> asteroidsWithoutConnections = new ArrayList<>();
 
-        int[] ids = {-1,-1};
-        try {
-            ids = FileOpener.getChildLoc(inputLines,"astList",0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        ArrayList<String> rawAsteroidList = new ArrayList<String>(inputLines.subList(ids[0],ids[1]+1));
+
 
         for (int i = 0;i<inputLines.size();i++){
             ids = new int[]{-1,-1};
@@ -96,9 +97,18 @@ public class GMCreator {
             i = ids[1]+1;
         }
 
-        //Todo kapcsolatok felállítása
-        //Todo Teleportkapuk összekapcsolása
+        //Todo kapcsolatok felállítása, Kész?
+        try {
+            ids = FileOpener.getChildLoc(inputLines,"astRelations",0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> rawRelations = new ArrayList<String>(inputLines.subList(ids[0],ids[1]+1));
+        MrConnector.createNeighborhood(asteroidsWithoutConnections,rawRelations);
         //Todo Aszteroidák áthelyezése a GameManagerbe
+
+        //Todo Teleportkapuk összekapcsolása
+
         //Todo Scenebe az entitások beregisztrálása
         //Todo Seed beállítása
         //Todo Telepesek beregisztrálása a GameManagerbe
