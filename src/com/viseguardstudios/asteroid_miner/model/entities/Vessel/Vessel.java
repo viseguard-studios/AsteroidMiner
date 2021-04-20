@@ -33,31 +33,41 @@ public abstract class Vessel extends MovableEntity {
     protected Player owner;
 
     /**
+     * Item áthelyezése
+     * @return
+     */
+    public abstract boolean placeItem(Item i);
+
+    /**
      * Belebújik az adott aszteroidába, ha van benne elegendő hely. Ha nincsen, az aszteroida felszínén marad.
      */
-    public void Hide() {
+    public boolean Hide() {
         if(!isHidden){
             var canHide = currentAsteroid.Hide(this);
             isHidden = canHide;
+            return isHidden;
         }
+        return false;
     }
 
     /**
      * Fúr egy egységnyit az aszteroida köpenyéből, ha még nincs teljesen átfúrva. Ha át van fúrva, nem történik művelet.
      */
-    public void Drill() {
-        currentAsteroid.Drill();
+    public boolean Drill() {
+        return currentAsteroid.Drill();
     }
 
     /**
      * Bányászat, ha lehetséges
      */
-    public void Mine(){
+    public Item Mine(){
+        Item mined = null;
         if(!isHidden){
-            Item mined = currentAsteroid.Mine();
+            mined = currentAsteroid.Mine();
             if(mined != null)
                 this.getInventory().insertItem(mined);
         }
+        return mined;
     }
 
     /**
@@ -76,11 +86,13 @@ public abstract class Vessel extends MovableEntity {
     /**
      * A jármű kibújik az aszteroida magjából, ha el volt bújva benne. Ha nem, nem történik művelet.
      */
-    public void ExitHiding() {
+    public boolean ExitHiding() {
         if(isHidden){
             currentAsteroid.Exit(this);
             isHidden = false;
+            return true;
         }
+        return false;
     }
 
 

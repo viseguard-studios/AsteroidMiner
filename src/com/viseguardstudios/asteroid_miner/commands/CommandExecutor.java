@@ -22,6 +22,8 @@ public class CommandExecutor {
         registerCommand(new MoveCmd());
         registerCommand(new DrillCmd());
         registerCommand(new MineCmd());
+        registerCommand(new HideCmd());
+        registerCommand(new PlaceCmd());
     }
 
     public void registerCommand(Command cmd){

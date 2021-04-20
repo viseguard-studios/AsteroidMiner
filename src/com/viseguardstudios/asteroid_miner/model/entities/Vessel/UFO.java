@@ -4,6 +4,7 @@ import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.inventory.InfiniteInventory;
+import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 public class UFO extends Vessel{
     InfiniteInventory inventory;
@@ -15,6 +16,11 @@ public class UFO extends Vessel{
     public UFO(Asteroid a) {
         super(a);
         inventory = new InfiniteInventory();
+    }
+
+    @Override
+    public boolean placeItem(Item i) {
+        return false;
     }
 
     /**
@@ -41,8 +47,9 @@ public class UFO extends Vessel{
 
     //Nem képes bányászni
     @Override
-    public void Drill() {
+    public boolean Drill() {
         //Do nothing
+        return false;
     }
 
     @Override
@@ -56,8 +63,9 @@ public class UFO extends Vessel{
     }
 
     @Override
-    public void Hide() {
+    public boolean Hide() {
         //DO not hide
+        return false;
     }
 
     @Override
