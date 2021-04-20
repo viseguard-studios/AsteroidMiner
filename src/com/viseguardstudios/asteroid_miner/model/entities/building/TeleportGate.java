@@ -14,7 +14,8 @@ public class TeleportGate extends Building {
      * az eddig lerakott teleportkapuk azonosítókkal párosítva.
      */
     private static TreeMap<TeleportGate,Integer> idList;
-    private int gateId;
+
+   // private int gateId;
     private TeleportGate pair = null;
     /**
     * Az aszteroida alapértelmezetten aktív, deaktiválódik a saját vagy a párja robbanása során
@@ -181,4 +182,7 @@ public class TeleportGate extends Building {
         return id;
     }
 
+    public int getId() {
+        return pairID;
+    }
 }

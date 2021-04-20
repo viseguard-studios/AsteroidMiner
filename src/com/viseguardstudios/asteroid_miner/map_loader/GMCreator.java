@@ -7,7 +7,9 @@ import com.viseguardstudios.asteroid_miner.model.GameManager;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 import java.util.ArrayList;
@@ -118,18 +120,21 @@ public class GMCreator {
 
 
 
-        //Todo Teleportkapuk összekapcsolása
+        //Todo Teleportkapuk összekapcsolása Lehet hogy működik
 
-
-
-        //Todo Scenebe az entitások beregisztrálása
-
-        for (Asteroid a: asteroidsWithoutConnections
+        for (Entity e: scene.getEntities()
              ) {
-            scene.addEntity(a);
-        }
-        //TODO other entities ?
+            if(e.getClass().equals(TeleportGate.class))
+            {
+                TeleportGate tg = ((TeleportGate) e);
+                TeleportGate pair = tg.getIdPair(tg.getId(), tg);
+                if(pair != null){
+                    tg.setPair(pair);
+                    pair.setPair(tg);
+                }
+            }
 
+        }
 
         //Todo Seed beállítása
 
