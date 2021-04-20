@@ -366,6 +366,18 @@ Adams branch
         }
         return canPlace;
     }
+    /**
+     * Elem kivétele.
+     * @param item
+     * @return null ha nincs, amúgy az első Item ami megfelel a neki
+     */
+    public Item pickupItem(Item item)
+    {
+        List<Item> items = inventory.getItems();
+        int i =0;
+        while (!items.get(i).satisfies(item) && i < items.size()) i++;
+        return i >=items.size() ? null : items.get(i);
+    }
 
     /**
      * Új szomszéd hozzáadása.
