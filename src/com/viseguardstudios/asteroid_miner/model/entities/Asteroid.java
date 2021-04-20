@@ -262,7 +262,7 @@ public class Asteroid extends Entity {
      * @return
      */
     public Item Mine() {
-        if(exploded || crustSize==0 || inventory.getItems().size()==0)
+        if(exploded || crustSize>0 || inventory.getItems().size()==0)
             return null;
         Item res = inventory.getItems().get(0);
         inventory.removeItem(res);
