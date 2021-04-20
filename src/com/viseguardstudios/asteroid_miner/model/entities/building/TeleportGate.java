@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model.entities.building;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import jdk.jfr.Label;
 
 import java.util.*;
 
@@ -20,12 +21,34 @@ public class TeleportGate extends Building {
      */
     private boolean active = true;
 
+    private int pairID;
+
     /**
      * Default constructor
+     *
      */
+    public TeleportGate(int pairID) {
+        this.pairID = pairID;
+    }
+
+    /**
+     * Teleportkapu létrehozása.
+     * @param home hova kerüljön
+     * @param pairID pár id-je
+     */
+
+    public TeleportGate(Asteroid home,String name, int pairID) {
+        this.name = name;
+        this.pairID = pairID;
+        this.currentAsteroid = home;
+        home.AddBuilding(this);
+    }
+/* Titusz's branch
     public TeleportGate(int id) {
         id =gateId;
+
     }
+    */
 
     @Override
     public void RoundEnd(boolean closeToSun) {}
@@ -36,7 +59,8 @@ public class TeleportGate extends Building {
     @Override
     public void SolarFlare() {
         ArrayList<Asteroid> neighbours = (ArrayList<Asteroid>) currentAsteroid.getPhysicalNeighbours();
-        int bound = neighbours.size();
+        if(neighbours.size()==0) return; //ha nincs szomszéd, nem tud mozogni
+        int bound = neighbours.size()-1;
         //választ egy random indexet a szomszédok listájának lehetséges indexei közül
         Random rand = new Random();
         int chosen = rand.nextInt(bound);
@@ -86,6 +110,24 @@ public class TeleportGate extends Building {
     }
 
     /**
+
+     * Visszaadja, hogy a párjának milyen ID-je lenne
+     * @return
+     */
+      /* 
+    public int getPairID(){return pairID;}
+
+    public TeleportGate getIdPair(int id){
+        return null;
+    }
+
+    @Label("MI EZ?? VAN MÁSIK METÓDUS IS!!!")
+    @Deprecated
+    public void setPair(TeleportGate pair){
+
+        //TODO MIÉRT VAN KÉT PÁR???
+    }
+ Duplicated methods in merge
      *Teleportkapu párjának megkeresése ID alapján, ha létezik
      */
     public TeleportGate getIdPair(int id, TeleportGate tg){
@@ -101,6 +143,7 @@ public class TeleportGate extends Building {
      * @param tg
      * @param id
      */
+
 
     public void addIdListItem(TeleportGate tg, int id){
         int idCount = 0;

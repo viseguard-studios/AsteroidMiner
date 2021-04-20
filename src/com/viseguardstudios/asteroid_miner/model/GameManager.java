@@ -4,9 +4,13 @@ import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
+import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+import com.viseguardstudios.asteroid_miner.util.Namer;
 import com.viseguardstudios.asteroid_miner.util.RandomCollection;
+import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 import java.util.*;
 
@@ -36,12 +40,12 @@ public class GameManager {
     /**
      * A játék játékosainak listája.
      */
-    private Set<Player> allPlayers;
+    private Set<Player> allPlayers = new HashSet<>();
 
     /**
      * A játékban szereplő aszteroidák listája.
      */
-    private Set<Asteroid> asteroids;
+    private List<Asteroid> asteroids = new ArrayList<>();
 
     /**
      * Jelzi, hogy a játék befejeződött-e már.
@@ -69,6 +73,32 @@ public class GameManager {
     public GameManager() {
     }
 
+
+    public GameManager(int sunDist, boolean gameEnded, boolean stormQueued) {
+        //TODO kell-e név?
+    }
+
+    /**
+     * Visszaadja az első ilyen nevű playert. NE LEGYEN TÖBB EGYFORMA NEVŰ!
+     * @param name
+     * @return
+     */
+    public Player getPlayerByName(String name){
+
+        for (Player p : allPlayers) {
+            if(p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+
+
+    public Set<Player> getAllPlayers() {
+        return allPlayers;
+    }
+
     /**
      * A játékmenet inicializálásáért felel.
      * @param seed
@@ -84,7 +114,7 @@ public class GameManager {
         else {
             rnd = new Random(seed);
             deterministic = false;
-            GenerateScene();
+            generateScene();
         }
 
         //Generate stuff
@@ -97,6 +127,7 @@ public class GameManager {
     }
 
     /**
+
      * Új játékos hozzáadása.
      * @param p
      */
@@ -105,16 +136,24 @@ public class GameManager {
     }
 
     /**
+     * Aszteroida hozzáadása
+     * @param asteroid
+     */
+    public void AddAsteroid(Asteroid asteroid){
+        asteroids.add(asteroid);
+    }
+
+    /**
      * Új játék indításáért felel.
      */
-    public void StartGame() {
+    public void startGame() {
         // TODO implement here
     }
 
     /**
      * Egy játékos aktuális köre - ekkor van lehetősége irányítani a járműveit egyesével.
      */
-    public void TakeTurn() {
+    public void takeTurn() {
         Logger.log("scene.SolarFlare()");
         scene.SolarFlare();
         Logger.returned();
@@ -123,16 +162,32 @@ public class GameManager {
     /**
      * Aktuális játék befejezése.
      */
-    public void EndGame() {
+    public void endGame() {
         // TODO implement here
     }
+
 
     /**
      * Játék inicializálás során a játéktér elemeinek inicializálása.
      */
-    private void GenerateScene() {
+    private void generateScene() {
         // TODO implement here
         GenerateAsteroids();
+
+        for (var pl : allPlayers) {
+
+            for (int i = 0; i < 3; i++) {
+
+                var ai = rnd.nextInt(asteroids.size());
+
+                var ss = new SpaceShip(asteroids.get(ai));
+                ss.setName("SpaceShip_"+ Namer.getNextID(ss.getClass()));
+                pl.addVessel(ss);
+
+                settlers.add(ss);
+                scene.addEntity(ss);
+            }
+        }
     }
 
     /**
@@ -144,6 +199,8 @@ public class GameManager {
         RandomCollection<Resource> resources = new RandomCollection<>(rnd);
 
         resources.add(1, new Coal());
+        resources.add(2, new Iron());
+        resources.add(2, new Ice());
 
         return resources.next();
 
@@ -154,21 +211,49 @@ public class GameManager {
      * Az aszteroidamező inicializálása, játék inicializálás során hozzuk létre.
      */
     private void GenerateAsteroids() {
-        for (int i = 0; i < 100; i++) {
-            //Create pos
+        for (int i = 0; i < 10; i++) {
+
             var res = GenerateNewResource();
+            var count = rnd.nextInt(5);
 
+            //Create pos
+            var pos = new Vector2(rnd.nextInt(10), rnd.nextInt(10));
 
-            var a = new Asteroid();
-            a.setResource(res);
+            var a = new Asteroid(res,count);
+            a.setPos(pos);
+            //a.setResource(res);
             a.setCrustSize(rnd.nextInt(3));
 
             a.setName("Asteroid_"+i);
-            scene.AddEntity(a);
+            scene.addEntity(a);
+            asteroids.add(a);
         }
+
+
+        for (var ast : asteroids) {
+            var pos = ast.getPos();
+
+            while (ast.getPhysicalNeighbours().size() < 3){
+                Asteroid closest = null;
+                double dist_closest = 100000000;
+
+                for (var p : asteroids) {
+                    var dist = ast.getPos().distance(p.getPos());
+                    if(dist < dist_closest && ast != p && !ast.getPhysicalNeighbours().contains(p)){
+                        dist_closest = dist;
+                        closest =  p;
+                    }
+                }
+
+                ast.AddNeighbour(closest);
+            }
+
+        }
+
 
         //Connect the asteroids that are close together.
     }
+
 
     /**
      * Visszaadja, hogy jelenleg napviharban van-e az aszteroidamező.
@@ -200,6 +285,8 @@ public class GameManager {
         CreateStormOn = true;
     }
 
+
+
     /**
      * Játékos hozzáadása a listához.
      * @param p
@@ -214,5 +301,10 @@ public class GameManager {
 
     public void removeSettler(SpaceShip spaceShip) {
         settlers.remove(spaceShip);
+    }
+
+
+    public List<SpaceShip> getSettlers(){
+        return settlers;
     }
 }

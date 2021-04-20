@@ -10,18 +10,23 @@ public class Namer {
 
     public static String getName(Type t){
 
+        return t.getTypeName() + "_" + getNextID(t);
+    }
+
+    public static int getNextID(Type t){
+
         if(counters.containsKey(t)){
             var i = counters.get(t);
             i++;
             counters.replace(t,i);
-            return t.getTypeName() + "_" + i;
+            return i;
         }
 
         int i = 1;
 
         counters.put(t, i);
 
-        return t.getTypeName() + "_" + i;
+        return i;
     }
 
 }

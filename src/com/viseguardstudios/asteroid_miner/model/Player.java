@@ -26,12 +26,35 @@ public class Player {
      */
     private String name;
 
+    /**
+    * Név lekérdezése;
+    */
+    public String getName(){
+        return name;
+    }
+
+    /**
+     * Név beállítása
+     * @param name
+     */
+    public  void setName(String name){
+        this.name = name;
+    }
+
 
 
     /**
      * Az itt szereplő nyersanyagfajta után kutatnak a játékos robotjai.
      */
     private Resource searching_for;
+
+    /**
+     * az űrjárművek lista getter -e.
+     * @return
+     */
+    public ArrayList<Vessel> getOwnedVessels() {
+        return ownedVessels;
+    }
 
     /**
      * Hozzáadunk egy űrjárművet a játékoshoz

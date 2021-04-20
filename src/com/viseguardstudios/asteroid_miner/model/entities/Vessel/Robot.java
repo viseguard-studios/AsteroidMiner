@@ -21,8 +21,9 @@ public class Robot extends Vessel {
      * @param p
      * @param currentAsteroid
      */
-    public Robot(Player p, Asteroid currentAsteroid) {
+    public Robot(Player p, Asteroid currentAsteroid, String name) {
         super(currentAsteroid);
+        this.name = name;
         owner = p;
         p.addVessel(this);
     }
