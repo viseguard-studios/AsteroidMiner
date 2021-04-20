@@ -156,6 +156,7 @@ public class Asteroid extends Entity {
      * Felrobban az aszteroida. Felrobbantja az összes rajta tartózkodó járművet, hozzáférhetetlenné teszi a raktárat és a rajta lévő épületeket.
      */
     public void explode() {
+        super.explode();
         exploded = true;
         //járműveknek, épületeknek jelzi a robbanást
         for(Vessel v: stationed)
