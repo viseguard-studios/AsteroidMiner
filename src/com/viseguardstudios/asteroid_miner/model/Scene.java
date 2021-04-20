@@ -1,7 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Entity;
-import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 import java.util.*;
@@ -55,7 +54,14 @@ public class Scene {
      * Az összes entitás RoundEnd() metódusát meghívja, befejezi az adott kört.
      */
     public void roundEnded() {
-        // TODO implement here
+        if (!entities.isEmpty()){
+            for (int i = 0; i < entities.size(); i++) {
+                Entity e = entities.get(i);
+
+                e.roundEnd(false);
+
+            }
+        }
     }
 
     /**

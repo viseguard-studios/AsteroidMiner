@@ -165,7 +165,6 @@ public class GameManager {
             scene.solarFlare(pos, radius);
         }
 
-
         scene.roundEnded();
 
         playerID++;
