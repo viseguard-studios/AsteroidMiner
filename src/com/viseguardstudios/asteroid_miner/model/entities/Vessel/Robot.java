@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.model.entities.Vessel;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
+import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 /**
  * Egy speciális jármű, a robot tevékenységeit, tulajdonságait tartalmazza.
@@ -14,6 +15,11 @@ public class Robot extends Vessel {
      */
     public Robot(Asteroid a) {
         super(a);
+    }
+
+    @Override
+    public boolean placeItem(Item i) {
+        return false;
     }
 
     /**
@@ -50,7 +56,9 @@ public class Robot extends Vessel {
      * Üres metódus, robot nem tud bányászni
      */
     @Override
-    public void Mine(){}
+    public Item Mine(){
+        return null;
+    }
 
     @Override
     public void AsteroidExploded(){

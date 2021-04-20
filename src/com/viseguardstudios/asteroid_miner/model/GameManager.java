@@ -300,7 +300,6 @@ public class GameManager {
         settlers.remove(spaceShip);
     }
 
-
     public List<SpaceShip> getSettlers(){
         return settlers;
     }
@@ -308,4 +307,8 @@ public class GameManager {
     public Set<Player> getAllPlayers() {
         return allPlayers;
     }
+
+    public List<Asteroid> getAsteroids() { return asteroids; }
+
+    public Player getCurrentPlayer() { return currentPlayer; }
 }

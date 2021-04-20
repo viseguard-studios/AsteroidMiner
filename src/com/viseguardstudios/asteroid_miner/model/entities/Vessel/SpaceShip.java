@@ -27,6 +27,21 @@ public class SpaceShip extends Vessel {
     }
 
     /**
+     * Elem belehelyezése az aktuális aszteroidába, amin tartózkodik. Sikeres behelyezés után igazzal tér vissza, a saját raktárból eltávolítja az elemet. Sikertelen művelet után hamissal tér vissza.
+     * @param i
+     * @return
+     */
+    @Override
+    public boolean placeItem(Item i) {
+        var success = currentAsteroid.PlaceItem(i);
+        if(success){
+            inventory.removeItem(i);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * A telepes által folyamatosan hordozott raktár.
      */
     private SSInventory inventory;
@@ -45,20 +60,6 @@ public class SpaceShip extends Vessel {
         boolean cancraft = recipe.canCraft(this);
         if (cancraft)
             recipe.craft(this);
-    }
-
-    /**
-     * Elem belehelyezése az aktuális aszteroidába, amin tartózkodik. Sikeres behelyezés után igazzal tér vissza, a saját raktárból eltávolítja az elemet. Sikertelen művelet után hamissal tér vissza.
-     * @param i 
-     * @return
-     */
-    public boolean PlaceItem(Item i) {
-        var success = currentAsteroid.placeItem(i);
-        if(success){
-            inventory.removeItem(i);
-            return true;
-        }
-        return false;
     }
 
     /**

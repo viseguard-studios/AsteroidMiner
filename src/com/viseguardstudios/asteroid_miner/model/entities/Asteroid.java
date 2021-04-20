@@ -252,9 +252,12 @@ public class Asteroid extends Entity {
     /**
      * Akkor hívódik meg amikor az aszteroida kérgén lévő lyukat akarják mélyíteni.
      */
-    public void Drill() {
-        if(crustSize > 0 && !exploded)
+    public boolean Drill() {
+        if(crustSize > 0 && !exploded){
             crustSize -= 1;
+            return true;
+        }
+        return false;
     }
 
     /**

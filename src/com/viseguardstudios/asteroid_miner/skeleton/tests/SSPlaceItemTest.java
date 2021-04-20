@@ -2,7 +2,6 @@ package com.viseguardstudios.asteroid_miner.skeleton.tests;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
-import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
@@ -53,7 +52,7 @@ public class SSPlaceItemTest extends Test {
     @Override
     public void Run() {
         Logger.functionCalled("ss.PlaceItem(i)");
-        ss.PlaceItem(i);
+        ss.placeItem(i);
         Logger.returned();
     }
 }
