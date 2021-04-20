@@ -25,7 +25,7 @@ public class PlaceCmd extends Command {
         }
 
         GameManager gm = Engine.getInstance().getScene().GetManager();
-        Set<Player> players = gm.getAllPlayers();
+        List<Player> players = gm.getAllPlayers();
         for(Player player : players){
             if(player == gm.getCurrentPlayer()){
                 for(Vessel v : player.getOwnedVessels()){
