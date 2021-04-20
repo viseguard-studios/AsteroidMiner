@@ -100,6 +100,7 @@ public class TeleportGate extends Building {
      */
     @Override
     public void explode() {
+        super.explode();
         if(pair != null)
             pair.PairDestroyed();
         active = false;
