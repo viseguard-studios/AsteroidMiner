@@ -2,12 +2,9 @@ package com.viseguardstudios.asteroid_miner.commands.cmds;
 
 import com.viseguardstudios.asteroid_miner.commands.Command;
 import com.viseguardstudios.asteroid_miner.model.Engine;
-import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
-import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 
 import java.util.List;
-import java.util.Set;
 
 public class NeighboursCmd extends Command {
     @Override
@@ -21,7 +18,7 @@ public class NeighboursCmd extends Command {
             System.out.println("Not enough params");
             return;
         }
-        List<Asteroid> asteroids = Engine.getInstance().getScene().GetManager().getAsteroids();
+        List<Asteroid> asteroids = Engine.getInstance().getScene().getManager().getAsteroids();
         for(Asteroid a : asteroids){
             if(a.getName().equals(params[1])){
                 System.out.println("Neighbours:");
@@ -34,7 +31,7 @@ public class NeighboursCmd extends Command {
                         if (neighbour.isMined())
                             rType = "Empty";
                         else
-                            rType = neighbour.getInventory().getItems().get(0).getType();
+                            rType = neighbour.getInventory().getItems().get(0).getName();
                     }
                     else
                         rType = "?";

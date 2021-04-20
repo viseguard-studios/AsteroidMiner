@@ -9,7 +9,6 @@ import com.viseguardstudios.asteroid_miner.model.item.Item;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class PlaceCmd extends Command {
     @Override
@@ -24,7 +23,7 @@ public class PlaceCmd extends Command {
             return;
         }
 
-        GameManager gm = Engine.getInstance().getScene().GetManager();
+        GameManager gm = Engine.getInstance().getScene().getManager();
         List<Player> players = gm.getAllPlayers();
         for(Player player : players){
             if(player == gm.getCurrentPlayer()){
@@ -37,14 +36,14 @@ public class PlaceCmd extends Command {
                         System.out.println("Items:");
                         int number = 1;
                         for (Item i : v.getInventory().getItems()){
-                            System.out.println(number + ". " + i.getType());
+                            System.out.println(number + ". " + i.getName());
                             number++;
                         }
                         Scanner sc = new Scanner(System.in);
                         number = sc.nextInt();
                         Item item = v.getInventory().getItems().get(number - 1);
                         if(v.placeItem(item))
-                            System.out.println("Placed " + item.getType());
+                            System.out.println("Placed " + item.getName());
                     }
                 }
             }

@@ -24,7 +24,7 @@ public class SpaceStation extends Building {
          * Jelezzük a game manager-nek, hogy a játékot megnyertük, felépült az állomás
          */
         Scene scene = a.GetScene();
-        GameManager manager = scene.GetManager();
+        GameManager manager = scene.getManager();
         manager.endGame();
     }
 

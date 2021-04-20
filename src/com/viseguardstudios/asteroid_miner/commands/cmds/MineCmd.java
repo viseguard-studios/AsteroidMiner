@@ -22,7 +22,7 @@ public class MineCmd extends Command {
             return;
         }
 
-        GameManager gm = Engine.getInstance().getScene().GetManager();
+        GameManager gm = Engine.getInstance().getScene().getManager();
         List<Player> players = gm.getAllPlayers();
         for (Player player : players) {
             if(player == gm.getCurrentPlayer()){
@@ -32,7 +32,7 @@ public class MineCmd extends Command {
                         if(mined != null){
                             var ast = v.getCurrentAsteroid();
                             System.out.println(ast.getName()+" mined ");
-                            System.out.println(mined.getName());
+                            System.out.println("* Item: " + mined.getName());
                         }
                         else {
                             System.out.println("can't mine");

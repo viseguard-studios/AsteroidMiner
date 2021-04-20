@@ -8,9 +8,6 @@ import com.viseguardstudios.asteroid_miner.model.item.resource.*;
  */
 public class Iron extends Resource {
 
-    public Iron(){
-        type = "Iron";
-    }
 
     /**
      * Meghatározza, hogy az átadott Item használható-e a jelenlegi helyett.

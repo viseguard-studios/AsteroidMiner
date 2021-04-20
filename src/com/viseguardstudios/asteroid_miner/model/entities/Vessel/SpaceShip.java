@@ -80,7 +80,7 @@ public class SpaceShip extends Vessel {
     public void explode() {
         super.explode();
         inventory.explode();
-        scene.GetManager().removeSettler(this);
+        scene.getManager().removeSettler(this);
     }
 
     /**

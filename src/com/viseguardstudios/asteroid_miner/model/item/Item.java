@@ -33,6 +33,4 @@ public abstract class Item {
     public abstract boolean satisfies(Item item);
 
     public abstract String getName();
-
-    public String getType() { return type; }
 }
