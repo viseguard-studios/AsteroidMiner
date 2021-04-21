@@ -62,7 +62,7 @@ public abstract class VesselCreator extends MovableEntityCreator{
                          }
                         if(ids[0]==-1||ids[1]==-1) throw new Exception("End of UFO describer not found.");
                         rawDescriber= new ArrayList<String>(inputLines.subList(ids[0],ids[1]+1));
-                        UfoCreator.createUFO(rawDescriber,home);
+                        UfoCreator.createUFO(rawDescriber,manager, home);
                         break;
                     case "spaceship":
                         ids = new int[]{-1, -1};

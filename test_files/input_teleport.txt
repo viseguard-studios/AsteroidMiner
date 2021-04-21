@@ -1,7 +1,7 @@
-startgame 0 teleport_test.vsgstd 1
-neighbors s1
+startgame 0 AsteroidMiner\test_files\teleport_test.vsgstd 1
+neighbours a0
 move s1
-1
+0
 endturn
-hide s1
+hide enter s1
 endturn

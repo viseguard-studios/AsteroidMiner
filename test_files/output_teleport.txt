@@ -1,0 +1,13 @@
+Created Engine
+Application started
+
+Starting game
+Deterministic game
+
+Neighbours:
+01 - asteroid_1 - Empty
+
+Neighbours:
+0 - asteroid_1
+
+s1 is hidden

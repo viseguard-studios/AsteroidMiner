@@ -4,6 +4,7 @@ import com.viseguardstudios.asteroid_miner.commands.Command;
 import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NeighboursCmd extends Command {
@@ -26,7 +27,9 @@ public class NeighboursCmd extends Command {
                 String rType;
 
                 int number = 1;
-                for (Asteroid neighbour : a.getPhysicalNeighbours()){
+                List<Asteroid> asteroidList = new ArrayList<Asteroid>();
+                asteroidList.addAll(a.ReachableAsteroids());
+                for (Asteroid neighbour : asteroidList){
                     if(neighbour.getCrustSize() == 0){
                         if (neighbour.isMined())
                             rType = "Empty";
@@ -43,6 +46,6 @@ public class NeighboursCmd extends Command {
 
             }
         }
-        System.out.println("Vessel not found");
+        System.out.println("Asteroid not found");
     }
 }

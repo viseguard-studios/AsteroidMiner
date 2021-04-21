@@ -1,11 +1,11 @@
-startgame 0 UFO_test.vsgstd 1
-neighbors u1
-move u1
-1
+startgame 0 AsteroidMiner\test_files\UFO_test.vsgstd 1
+neighbours a0
+move ufo1
+0
 move r1
-1
+0
 endturn
 drill r1
 endturn
-mine u1
+mine ufo1
 endturn

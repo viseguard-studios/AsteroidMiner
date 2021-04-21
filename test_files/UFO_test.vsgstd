@@ -21,7 +21,7 @@
 			
 			{/spaceShip}
 
-			{ufo name="UFO1"}
+			{ufo name="UFO1" ownerPlayer="player_1"}
 
 			{/ufo}
 
@@ -46,6 +46,8 @@
 			{iron}
 
 			{iron}
+
+		{/asteroidInventory}
 	
 	{/asteroid}
 	

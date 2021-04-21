@@ -3,6 +3,8 @@ package com.viseguardstudios.asteroid_miner.map_loader.entities.vessels;
 import com.viseguardstudios.asteroid_miner.map_loader.FileOpener;
 import com.viseguardstudios.asteroid_miner.map_loader.ItemCreator;
 import com.viseguardstudios.asteroid_miner.map_loader.entities.VesselCreator;
+import com.viseguardstudios.asteroid_miner.model.GameManager;
+import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.UFO;
@@ -28,15 +30,22 @@ public class UfoCreator  extends VesselCreator {
         scene.addEntity(new UFO(a));
     }
 
-    public static UFO createUFO(ArrayList<String> rawLines, Asteroid home) throws Exception {
+    public static UFO createUFO(ArrayList<String> rawLines, GameManager manager, Asteroid home) throws Exception {
         String describer = rawLines.get(0);
         String name = "default";
+        String playerName = null;
         String param = FileOpener.getPropValue(describer,"name");
         if (param!=null){
             name =  param;
         }
+        //TODO
+        param = FileOpener.getPropValue(describer,"ownerPlayer");
+        if (param!=null){
+            playerName =  param;
+        }
+        Player owner = manager.getPlayerByName(playerName);
 
-        UFO ufo = new UFO(home, name);
+        UFO ufo = new UFO(home, owner, name);
 
         //Inventory létrehozása
 

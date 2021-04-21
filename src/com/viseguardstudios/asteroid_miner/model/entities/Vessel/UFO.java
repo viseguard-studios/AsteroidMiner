@@ -28,10 +28,11 @@ public class UFO extends Vessel{
      * Konstruktor névvel.
      *
      **/
-    public UFO(Asteroid a, String name) {
+    public UFO(Asteroid a, Player owner, String name) {
         super(a);
         this.name = name;
-        this.owner = null;
+        owner.addVessel(this);
+        this.owner = owner;
         inventory = new InfiniteInventory();
     }
 
