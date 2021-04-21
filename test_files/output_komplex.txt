@@ -1,3 +1,6 @@
+Created Engine
+Application started
+
 Starting game
 Deterministic game
 
