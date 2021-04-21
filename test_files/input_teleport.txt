@@ -1,0 +1,7 @@
+startgame 0 teleport_test.vsgstd 1
+neighbors s1
+move s1
+1
+endturn
+hide s1
+endturn

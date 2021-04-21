@@ -1,0 +1,3 @@
+startgame 0 crafting_test.vsgstd 1
+craft s1 Base
+endturn

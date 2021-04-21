@@ -1,0 +1,5 @@
+startgame 0 mining_test.vsgstd
+drill s1
+endturn
+mine s1
+endturn
