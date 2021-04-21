@@ -1,4 +1,4 @@
-startgame 0 mining_test.vsgstd
+startgame 0 test_files/mining_test.vsgstd 1
 drill s1
 endturn
 mine s1
