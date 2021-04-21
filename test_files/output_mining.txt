@@ -1,0 +1,10 @@
+Created Engine
+Application started
+
+Starting game
+Deterministic game
+
+a1 crust = 0
+
+a1 mined 
+* Item: Iron

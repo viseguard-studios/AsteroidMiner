@@ -1,0 +1,10 @@
+Created Engine
+Application started
+
+Starting game
+Deterministic game
+
+Current game is over
+You successfully crafted a Base
+Congratulations, you won the game!
+
