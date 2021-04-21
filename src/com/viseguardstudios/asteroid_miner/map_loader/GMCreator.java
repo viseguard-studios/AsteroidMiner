@@ -129,11 +129,11 @@ public class GMCreator {
              ) {
             if(e.getClass().equals(TeleportGate.class))
             {
-                TeleportGate tg = ((TeleportGate) e);
-                TeleportGate pair = tg.getIdPair(tg.getId(), tg);
+                //TeleportGate tg = ((TeleportGate) e);
+                TeleportGate pair = ((TeleportGate) e).getIdPair(((TeleportGate) e).getId(), ((TeleportGate) e));
                 if(pair != null){
-                    tg.setPair(pair);
-                    pair.setPair(tg);
+                    ((TeleportGate) e).setPair(pair);
+                    pair.setPair(((TeleportGate) e));
                 }
             }
 

@@ -82,11 +82,11 @@ public class SpaceShipCreator extends VesselCreator {
         // Teleportkapuk betöltése
         ids = new int[]{-1, -1};
         try {
-            ids = FileOpener.getChildLoc(rawLines,"telegateitem",0);
+            ids = FileOpener.getChildLoc(rawLines,"telegates",0); // az összes kapu kell!
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(ids[0]!=-1||ids[1]!=-1) {// throw new Exception("End of telegates describer not found.");
+        if(ids[0]!=-1 && ids[1]!=-1) {// throw new Exception("End of telegates describer not found.");
 
             ArrayList<String> rawTeles = new ArrayList<String>(rawLines.subList(ids[0], ids[1] + 1));
             ArrayList<TeleportGateItem> teles = ItemCreator.getTeleportGates(rawTeles);

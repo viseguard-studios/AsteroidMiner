@@ -1,0 +1,4 @@
+startgame 0 C:\Users\Adam\Documents\test\komplex_test.vsgstd 1
+mine s1
+endturn
+move s1

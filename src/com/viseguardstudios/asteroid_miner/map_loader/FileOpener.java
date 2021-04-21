@@ -49,7 +49,8 @@ public class FileOpener {
      * @return
      */
     public static String cutComments(String input){
-        return input.split("#")[0];
+        String s = input.split("#")[0];
+        return s;
 
     }
 
@@ -159,6 +160,8 @@ public class FileOpener {
      * @return
      */
     public static String getObjType(String rawLine){
+        if(prepareLine(rawLine).isEmpty())
+            return "";
         String type = prepareLine(rawLine).get(0).toLowerCase(); //toLowerCase a biztonság kedvéért
         return type;
     }
