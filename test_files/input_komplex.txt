@@ -1,0 +1,10 @@
+startgame 0 komplex_test.vsgstd 1
+mine s1
+endturn
+move s1
+1
+endturn
+place from s1
+1
+solarDistance 1
+endturn

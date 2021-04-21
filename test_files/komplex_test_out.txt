@@ -1,8 +1,0 @@
-Created Engine
-Application started
-Starting game
-Deterministic game
-a1 mined 
-* Item: Uranium Exp:2
-Neighbours:
-0 - a2

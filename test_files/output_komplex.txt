@@ -1,0 +1,20 @@
+Starting game
+Deterministic game
+
+a1 mined 
+* Item: Uranium Exp:2
+
+Neighbours:
+0 - a2
+1 - a3
+
+Items:
+1. Uranium Exp:2
+
+Placed Uranium Exp:2
+
+Solar distance changed to 1
+
+[EVENT] a3 exploded
+[EVENT] s1 exploded
+[EVENT] g2 exploded
