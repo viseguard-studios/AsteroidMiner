@@ -10,7 +10,6 @@ import java.util.*;
 public class Engine {
 
 
-
     static Engine instance;
 
     Scene scene;
@@ -23,6 +22,7 @@ public class Engine {
 
     /**
      * Default constructor
+     *
      * @param args
      */
     public Engine(String[] args) {
@@ -32,6 +32,7 @@ public class Engine {
 
     }
 
+    public static Scanner in = new Scanner(System.in);
 
     /**
      * A program indítása.
@@ -39,14 +40,14 @@ public class Engine {
     public void StartApplication() {
         System.out.println("Application started");
 
-        Scanner in = new Scanner(System.in);
-
         running = true;
 
-        while (running){
+        while (running) {
             var line = in.nextLine();
             cmdexec.execute(line);
+        
         }
+
     }
 
     /**
@@ -72,9 +73,10 @@ public class Engine {
 
         gm.startGame();
     }
+
     /**
      * Új játék fájlból
-     * **/
+     **/
     public void StartGame(int seed, Scene scene) {
         System.out.println("Starting game");
         this.scene = scene;
@@ -106,7 +108,7 @@ public class Engine {
         return scene;
     }
 
-    public GameManager getGameManager(){
+    public GameManager getGameManager() {
         return scene.getManager();
     }
 

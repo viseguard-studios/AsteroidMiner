@@ -51,7 +51,7 @@ public class MoveCmd extends Command {
             System.out.println(i+" - " + targets.getName());
         }
 
-        int choice = Integer.parseInt(scanner.nextLine());
+        int choice = Integer.parseInt(Engine.in.nextLine());
 
         entity.move(reachableAsteroids.get(choice));
     }

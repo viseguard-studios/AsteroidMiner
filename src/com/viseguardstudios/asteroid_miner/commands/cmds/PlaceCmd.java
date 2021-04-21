@@ -40,7 +40,7 @@ public class PlaceCmd extends Command {
                             number++;
                         }
 
-                        number = scanner.nextInt();
+                        number = Engine.in.nextInt();
                         Item item = v.getInventory().getItems().get(number - 1);
                         if(v.placeItem(item))
                             System.out.println("Placed " + item.getName());
