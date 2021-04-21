@@ -1,7 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.entities.building;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
-import jdk.jfr.Label;
 
 import java.util.*;
 
@@ -13,12 +12,12 @@ public class TeleportGate extends Building {
     /**
      * az eddig lerakott teleportkapuk azonosítókkal párosítva.
      */
-    private static Map<TeleportGate,Integer> idList = new HashMap<>();
+    private static Map<Integer, TeleportGate> idList = new HashMap<>();
 
-   // private int gateId;
+    // private int gateId;
     private TeleportGate pair = null;
     /**
-    * Az aszteroida alapértelmezetten aktív, deaktiválódik a saját vagy a párja robbanása során
+     * Az aszteroida alapértelmezetten aktív, deaktiválódik a saját vagy a párja robbanása során
      */
     private boolean active = true;
 
@@ -26,25 +25,38 @@ public class TeleportGate extends Building {
 
     /**
      * Default constructor
-     *
      */
     public TeleportGate(int pairID) {
         this.pairID = pairID;
+        findPair();
     }
 
     /**
      * Teleportkapu létrehozása.
-     * @param home hova kerüljön
+     *
+     * @param home   hova kerüljön
      * @param pairID pár id-je
      */
 
-    public TeleportGate(Asteroid home,String name, int pairID) {
+    public TeleportGate(Asteroid home, String name, int pairID) {
         this.name = name;
         this.pairID = pairID;
         this.currentAsteroid = home;
         home.AddBuilding(this);
+        findPair();
     }
 
+    public void findPair() {
+        if (idList.containsKey(this.pairID)) {
+            pair = idList.get(this.pairID);
+            pair.setPair(this);
+
+            idList.remove(pair);
+        }
+        else {
+            idList.put(this.pairID, this);
+        }
+    }
 
     @Override
     public void roundEnd(boolean closeToSun) {
@@ -57,8 +69,10 @@ public class TeleportGate extends Building {
     @Override
     public void SolarFlare() {
         ArrayList<Asteroid> neighbours = (ArrayList<Asteroid>) currentAsteroid.getPhysicalNeighbours();
-        if(neighbours.size()==0) return; //ha nincs szomszéd, nem tud mozogni
-        int bound = neighbours.size()-1;
+        if (neighbours.size() == 0) {
+            return; //ha nincs szomszéd, nem tud mozogni
+        }
+        int bound = neighbours.size() - 1;
         //választ egy random indexet a szomszédok listájának lehetséges indexei közül
         Random rand = new Random();
         int chosen = rand.nextInt(bound);
@@ -69,26 +83,30 @@ public class TeleportGate extends Building {
     }
 
 
-    public void setPair(TeleportGate tg){
-        if(pair ==null && active)
-             pair = tg;
+    public void setPair(TeleportGate tg) {
+        if (pair == null && active) {
+            pair = tg;
+        }
     }
 
     /**
      * Visszaadja az ebből a kapuból elérhető extra aszteroidát, ha van párja.
+     *
      * @return
      */
     public Asteroid getRoutes() {
-       if(pair==null) return null;
-       return pair.getCurrentAsteroid();
+        if (pair == null) {
+            return null;
+        }
+        return pair.getCurrentAsteroid();
     }
 
     /**
      * Akkor hívódik meg ha a párja megsemmisül és ezáltal ez az oldal deaktiválódik.
      */
-    public void PairDestroyed() {
+    public void pairDestroyed() {
         this.pair = null;
-        active=false;
+        active = false;
     }
 
     /**
@@ -97,9 +115,12 @@ public class TeleportGate extends Building {
     @Override
     public void explode() {
         super.explode();
-        if(pair != null)
-            pair.PairDestroyed();
+        if (pair != null) {
+            pair.pairDestroyed();
+        }
         active = false;
+
+        currentAsteroid.removeBuilding(this);
     }
 
     @Override
@@ -111,8 +132,8 @@ public class TeleportGate extends Building {
     }
 
     /**
-
      * Visszaadja, hogy a párjának milyen ID-je lenne
+     *
      * @return
      */
       /* 
@@ -129,51 +150,57 @@ public class TeleportGate extends Building {
  Duplicated methods in merge
      *Teleportkapu párjának megkeresése ID alapján, ha létezik
      */
-    public TeleportGate getIdPair(int id, TeleportGate tg){
-        for(Map.Entry<TeleportGate,Integer> i: idList.entrySet()) {
-            if(i.getValue().equals(id) && !i.getKey().equals(tg)) //id megegyezik és nem saját maga a kapu
-                return i.getKey();
+    public TeleportGate getIdPair(int id, TeleportGate tg) {
+        for (Map.Entry<Integer, TeleportGate> i : idList.entrySet()) {
+            if (i.getKey().equals(id) && !i.getValue().equals(tg)) //id megegyezik és nem saját maga a kapu
+            {
+                return i.getValue();
+            }
         }
         return null; //ha nem találta meg
     }
 
     /**
      * Új elem hozzáadása az idListhez
+     *
      * @param tg
      * @param id
      */
-
-
-    public void addIdListItem(TeleportGate tg, int id){
+    public void addIdListItem(TeleportGate tg, int id) {
         int idCount = 0;
-        for(Integer i: idList.values()) {
-            if(i.equals(id))
+        for (Integer i : idList.keySet()) {
+            if (i.equals(id)) {
                 idCount++;
+            }
         } //csak akkor rakhatja bele, ha max 1 ilyen kapu van ezzel az azonosítóval
-        if(idCount<2)
-            idList.put(tg,id);
+        if (idCount < 2) {
+            idList.put(id, tg);
+        }
     }
 
     /**
      * Azonosító generálása újonnan létrehozott aszteroidának -> ellenőrzi, hogy ne legyen duplikáció
+     *
      * @return
      */
 
-    public int generateId(){
+    public int generateId() {
         Random rand = new Random();
         boolean equal = true;
-        int idCount=0;
+        int idCount = 0;
         int id = -1;
         //egye
-        while(equal) {
+        while (equal) {
             id = rand.nextInt(1000);
             //végignézi a listát, hogy van-e egyezés
-            for(Integer i: idList.values()) {
-                if(i.equals(id))
+            for (Integer i : idList.keySet()) {
+                if (i.equals(id)) {
                     idCount++;
+                }
             } //akkor léphet ki, ha nincs sehol egyezés
-            if(idCount==0)
-                equal=false;
+            if (idCount == 0) {
+                equal = false;
+            }
         }
         return id;
     }

@@ -95,6 +95,7 @@ public class FileOpener {
         String[] temp = input.strip().toLowerCase().split("=");
         try {
             if(temp.length!=2) throw new Exception("Bad format in object property");
+            if(!(temp[1].isEmpty() || temp[1].isBlank()) && temp[1].contains("\"") )
             temp[1] = temp[1].split("\"")[1];  //Todo Check if this part works correctly (
         }
         catch (Exception e)

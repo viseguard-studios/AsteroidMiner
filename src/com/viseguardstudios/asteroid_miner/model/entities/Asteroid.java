@@ -360,7 +360,7 @@ Adams branch
      */
     public boolean placeItem(Item i) {
         boolean canPlace = false;
-        if(mined && !exploded){
+        if(isMined() && !exploded){
             canPlace = inventory.tryInsertItem(i);
             if(canPlace)
                 inventory.insertItem(i);

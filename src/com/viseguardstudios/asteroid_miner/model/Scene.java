@@ -58,7 +58,12 @@ public class Scene {
             for (int i = 0; i < entities.size(); i++) {
                 Entity e = entities.get(i);
 
-                e.roundEnd(false);
+                boolean close = false;
+                if(manager.getSunDistance() < 10){
+                    close = true;
+                }
+
+                e.roundEnd(close);
 
             }
         }

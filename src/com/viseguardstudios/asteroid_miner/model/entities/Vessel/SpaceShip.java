@@ -34,8 +34,8 @@ public class SpaceShip extends Vessel {
      */
     @Override
     public boolean placeItem(Item i) {
-        var success = currentAsteroid.placeItem(i);
-        if(success){
+
+        if(currentAsteroid.placeItem(i)){
             inventory.removeItem(i);
             return true;
         }
@@ -74,7 +74,7 @@ public class SpaceShip extends Vessel {
      * @param i
      */
     public void ActivateItem(Item i) {
-        i.activate(inventory);
+        i.activate(inventory, this);
     }
 
     @Override

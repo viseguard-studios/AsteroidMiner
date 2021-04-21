@@ -73,7 +73,7 @@ public class Robot extends Vessel {
 
     @Override
     public void AsteroidExploded(){
-
+        //Todo miért üres???
     }
 
 

@@ -48,6 +48,7 @@ public class SSInventory implements IInventory{
     public boolean insertItem(Item item) {
         if(capacity > items.size()) {
             items.add(item);
+            item.setInventory(this);
             return true;
         } else
             return false;
@@ -66,7 +67,12 @@ public class SSInventory implements IInventory{
 
     @Override
     public boolean removeItem(Item item) {
-        return items.remove(item);
+        if(items.contains(item))
+            return items.remove(item);
+        else if (tgs.contains(item))
+            return tgs.remove(item);
+
+        return false;
     }
 
     public boolean removeGate(TeleportGateItem gate){

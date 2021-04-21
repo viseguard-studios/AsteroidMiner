@@ -2,6 +2,7 @@ package com.viseguardstudios.asteroid_miner.model.item;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 
 
@@ -18,14 +19,21 @@ public abstract class Item {
      * nearSun: napközelben különleges tulajdonságú nyersanyagok felüldefiniálják
      * turnEnd: vízjég párolgási tulajdonságát visszaállítja a kör végén
      */
-    public void activate(IInventory inv){}
+    public void activate(IInventory inv, SpaceShip ship) {
+    }
+
     public void nearSun(Asteroid a){};
+
     public void turnEnd(){};
 
     /**
-     *Elemek összehasonlítására szolgál
+     * Elemek összehasonlítására szolgál
      */
     public abstract boolean satisfies(Item item);
 
-    public abstract String getName();
+    public  abstract String getName();
+
+    public void setInventory(IInventory i){
+        this.inventory = i;
+    }
 }

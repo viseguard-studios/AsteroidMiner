@@ -35,6 +35,12 @@ public class GameManager {
     private int sunDistance;
 
     /**
+     * Távolság lekérdezése
+     * @return
+     */
+    public int getSunDistance() {return  sunDistance;}
+
+    /**
      * A játék játékosainak listája.
      */
     private List<Player> allPlayers = new ArrayList<>();

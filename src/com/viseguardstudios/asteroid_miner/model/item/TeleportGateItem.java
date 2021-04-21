@@ -1,8 +1,11 @@
 package com.viseguardstudios.asteroid_miner.model.item;
 
+import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.building.TeleportGate;
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
+import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
+import com.viseguardstudios.asteroid_miner.util.Namer;
 
 /**
  * A még le nem rakott teleportkapukért felelős osztály, amiket a telepes a raktárában tárol.
@@ -38,20 +41,29 @@ public class TeleportGateItem extends Item {
     /**
      * Teleportkapuk lerakásáért felel.
      */
-
-    public void activate(SSInventory inv){
+    @Override
+    public void activate(IInventory inv, SpaceShip ship){
         //eltávolítja magát a raktárból
-        inv.removeGate(this);
+        //inv.removeGate(this);
+        inv.removeItem(this);
         //kapu létrehozása
-        TeleportGate gate = new TeleportGate(id);
+
+        var ast = ship.getCurrentAsteroid();
+
+        TeleportGate gate = new TeleportGate(ast, "", id);
         //hozzáadja az Id-ket tartalmazó listához a most létrehozott kaput
-        gate.addIdListItem(gate,id);
+        //gate.addIdListItem(gate,id);
         //pár megkeresése
-        TeleportGate pair = gate.getIdPair(id, gate);
+        //TeleportGate pair = gate.getIdPair(id, gate);
         //ha megtalálta a párt -> beállítja a kapuknál is
+        /*
         if(pair != null){
             gate.setPair(pair);
             pair.setPair(gate);
         }
+        */
+
+        Engine.getInstance().getScene().addEntity(gate);
+
     }
 }

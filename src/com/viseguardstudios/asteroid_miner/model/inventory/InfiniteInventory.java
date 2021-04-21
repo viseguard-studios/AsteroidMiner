@@ -28,6 +28,7 @@ public class InfiniteInventory implements IInventory{
     @Override
     public boolean insertItem(Item item) {
         items.add(item);
+        item.setInventory(this);
         return true;
     }
 

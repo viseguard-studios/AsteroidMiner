@@ -37,6 +37,7 @@ public class AsteroidInventory implements IInventory{
     public boolean insertItem(Item item) {
         if(capacity > items.size()) {
             items.add(item);
+            item.setInventory(this);
             return true;
         } else
             return false;
@@ -57,7 +58,7 @@ public class AsteroidInventory implements IInventory{
 
     @Override
     public boolean tryInsertItem(Item item) {
-        if (capacity == items.size())
+        if (capacity <= items.size())
             return false;
         else
             return true;
@@ -76,7 +77,8 @@ public class AsteroidInventory implements IInventory{
      */
     @Override
     public void nearSun(Asteroid a) {
-        for(Item i : items){
+        for (int j = 0; j < items.size(); j++) {
+            Item i = items.get(j);
             i.nearSun(a);
         }
     }
