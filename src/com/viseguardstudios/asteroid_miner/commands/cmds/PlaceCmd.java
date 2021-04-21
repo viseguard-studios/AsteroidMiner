@@ -39,8 +39,8 @@ public class PlaceCmd extends Command {
                             System.out.println(number + ". " + i.getName());
                             number++;
                         }
-                        Scanner sc = new Scanner(System.in);
-                        number = sc.nextInt();
+
+                        number = scanner.nextInt();
                         Item item = v.getInventory().getItems().get(number - 1);
                         if(v.placeItem(item))
                             System.out.println("Placed " + item.getName());
