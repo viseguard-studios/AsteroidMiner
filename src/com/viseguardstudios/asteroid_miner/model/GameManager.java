@@ -1,22 +1,21 @@
 package com.viseguardstudios.asteroid_miner.model;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
-import com.viseguardstudios.asteroid_miner.util.Namer;
-import com.viseguardstudios.asteroid_miner.util.RandomCollection;
-import com.viseguardstudios.asteroid_miner.util.Vector2;
+import com.viseguardstudios.asteroid_miner.util.*;
 
 import java.util.*;
 
 /**
  * A játék menetének irányításáért felelős osztály.
  */
-public class GameManager {
+public class GameManager implements INotifyPropertyChanged {
 
     boolean debug = false;
 
@@ -27,7 +26,7 @@ public class GameManager {
     /**
      * Az aktuálisan irányítható jármű (akit a soron lévő játékos jelenleg irányít).
      */
-    private Vessel selectedVessel;
+    private Entity selectedEntity;
 
     /**
      * A Naptól való aktuális távolság.
@@ -361,4 +360,30 @@ public class GameManager {
     public List<Asteroid> getAsteroids() { return asteroids; }
 
     public Player getCurrentPlayer() { return currentPlayer; }
+
+    public Entity getSelectedEntity() {
+        return selectedEntity;
+    }
+
+    public void setSelectedEntity(Entity selectedEntity) {
+        this.selectedEntity = selectedEntity;
+        notifyListeners();
+    }
+
+
+    List<StateChangedListener> listeners = new ArrayList<>();
+
+    @Override
+    public void addListener(StateChangedListener l) {
+        listeners.add(l);
+    }
+
+    @Override
+    public void removeListener(StateChangedListener l) {
+        listeners.remove(l);
+    }
+
+    public void notifyListeners(){
+        listeners.forEach(l -> l.stateChanged());
+    }
 }

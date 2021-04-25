@@ -367,6 +367,7 @@ Adams branch
         }
         return canPlace;
     }
+
     /**
      * Elem kivétele.
      * @param itemType item típusa
@@ -407,27 +408,27 @@ Adams branch
 
 
     @Override
-    public void printStatus() {
-        //super.printStatus();
-        System.out.println("Crust: " + crustSize);
-        System.out.println("Vessels:");
+    public String printStatus() {
+        String status = super.printStatus() + "\n";
+        status = status.concat("Crust: " + crustSize + "\n");
+        status = status.concat("Vessels:" + "\n");
         for (var vessel :
                 this.stationed) {
-            System.out.println("- " + vessel.getName());
+            status = status.concat("- " + vessel.getName() + "\n");
         }
 
-        System.out.println("Items:");
+        status.concat("Items:");
         if (crustSize <= 0) {
             for (var item : inventory.getItems()) {
-                System.out.println("- " + item.getName());
+                status = status.concat("- " + item.getName() + "\n");
             }
         }
         else {
-            System.out.println("?");
+            status = status.concat("?" + "\n");
         }
 
 
-        System.out.println("Teleport Gates:");
+        status = status.concat("Teleport Gates:" + "\n");
 /*
         System.out.println("Neighbours:");
         for (var a :
@@ -435,6 +436,7 @@ Adams branch
             System.out.println("- " + a.getName());
         }
  */
+        return status;
     }
 
     //#################################

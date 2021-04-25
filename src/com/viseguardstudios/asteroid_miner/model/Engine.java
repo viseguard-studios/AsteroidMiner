@@ -1,16 +1,27 @@
 package com.viseguardstudios.asteroid_miner.model;
 
 import com.viseguardstudios.asteroid_miner.commands.CommandExecutor;
+import com.viseguardstudios.asteroid_miner.util.INotifyPropertyChanged;
+import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
+import com.viseguardstudios.asteroid_miner.view.MainWindow;
 
 import java.util.*;
 
 /**
  * A program indításáért, egy játékfolyam bezárásáért felelős osztály.
  */
-public class Engine {
-
+public class Engine implements INotifyPropertyChanged {
 
     static Engine instance;
+    public static Scanner in = new Scanner(System.in);
+
+    public enum State{
+        MainMenu,
+        InGame,
+        Won,
+        Lost
+    }
+    State gameState = State.MainMenu;
 
     Scene scene;
 
@@ -32,13 +43,13 @@ public class Engine {
 
     }
 
-    public static Scanner in = new Scanner(System.in);
-
     /**
      * A program indítása.
      */
     public void StartApplication() {
         System.out.println("Application started");
+
+        MainWindow m = new MainWindow();
 
         running = true;
 
@@ -57,7 +68,7 @@ public class Engine {
         System.out.println("Starting game");
         var gm = new GameManager();
 
-        scene = new Scene();
+        setScene(new Scene());
         scene.setManager(gm);
 
         gm.setManagedScene(scene);
@@ -71,7 +82,9 @@ public class Engine {
 
         gm.initGame(seed);
 
+        setGameState(State.InGame);
         gm.startGame();
+
     }
 
     /**
@@ -92,7 +105,7 @@ public class Engine {
     }
 
 
-    public CommandExecutor getCmdexec() {
+    public CommandExecutor getCmdExec() {
         return cmdexec;
     }
 
@@ -114,5 +127,32 @@ public class Engine {
 
     public void setScene(Scene scene) {
         this.scene = scene;
+    }
+
+
+    public State getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(State gameState) {
+        this.gameState = gameState;
+        notifyListeners();
+    }
+
+
+    List<StateChangedListener> listeners = new ArrayList<>();
+
+    @Override
+    public void addListener(StateChangedListener l) {
+        listeners.add(l);
+    }
+
+    @Override
+    public void removeListener(StateChangedListener l) {
+        listeners.remove(l);
+    }
+
+    public void notifyListeners(){
+        listeners.forEach(l -> l.stateChanged());
     }
 }

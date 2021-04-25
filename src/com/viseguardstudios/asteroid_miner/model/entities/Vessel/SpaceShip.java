@@ -106,20 +106,22 @@ public class SpaceShip extends Vessel {
     }
 
     @Override
-    public void printStatus() {
-        //super.printStatus();
-        System.out.println("Turn used: " + (turnUsed ? "true":"false"));
+    public String printStatus() {
+        String status = super.printStatus();
+        status = status.concat("Turn used: " + (turnUsed ? "true":"false")+ "\n");
 
-        System.out.println(currentAsteroid.getName());
+        status = status.concat(currentAsteroid.getName()+"\n");
 
-        System.out.println("Resources:");
+        status = status.concat("Resources:\n");
         for (var item : inventory.getItems()) {
-            System.out.println("- "+ item.getName());
+          status =  status.concat("- "+ item.getName()+"\n");
         }
 
-        System.out.println("Teleport Gates:");
+        status = status.concat("Teleport Gates:\n");
         for (var item : inventory.getGates()) {
-            System.out.println("- "+ item.getName());
+           status = status.concat("- "+ item.getName()+"\n");
         }
+
+        return status;
     }
 }

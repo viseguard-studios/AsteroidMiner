@@ -59,8 +59,8 @@ public abstract class Entity {
     public abstract void SolarFlare();
 
 
-    public void printStatus(){
-        System.out.println(name);
+    public String printStatus(){
+        return new String(name);
     }
 
     public void explode(){

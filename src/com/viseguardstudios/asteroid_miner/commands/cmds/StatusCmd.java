@@ -27,9 +27,8 @@ public class StatusCmd extends Command {
                 for (var ent :
                         entities) {
                     if (ent.getName().equals(params[1])) {
-
-                        ent.printStatus();
-
+                        var s = ent.printStatus();
+                        System.out.println(s);
                     }
                 }
             }
