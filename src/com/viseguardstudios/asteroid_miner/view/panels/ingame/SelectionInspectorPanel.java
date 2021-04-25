@@ -55,7 +55,7 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
 
     void selectionChanged(int index){
         var sel = scene.getEntities().get(index);
-        System.out.println(sel.getName());
+        //System.out.println(sel.getName());
         scene.getManager().setSelectedEntity(sel);
 
     }

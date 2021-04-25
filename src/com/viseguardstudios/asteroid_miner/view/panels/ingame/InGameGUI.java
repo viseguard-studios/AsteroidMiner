@@ -9,7 +9,8 @@ public class InGameGUI extends JPanel {
     public InGameGUI() {
 
         var insp = new SelectionInspectorPanel();
-        MapViewPanel map = new MapViewPanel();
+        var map = new MapViewPanel();
+        var actions = new ActionBar();
 
         var content = new JPanel();
         var horizontal = new BorderLayout();
@@ -17,6 +18,7 @@ public class InGameGUI extends JPanel {
 
         content.add(insp, BorderLayout.LINE_START);
         content.add(map, BorderLayout.CENTER);
+        content.add(actions,BorderLayout.PAGE_END);
 
         this.add(content);
 

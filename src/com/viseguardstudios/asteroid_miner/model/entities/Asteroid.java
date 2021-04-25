@@ -393,6 +393,7 @@ Adams branch
     public void addNeighbour(Asteroid a) {
         if(!neighbours.contains(a))
              neighbours.add(a);
+
     }
 
     /**

@@ -4,6 +4,8 @@ import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.util.Namer;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
 
+import java.util.List;
+
 /**
  * Egy adott entitás ( vizuális megjelenítéssel rendelkező játékelem) osztálya.
  */
@@ -40,7 +42,6 @@ public abstract class Entity {
     };
 
 
-
     /**
      * A játéktér getter-e.
      * @return
@@ -68,6 +69,9 @@ public abstract class Entity {
     };
 
 
+    public abstract List<String> getActions();
+
+    public abstract void doAction(String name);
 
     /**
      * További getterek, setterek

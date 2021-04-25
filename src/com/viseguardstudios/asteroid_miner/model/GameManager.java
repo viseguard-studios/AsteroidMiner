@@ -262,7 +262,7 @@ public class GameManager implements INotifyPropertyChanged {
             var count = rnd.nextInt(5)+1;
 
             //Create pos
-            var pos = new Vector2(rnd.nextInt(100), rnd.nextInt(100));
+            var pos = new Vector2(rnd.nextInt(500), rnd.nextInt(500));
 
             var a = new Asteroid(res,count);
             a.setPos(pos);
@@ -291,6 +291,7 @@ public class GameManager implements INotifyPropertyChanged {
                 }
 
                 ast.addNeighbour(closest);
+                closest.addNeighbour(ast);
             }
 
         }
