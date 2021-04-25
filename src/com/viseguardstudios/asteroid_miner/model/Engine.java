@@ -75,7 +75,7 @@ public class Engine implements INotifyPropertyChanged {
 
         for (int i = 0; i < playerCount; i++) {
             var p = new Player();
-
+            p.setName("Player_"+i);
             gm.addPlayer(p);
         }
         //gm.AddPlayer();
