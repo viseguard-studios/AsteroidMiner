@@ -1,5 +1,7 @@
 package com.viseguardstudios.asteroid_miner.view.panels.ingame;
 
+import com.viseguardstudios.asteroid_miner.model.Engine;
+import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 
 import javax.swing.*;
@@ -7,9 +9,12 @@ import java.awt.*;
 
 public class MapViewPanel extends JPanel implements StateChangedListener {
 
+    Scene scene;
 
     public MapViewPanel() {
-        this.setPreferredSize(new Dimension(500,500));
+        scene = Engine.getInstance().getScene();
+
+        this.setPreferredSize(new Dimension(700,700));
     }
 
     @Override
@@ -21,6 +26,14 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         var size = this.getSize();
 
         g.fillRect(0,0, size.width, size.height);
+
+        for (var ent : scene.getEntities()) {
+            var pos = ent.getPos();
+            if(pos != null) {
+                g.setColor(Color.CYAN);
+                g.fillOval(pos.getX(), pos.getY(), 10, 10);
+            }
+        }
 
     }
 

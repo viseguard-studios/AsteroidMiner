@@ -256,13 +256,13 @@ public class GameManager implements INotifyPropertyChanged {
      * Az aszteroidamező inicializálása, játék inicializálás során hozzuk létre.
      */
     private void GenerateAsteroids() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
 
             var res = GenerateNewResource();
             var count = rnd.nextInt(5)+1;
 
             //Create pos
-            var pos = new Vector2(rnd.nextInt(10), rnd.nextInt(10));
+            var pos = new Vector2(rnd.nextInt(100), rnd.nextInt(100));
 
             var a = new Asteroid(res,count);
             a.setPos(pos);

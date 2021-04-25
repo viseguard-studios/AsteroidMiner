@@ -107,7 +107,7 @@ public class SpaceShip extends Vessel {
 
     @Override
     public String printStatus() {
-        String status = super.printStatus();
+        String status = super.printStatus() + "\n";
         status = status.concat("Turn used: " + (turnUsed ? "true":"false")+ "\n");
 
         status = status.concat(currentAsteroid.getName()+"\n");

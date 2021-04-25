@@ -417,7 +417,7 @@ Adams branch
             status = status.concat("- " + vessel.getName() + "\n");
         }
 
-        status.concat("Items:");
+        status = status.concat("Items:");
         if (crustSize <= 0) {
             for (var item : inventory.getItems()) {
                 status = status.concat("- " + item.getName() + "\n");

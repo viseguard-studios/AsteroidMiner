@@ -40,11 +40,13 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
             public String getElementAt(int index) {
                 return scene.getEntities().get(index).getName();
             }
+
+
         };
 
         JList<String> myList = new JList<String>(entityList);
         this.add(myList);
-        myList.addListSelectionListener(i->{ selectionChanged(i.getFirstIndex()); });
+        myList.addListSelectionListener(i->{ selectionChanged(myList.getSelectedIndex()); });
 
         t2 = new JTextArea();
 
@@ -53,6 +55,7 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
 
     void selectionChanged(int index){
         var sel = scene.getEntities().get(index);
+        System.out.println(sel.getName());
         scene.getManager().setSelectedEntity(sel);
 
     }
