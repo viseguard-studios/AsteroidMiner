@@ -7,9 +7,11 @@ import com.viseguardstudios.asteroid_miner.model.inventory.InfiniteInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 
+import java.util.List;
+
 public class UFO extends Vessel{
     InfiniteInventory inventory;
-
+    static List<String> actions = List.of("move","mine");
     /**
      * Default constructor
      *
@@ -62,6 +64,16 @@ public class UFO extends Vessel{
     @Override
     public void SolarFlare() {
         //DO not die
+    }
+
+    @Override
+    public List<String> getActions() {
+        return actions;
+    }
+
+    @Override
+    public void doAction(String name) {
+        //TODO: Implement
     }
 
     /**

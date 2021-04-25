@@ -6,10 +6,15 @@ import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Egy speciális jármű, a robot tevékenységeit, tulajdonságait tartalmazza.
  */
 public class Robot extends Vessel {
+
+    static List<String> actions = List.of("move","hide","drill");
 
     /**
      * Default constructor
@@ -80,5 +85,16 @@ public class Robot extends Vessel {
     @Override
     public AsteroidPlaces getPlace() {
         return AsteroidPlaces.Vessel;
+    }
+
+    @Override
+    public List<String> getActions() {
+
+        return actions;
+    }
+
+    @Override
+    public void doAction(String name) {
+        //TODO: Implement
     }
 }

@@ -169,6 +169,16 @@ public class Asteroid extends Entity {
         inventory.explode();
     }
 
+    @Override
+    public List<String> getActions() {
+        return null;
+    }
+
+    @Override
+    public void doAction(String name) {
+
+    }
+
     /**
      * Tárolja, hogy melyik aszteroidák elérhetőek jelenleg az adott aszteroidából.
      * @return

@@ -6,10 +6,14 @@ import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 
+import java.util.List;
+
 /**
  * A telepesekért felelős osztály.
  */
 public class SpaceShip extends Vessel {
+
+    static List<String> actions = List.of("move","hide","drill","mine","activate","create","stash");
 
     /**
      * Default constructor
@@ -82,6 +86,16 @@ public class SpaceShip extends Vessel {
         super.explode();
         inventory.explode();
         scene.getManager().removeSettler(this);
+    }
+
+    @Override
+    public List<String> getActions() {
+        return actions;
+    }
+
+    @Override
+    public void doAction(String name) {
+        //TODO :Implement
     }
 
     /**

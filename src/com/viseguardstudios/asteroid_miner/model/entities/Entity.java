@@ -68,7 +68,9 @@ public abstract class Entity {
         System.out.println("[EVENT] "+ getName()+" exploded");
     };
 
-
+    /**
+     * Visszatér az egységen végezhető műveletekkel
+     */
     public abstract List<String> getActions();
 
     public abstract void doAction(String name);

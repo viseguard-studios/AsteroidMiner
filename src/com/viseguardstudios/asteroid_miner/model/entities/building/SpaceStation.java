@@ -4,6 +4,8 @@ import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.GameManager;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 
+import java.util.List;
+
 /**
  * A játékosok által megépítendő űrállomás épület típust jelöli. Speciális tulajdonsága, hogy amikor megépül akkor a játék befejeződik.
  */
@@ -39,6 +41,16 @@ public class SpaceStation extends Building {
     @Override
     public void explode() {
         super.explode();
+    }
+
+    @Override
+    public List<String> getActions() {
+        return null;
+    }
+
+    @Override
+    public void doAction(String name) {
+
     }
 
     @Override

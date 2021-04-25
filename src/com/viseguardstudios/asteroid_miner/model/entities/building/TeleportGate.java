@@ -124,6 +124,16 @@ public class TeleportGate extends Building {
     }
 
     @Override
+    public List<String> getActions() {
+        return null;
+    }
+
+    @Override
+    public void doAction(String name) {
+
+    }
+
+    @Override
     public AsteroidPlaces getPlace() {
         //TODO If it started to wander it should return vessel to ensure it has space
         // Ádám: szerintem ez nem jó ötlet, inkább vegyük ki a teleportkapu mennyiségi korlátozást
