@@ -5,8 +5,12 @@ import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class MapViewPanel extends JPanel implements StateChangedListener {
 
@@ -16,8 +20,18 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         scene = Engine.getInstance().getScene();
         scene.getManager().addListener(this);
 
+        try {
+            asteroidImage = ImageIO.read(new File("assets\\graphics\\sprites\\ast.png"));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
         this.setPreferredSize(new Dimension(700,700));
     }
+
+    private static Image asteroidImage = null;
+
+
 
     @Override
     public void paint(Graphics g) {
@@ -53,6 +67,8 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
                         g.drawLine(pos.getX(), pos.getY(), end.getX(), end.getY());
                     }
                 }
+                //Aszteroida kirajzolása
+                g.drawImage(asteroidImage,pos.getX()- asteroidImage.getHeight(null)/2,pos.getY() - asteroidImage.getWidth(null)/2,null);
 
             }
         }
