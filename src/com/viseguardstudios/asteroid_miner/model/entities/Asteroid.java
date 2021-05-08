@@ -506,4 +506,8 @@ Adams branch
         //return mined;
         return crustSize <= 0;
     }
+
+    public int getLocalEntityNumber(){
+        return stationed.size()+ orbit.size()+inside.size();
+    }
 }

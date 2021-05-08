@@ -1,5 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model.entities;
 
+import com.viseguardstudios.asteroid_miner.util.Vector2;
+
 /**
  * Egy mozgatható entitás osztálya
  */
@@ -26,7 +28,8 @@ public abstract class MovableEntity extends Entity {
         }
         currentAsteroid.depart(this);
         to.arrive(this);
-        this.pos = to.getPos();
+        int i = to.getLocalEntityNumber();
+        this.pos = getEntityOrbitPos(to.pos,i);
         this.currentAsteroid = to;
 
         turnUsed = true;
@@ -47,6 +50,20 @@ public abstract class MovableEntity extends Entity {
         Inside,
         Orbit,
         Vessel
+    }
+
+    /**
+     * A cél, hogy az entitások az aszteroida körül jelenjenek meg.
+     * @param asteroidPos
+     * @return
+     */
+    public Vector2 getEntityOrbitPos(Vector2 asteroidPos, int i){
+        float orbitRadius = 2;
+        int relX = (int) (orbitRadius*Math.cos(i));
+        int relY = (int) (orbitRadius*Math.sin(i));
+        Vector2 relPos = new Vector2(relX,relY);
+        return asteroidPos.add(relPos);
+
     }
 
 }

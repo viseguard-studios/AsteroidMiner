@@ -274,6 +274,27 @@ public class GameManager implements INotifyPropertyChanged {
             asteroids.add(a);
         }
 
+        for (int i = 0; i < 5; i++) {
+            for (var ast : asteroids) {
+                var pos = ast.getPos();
+                var delta = new Vector2(0,0);
+
+                for (var o : asteroids) {
+                    var other = o.getPos();
+
+                    var d = pos.distance(other);
+                    if(d < 50){
+                        var norm = pos.subtract(other).divide(d);
+
+                        delta = Vector2.add(delta,norm.multiply(50-d));
+                    }
+                }
+                pos = pos.add(delta);
+
+                ast.setPos(pos);
+            }
+        }
+
 
         for (var ast : asteroids) {
             var pos = ast.getPos();
@@ -293,6 +314,8 @@ public class GameManager implements INotifyPropertyChanged {
                 ast.addNeighbour(closest);
                 closest.addNeighbour(ast);
             }
+
+
 
         }
 
