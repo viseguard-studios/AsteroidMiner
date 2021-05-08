@@ -1,4 +1,4 @@
-package shaft_run;
+package com.viseguardstudios.asteroid_miner.view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

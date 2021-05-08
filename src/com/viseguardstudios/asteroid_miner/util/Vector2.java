@@ -25,6 +25,11 @@ public class Vector2 {
         return subtract(this, right);
     }
 
+    public Vector2 multiply(Vector2 right) {return new Vector2(this.x*right.x,this.y*right.y); }
+
+    public Vector2 multiply(int right) {return new Vector2(this.x*right,this.y*right); }
+
+
     public static double distance(Vector2 value1, Vector2 value2)
     {
         Vector2 difference = subtract(value1, value2);

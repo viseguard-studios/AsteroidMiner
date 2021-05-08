@@ -18,6 +18,7 @@ public class MainWindow extends JFrame implements StateChangedListener {
 
     Engine eng;
 
+
     JPanel active;
 
     public MainWindow() throws HeadlessException {
