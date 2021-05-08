@@ -19,7 +19,7 @@ public abstract class Vessel extends MovableEntity {
      */
     public Vessel(Asteroid a) {
         a.arrive(this);
-        currentAsteroid = a;
+        arriveTo(a);
         isHidden = false;
     }
 

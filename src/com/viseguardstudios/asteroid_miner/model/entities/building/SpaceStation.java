@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.model.entities.building;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.GameManager;
 import com.viseguardstudios.asteroid_miner.model.Scene;
+import com.viseguardstudios.asteroid_miner.util.Sprite;
 
 import java.util.List;
 
@@ -11,6 +12,12 @@ import java.util.List;
  */
 public class SpaceStation extends Building {
 
+    public static final Sprite sprite = new Sprite("assets\\graphics\\sprites\\base.png", 10);
+
+    @Override
+    public Sprite getSprite() {
+        return sprite;
+    }
 
     /**
      * Meghívódik ha az adott aszteroidán egy űrállomás épült. Ekkor a játék befejeződik.

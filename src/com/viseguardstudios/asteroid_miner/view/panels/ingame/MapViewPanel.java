@@ -36,12 +36,13 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         this.requestFocus();
         this.requestFocusInWindow();
 
-
+/*
         try {
             asteroidImage = ImageIO.read(new File("assets\\graphics\\sprites\\ast.png"));
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+ */
 
         this.setPreferredSize(new Dimension(viewPortSize.getX(), viewPortSize.getY()));
 
@@ -61,11 +62,24 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         public void mouseClicked(MouseEvent e)
         {
             a.requestFocusInWindow();
+
+            var pos = new Vector2(e.getX(),e.getY());
+            var wordPos = ReverseViewProject(pos);
+
+            float minDist = 0;
+            for (var ent : scene.getEntities()) {
+                var entPos = ent.getPos();
+                if (entPos != null && entPos.distance(wordPos) < ent.getSprite().getSize()/2f*scale) {
+
+                    scene.getManager().setSelectedEntity(ent);
+                }
+            }
+
             super.mouseClicked(e);
         }
     }
 
-    private static Image asteroidImage = null;
+    //private static Image asteroidImage = null;
 
 
     @Override
@@ -81,17 +95,27 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         g.fillRect(0,0, size.width, size.height);
 
         for (var ent : scene.getEntities()) {
-            if(scene.getManager().getSelectedEntity() != ent){
-                g.setColor(Color.gray);
-            }
-            else {
-                g.setColor(Color.CYAN);
-            }
+
 
 
             var pos = ent.getPos();
             if(pos != null) {
+
                 var viewPos = ViewProject(pos);
+
+                drawImage(g, ent.getSprite().getImg() , viewPos, ent.getSprite().getSize());
+
+                if(scene.getManager().getSelectedEntity() != ent){
+                    g.setColor(Color.gray);
+                }
+                else {
+                    g.setColor(Color.CYAN);
+                    var s = (ent.getSprite().getSize()+3)*scale;
+                    g.drawOval((int)(viewPos.getX()-s/2),(int)(viewPos.getY()-s/2), (int)s,(int)s);
+                }
+
+
+
 
 
                 if (ent instanceof Asteroid) {
@@ -105,7 +129,7 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
                         }
                     }
                     //Aszteroida kirajzolása
-                    drawImage(g, asteroidImage, viewPos, 20);
+
                 }
             }
         }
@@ -143,6 +167,17 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         return viewPos;
     }
 
+    private Vector2 ReverseViewProject(Vector2 loc) {
+        var a = loc.divide(scale);
+        a = a.add(cameraPos.subtract(viewPortSize.multiply(0.5f)));
+        return a;
+        /*
+        Vector2 viewPos = loc.subtract(cameraPos.subtract(viewPortSize.multiply(0.5f)));
+        viewPos = viewPos.multiply(scale);
+        return viewPos;
+        */
+    }
+
     @Override
     protected void processKeyEvent(KeyEvent e) {
         if(e.getID() == KEY_PRESSED) {
@@ -175,11 +210,11 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
             cameraPos.setX(cameraPos.getX()-10);
             changed = true;
         }
-        if(keyStates == VK_W){
+        if(keyStates == VK_S){
             cameraPos.setY(cameraPos.getY()+10);
             changed = true;
         }
-        if(keyStates == VK_S){
+        if(keyStates == VK_W){
             cameraPos.setY(cameraPos.getY()-10);
             changed = true;
         }

@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.model.entities.building;
 
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.util.Sprite;
 
 import java.util.*;
 
@@ -8,6 +9,13 @@ import java.util.*;
  * A teleportkapukat reprezentáló osztály.
  */
 public class TeleportGate extends Building {
+
+    public static final Sprite sprite = new Sprite("assets\\graphics\\sprites\\gate.png", 10);
+
+    @Override
+    public Sprite getSprite() {
+        return sprite;
+    }
 
     /**
      * az eddig lerakott teleportkapuk azonosítókkal párosítva.

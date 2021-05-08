@@ -8,9 +8,13 @@ import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
 import com.viseguardstudios.asteroid_miner.skeleton.Logger;
+import com.viseguardstudios.asteroid_miner.util.Sprite;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -18,6 +22,8 @@ import java.util.*;
  */
 public class Asteroid extends Entity {
 
+    public static final Sprite basic = new Sprite("assets\\graphics\\sprites\\ast.png", 20);
+    public static final Sprite exploded_sprite = new Sprite("assets\\graphics\\sprites\\ast_exp.png", 20);
 
     /**
      * Aszteroida létrehozása
@@ -450,9 +456,19 @@ Adams branch
         return status;
     }
 
+    @Override
+    public Sprite getSprite() {
+        if(this.exploded){
+            return exploded_sprite;
+        }
+        return basic;
+    }
+
     //#################################
     //Getter-Setters
     //#################################
+
+
     public int getCrustSize() {
         return crustSize;
     }

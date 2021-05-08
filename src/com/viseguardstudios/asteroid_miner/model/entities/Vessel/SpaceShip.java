@@ -5,6 +5,7 @@ import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
+import com.viseguardstudios.asteroid_miner.util.Sprite;
 
 import java.util.List;
 
@@ -13,7 +14,10 @@ import java.util.List;
  */
 public class SpaceShip extends Vessel {
 
+    private static final Sprite s = new Sprite("assets/graphics/sprites/ship.png", 10);
+
     static List<String> actions = List.of("move","hide","drill","mine","activate","create","stash");
+
 
     /**
      * Default constructor
@@ -137,5 +141,10 @@ public class SpaceShip extends Vessel {
         }
 
         return status;
+    }
+
+    @Override
+    public Sprite getSprite() {
+        return s;
     }
 }

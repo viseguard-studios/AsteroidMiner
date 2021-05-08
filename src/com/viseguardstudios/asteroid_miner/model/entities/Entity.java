@@ -2,6 +2,7 @@ package com.viseguardstudios.asteroid_miner.model.entities;
 
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.util.Namer;
+import com.viseguardstudios.asteroid_miner.util.Sprite;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  */
 public abstract class Entity {
 
+    public static final Sprite missing = new Sprite("assets\\graphics\\sprites\\missing.png", 10);
 
     protected String name;
 
@@ -22,6 +24,7 @@ public abstract class Entity {
     public boolean turnUsed = false;
 
     public Vector2 pos;
+
 
     /**
      * Default constructor
@@ -84,6 +87,8 @@ public abstract class Entity {
     public Vector2 getPos(){return pos;}
 
     public void setPos(Vector2 newpos) {this.pos = newpos;}
+
+    public Sprite getSprite(){return missing;}
 
 
     public void setDefaultName(){

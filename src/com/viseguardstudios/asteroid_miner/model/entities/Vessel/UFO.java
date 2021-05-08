@@ -6,10 +6,13 @@ import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.inventory.InfiniteInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
+import com.viseguardstudios.asteroid_miner.util.Sprite;
 
 import java.util.List;
 
 public class UFO extends Vessel{
+
+    public static final Sprite sprite = new Sprite("assets\\graphics\\sprites\\ufo.png", 10);
     InfiniteInventory inventory;
     static List<String> actions = List.of("move","mine");
     /**
@@ -90,6 +93,11 @@ public class UFO extends Vessel{
     public boolean Hide() {
         //DO not hide
         return false;
+    }
+
+    @Override
+    public Sprite getSprite(){
+        return sprite;
     }
 
     @Override

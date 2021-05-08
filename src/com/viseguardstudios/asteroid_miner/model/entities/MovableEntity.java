@@ -28,11 +28,15 @@ public abstract class MovableEntity extends Entity {
         }
         currentAsteroid.depart(this);
         to.arrive(this);
+        arriveTo(to);
+
+        turnUsed = true;
+    }
+
+    protected void arriveTo(Asteroid to) {
         int i = to.getLocalEntityNumber();
         this.pos = getEntityOrbitPos(to.pos,i);
         this.currentAsteroid = to;
-
-        turnUsed = true;
     }
 
     /**
@@ -58,7 +62,7 @@ public abstract class MovableEntity extends Entity {
      * @return
      */
     public Vector2 getEntityOrbitPos(Vector2 asteroidPos, int i){
-        float orbitRadius = 2;
+        float orbitRadius = 20;
         int relX = (int) (orbitRadius*Math.cos(i));
         int relY = (int) (orbitRadius*Math.sin(i));
         Vector2 relPos = new Vector2(relX,relY);

@@ -5,6 +5,7 @@ import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
+import com.viseguardstudios.asteroid_miner.util.Sprite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
  * Egy speciális jármű, a robot tevékenységeit, tulajdonságait tartalmazza.
  */
 public class Robot extends Vessel {
+
+    public static final Sprite sprite = new Sprite("assets\\graphics\\sprites\\robot.png", 10);
 
     static List<String> actions = List.of("move","hide","drill");
 
@@ -96,5 +99,10 @@ public class Robot extends Vessel {
     @Override
     public void doAction(String name) {
         //TODO: Implement
+    }
+
+    @Override
+    public Sprite getSprite() {
+        return sprite;
     }
 }
