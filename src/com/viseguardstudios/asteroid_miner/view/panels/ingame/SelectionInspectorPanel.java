@@ -45,7 +45,8 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
         };
 
         JList<String> myList = new JList<String>(entityList);
-        this.add(myList);
+        JScrollPane scroll = new JScrollPane(myList);
+        this.add(scroll);
         myList.addListSelectionListener(i->{ selectionChanged(myList.getSelectedIndex()); });
 
         t2 = new JTextArea();
