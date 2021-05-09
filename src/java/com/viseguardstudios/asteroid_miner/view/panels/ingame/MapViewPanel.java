@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.view.panels.ingame;
 import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
 
@@ -113,6 +114,14 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
                     g.drawOval((int)(viewPos.getX()-s/2),(int)(viewPos.getY()-s/2), (int)s,(int)s);
                 }
 
+                if(ent instanceof Vessel) {
+                    var p = Engine.getInstance().getScene().getManager().getCurrentPlayer();
+                    if (((Vessel) ent).getOwner() == p) {
+                        g.setColor(Color.green);
+                        var s = (ent.getSprite().getSize())*scale;
+                        g.drawRect((int)(viewPos.getX()-s/2),(int)(viewPos.getY()-s/2), (int)s,(int)s);
+                    }
+                }
 
 
 

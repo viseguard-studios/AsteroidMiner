@@ -184,6 +184,8 @@ public class GameManager implements INotifyPropertyChanged {
     public void startGame() {
         currentPlayer = allPlayers.get(0);
         playerID = 0;
+
+        notifyListeners();
     }
 
     /**
@@ -209,6 +211,8 @@ public class GameManager implements INotifyPropertyChanged {
         }
 
         currentPlayer = allPlayers.get(playerID);
+
+        notifyListeners();
     }
 
     /**

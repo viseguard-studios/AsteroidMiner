@@ -105,9 +105,11 @@ public class SpaceShip extends Vessel {
             super.doAction(args);
         if(args[0].equals("drill")){
             this.drill();
+            scene.getManager().notifyListeners();
         }
         if(args[0].equals("mine")){
             this.mine();
+            scene.getManager().notifyListeners();
         }
     }
 
@@ -135,6 +137,7 @@ public class SpaceShip extends Vessel {
     @Override
     public String printStatus() {
         String status = super.printStatus() + "\n";
+        status = status + "Owner: " + owner.getName() + "\n";
         status = status.concat("Turn used: " + (turnUsed ? "true":"false")+ "\n");
 
         status = status.concat(currentAsteroid.getName()+"\n");

@@ -5,6 +5,7 @@ import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 
 import javax.swing.*;
@@ -62,35 +63,27 @@ public class ActionBar extends JPanel implements StateChangedListener {
             this.remove(b);
         }
 
-        //add new ones
-        var actions = selected.getActions();
-        if(actions != null) {
-            for (var a : actions) {
-                JButton moveBtn = new JButton(a);
-                moveBtn.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        /*
-                        SpaceShip ss = (SpaceShip)(Engine.getInstance().getScene().getManager().getSelectedEntity()); //selection must be SS to work
-                        if(!ss.turnUsed) {
-                            List<Asteroid> asteroids = ss.getCurrentAsteroid().getPhysicalNeighbours();
-                            List<String> posib = new ArrayList<>();
-                            for (Asteroid a : asteroids
-                            ) {
-                                posib.add(a.getName());
-                            }
-                            String res = (String) JOptionPane.showInputDialog(ActionBar.this.getParent().getParent(), "Please choose a destination: ", "Choose", JOptionPane.PLAIN_MESSAGE, null, posib.toArray(), "")
 
-                            ss.doAction(new String[]{res});
-                            ss.turnUsed = true;
-                            ActionBar.this.getParent().repaint();
-                        }
-                         */
-                        selected.doAction(new String[]{e.getActionCommand()});
+        //add new ones
+        if(selected instanceof Vessel){
+            var p = Engine.getInstance().getScene().getManager().getCurrentPlayer();
+            if(((Vessel)selected).getOwner() == p){
+
+                var actions = selected.getActions();
+                if(actions != null) {
+                    for (var a : actions) {
+                        JButton moveBtn = new JButton(a);
+                        moveBtn.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                selected.doAction(new String[]{e.getActionCommand()});
+                            }
+                        });
+                        this.add(moveBtn);
+                        buttons.add(moveBtn);
                     }
-                });
-                this.add(moveBtn);
-                buttons.add(moveBtn);
+                }
+
             }
         }
 

@@ -141,6 +141,10 @@ public abstract class Vessel extends MovableEntity {
         owner = p;
     }
 
+    public Player getOwner(){
+        return owner;
+    }
+
     public boolean getHidden(){
         return isHidden;
     }
