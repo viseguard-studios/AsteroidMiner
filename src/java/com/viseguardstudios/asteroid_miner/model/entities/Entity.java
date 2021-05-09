@@ -12,7 +12,7 @@ import java.util.List;
  */
 public abstract class Entity {
 
-    public static final Sprite missing = new Sprite("assets\\graphics\\sprites\\missing.png", 10);
+    public static final Sprite missing = new Sprite("assets/graphics/sprites/missing.png", 10);
 
     protected String name;
 

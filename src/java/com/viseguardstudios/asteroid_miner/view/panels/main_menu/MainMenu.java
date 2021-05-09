@@ -16,14 +16,22 @@ public class MainMenu extends JPanel {
         JButton newGame = new JButton("Start new game");
         this.add(newGame);
         newGame.addActionListener(e -> {
-            //TODO add popup to set the player count or something
-            Engine.getInstance().setPlayerCount(1);
-            Engine.getInstance().StartGame((int)System.currentTimeMillis());
+            startGame();
         });
 
 
         this.add(new JButton("Button 2"));
+    }
 
 
+    public void startGame(){
+        GameSetupScreen a = new GameSetupScreen();
+        a.setVisible(true);
+
+        a.
+
+        //TODO add popup to set the player count or something
+        Engine.getInstance().setPlayerCount(1);
+        Engine.getInstance().StartGame((int)System.currentTimeMillis());
     }
 }

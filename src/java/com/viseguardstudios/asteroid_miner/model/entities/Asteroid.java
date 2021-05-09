@@ -22,8 +22,8 @@ import java.util.*;
  */
 public class Asteroid extends Entity {
 
-    public static final Sprite basic = new Sprite("assets\\graphics\\sprites\\ast.png", 20);
-    public static final Sprite exploded_sprite = new Sprite("assets\\graphics\\sprites\\ast_exp.png", 20);
+    public static final Sprite basic = new Sprite("assets/graphics/sprites/ast.png", 20);
+    public static final Sprite exploded_sprite = new Sprite("assets/graphics/sprites/ast_exp.png", 20);
 
     /**
      * Aszteroida létrehozása
