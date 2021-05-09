@@ -41,23 +41,24 @@ public abstract class MovableEntity extends Entity {
 
     @Override
     public void doAction(String[] args) {
-        if(args[0].equals("move")){
+        if(args[0].equals("move")) {
+            if (!turnUsed) {
+                List<Asteroid> asteroids = currentAsteroid.getPhysicalNeighbours();
+                List<String> posib = new ArrayList<>();
+                for (Asteroid a : asteroids
+                ) {
+                    posib.add(a.getName());
+                }
+                var window = Engine.getInstance().getMainWindow();
 
-            List<Asteroid> asteroids = currentAsteroid.getPhysicalNeighbours();
-            List<String> posib = new ArrayList<>();
-            for (Asteroid a : asteroids
-            ) {
-                posib.add(a.getName());
-            }
-            var window = Engine.getInstance().getMainWindow();
+                String res = (String) JOptionPane.showInputDialog(window, "Please choose a destination: ", "Choose", JOptionPane.PLAIN_MESSAGE, null, posib.toArray(), "");
 
-            String res = (String) JOptionPane.showInputDialog(window, "Please choose a destination: ", "Choose", JOptionPane.PLAIN_MESSAGE, null, posib.toArray(), "");
-
-            for (Asteroid a : currentAsteroid.getPhysicalNeighbours()) {
-                if(a.getName().equals(res)) {
-                    move(a);
-                    scene.getManager().notifyListeners();
-                    break;
+                for (Asteroid a : currentAsteroid.getPhysicalNeighbours()) {
+                    if (a.getName().equals(res)) {
+                        move(a);
+                        scene.getManager().notifyListeners();
+                        break;
+                    }
                 }
             }
         }

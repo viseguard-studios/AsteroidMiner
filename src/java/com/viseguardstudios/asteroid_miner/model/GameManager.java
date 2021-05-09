@@ -234,7 +234,7 @@ public class GameManager implements INotifyPropertyChanged {
                 var ss = new SpaceShip(asteroids.get(ai));
                 ss.setName("SS_"+ Namer.getNextID(ss.getClass()));
                 pl.addVessel(ss);
-
+                ss.setOwner(pl);
                 settlers.add(ss);
                 scene.addEntity(ss);
             }

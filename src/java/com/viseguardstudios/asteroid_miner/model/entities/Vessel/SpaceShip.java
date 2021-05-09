@@ -101,7 +101,8 @@ public class SpaceShip extends Vessel {
 
     @Override
     public void doAction(String[] args) {
-        super.doAction(args);
+        if(owner.equals(Engine.getInstance().getGameManager().getCurrentPlayer()))
+            super.doAction(args);
         if(args[0].equals("drill")){
             this.drill();
         }
