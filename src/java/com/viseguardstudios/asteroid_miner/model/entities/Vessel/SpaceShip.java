@@ -102,16 +102,12 @@ public class SpaceShip extends Vessel {
     @Override
     public void doAction(String[] args) {
         super.doAction(args);
-        /*
-        for (Asteroid a:currentAsteroid.getPhysicalNeighbours()
-             ) {
-            if(a.getName() == args[0]) {
-                move(a);
-                break;
-            }
+        if(args[0].equals("drill")){
+            this.drill();
         }
-
-         */
+        if(args[0].equals("mine")){
+            this.mine();
+        }
     }
 
     /**

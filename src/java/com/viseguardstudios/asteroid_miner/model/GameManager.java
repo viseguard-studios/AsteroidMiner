@@ -198,9 +198,15 @@ public class GameManager implements INotifyPropertyChanged {
 
         scene.roundEnded();
 
+
+    }
+
+    public void nextPlayer(){
         playerID++;
-        if(playerID >= allPlayers.size())
+        if(playerID >= allPlayers.size()) {
+            takeTurn();
             playerID = 0;
+        }
 
         currentPlayer = allPlayers.get(playerID);
     }

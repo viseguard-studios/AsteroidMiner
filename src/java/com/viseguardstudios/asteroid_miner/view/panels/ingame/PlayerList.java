@@ -5,6 +5,8 @@ import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PlayerList extends JPanel implements StateChangedListener {
 
@@ -15,6 +17,15 @@ public class PlayerList extends JPanel implements StateChangedListener {
 
         doPlayerList();
 
+        JButton next = new JButton("End Turn");
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Engine.getInstance().getScene().getManager().nextPlayer();
+            }
+        });
+
+        this.add(next);
     }
 
     public void doPlayerList(){
