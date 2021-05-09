@@ -1,8 +1,11 @@
 package com.viseguardstudios.asteroid_miner.view.panels.ingame;
 
 import com.viseguardstudios.asteroid_miner.model.Engine;
+import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,14 +14,24 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActionBar extends JPanel {
+public class ActionBar extends JPanel implements StateChangedListener {
+
+    Scene scene;
+    Entity selected = null;
+
+    List<JComponent> buttons = new ArrayList<>();
 
     public ActionBar() {
+        scene = Engine.getInstance().getScene();
+        scene.getManager().addListener(this);
 
         FlowLayout experimentLayout = new FlowLayout();
 
+        this.setPreferredSize(new Dimension(0,100));
+
         this.setLayout(experimentLayout);
 
+        /*
         JButton moveBtn = new JButton("Move");
         moveBtn.addActionListener(new ActionListener() {
             @Override
@@ -39,6 +52,35 @@ public class ActionBar extends JPanel {
         this.add(new JButton("Mine"));
         this.add(new JButton("Hide"));
         this.add(new JButton("Drill"));
+         */
 
+    }
+
+    public void DrawButtons(){
+        //remove old ones
+        for (var b : buttons) {
+            this.remove(b);
+        }
+
+        //add new ones
+        var actions = selected.getActions();
+        if(actions != null) {
+            for (var a : actions) {
+                JButton moveBtn = new JButton(a);
+
+                this.add(moveBtn);
+                buttons.add(moveBtn);
+            }
+        }
+
+
+    }
+
+    @Override
+    public void stateChanged() {
+        if(selected != scene.getManager().getSelectedEntity()){
+            selected = scene.getManager().getSelectedEntity();
+            DrawButtons();
+        }
     }
 }
