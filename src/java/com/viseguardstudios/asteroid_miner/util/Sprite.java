@@ -22,13 +22,18 @@ public class Sprite {
             ClassLoader classLoader = getClass().getClassLoader();
 
             URL resource = classLoader.getResource(path);
+            var resource_stream = classLoader.getResourceAsStream(path);
             if (resource == null) {
                 throw new IllegalArgumentException("file is not found!");
-            } else {
-                f = new File(resource.getFile());
             }
 
-            img = ImageIO.read(f);
+            f = new File(resource.getFile());
+
+            if(!f.exists()){
+                throw new IllegalArgumentException("file is not found!");
+            }
+
+            img = ImageIO.read(resource_stream);
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

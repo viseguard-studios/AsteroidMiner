@@ -27,7 +27,7 @@ public class ActionBar extends JPanel implements StateChangedListener {
 
         FlowLayout experimentLayout = new FlowLayout();
 
-        this.setPreferredSize(new Dimension(0,100));
+        this.setPreferredSize(new Dimension(0,50));
 
         this.setLayout(experimentLayout);
 
@@ -73,7 +73,7 @@ public class ActionBar extends JPanel implements StateChangedListener {
             }
         }
 
-
+        this.repaint();
     }
 
     @Override
