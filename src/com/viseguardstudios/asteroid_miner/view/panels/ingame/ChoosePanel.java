@@ -15,4 +15,6 @@ public class ChoosePanel extends JInternalFrame {
         super("Please choose from the list:",false,false,false);
         this.list = list;
     }
+
+
 }
