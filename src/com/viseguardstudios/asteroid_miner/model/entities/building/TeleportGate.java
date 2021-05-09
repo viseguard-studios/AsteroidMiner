@@ -137,7 +137,7 @@ public class TeleportGate extends Building {
     }
 
     @Override
-    public void doAction(String name) {
+    public void doAction(String[] args) {
 
     }
 

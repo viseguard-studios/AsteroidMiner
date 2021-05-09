@@ -181,7 +181,7 @@ public class Asteroid extends Entity {
     }
 
     @Override
-    public void doAction(String name) {
+    public void doAction(String[] args) {
 
     }
 

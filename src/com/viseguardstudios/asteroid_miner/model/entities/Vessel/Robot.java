@@ -97,7 +97,7 @@ public class Robot extends Vessel {
     }
 
     @Override
-    public void doAction(String name) {
+    public void doAction(String[] args) {
         //TODO: Implement
     }
 

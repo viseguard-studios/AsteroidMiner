@@ -76,7 +76,7 @@ public abstract class Entity {
      */
     public abstract List<String> getActions();
 
-    public abstract void doAction(String name);
+    public abstract void doAction(String[] args);
 
     /**
      * További getterek, setterek
