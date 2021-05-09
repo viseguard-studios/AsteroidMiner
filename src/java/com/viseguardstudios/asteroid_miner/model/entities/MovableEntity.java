@@ -1,6 +1,12 @@
 package com.viseguardstudios.asteroid_miner.model.entities;
 
+import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
+import com.viseguardstudios.asteroid_miner.view.panels.ingame.ActionBar;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Egy mozgatható entitás osztálya
@@ -31,6 +37,30 @@ public abstract class MovableEntity extends Entity {
         arriveTo(to);
 
         turnUsed = true;
+    }
+
+    @Override
+    public void doAction(String[] args) {
+        if(args[0].equals("move")){
+
+            List<Asteroid> asteroids = currentAsteroid.getPhysicalNeighbours();
+            List<String> posib = new ArrayList<>();
+            for (Asteroid a : asteroids
+            ) {
+                posib.add(a.getName());
+            }
+            var window = Engine.getInstance().getMainWindow();
+
+            String res = (String) JOptionPane.showInputDialog(window, "Please choose a destination: ", "Choose", JOptionPane.PLAIN_MESSAGE, null, posib.toArray(), "");
+
+            for (Asteroid a : currentAsteroid.getPhysicalNeighbours()) {
+                if(a.getName().equals(res)) {
+                    move(a);
+                    scene.getManager().notifyListeners();
+                    break;
+                }
+            }
+        }
     }
 
     protected void arriveTo(Asteroid to) {

@@ -101,7 +101,8 @@ public class SpaceShip extends Vessel {
 
     @Override
     public void doAction(String[] args) {
-
+        super.doAction(args);
+        /*
         for (Asteroid a:currentAsteroid.getPhysicalNeighbours()
              ) {
             if(a.getName() == args[0]) {
@@ -109,6 +110,8 @@ public class SpaceShip extends Vessel {
                 break;
             }
         }
+
+         */
     }
 
     /**

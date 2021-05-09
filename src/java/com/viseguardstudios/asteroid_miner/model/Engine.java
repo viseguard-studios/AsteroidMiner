@@ -31,6 +31,12 @@ public class Engine implements INotifyPropertyChanged {
 
     CommandExecutor cmdexec;
 
+    public MainWindow getMainWindow() {
+        return mainWindow;
+    }
+
+    MainWindow mainWindow;
+
     /**
      * Default constructor
      *
@@ -49,7 +55,7 @@ public class Engine implements INotifyPropertyChanged {
     public void StartApplication() {
         System.out.println("Application started");
 
-        MainWindow m = new MainWindow();
+        mainWindow = new MainWindow();
 
         running = true;
 

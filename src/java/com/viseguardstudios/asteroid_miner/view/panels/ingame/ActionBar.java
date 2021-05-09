@@ -70,6 +70,7 @@ public class ActionBar extends JPanel implements StateChangedListener {
                 moveBtn.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        /*
                         SpaceShip ss = (SpaceShip)(Engine.getInstance().getScene().getManager().getSelectedEntity()); //selection must be SS to work
                         if(!ss.turnUsed) {
                             List<Asteroid> asteroids = ss.getCurrentAsteroid().getPhysicalNeighbours();
@@ -78,10 +79,14 @@ public class ActionBar extends JPanel implements StateChangedListener {
                             ) {
                                 posib.add(a.getName());
                             }
-                            ss.doAction(new String[]{(String) JOptionPane.showInputDialog(ActionBar.this.getParent().getParent(), "Please choose a destination: ", "Choose", JOptionPane.PLAIN_MESSAGE, null, posib.toArray(), "")});
+                            String res = (String) JOptionPane.showInputDialog(ActionBar.this.getParent().getParent(), "Please choose a destination: ", "Choose", JOptionPane.PLAIN_MESSAGE, null, posib.toArray(), "")
+
+                            ss.doAction(new String[]{res});
                             ss.turnUsed = true;
                             ActionBar.this.getParent().repaint();
                         }
+                         */
+                        selected.doAction(new String[]{e.getActionCommand()});
                     }
                 });
                 this.add(moveBtn);
