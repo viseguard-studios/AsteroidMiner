@@ -64,6 +64,28 @@ public class Engine implements INotifyPropertyChanged {
     /**
      * Egy új játék kezdése.
      */
+    public void StartGame(List<Player> players,int seed) {
+        System.out.println("Starting game");
+        var gm = new GameManager();
+
+        setScene(new Scene());
+        scene.setManager(gm);
+
+        gm.setManagedScene(scene);
+
+        for (var p : players) {
+            gm.addPlayer(p);
+        }
+
+        //gm.AddPlayer();
+
+        gm.initGame(seed);
+
+        setGameState(State.InGame);
+        gm.startGame();
+
+    }
+
     public void StartGame(int seed) {
         System.out.println("Starting game");
         var gm = new GameManager();
@@ -78,6 +100,7 @@ public class Engine implements INotifyPropertyChanged {
             p.setName("Player_"+i);
             gm.addPlayer(p);
         }
+
         //gm.AddPlayer();
 
         gm.initGame(seed);

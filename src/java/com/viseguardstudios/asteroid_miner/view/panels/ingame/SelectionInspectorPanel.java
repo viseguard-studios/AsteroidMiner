@@ -40,8 +40,6 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
             public String getElementAt(int index) {
                 return scene.getEntities().get(index).getName();
             }
-
-
         };
 
         JList<String> myList = new JList<String>(entityList);

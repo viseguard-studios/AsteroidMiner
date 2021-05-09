@@ -1,9 +1,11 @@
 package com.viseguardstudios.asteroid_miner.view.panels.main_menu;
 
 import com.viseguardstudios.asteroid_miner.model.Engine;
+import com.viseguardstudios.asteroid_miner.model.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class MainMenu extends JPanel {
 
@@ -29,9 +31,7 @@ public class MainMenu extends JPanel {
         JButton newGame = new JButton("Start new game");
         actions.add(newGame);
         newGame.addActionListener(e -> {
-            //TODO add popup to set the player count or something
-            Engine.getInstance().setPlayerCount(1);
-            Engine.getInstance().StartGame((int)System.currentTimeMillis());
+            startGame();
         });
 
         actions.add(Box.createHorizontalStrut(10));
@@ -45,13 +45,14 @@ public class MainMenu extends JPanel {
 
 
     public void startGame(){
-        //GameSetupScreen a = new GameSetupScreen();
-        //a.setVisible(true);
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        GameSetupScreen a = new GameSetupScreen(topFrame, true);
+        List<Player> result = a.showDialog();
 
 
 
         //TODO add popup to set the player count or something
-        Engine.getInstance().setPlayerCount(1);
-        Engine.getInstance().StartGame((int)System.currentTimeMillis());
+        //Engine.getInstance().setPlayerCount(1);
+        Engine.getInstance().StartGame(result, (int)System.currentTimeMillis());
     }
 }

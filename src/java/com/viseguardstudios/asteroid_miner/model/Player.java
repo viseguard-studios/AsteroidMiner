@@ -16,6 +16,10 @@ public class Player {
     public Player() {
     }
 
+    public Player(String name) {
+        this.name = name;
+    }
+
     /**
      * A játékos által birtokolt űrjárművek listája.
      */
