@@ -37,6 +37,7 @@ public class MainWindow extends JFrame implements StateChangedListener {
         //this.setSize(new Dimension(0,500));
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setResizable(false);
     }
 
     @Override
