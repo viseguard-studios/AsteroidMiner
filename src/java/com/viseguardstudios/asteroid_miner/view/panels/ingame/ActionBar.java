@@ -5,6 +5,7 @@ import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.util.PositionChangeListener;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class ActionBar extends JPanel implements StateChangedListener {
 
     Scene scene;
     Entity selected = null;
+    private List<PositionChangeListener> listeners = new ArrayList<>();
 
     List<JComponent> buttons = new ArrayList<>();
 
@@ -67,7 +69,20 @@ public class ActionBar extends JPanel implements StateChangedListener {
         if(actions != null) {
             for (var a : actions) {
                 JButton moveBtn = new JButton(a);
-
+                moveBtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        SpaceShip ss = (SpaceShip)(Engine.getInstance().getScene().getManager().getSelectedEntity()); //selection must be SS to work
+                        List<Asteroid> asteroids = ss.getCurrentAsteroid().getPhysicalNeighbours();
+                        List<String> posib =  new ArrayList<>();
+                        for (Asteroid a: asteroids
+                        ) {
+                            posib.add(a.getName());
+                        }
+                        ss.doAction(new String[]{(String)JOptionPane.showInputDialog(ActionBar.this.getParent().getParent(),"Please choose a destination: ","Choose",JOptionPane.PLAIN_MESSAGE,null,posib.toArray(),"")});
+                        ActionBar.this.getParent().repaint();
+                    }
+                });
                 this.add(moveBtn);
                 buttons.add(moveBtn);
             }

@@ -30,7 +30,7 @@ public class Sprite {
             f = new File(resource.getFile());
 
             if(!f.exists()){
-                throw new IllegalArgumentException("file is not found!");
+              //  throw new IllegalArgumentException("file is not found!");
             }
 
             img = ImageIO.read(resource_stream);

@@ -1,7 +1,9 @@
 package com.viseguardstudios.asteroid_miner.model;
 
 import com.viseguardstudios.asteroid_miner.commands.CommandExecutor;
+import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.util.INotifyPropertyChanged;
+import com.viseguardstudios.asteroid_miner.util.PositionChangeListener;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 import com.viseguardstudios.asteroid_miner.view.MainWindow;
 

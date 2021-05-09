@@ -1,5 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.entities.Vessel;
 
+import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
@@ -7,6 +8,7 @@ import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 import com.viseguardstudios.asteroid_miner.util.Sprite;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -100,7 +102,13 @@ public class SpaceShip extends Vessel {
     @Override
     public void doAction(String[] args) {
 
-        //TODO :Implement
+        for (Asteroid a:currentAsteroid.getPhysicalNeighbours()
+             ) {
+            if(a.getName() == args[0]) {
+                move(a);
+                break;
+            }
+        }
     }
 
     /**
