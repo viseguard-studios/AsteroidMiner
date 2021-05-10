@@ -37,7 +37,12 @@ public class MainMenu extends JPanel {
         actions.add(Box.createHorizontalStrut(10));
         actions.add(new JButton("    Load game     "));
         actions.add(Box.createHorizontalStrut(10));
-        actions.add(new JButton("        Exit        "));
+
+        JButton exitButton = new JButton("       Exit       ");
+        exitButton.addActionListener( e -> {
+            System.exit(0);
+        });
+        actions.add(exitButton);
 
         this.add(new JPanel());
         this.add(actions);
