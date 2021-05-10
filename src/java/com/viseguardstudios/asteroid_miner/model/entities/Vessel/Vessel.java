@@ -43,9 +43,10 @@ public abstract class Vessel extends MovableEntity {
      * Belebújik az adott aszteroidába, ha van benne elegendő hely. Ha nincsen, az aszteroida felszínén marad.
      */
     public boolean Hide() {
-        if(!isHidden){
+        if(!isHidden && !turnUsed){
             var canHide = currentAsteroid.Hide(this);
             isHidden = canHide;
+            turnUsed=true;
             return isHidden;
         }
         return false;
@@ -75,10 +76,12 @@ public abstract class Vessel extends MovableEntity {
         Item mined = null;
         if(!isHidden){
             mined = currentAsteroid.Mine();
-            if(mined != null)
+            if(mined != null) {
                 this.getInventory().insertItem(mined);
+                turnUsed = true;
+            }
 
-            turnUsed = true;
+
         }
         return mined;
     }

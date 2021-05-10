@@ -111,6 +111,15 @@ public class SpaceShip extends Vessel {
             this.mine();
             scene.getManager().notifyListeners();
         }
+        if(args[0].equals("hide")){
+            if(!getHidden()) {
+                this.Hide();
+            }else if(!turnUsed)
+            {
+                this.ExitHiding();
+            }
+            scene.getManager().notifyListeners();
+        }
     }
 
     /**
@@ -138,6 +147,7 @@ public class SpaceShip extends Vessel {
     public String printStatus() {
         String status = super.printStatus() + "\n";
         status = status + "Owner: " + owner.getName() + "\n";
+        status = status + "Hidden: " + getHidden() + "\n";
         status = status.concat("Turn used: " + (turnUsed ? "true":"false")+ "\n");
 
         status = status.concat(currentAsteroid.getName()+"\n");
