@@ -50,18 +50,8 @@ public class TeleportGateItem extends Item {
 
         var ast = ship.getCurrentAsteroid();
 
-        TeleportGate gate = new TeleportGate(ast, "", id);
-        //hozzáadja az Id-ket tartalmazó listához a most létrehozott kaput
-        //gate.addIdListItem(gate,id);
-        //pár megkeresése
-        //TeleportGate pair = gate.getIdPair(id, gate);
-        //ha megtalálta a párt -> beállítja a kapuknál is
-        /*
-        if(pair != null){
-            gate.setPair(pair);
-            pair.setPair(gate);
-        }
-        */
+        TeleportGate gate = new TeleportGate(ast, "Teleport Gate " + Namer.getNextID(TeleportGate.class), id);
+
 
         Engine.getInstance().getScene().addEntity(gate);
 

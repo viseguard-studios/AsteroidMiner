@@ -39,6 +39,7 @@ public class TeleGateCreator extends BuildingCreator {
         }
         TeleportGate tg = new TeleportGate(home,name,ID);
         home.GetScene().addEntity(tg);
+        home.GetScene().getManager().notifyListeners();
         return tg;
 
     }

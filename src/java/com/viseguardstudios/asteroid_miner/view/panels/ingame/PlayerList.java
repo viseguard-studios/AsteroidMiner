@@ -37,7 +37,7 @@ public class PlayerList extends JPanel implements StateChangedListener {
         this.add(next);
 
         sunDistance = new JLabel();
-
+        sunDistance.setOpaque(true);
         this.add(sunDistance);
 
     }
@@ -75,6 +75,7 @@ public class PlayerList extends JPanel implements StateChangedListener {
         else {
             sunDistance.setBackground(Color.YELLOW);
         }
+        sunDistance.repaint();
 
         this.repaint();
     }

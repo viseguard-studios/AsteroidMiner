@@ -16,9 +16,9 @@ import java.util.*;
 public class GameManager implements INotifyPropertyChanged {
 
     public static final int MAP_SIZE= 1000;
-    public static final int CLOSE_SUN_DISTANCE= 20;
+    public static final int CLOSE_SUN_DISTANCE= 250;
 
-    boolean debug = false;
+    boolean debug = true;
 
 
     Random rnd;
@@ -28,6 +28,8 @@ public class GameManager implements INotifyPropertyChanged {
      * Jelzi, hogy a játék befejeződött-e már.
      */
     private boolean gameEnded;
+
+    private int turnCount =0;
 
     /**
      * Az aktuálisan irányítható jármű (akit a soron lévő játékos jelenleg irányít).
@@ -81,7 +83,7 @@ public class GameManager implements INotifyPropertyChanged {
     /**
      * A Naptól való aktuális távolság.
      */
-    private int sunDistance;
+    private int sunDistance = 300;
 
 
 
@@ -181,6 +183,8 @@ public class GameManager implements INotifyPropertyChanged {
         notifyListeners();
     }
 
+    double dir = 0;
+
     /**
      * Amikor az összes játékos lépett.
      */
@@ -189,14 +193,18 @@ public class GameManager implements INotifyPropertyChanged {
             scene.solarFlare(solarStormCenter, solarStromRadius);
             CreateStormOn = false;
         }
-        if(rnd.nextInt(100) < 50){
+        if(rnd.nextInt(100) < 30){
             CreateStormOn = true;
             solarStormCenter = new Vector2(rnd.nextInt(MAP_SIZE),rnd.nextInt(MAP_SIZE));
             solarStromRadius = rnd.nextInt(200)+80;
         }
 
-        scene.roundEnded();
+        dir = Math.cos(turnCount/4f);
+        sunDistance += rnd.nextInt(30)*dir;
 
+
+        scene.roundEnded();
+        turnCount++;
         notifyListeners();
     }
 
@@ -217,9 +225,14 @@ public class GameManager implements INotifyPropertyChanged {
 
     /**
      * Aktuális játék befejezése.
+     * @param b
      */
-    public void endGame() {
+    public void endGame(boolean b) {
         System.out.println("Current game is over");
+        if(b)
+            Engine.getInstance().setGameState(Engine.State.Won);
+        else
+            Engine.getInstance().setGameState(Engine.State.Lost);
     }
 
 
@@ -237,9 +250,15 @@ public class GameManager implements INotifyPropertyChanged {
 
                 var ss = new SpaceShip(asteroids.get(ai));
                 ss.setName("SS_"+ Namer.getNextID(ss.getClass()));
-                ss.getInventory().insertItem(new Iron());
-                ss.getInventory().insertItem(new Coal());
-                ss.getInventory().insertItem(new Uranium());
+                if(debug) {
+                    ss.getInventory().insertItem(new Iron());
+                    ss.getInventory().insertItem(new Iron());
+                    ss.getInventory().insertItem(new Iron());
+                    ss.getInventory().insertItem(new Coal());
+                    ss.getInventory().insertItem(new Ice());
+                    ss.getInventory().insertItem(new Uranium());
+                    ss.getInventory().insertItem(new Titan());
+                }
                 pl.addVessel(ss);
                 ss.setOwner(pl);
                 settlers.add(ss);

@@ -22,6 +22,12 @@ public class AsteroidInventory implements IInventory{
      */
     private int capacity;
 
+    public boolean isMinedOut() {
+        return minedOut;
+    }
+
+    private boolean minedOut = false;
+
     /**
      * Konstruktor: új üres lista, kapacitás beállítása
      */
@@ -49,7 +55,21 @@ public class AsteroidInventory implements IInventory{
 
     @Override
     public boolean removeItem(Item item) {
-        return items.remove(item);
+        for (int i = 0; i < items.size(); i++) {
+            var it = items.get(i);
+            if(it.satisfies(item)){
+                items.remove(it);
+
+                if(items.size() == 0){
+                    minedOut = true;
+                }
+
+                return true;
+            }
+        }
+
+        //return items.remove(item);
+        return false;
     }
 
     /**

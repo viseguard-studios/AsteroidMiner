@@ -67,10 +67,21 @@ public class SSInventory implements IInventory{
 
     @Override
     public boolean removeItem(Item item) {
-        if(items.contains(item))
-            return items.remove(item);
-        else if (tgs.contains(item))
-            return tgs.remove(item);
+        for (int i = 0; i < items.size(); i++) {
+            var it = items.get(i);
+            if(it.satisfies(item)){
+                items.remove(it);
+                return true;
+            }
+        }
+
+        for (int i = 0; i < tgs.size(); i++) {
+            var it = tgs.get(i);
+            if(it.satisfies(item)){
+                tgs.remove(it);
+                return true;
+            }
+        }
 
         return false;
     }

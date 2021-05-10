@@ -87,6 +87,11 @@ public class Vector2 {
                 value1.y * value2.y;
     }
 
+
+    public static float angle(Vector2 a, Vector2 b){
+        return (float) Math.atan2((double) b.y - a.y,(double) b.x - a.x);
+    }
+
     public int getX() {
         return x;
     }

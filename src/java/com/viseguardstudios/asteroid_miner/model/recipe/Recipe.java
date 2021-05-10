@@ -34,8 +34,8 @@ public abstract class Recipe {
         Asteroid a = ss.getCurrentAsteroid();
         SSInventory inv = ss.getInventory();
         ArrayList<Item> items = new ArrayList<Item>(inv.getItems());
-        AsteroidInventory inventory = a.getInventory();
-        ArrayList<Item> aItems = new ArrayList<Item>(inventory.getItems());
+        //AsteroidInventory inventory = a.getInventory();
+        ArrayList<Item> aItems = new ArrayList<Item>(a.getInventory().getItems());
         ArrayList<Item> recipe = new ArrayList<Item>(input);
 
 
@@ -61,15 +61,18 @@ public abstract class Recipe {
         if(recipe.size()==0)  //ha megvan az összes szükséges hozzávaló
             return true;
 
-        for (int i = 0; i < recipe.size(); i++) {
-            Item rec = recipe.get(i);
-            for (int j = 0; j < aItems.size(); j++) {
-                Item aItem = aItems.get(j);
-                if (aItem.satisfies(rec)) {
-                    recipe.remove(rec);
-                    aItems.remove(aItem);
-                    i--;
-                    break;
+        if(a.getInventory().isMinedOut()) {
+
+            for (int i = 0; i < recipe.size(); i++) {
+                Item rec = recipe.get(i);
+                for (int j = 0; j < aItems.size(); j++) {
+                    Item aItem = aItems.get(j);
+                    if (aItem.satisfies(rec)) {
+                        recipe.remove(rec);
+                        aItems.remove(aItem);
+                        i--;
+                        break;
+                    }
                 }
             }
         }
@@ -93,15 +96,15 @@ public abstract class Recipe {
          * Az aszteroida és a telepes raktárának vizsgálatához szükséges dolgok lekérdezése (raktárak elemkészlete)
          */
         Asteroid a = ss.getCurrentAsteroid();
-        SSInventory inv = ss.getInventory();
-        AsteroidInventory inventory = a.getInventory();
+        SSInventory ssInv = ss.getInventory();
+        AsteroidInventory astInv = a.getInventory();
 
         /***
          * Az összes lehetséges recepthez szükséges item-et eltávolítjuk a telepes/aszteroida raktárából (ha a telepesnél nincs, az aszteroidán lesz belőle)
          */
         for(Item input: input){
-            if(!inv.removeItem(input))
-                inventory.removeItem(input);
+            if(!ssInv.removeItem(input))
+                astInv.removeItem(input);
         }
 
         /***
