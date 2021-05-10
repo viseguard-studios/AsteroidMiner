@@ -5,6 +5,7 @@ import com.viseguardstudios.asteroid_miner.util.INotifyPropertyChanged;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 import com.viseguardstudios.asteroid_miner.view.MainWindow;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -56,7 +57,7 @@ public class Engine implements INotifyPropertyChanged {
         System.out.println("Application started");
 
         mainWindow = new MainWindow();
-
+        mainWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         running = true;
 
         while (running) {
@@ -112,8 +113,8 @@ public class Engine implements INotifyPropertyChanged {
         gm.initGame(seed);
 
         setGameState(State.InGame);
-        gm.startGame();
 
+        gm.startGame();
     }
 
     /**

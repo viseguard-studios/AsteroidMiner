@@ -65,4 +65,10 @@ public class MainWindow extends JFrame implements StateChangedListener {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        System.exit(0);
+    }
 }

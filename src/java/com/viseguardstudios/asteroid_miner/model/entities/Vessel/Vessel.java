@@ -46,7 +46,7 @@ public abstract class Vessel extends MovableEntity {
         if(!isHidden && !turnUsed){
             var canHide = currentAsteroid.Hide(this);
             isHidden = canHide;
-            turnUsed=true;
+            if(isHidden) turnUsed=true;
             return isHidden;
         }
         return false;
