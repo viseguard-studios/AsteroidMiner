@@ -15,7 +15,9 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
 
     private Entity selected;
 
+    JList<String> myList;
     JTextArea t2;
+
 
     public SelectionInspectorPanel() {
         scene = Engine.getInstance().getScene();
@@ -42,7 +44,7 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
             }
         };
 
-        JList<String> myList = new JList<String>(entityList);
+        myList = new JList<String>(entityList);
         JScrollPane scroll = new JScrollPane(myList);
         this.add(scroll);
         myList.addListSelectionListener(i->{ selectionChanged(myList.getSelectedIndex()); });
@@ -64,8 +66,11 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
     public void stateChanged() {
         if(selected != scene.getManager().getSelectedEntity()){
             selected = scene.getManager().getSelectedEntity();
-            //var text = selected.printStatus();
-            //t2.setText(text);
+
+            var i = scene.getEntities().indexOf(selected);
+            myList.setSelectedIndex(i);
+            myList.ensureIndexIsVisible(myList.getSelectedIndex());
+
         }
         if(selected != null) {
             var text = selected.printStatus();
@@ -74,5 +79,7 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
         else {
             t2.setText("");
         }
+        myList.updateUI();
+        myList.repaint();
     }
 }
