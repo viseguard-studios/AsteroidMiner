@@ -18,7 +18,7 @@ public class GameManager implements INotifyPropertyChanged {
     public static final int MAP_SIZE= 1000;
     public static final int CLOSE_SUN_DISTANCE= 250;
 
-    boolean debug = true;
+    boolean debug = false;
 
 
     Random rnd;
@@ -419,6 +419,10 @@ public class GameManager implements INotifyPropertyChanged {
     public void removeSettler(SpaceShip spaceShip) {
         settlers.remove(spaceShip);
         scene.removeEntity(spaceShip);
+
+        if(settlers.size() <= 0){
+            endGame(false);
+        }
     }
 
     public List<SpaceShip> getSettlers(){

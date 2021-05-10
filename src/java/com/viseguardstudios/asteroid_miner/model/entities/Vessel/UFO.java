@@ -12,7 +12,7 @@ import java.util.List;
 
 public class UFO extends Vessel{
 
-    public static final Sprite sprite = new Sprite("assets\\graphics\\sprites\\ufo.png", 10);
+    public static final Sprite sprite = new Sprite("assets/graphics/sprites/ufo.png", 10);
     InfiniteInventory inventory;
     //static List<String> actions = List.of("move","mine");
     /**

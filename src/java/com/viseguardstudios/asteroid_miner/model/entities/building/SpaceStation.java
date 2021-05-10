@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class SpaceStation extends Building {
 
-    public static final Sprite sprite = new Sprite("assets\\graphics\\sprites\\base.png", 10);
+    public static final Sprite sprite = new Sprite("assets/graphics/sprites/base.png", 10);
 
     @Override
     public Sprite getSprite() {

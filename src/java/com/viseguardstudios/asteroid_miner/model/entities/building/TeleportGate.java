@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class TeleportGate extends Building {
 
-    public static final Sprite sprite = new Sprite("assets\\graphics\\sprites\\gate.png", 10);
+    public static final Sprite sprite = new Sprite("assets/graphics/sprites/gate.png", 10);
 
     @Override
     public Sprite getSprite() {
