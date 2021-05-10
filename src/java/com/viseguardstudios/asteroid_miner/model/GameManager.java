@@ -5,10 +5,7 @@ import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.UFO;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
-import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
-import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
-import com.viseguardstudios.asteroid_miner.model.item.resource.Iron;
-import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
+import com.viseguardstudios.asteroid_miner.model.item.resource.*;
 import com.viseguardstudios.asteroid_miner.util.*;
 
 import java.util.*;
@@ -238,6 +235,9 @@ public class GameManager implements INotifyPropertyChanged {
 
                 var ss = new SpaceShip(asteroids.get(ai));
                 ss.setName("SS_"+ Namer.getNextID(ss.getClass()));
+                ss.getInventory().insertItem(new Iron());
+                ss.getInventory().insertItem(new Coal());
+                ss.getInventory().insertItem(new Uranium());
                 pl.addVessel(ss);
                 ss.setOwner(pl);
                 settlers.add(ss);
