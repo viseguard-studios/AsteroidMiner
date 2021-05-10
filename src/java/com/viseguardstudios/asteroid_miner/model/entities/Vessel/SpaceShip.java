@@ -5,10 +5,12 @@ import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
+import com.viseguardstudios.asteroid_miner.model.item.TeleportGateItem;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 import com.viseguardstudios.asteroid_miner.util.Sprite;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -119,6 +121,56 @@ public class SpaceShip extends Vessel {
                 this.ExitHiding();
             }
             scene.getManager().notifyListeners();
+        }
+        if(args[0].equals("activate")) {
+            if (!turnUsed) {
+                List<TeleportGateItem> gates = this.getInventory().getGates();
+
+                List<String> posib = new ArrayList<>();
+                for (TeleportGateItem g : gates
+                ) {
+                    posib.add(g.getName());
+                }
+                var window = Engine.getInstance().getMainWindow();
+
+                String res = (String) JOptionPane.showInputDialog(window, "Please choose a gate to activate: ", "Choose", JOptionPane.PLAIN_MESSAGE, null, posib.toArray(), "");
+
+                if (res != null) {
+                    for (TeleportGateItem g : getInventory().getGates()) {
+                        if (g.getName().equals(res)) {
+                            g.activate(getInventory(), this);
+                            scene.getManager().notifyListeners();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+            if(args[0].equals("stash")) {
+                if (!turnUsed) {
+                    List<Item> items = this.getInventory().getItems();
+
+                    List<String> posib = new ArrayList<>();
+                    for (Item i : items
+                    ) {
+                        posib.add(i.getName());
+                    }
+                    var window = Engine.getInstance().getMainWindow();
+
+                    String res = (String) JOptionPane.showInputDialog(window, "Please choose an item to place: ", "Choose", JOptionPane.PLAIN_MESSAGE, null, posib.toArray(), "");
+
+                    if (res != null) {
+                        for (Item i : getInventory().getItems()) {
+                            if (i.getName().equals(res)) {
+                                if (currentAsteroid.placeItem(i)) inventory.removeItem(i);
+                                scene.getManager().notifyListeners();
+                                turnUsed=true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
         }
     }
 
