@@ -17,6 +17,8 @@ public class GameManager implements INotifyPropertyChanged {
 
     boolean debug = false;
 
+
+
     Random rnd;
     boolean deterministic;
 
@@ -187,7 +189,7 @@ public class GameManager implements INotifyPropertyChanged {
     }
 
     /**
-     * Egy játékos aktuális köre - ekkor van lehetősége irányítani a járműveit egyesével.
+     * Amikor az összes játékos lépett.
      */
     public void takeTurn() {
         if(this.CreateStormOn){
@@ -201,6 +203,9 @@ public class GameManager implements INotifyPropertyChanged {
         notifyListeners();
     }
 
+    /**
+     * Amikor egy játékos befejezi a körét
+     */
     public void nextPlayer(){
         playerID++;
         if(playerID >= allPlayers.size()) {
@@ -418,6 +423,10 @@ public class GameManager implements INotifyPropertyChanged {
     public void setSelectedEntity(Entity selectedEntity) {
         this.selectedEntity = selectedEntity;
         notifyListeners();
+    }
+
+    public Random getRnd() {
+        return rnd;
     }
 
 

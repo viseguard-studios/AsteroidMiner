@@ -6,7 +6,6 @@ import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.MovableEntity;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class MoveCmd extends Command {
     @Override
@@ -45,7 +44,7 @@ public class MoveCmd extends Command {
 
         System.out.println("Neighbours:");
 
-        List<Asteroid> reachableAsteroids = entity.getCurrentAsteroid().ReachableAsteroids();
+        List<Asteroid> reachableAsteroids = entity.getCurrentAsteroid().getReachableAsteroids();
         for (int i = 0, reachableAsteroidsSize = reachableAsteroids.size(); i < reachableAsteroidsSize; i++) {
             Asteroid targets = reachableAsteroids.get(i);
             System.out.println(i+" - " + targets.getName());

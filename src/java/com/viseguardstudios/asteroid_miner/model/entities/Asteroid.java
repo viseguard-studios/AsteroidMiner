@@ -7,14 +7,10 @@ import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.inventory.AsteroidInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Resource;
-import com.viseguardstudios.asteroid_miner.skeleton.Logger;
 import com.viseguardstudios.asteroid_miner.util.Sprite;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
 
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -189,7 +185,7 @@ public class Asteroid extends Entity {
      * Tárolja, hogy melyik aszteroidák elérhetőek jelenleg az adott aszteroidából.
      * @return
      */
-    public List<Asteroid> ReachableAsteroids() {
+    public List<Asteroid> getReachableAsteroids() {
         //természetes szomszédok
         List<Asteroid> n = new LinkedList<>(neighbours);
         //extra szomszédok, ha vannak
@@ -252,7 +248,7 @@ public class Asteroid extends Entity {
          */
         if(!visited){
             visited=true;
-            for(Asteroid n: ReachableAsteroids())
+            for(Asteroid n: getReachableAsteroids())
                 n.Reveal();
         }
     }

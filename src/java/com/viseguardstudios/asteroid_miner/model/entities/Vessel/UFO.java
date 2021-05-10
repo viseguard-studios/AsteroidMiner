@@ -14,7 +14,7 @@ public class UFO extends Vessel{
 
     public static final Sprite sprite = new Sprite("assets\\graphics\\sprites\\ufo.png", 10);
     InfiniteInventory inventory;
-    static List<String> actions = List.of("move","mine");
+    //static List<String> actions = List.of("move","mine");
     /**
      * Default constructor
      *
@@ -49,8 +49,22 @@ public class UFO extends Vessel{
     @Override
     public int GetHidingSpaceRequirement() {
         return 2;
-    } 
+    }
 
+
+    @Override
+    public void roundEnd(boolean closeToSun) {
+        super.roundEnd(closeToSun);
+
+        mine();
+
+        if(!this.turnUsed){
+            var asteroids = currentAsteroid.getReachableAsteroids();
+            int rnd = scene.getManager().getRnd().nextInt(asteroids.size());
+
+            move(asteroids.get(rnd));
+        }
+    }
 
     //Nem képes bányászni
     @Override
@@ -71,12 +85,12 @@ public class UFO extends Vessel{
 
     @Override
     public List<String> getActions() {
-        return actions;
+        return null;
     }
 
     @Override
     public void doAction(String[] args) {
-        //TODO: Implement
+        //No user actions
     }
 
     /**

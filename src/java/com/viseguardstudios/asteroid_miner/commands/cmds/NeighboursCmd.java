@@ -28,7 +28,7 @@ public class NeighboursCmd extends Command {
 
                 int number = 1;
                 List<Asteroid> asteroidList = new ArrayList<Asteroid>();
-                asteroidList.addAll(a.ReachableAsteroids());
+                asteroidList.addAll(a.getReachableAsteroids());
                 for (Asteroid neighbour : asteroidList){
                     if(neighbour.getCrustSize() == 0){
                         if (neighbour.isMined())
