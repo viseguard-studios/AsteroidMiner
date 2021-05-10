@@ -193,45 +193,65 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         }
     }
 
-    public void updateCamera(KeyEvent e){ //TODO NEM KAPJUK MEG A KEY EVENTEKET!!!
+    public void updateCamera(KeyEvent e){
 
-        /*
-         * Hasznalando karakterkodok: le - 40
-         * 	fel: 38
-         *  balra: 37
-         *  jobbra: 39
-         *  enter: 10
-         *
-         *  A : 97
-         *  W : 119
-         *  S : 115
-         *  D : 100
-         */
         boolean changed = false;
+
+        Dimension mapSize = this.getSize();
+
+        //Legyen minimum!
+        int movement = ((30/scale) > 2) ? (int)(30/scale) : 2;
 
         int keyStates = e.getKeyCode();
         if(keyStates == VK_D){
-            cameraPos.setX(cameraPos.getX()+10);
+            cameraPos.setX((cameraPos.getX()+movement));
             changed = true;
         }
         if(keyStates == VK_A){
-            cameraPos.setX(cameraPos.getX()-10);
+            cameraPos.setX((cameraPos.getX()-movement));
             changed = true;
         }
         if(keyStates == VK_S){
-            cameraPos.setY(cameraPos.getY()+10);
+            cameraPos.setY((cameraPos.getY()+movement));
             changed = true;
         }
         if(keyStates == VK_W){
-            cameraPos.setY(cameraPos.getY()-10);
+            cameraPos.setY((cameraPos.getY()-movement));
             changed = true;
         }
         if(keyStates == VK_Q){
-            scale += 0.01;
+            int camX = cameraPos.getX();
+            int camY = cameraPos.getY();
+
+            int camCenterX = cameraPos.getX()+(int)(mapSize.width/2/scale);
+            int camCenterY = cameraPos.getY()+(int)(mapSize.height/2/scale);
+
+            scale *= 1.3;
+
+            camX = camCenterX - (int)(mapSize.width/2/scale);
+            camY = camCenterY -(int)(mapSize.height/2/scale);
+
+
+            cameraPos.setX((camX));
+            cameraPos.setY((camY));
             changed = true;
         }
         if(keyStates == VK_E){
-            scale -= 0.01;
+            int camX = cameraPos.getX();
+            int camY = cameraPos.getY();
+
+            int camCenterX = cameraPos.getX()+(int)(mapSize.width/2/scale);
+            int camCenterY = cameraPos.getY()+(int)(mapSize.height/2/scale);
+
+            scale /= 1.3;
+
+            camX = camCenterX - (int)(mapSize.width/2/scale);
+            camY = camCenterY -(int)(mapSize.height/2/scale);
+
+
+            cameraPos.setX((camX));
+            cameraPos.setY((camY));
+
             changed = true;
         }
 
