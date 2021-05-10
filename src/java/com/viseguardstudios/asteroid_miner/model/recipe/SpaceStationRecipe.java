@@ -1,5 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.recipe;
 
+import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
 import com.viseguardstudios.asteroid_miner.model.entities.building.SpaceStation;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
@@ -15,7 +16,7 @@ public class SpaceStationRecipe extends Recipe {
      * Default constructor
      */
     public SpaceStationRecipe() {
-        for(int i = 0; i<3; i++) {
+        for(int i = 0; i<1; i++) {
             input.add(new Coal());
             input.add(new Ice());
             input.add(new Uranium());
@@ -33,6 +34,9 @@ public class SpaceStationRecipe extends Recipe {
          * Új űrállomás létrehozása, konstruktor meghívása
          */
         SpaceStation station = new SpaceStation(ss.getCurrentAsteroid());
+
+        Engine.getInstance().getScene().addEntity(station);
+
     }
 
 }

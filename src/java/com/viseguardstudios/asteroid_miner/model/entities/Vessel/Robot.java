@@ -7,7 +7,9 @@ import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
 import com.viseguardstudios.asteroid_miner.util.Sprite;
+import com.viseguardstudios.asteroid_miner.util.Vector2;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +20,18 @@ public class Robot extends Vessel {
 
     public static final Sprite sprite = new Sprite("assets\\graphics\\sprites\\robot.png", 10);
 
-    static List<String> actions = List.of("move","hide","drill");
+    //static List<String> actions = List.of("move","hide","drill");
+
+
+    Vector2 dir;
 
     /**
      * Default constructor
      */
     public Robot(Asteroid a) {
         super(a);
+        var rnd = Engine.getInstance().getGameManager().getRnd();
+        dir = new Vector2(rnd.nextInt(10), rnd.nextInt(10));
     }
 
     @Override
@@ -42,6 +49,9 @@ public class Robot extends Vessel {
         this.name = name;
         owner = p;
         p.addVessel(this);
+
+        var rnd = Engine.getInstance().getGameManager().getRnd();
+        dir = new Vector2(rnd.nextInt(10), rnd.nextInt(10));
     }
 
 
@@ -87,14 +97,38 @@ public class Robot extends Vessel {
 
 
     @Override
+    public void roundEnd(boolean closeToSun) {
+        super.roundEnd(closeToSun);
+
+        var rnd = Engine.getInstance().getGameManager().getRnd();
+        dir = dir.add(new Vector2(rnd.nextInt(1), rnd.nextInt(1)));
+
+        float min = Float.MAX_VALUE;
+        Asteroid a = null;
+        for (var ast :
+                currentAsteroid.getReachableAsteroids()) {
+             var t =Vector2.angle(ast.getPos(),this.pos);
+             if( t < min){
+                 min = t;
+                 a = ast;
+             }
+        }
+        if(a == null && currentAsteroid.getReachableAsteroids().size() > 0){
+            currentAsteroid.getReachableAsteroids().get(0);
+        }
+
+        this.move(a);
+
+    }
+
+    @Override
     public AsteroidPlaces getPlace() {
         return AsteroidPlaces.Vessel;
     }
 
     @Override
     public List<String> getActions() {
-
-        return actions;
+        return null;
     }
 
     @Override

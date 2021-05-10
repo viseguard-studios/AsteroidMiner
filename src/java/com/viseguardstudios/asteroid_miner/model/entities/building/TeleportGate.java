@@ -51,6 +51,7 @@ public class TeleportGate extends Building {
         this.pairID = pairID;
         this.currentAsteroid = home;
         home.AddBuilding(this);
+        arriveTo(home);
         findPair();
     }
 
@@ -142,6 +143,14 @@ public class TeleportGate extends Building {
     }
 
     @Override
+    public String printStatus() {
+        var s = super.printStatus();
+        s = s + "ID: " + pairID + "\n";
+
+        return s;
+    }
+
+    @Override
     public AsteroidPlaces getPlace() {
         //TODO If it started to wander it should return vessel to ensure it has space
         // Ádám: szerintem ez nem jó ötlet, inkább vegyük ki a teleportkapu mennyiségi korlátozást
@@ -154,20 +163,7 @@ public class TeleportGate extends Building {
      *
      * @return
      */
-      /* 
-    public int getPairID(){return pairID;}
 
-    public TeleportGate getIdPair(int id){
-        return null;
-    }
-
-    @Label("MI EZ?? VAN MÁSIK METÓDUS IS!!!")
-    @Deprecated
-    public void setPair(TeleportGate pair){
-    }
- Duplicated methods in merge
-     *Teleportkapu párjának megkeresése ID alapján, ha létezik
-     */
     public TeleportGate getIdPair(int id, TeleportGate tg) {
         for (Map.Entry<Integer, TeleportGate> i : idList.entrySet()) {
             if (i.getKey().equals(id) && !i.getValue().equals(tg)) //id megegyezik és nem saját maga a kapu

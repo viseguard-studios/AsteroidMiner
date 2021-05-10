@@ -32,6 +32,8 @@ public class EndGame extends JPanel {
         okay.addActionListener(e -> {
             System.exit(0);
         });
+
+        this.add(actions);
     }
 
 }

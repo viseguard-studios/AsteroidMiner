@@ -441,14 +441,24 @@ Adams branch
         }
 
 
-        status = status.concat("Teleport Gates:" + "\n");
-/*
-        System.out.println("Neighbours:");
-        for (var a :
-                neighbours) {
-            System.out.println("- " + a.getName());
+        status = status.concat("Orbit:" + "\n");
+
+        for (var a : orbit) {
+            status = status + "- " + a.getName() + "\n";
         }
- */
+
+        status = status.concat("Vessels:" + "\n");
+
+        for (var a : stationed) {
+            status = status + "- " + a.getName() + "\n";
+        }
+
+        status = status.concat("Inside:" + "\n");
+
+        for (var a : inside) {
+            status = status + "- " + a.getName() + "\n";
+        }
+
         return status;
     }
 

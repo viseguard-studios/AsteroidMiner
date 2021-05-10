@@ -29,12 +29,16 @@ public class SpaceStation extends Building {
          * Elhelyezzük a megfelelő aszteroidán
          */
         a.AddBuilding(this);
+        arriveTo(a);
         /****
          * Jelezzük a game manager-nek, hogy a játékot megnyertük, felépült az állomás
          */
+
         Scene scene = a.GetScene();
+
         GameManager manager = scene.getManager();
-        manager.endGame();
+
+        manager.endGame(true);
     }
 
     /**
