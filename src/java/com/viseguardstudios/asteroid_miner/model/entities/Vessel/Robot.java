@@ -1,5 +1,6 @@
 package com.viseguardstudios.asteroid_miner.model.entities.Vessel;
 
+import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.Player;
 import com.viseguardstudios.asteroid_miner.model.inventory.IInventory;
@@ -98,7 +99,12 @@ public class Robot extends Vessel {
 
     @Override
     public void doAction(String[] args) {
-        //TODO: Implement
+        if(owner.equals(Engine.getInstance().getGameManager().getCurrentPlayer()))
+            super.doAction(args);
+        if(args[0].equals("drill")){
+            this.drill();
+            scene.getManager().notifyListeners();
+        }
     }
 
     @Override
