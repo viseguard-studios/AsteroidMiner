@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.model;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.SpaceShip;
+import com.viseguardstudios.asteroid_miner.model.entities.Vessel.UFO;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Coal;
 import com.viseguardstudios.asteroid_miner.model.item.resource.Ice;
@@ -200,7 +201,7 @@ public class GameManager implements INotifyPropertyChanged {
 
         scene.roundEnded();
 
-
+        notifyListeners();
     }
 
     public void nextPlayer(){
@@ -243,6 +244,15 @@ public class GameManager implements INotifyPropertyChanged {
                 scene.addEntity(ss);
             }
         }
+
+        for (int i = 0; i < 5; i++) {
+
+            var ai = rnd.nextInt(asteroids.size());
+
+            var ss = new UFO(asteroids.get(ai));
+            ss.setName("Klingon");
+            scene.addEntity(ss);
+        }
     }
 
     /**
@@ -266,13 +276,13 @@ public class GameManager implements INotifyPropertyChanged {
      * Az aszteroidamező inicializálása, játék inicializálás során hozzuk létre.
      */
     private void GenerateAsteroids() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 500; i++) {
 
             var res = GenerateNewResource();
             var count = rnd.nextInt(5)+1;
 
             //Create pos
-            var pos = new Vector2(rnd.nextInt(500), rnd.nextInt(500));
+            var pos = new Vector2(rnd.nextInt(1000), rnd.nextInt(1000));
 
             var a = new Asteroid(res,count);
             a.setPos(pos);
@@ -284,7 +294,7 @@ public class GameManager implements INotifyPropertyChanged {
             asteroids.add(a);
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
             for (var ast : asteroids) {
                 var pos = ast.getPos();
                 var delta = new Vector2(0,0);
@@ -293,7 +303,13 @@ public class GameManager implements INotifyPropertyChanged {
                     var other = o.getPos();
 
                     var d = pos.distance(other);
-                    if(d < 50){
+
+                    if(ast.getPhysicalNeighbours().contains(o) && d < 70){
+                        var norm = other.subtract(pos).divide(d);
+
+                        delta = delta.add(norm.multiply(1/2f));
+                    }
+                    else if(d < 50){
                         var norm = pos.subtract(other).divide(d);
 
                         delta = Vector2.add(delta,norm.multiply(50-d));

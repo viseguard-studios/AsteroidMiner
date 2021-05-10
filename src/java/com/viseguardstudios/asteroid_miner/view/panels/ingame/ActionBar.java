@@ -94,7 +94,8 @@ public class ActionBar extends JPanel implements StateChangedListener {
     public void stateChanged() {
         if(selected != scene.getManager().getSelectedEntity()){
             selected = scene.getManager().getSelectedEntity();
-            DrawButtons();
+
         }
+        DrawButtons();
     }
 }

@@ -48,6 +48,7 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
         myList.addListSelectionListener(i->{ selectionChanged(myList.getSelectedIndex()); });
 
         t2 = new JTextArea();
+        t2.setEditable(false);
 
         this.add(t2);
     }
@@ -69,6 +70,9 @@ public class SelectionInspectorPanel extends JPanel implements StateChangedListe
         if(selected != null) {
             var text = selected.printStatus();
             t2.setText(text);
+        }
+        else {
+            t2.setText("");
         }
     }
 }

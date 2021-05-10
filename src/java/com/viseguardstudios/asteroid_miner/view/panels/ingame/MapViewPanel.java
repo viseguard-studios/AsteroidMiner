@@ -3,6 +3,7 @@ package com.viseguardstudios.asteroid_miner.view.panels.ingame;
 import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
+import com.viseguardstudios.asteroid_miner.model.entities.Entity;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
 import com.viseguardstudios.asteroid_miner.util.Sprite;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
@@ -14,6 +15,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -49,7 +51,9 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
 
         this.setPreferredSize(new Dimension(viewPortSize.getX(), viewPortSize.getY()));
 
-        this.addMouseListener(new FocusMouse(this));
+        var mListerner = new FocusMouse(this);
+        this.addMouseListener(mListerner);
+        this.addMouseWheelListener(mListerner);
 
     }
 
@@ -69,16 +73,30 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
             var pos = new Vector2(e.getX(),e.getY());
             var wordPos = ReverseViewProject(pos);
 
-            float minDist = 0;
+            float minDist = Float.MAX_VALUE;
+            Entity s = null;
             for (var ent : scene.getEntities()) {
                 var entPos = ent.getPos();
-                if (entPos != null && entPos.distance(wordPos) < ent.getSprite().getSize()/2f*scale) {
 
-                    scene.getManager().setSelectedEntity(ent);
+                if (entPos != null ){
+                    var distance = entPos.distance(wordPos);
+                    var spriteSize = ent.getSprite().getSize();
+
+                    if( distance < spriteSize/2f*scale && distance < minDist) {
+                        minDist = distance;
+                        s = ent;
+                    }
                 }
             }
-
+            scene.getManager().setSelectedEntity(s);
             super.mouseClicked(e);
+        }
+
+        @Override
+        public void mouseWheelMoved(MouseWheelEvent e) {
+            //super.mouseWheelMoved(e);
+            zoom((float) Math.pow(1.3f, -1* e.getWheelRotation()));
+            a.repaint();
         }
     }
 
@@ -228,37 +246,14 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
             changed = true;
         }
         if(keyStates == VK_Q){
-            int camX = cameraPos.getX();
-            int camY = cameraPos.getY();
 
-            int camCenterX = cameraPos.getX()+(int)(mapSize.width/2/scale);
-            int camCenterY = cameraPos.getY()+(int)(mapSize.height/2/scale);
+            zoom(1.3f);
 
-            scale *= 1.3;
-
-            camX = camCenterX - (int)(mapSize.width/2/scale);
-            camY = camCenterY -(int)(mapSize.height/2/scale);
-
-
-            cameraPos.setX((camX));
-            cameraPos.setY((camY));
             changed = true;
         }
         if(keyStates == VK_E){
-            int camX = cameraPos.getX();
-            int camY = cameraPos.getY();
 
-            int camCenterX = cameraPos.getX()+(int)(mapSize.width/2/scale);
-            int camCenterY = cameraPos.getY()+(int)(mapSize.height/2/scale);
-
-            scale /= 1.3;
-
-            camX = camCenterX - (int)(mapSize.width/2/scale);
-            camY = camCenterY -(int)(mapSize.height/2/scale);
-
-
-            cameraPos.setX((camX));
-            cameraPos.setY((camY));
+            zoom(1/1.3f);
 
             changed = true;
         }
@@ -267,6 +262,24 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
             this.repaint();
         }
 
+    }
+
+    public void zoom(float amount){
+        Dimension mapSize = this.getSize();
+        int camX = cameraPos.getX();
+        int camY = cameraPos.getY();
+
+        int camCenterX = cameraPos.getX()+(int)(mapSize.width/2/scale);
+        int camCenterY = cameraPos.getY()+(int)(mapSize.height/2/scale);
+
+        scale *= amount;
+
+        camX = camCenterX - (int)(mapSize.width/2/scale);
+        camY = camCenterY -(int)(mapSize.height/2/scale);
+
+
+        cameraPos.setX((camX));
+        cameraPos.setY((camY));
     }
 
 

@@ -35,79 +35,118 @@ public class GameSetupScreen extends JDialog {
         this.setPreferredSize(new Dimension(600,300));
 
         //FlowLayout layout = new FlowLayout(FlowLayout.LEFT);
-        GridLayout layout = new GridLayout(1,2);
+        //GridLayout layout = new GridLayout(1,2);
+        //BoxLayout layout = new BoxLayout(this,BoxLayout.X_AXIS);
+        BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
 
-        JPanel list = new JPanel();
-        BoxLayout listLayout = new BoxLayout(list,BoxLayout.Y_AXIS);
-        list.setLayout(listLayout);
+        //The players List
+        {
+            //Main side panel
+            JPanel list = new JPanel();
 
-        ListModel<String> entityList = new AbstractListModel<String>() {
-            @Override
-            public int getSize() {
-                return players.size();
-            }
+            BoxLayout listLayout = new BoxLayout(list, BoxLayout.Y_AXIS);
+            list.setLayout(listLayout);
 
-            @Override
-            public String getElementAt(int index) {
-                return players.get(index).getName();
-            }
-        };
-
-        playerList = new JList<String>(entityList);
-        JScrollPane scroll = new JScrollPane(playerList);
-        list.add(scroll);
-        playerList.addListSelectionListener(i->{ selectionChanged(playerList.getSelectedIndex()); });
-
-
-        Button add = new Button("+");
-        add.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                var p = new Player("Player_"+(players.size()+1));
-                players.add(p);
-                playerList.updateUI();
-            }
-        });
-
-        Button remove = new Button("-");
-        remove.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(selected != null) {
-                    players.remove(selected);
-                    playerList.updateUI();
-                    selectionChanged(-1);
+            ListModel<String> entityList = new AbstractListModel<String>() {
+                @Override
+                public int getSize() {
+                    return players.size();
                 }
-            }
-        });
 
-        list.add(add);
-        list.add(remove);
+                @Override
+                public String getElementAt(int index) {
+                    return players.get(index).getName();
+                }
+            };
+
+            playerList = new JList<String>(entityList);
+            playerList.addListSelectionListener(i -> {
+                selectionChanged(playerList.getSelectedIndex());
+            });
+
+            Dimension d = playerList.getPreferredSize();
+            d.width = 150;
+            playerList.setPreferredSize(d);
 
 
-        this.add(list,0);
+            JScrollPane scroll = new JScrollPane(playerList);
+            list.add(scroll);
 
 
-        JPanel editor = new JPanel();
-        //BoxLayout editorLayout = new BoxLayout(editor,BoxLayout.Y_AXIS);
-        //editor.setLayout(editorLayout);
+            var buttonRow = new JPanel();
+            var buttonRowLayout = new FlowLayout();
+            buttonRow.setLayout(buttonRowLayout);
 
-        name = new JTextField();
-        //name.setText("asdasdas");
-        name.setPreferredSize(new Dimension(200,20));
-        name.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                selected.setName(e.getActionCommand());
+            Button add = new Button("+");
+            add.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    var p = new Player("Player_" + (players.size() + 1));
+                    players.add(p);
+                    playerList.updateUI();
+                }
+            });
 
-                playerList.repaint();
-            }
-        });
+            Button remove = new Button("-");
+            remove.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (selected != null) {
+                        players.remove(selected);
+                        playerList.updateUI();
+                        selectionChanged(-1);
+                    }
+                }
+            });
 
-        editor.add(name);
+            buttonRow.add(add);
+            buttonRow.add(remove);
 
-        this.add(editor,1);
+            list.add(buttonRow);
+
+            this.add(list, BorderLayout.LINE_START);
+        }
+
+
+
+        {
+            JPanel editor = new JPanel();
+            //BoxLayout editorLayout = new BoxLayout(editor,BoxLayout.Y_AXIS);
+            //editor.setLayout(editorLayout);
+
+            name = new JTextField();
+            //name.setText("asdasdas");
+            name.setPreferredSize(new Dimension(200, 20));
+            name.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    selected.setName(e.getActionCommand());
+
+                    playerList.repaint();
+                }
+            });
+
+            editor.add(name);
+
+            this.add(editor, BorderLayout.CENTER);
+        }
+
+        {
+            JPanel bottom = new JPanel();
+            FlowLayout bottomLayout = new FlowLayout();
+            bottom.setLayout(bottomLayout);
+
+            JButton ok = new JButton("start");
+            bottom.add(ok);
+
+            JButton cancel = new JButton("cancel");
+            bottom.add(cancel);
+
+            this.add(bottom, BorderLayout.PAGE_END);
+        }
+
+
 
         this.pack();
     }
@@ -115,7 +154,11 @@ public class GameSetupScreen extends JDialog {
 
 
     List<Player> showDialog() {
+        isAlwaysOnTop();
         setVisible(true);
+
+
+
         return players;
     }
 
