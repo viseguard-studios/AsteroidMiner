@@ -2,6 +2,7 @@ package com.viseguardstudios.asteroid_miner.view;
 
 import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
+import com.viseguardstudios.asteroid_miner.view.panels.ingame.EndGame;
 import com.viseguardstudios.asteroid_miner.view.panels.ingame.InGameGUI;
 import com.viseguardstudios.asteroid_miner.view.panels.ingame.MapViewPanel;
 import com.viseguardstudios.asteroid_miner.view.panels.ingame.SelectionInspectorPanel;
@@ -56,8 +57,16 @@ public class MainWindow extends JFrame implements StateChangedListener {
                 active = gui;
                 break;
             case Won:
+                this.remove(active);
+                EndGame win = new EndGame(true);
+                this.add(win);
+                active = win;
                 break;
             case Lost:
+                this.remove(active);
+                EndGame lost = new EndGame(false);
+                this.add(lost);
+                active = lost;
                 break;
         }
 
