@@ -62,7 +62,7 @@ public class Scene {
                 Entity e = entities.get(i);
 
                 boolean close = false;
-                if (manager.getSunDistance() < 10) {
+                if (manager.isColseToSun()) {
                     close = true;
                 }
 
@@ -91,9 +91,12 @@ public class Scene {
         if (!entities.isEmpty()) {
             for (int i = 0; i < entities.size(); i++) {
                 Entity e = entities.get(i);
-                //Logger.log("e.SolarFlare();");
-                e.SolarFlare();
-                //Logger.returned();
+                var d = e.getPos().distance(pos);
+                if(d < radius) {
+                    //Logger.log("e.SolarFlare();");
+                    e.SolarFlare();
+                    //Logger.returned();
+                }
             }
         }
     }

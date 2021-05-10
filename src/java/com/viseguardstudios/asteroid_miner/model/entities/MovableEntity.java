@@ -43,7 +43,7 @@ public abstract class MovableEntity extends Entity {
     public void doAction(String[] args) {
         if(args[0].equals("move")) {
             if (!turnUsed) {
-                List<Asteroid> asteroids = currentAsteroid.ReachableAsteroids();
+                List<Asteroid> asteroids = currentAsteroid.getReachableAsteroids();
                 List<String> posib = new ArrayList<>();
                 for (Asteroid a : asteroids
                 ) {

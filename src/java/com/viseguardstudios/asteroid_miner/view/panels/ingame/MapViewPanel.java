@@ -1,6 +1,7 @@
 package com.viseguardstudios.asteroid_miner.view.panels.ingame;
 
 import com.viseguardstudios.asteroid_miner.model.Engine;
+import com.viseguardstudios.asteroid_miner.model.GameManager;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Entity;
@@ -108,6 +109,8 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         super.paint(g);
 
         //moveCamera();
+        Graphics2D g2d = (Graphics2D) g.create();
+        ((Graphics2D)g).setComposite(AlphaComposite.SrcOver);
 
         // g.setColor(new Color(40, 78, 95));
 
@@ -165,8 +168,22 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
                 }
 
 
+
+
             }
         }
+        g2d.setPaint(new Color(255,255,0, 49));
+        //g2d.setComposite(AlphaComposite.SrcOver.derive(0.2f));
+        //((Graphics2D)g).set
+        GameManager gameManager = Engine.getInstance().getGameManager();
+
+        if(gameManager.IsSolarStormActive()){
+            Vector2 center = ViewProject(gameManager.getSolarStormCenter());
+            int rad = (int)(gameManager.getSolarStromRadius()*scale);
+
+            g2d.fillOval(center.getX()-rad, center.getY()-rad,rad*2,rad*2);
+        }
+        //g2d.setComposite(AlphaComposite.SrcOver);
 
     }
 

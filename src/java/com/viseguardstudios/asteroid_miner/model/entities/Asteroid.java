@@ -455,7 +455,8 @@ Adams branch
     @Override
     public Sprite getSprite() {
         if(this.exploded){
-            return exploded_sprite;
+            //return exploded_sprite;
+            return Entity.missing;
         }
         return basic;
     }

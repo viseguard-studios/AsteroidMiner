@@ -97,6 +97,7 @@ public class SpaceShip extends Vessel {
         super.explode();
         inventory.explode();
         scene.getManager().removeSettler(this);
+        currentAsteroid.depart(this);
     }
 
     @Override

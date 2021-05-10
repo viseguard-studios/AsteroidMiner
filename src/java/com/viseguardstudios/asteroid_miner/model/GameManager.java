@@ -16,6 +16,7 @@ import java.util.*;
 public class GameManager implements INotifyPropertyChanged {
 
     public static final int MAP_SIZE= 1000;
+    public static final int CLOSE_SUN_DISTANCE= 20;
 
     boolean debug = false;
 
@@ -56,12 +57,20 @@ public class GameManager implements INotifyPropertyChanged {
     /**
      * Kör végén lesz-e napkitörés
      */
-    private boolean CreateStormOn;
+    private boolean CreateStormOn = false;
+
+    public Vector2 getSolarStormCenter() {
+        return solarStormCenter;
+    }
 
     /**
      * Napkitörés középpontja
      */
     private Vector2 solarStormCenter;
+
+    public int getSolarStromRadius() {
+        return solarStromRadius;
+    }
 
     /**
      * Napkitörés sugara
@@ -178,11 +187,12 @@ public class GameManager implements INotifyPropertyChanged {
     public void takeTurn() {
         if(this.CreateStormOn){
             scene.solarFlare(solarStormCenter, solarStromRadius);
+            CreateStormOn = false;
         }
-        if(rnd.nextInt(100) < 90){
+        if(rnd.nextInt(100) < 50){
             CreateStormOn = true;
             solarStormCenter = new Vector2(rnd.nextInt(MAP_SIZE),rnd.nextInt(MAP_SIZE));
-            solarStromRadius = rnd.nextInt(100);
+            solarStromRadius = rnd.nextInt(200)+80;
         }
 
         scene.roundEnded();
@@ -389,6 +399,7 @@ public class GameManager implements INotifyPropertyChanged {
 
     public void removeSettler(SpaceShip spaceShip) {
         settlers.remove(spaceShip);
+        scene.removeEntity(spaceShip);
     }
 
     public List<SpaceShip> getSettlers(){
@@ -421,6 +432,8 @@ public class GameManager implements INotifyPropertyChanged {
      * @return
      */
     public int getSunDistance() {return  sunDistance;}
+
+    public boolean isColseToSun() {return  sunDistance < CLOSE_SUN_DISTANCE;}
 
     /**
      * Napkitörés középpontjának állítása
