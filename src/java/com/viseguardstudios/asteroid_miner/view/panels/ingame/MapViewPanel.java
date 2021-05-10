@@ -4,6 +4,7 @@ import com.viseguardstudios.asteroid_miner.model.Engine;
 import com.viseguardstudios.asteroid_miner.model.Scene;
 import com.viseguardstudios.asteroid_miner.model.entities.Asteroid;
 import com.viseguardstudios.asteroid_miner.model.entities.Vessel.Vessel;
+import com.viseguardstudios.asteroid_miner.util.Sprite;
 import com.viseguardstudios.asteroid_miner.util.StateChangedListener;
 import com.viseguardstudios.asteroid_miner.util.Vector2;
 
@@ -26,6 +27,8 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
     float scale = 1;
 
     Vector2 viewPortSize = new Vector2(700,700);
+
+    private static Sprite background = new Sprite("assets/graphics/sprites/background.png", 800);
 
 
     public MapViewPanel() {
@@ -88,11 +91,13 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
 
         //moveCamera();
 
-        g.setColor(new Color(40, 78, 95));
+        // g.setColor(new Color(40, 78, 95));
 
         var size = this.getSize();
 
-        g.fillRect(0,0, size.width, size.height);
+        // g.fillRect(0,0, size.width, size.height);
+
+        drawImage(g,background.getImg(),new Vector2(size.width/2,size.height/2),(int)(background.getSize()/scale));
 
         for (var ent : scene.getEntities()) {
 
@@ -103,7 +108,7 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
 
                 var viewPos = ViewProject(pos);
 
-                drawImage(g, ent.getSprite().getImg() , viewPos, ent.getSprite().getSize());
+
 
                 if(scene.getManager().getSelectedEntity() != ent){
                     g.setColor(Color.gray);
@@ -113,17 +118,6 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
                     var s = (ent.getSprite().getSize()+3)*scale;
                     g.drawOval((int)(viewPos.getX()-s/2),(int)(viewPos.getY()-s/2), (int)s,(int)s);
                 }
-
-                if(ent instanceof Vessel) {
-                    var p = Engine.getInstance().getScene().getManager().getCurrentPlayer();
-                    if (((Vessel) ent).getOwner() == p) {
-                        g.setColor(Color.green);
-                        var s = (ent.getSprite().getSize())*scale;
-                        g.drawRect((int)(viewPos.getX()-s/2),(int)(viewPos.getY()-s/2), (int)s,(int)s);
-                    }
-                }
-
-
 
 
                 if (ent instanceof Asteroid) {
@@ -139,6 +133,20 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
                     //Aszteroida kirajzolása
 
                 }
+
+                drawImage(g, ent.getSprite().getImg() , viewPos, ent.getSprite().getSize());
+
+
+                if(ent instanceof Vessel) {
+                    var p = Engine.getInstance().getScene().getManager().getCurrentPlayer();
+                    if (((Vessel) ent).getOwner() == p) {
+                        g.setColor(Color.green);
+                        var s = (ent.getSprite().getSize())*scale;
+                        g.drawRect((int)(viewPos.getX()-s/2),(int)(viewPos.getY()-s/2), (int)s,(int)s);
+                    }
+                }
+
+
             }
         }
 
@@ -153,7 +161,7 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
      * Kép kirajzolása az adott helyen.
      * @param g Graphics osztály
      * @param img Kép
-     * @param loc Pozíció(képernyő px)
+     * @param loc Pozíció(képernyő px, közép)
      */
     public void drawImage(Graphics g,Image img, Vector2 loc, int size){
         Graphics2D g2D = (Graphics2D)g; //kasztolás
