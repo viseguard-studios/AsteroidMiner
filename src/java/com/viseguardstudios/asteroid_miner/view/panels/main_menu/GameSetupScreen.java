@@ -138,9 +138,25 @@ public class GameSetupScreen extends JDialog {
             bottom.setLayout(bottomLayout);
 
             JButton ok = new JButton("start");
+            ok.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                    dispose();
+                }
+            });
             bottom.add(ok);
 
             JButton cancel = new JButton("cancel");
+            cancel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    players.clear();
+                    players = null;
+                    setVisible(false);
+                    dispose();
+                }
+            });
             bottom.add(cancel);
 
             this.add(bottom, BorderLayout.PAGE_END);
@@ -149,6 +165,8 @@ public class GameSetupScreen extends JDialog {
 
 
         this.pack();
+
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
 

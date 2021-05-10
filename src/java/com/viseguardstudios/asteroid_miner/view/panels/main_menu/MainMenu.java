@@ -50,9 +50,8 @@ public class MainMenu extends JPanel {
         List<Player> result = a.showDialog();
 
 
-
-        //TODO add popup to set the player count or something
-        //Engine.getInstance().setPlayerCount(1);
-        Engine.getInstance().StartGame(result, (int)System.currentTimeMillis());
+        if(result != null) {
+            Engine.getInstance().StartGame(result, (int) System.currentTimeMillis());
+        }
     }
 }
