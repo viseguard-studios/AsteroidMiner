@@ -229,19 +229,19 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         int movement = ((30/scale) > 2) ? (int)(30/scale) : 2;
 
         int keyStates = e.getKeyCode();
-        if(keyStates == VK_D){
+        if(keyStates == VK_D|| keyStates == VK_RIGHT){
             cameraPos.setX((cameraPos.getX()+movement));
             changed = true;
         }
-        if(keyStates == VK_A){
+        if(keyStates == VK_A || keyStates == VK_LEFT){
             cameraPos.setX((cameraPos.getX()-movement));
             changed = true;
         }
-        if(keyStates == VK_S){
+        if(keyStates == VK_S || keyStates == VK_DOWN){
             cameraPos.setY((cameraPos.getY()+movement));
             changed = true;
         }
-        if(keyStates == VK_W){
+        if(keyStates == VK_W || keyStates == VK_UP){
             cameraPos.setY((cameraPos.getY()-movement));
             changed = true;
         }
@@ -273,6 +273,9 @@ public class MapViewPanel extends JPanel implements StateChangedListener {
         int camCenterY = cameraPos.getY()+(int)(mapSize.height/2/scale);
 
         scale *= amount;
+
+        scale = (scale<0.1)? 0.1f : scale;
+        scale = (scale>10.0)? 10.0f : scale;
 
         camX = camCenterX - (int)(mapSize.width/2/scale);
         camY = camCenterY -(int)(mapSize.height/2/scale);
