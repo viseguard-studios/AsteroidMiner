@@ -15,29 +15,24 @@ import java.util.*;
  */
 public class GameManager implements INotifyPropertyChanged {
 
-    boolean debug = false;
+    public static final int MAP_SIZE= 1000;
 
+    boolean debug = false;
 
 
     Random rnd;
     boolean deterministic;
 
+    /**
+     * Jelzi, hogy a játék befejeződött-e már.
+     */
+    private boolean gameEnded;
 
     /**
      * Az aktuálisan irányítható jármű (akit a soron lévő játékos jelenleg irányít).
      */
     private Entity selectedEntity;
 
-    /**
-     * A Naptól való aktuális távolság.
-     */
-    private int sunDistance;
-
-    /**
-     * Távolság lekérdezése
-     * @return
-     */
-    public int getSunDistance() {return  sunDistance;}
 
     /**
      * A játék játékosainak listája.
@@ -50,15 +45,13 @@ public class GameManager implements INotifyPropertyChanged {
     private Player currentPlayer;
     private int playerID;
 
+
     /**
      * A játékban szereplő aszteroidák listája.
      */
     private List<Asteroid> asteroids = new ArrayList<>();
 
-    /**
-     * Jelzi, hogy a játék befejeződött-e már.
-     */
-    private boolean gameEnded;
+
 
     /**
      * Kör végén lesz-e napkitörés
@@ -71,25 +64,18 @@ public class GameManager implements INotifyPropertyChanged {
     private Vector2 solarStormCenter;
 
     /**
-     * Napkitörés középpontjának állítása
-     * @param center
-     */
-    public void setSolarStormCenter(Vector2 center){
-        solarStormCenter = center;
-    }
-
-    /**
      * Napkitörés sugara
      */
     private int solarStromRadius;
 
+
     /**
-     * Napkitörés sugarának állítása
-     * @param radius
+     * A Naptól való aktuális távolság.
      */
-    public void setSolarStromRadius(int radius){
-        solarStromRadius = radius;
-    }
+    private int sunDistance;
+
+
+
 
     /**
      * A játék telepeseinek tárolója.
@@ -113,8 +99,6 @@ public class GameManager implements INotifyPropertyChanged {
         this.sunDistance = sunDist;
         this.gameEnded = gameEnded;
         this.CreateStormOn = stormQueued;
-        //TODO kell-e név?
-        // NEM!
     }
 
     /**
@@ -193,9 +177,12 @@ public class GameManager implements INotifyPropertyChanged {
      */
     public void takeTurn() {
         if(this.CreateStormOn){
-            Vector2 pos = new Vector2(rnd.nextInt(10),rnd.nextInt(10));
-            int radius = rnd.nextInt(20);
-            scene.solarFlare(pos, radius);
+            scene.solarFlare(solarStormCenter, solarStromRadius);
+        }
+        if(rnd.nextInt(100) < 90){
+            CreateStormOn = true;
+            solarStormCenter = new Vector2(rnd.nextInt(MAP_SIZE),rnd.nextInt(MAP_SIZE));
+            solarStromRadius = rnd.nextInt(100);
         }
 
         scene.roundEnded();
@@ -287,7 +274,7 @@ public class GameManager implements INotifyPropertyChanged {
             var count = rnd.nextInt(5)+1;
 
             //Create pos
-            var pos = new Vector2(rnd.nextInt(1000), rnd.nextInt(1000));
+            var pos = new Vector2(rnd.nextInt(MAP_SIZE), rnd.nextInt(MAP_SIZE));
 
             var a = new Asteroid(res,count);
             a.setPos(pos);
@@ -427,6 +414,28 @@ public class GameManager implements INotifyPropertyChanged {
 
     public Random getRnd() {
         return rnd;
+    }
+
+    /**
+     * Távolság lekérdezése
+     * @return
+     */
+    public int getSunDistance() {return  sunDistance;}
+
+    /**
+     * Napkitörés középpontjának állítása
+     * @param center
+     */
+    public void setSolarStormCenter(Vector2 center){
+        solarStormCenter = center;
+    }
+
+    /**
+     * Napkitörés sugarának állítása
+     * @param radius
+     */
+    public void setSolarStromRadius(int radius){
+        solarStromRadius = radius;
     }
 
 
