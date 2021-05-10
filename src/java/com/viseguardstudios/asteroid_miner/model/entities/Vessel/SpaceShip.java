@@ -7,6 +7,9 @@ import com.viseguardstudios.asteroid_miner.model.inventory.SSInventory;
 import com.viseguardstudios.asteroid_miner.model.item.Item;
 import com.viseguardstudios.asteroid_miner.model.item.TeleportGateItem;
 import com.viseguardstudios.asteroid_miner.model.recipe.Recipe;
+import com.viseguardstudios.asteroid_miner.model.recipe.RobotRecipe;
+import com.viseguardstudios.asteroid_miner.model.recipe.SpaceStationRecipe;
+import com.viseguardstudios.asteroid_miner.model.recipe.TeleportGateRecipe;
 import com.viseguardstudios.asteroid_miner.util.Sprite;
 
 import javax.swing.*;
@@ -172,6 +175,45 @@ public class SpaceShip extends Vessel {
                 }
 
         }
+        if(args[0].equals("create")) {
+            if (!turnUsed) {
+                List<String> posib = new ArrayList<>() {
+                    {
+                    add("TeleportGate");
+                    add("SpaceStation");
+                    add("Robot");
+                    }
+                };
+                var window = Engine.getInstance().getMainWindow();
+                String res = (String) JOptionPane.showInputDialog(window, "What do you want to craft?", "Choose", JOptionPane.PLAIN_MESSAGE, null, posib.toArray(), "");
+                boolean possible = false;
+                switch (res){
+                    case "TeleportGate":
+                        possible = this.Craft(new TeleportGateRecipe());
+                        scene.getManager().notifyListeners();
+                        break;
+                    case "Robot":
+                        possible = this.Craft(new RobotRecipe());
+                        scene.getManager().notifyListeners();
+                        break;
+                    case "SpaceStation":
+                        possible = this.Craft(new SpaceStationRecipe());
+                        scene.getManager().notifyListeners();
+                        break;
+                    default:
+                        break;
+                }
+                String result;
+                if(possible){
+                    result ="You successfully crafted the recipe.";
+                    turnUsed=true;
+                } else
+                    result="You can't craft this recipe";
+
+                JOptionPane.showMessageDialog(window, result);
+            }
+        }
+
     }
 
     /**
