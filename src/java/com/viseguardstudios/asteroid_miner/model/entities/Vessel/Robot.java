@@ -100,25 +100,29 @@ public class Robot extends Vessel {
     public void roundEnd(boolean closeToSun) {
         super.roundEnd(closeToSun);
 
-        var rnd = Engine.getInstance().getGameManager().getRnd();
-        dir = dir.add(new Vector2(rnd.nextInt(1), rnd.nextInt(1)));
-
-        float min = Float.MAX_VALUE;
-        Asteroid a = null;
-        for (var ast :
-                currentAsteroid.getReachableAsteroids()) {
-             var t =Vector2.angle(ast.getPos(),this.pos);
-             if( t < min){
-                 min = t;
-                 a = ast;
-             }
+        if(currentAsteroid.getCrustSize() > 0){
+            drill();
         }
-        if(a == null && currentAsteroid.getReachableAsteroids().size() > 0){
-            currentAsteroid.getReachableAsteroids().get(0);
+        else {
+            var rnd = Engine.getInstance().getGameManager().getRnd();
+            dir = dir.add(new Vector2(rnd.nextInt(1), rnd.nextInt(1)));
+
+            float min = Float.MAX_VALUE;
+            Asteroid a = null;
+            for (var ast :
+                    currentAsteroid.getReachableAsteroids()) {
+                var t = Vector2.angle(ast.getPos(), this.pos);
+                if (t < min) {
+                    min = t;
+                    a = ast;
+                }
+            }
+            if (a == null && currentAsteroid.getReachableAsteroids().size() > 0) {
+                currentAsteroid.getReachableAsteroids().get(0);
+            }
+
+            this.move(a);
         }
-
-        this.move(a);
-
     }
 
     @Override

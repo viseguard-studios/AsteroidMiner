@@ -415,8 +415,15 @@ Adams branch
     public void SolarFlare() {
         for(MovableEntity o : orbit)
             o.SolarFlare();
+
+        stationed.forEach(s -> {
+            s.SolarFlare();
+        });
+
+        /*
         for(MovableEntity s: stationed)
             s.SolarFlare();
+         */
     }
 
 
@@ -430,7 +437,7 @@ Adams branch
             status = status.concat("- " + vessel.getName() + "\n");
         }
 
-        status = status.concat("Items:");
+        status = status.concat("Items:\n");
         if (crustSize <= 0) {
             for (var item : inventory.getItems()) {
                 status = status.concat("- " + item.getName() + "\n");
